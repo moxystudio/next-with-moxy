@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Fonts
+   If you are going to include custom fonts please use the /src/media/fonts
+   directory.
+   ========================================================================== */
+
+@font-face {
+    font-family: "Montserrat";
+    font-weight: normal;
+    font-style: normal;
+    src:
+        url("../../media/fonts/montserrat/montserrat-regular.woff") format("woff"),
+        url("../../media/fonts/montserrat/montserrat-regular.woff2") format("woff2");
+}

@@ -1,0 +1,46 @@
+@import "../variables.css";
+
+/* ==========================================================================
+   Proper box-sizing model
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Document
+   ========================================================================== */
+
+/*
+   1. Stretch <html> stretch to fill our screen height
+   2. Make children of html (body) occupy at least 100% of the screen
+   3. Viewport is scalable and occupies at least 320px (iPhone SE)
+*/
+
+html {
+    min-width: 32em;
+    height: 0; /* 3 */
+    min-height: 100%; /* 1 */
+    display: flex; /* 2 */
+    flex-direction: column; /* 2 */
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ==========================================================================
+   Body & #root
+   ========================================================================== */
+
+body {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+}
+
+:global(#__next) {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+}

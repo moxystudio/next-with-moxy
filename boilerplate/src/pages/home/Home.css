@@ -1,0 +1,7 @@
+@import "../../shared/styles/variables";
+
+.home {
+    width: var(--home-width);
+    height: var(--home-height);
+    background-color: var(--color-white);
+}
