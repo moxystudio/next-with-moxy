@@ -75,6 +75,20 @@ This options will update every existing snapshot test with the result of the new
 
 This example will run tests for files like `App.test.js` or `SpecialApp.test.js`, display the coverage (for the matched files) and update any existing snapshot.
 
+## Webpack configuration
+
+This boilerplate uses [`@moxy/next-common-files`](https://github.com/moxystudio/next-common-files) to push rules for common files into the Webpack configuration. Their implementation in this boilerplate standardizes a set of rules that define whether any given file should be loaded as a URL, a base64 translation, or inline content.
+
+How any file  should be returned will depend on the presence of a suffixed descriptor in their filename, or, also, the lack thereof (with the exception of fonts, which will **always** be data-url). For example, a .png file you want to be parsed into a base64 string will need to be named '[name].data-url.png', but if you only need to be returned a url to the file, '[name].png' will be enough.
+
+The following table explores all options.
+
+| Suffix | Example | Plugins | Result |
+|  ---   |     ---     | ---  |   ---   |
+| none   | house.png  | All  | Will return a url |
+| data-url   | house.data-url.gif | SVG and raster-images  | Will return a base64 translation |
+| inline   | garden.inline.svg | SVG exclusively  | Will return content as stringified HTML |
+
 ## Environment variables
 
 All environment variables will be be available to the server-side but only variables that start with `REACT_APP_` will be accessible to the client-side. This is made intentionality as a security measure, so that environment variables are exposed selectively. These will be embeded at **build time**, thus are **read-only**. This means you must rebuild your application every time you change them.

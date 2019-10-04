@@ -1,6 +1,7 @@
 /* eslint-disable prefer-import/prefer-import-over-require */
 
 const withPlugins = require('next-compose-plugins');
+const { withRasterImages, withPlayback, withSVG, withFonts } = require('@moxy/next-common-files');
 const withCSS = require('@zeit/next-css');
 const CompressionPlugin = require('compression-webpack-plugin');
 const { PHASE_PRODUCTION_BUILD } = require('next/constants');
@@ -31,6 +32,30 @@ module.exports = (phase, nextConfig) =>
                     '[name]__[local]___[hash:base64:5]',
             },
         }],
+        [withRasterImages({
+            exclude: [/favicons\/.*$/, /\.data-url\./],
+        })],
+        [withRasterImages({
+            include: /\.data-url\./,
+            options: {
+                limit: Number.MAX_SAFE_INTEGER,
+            },
+        })],
+        [withPlayback()],
+        [withFonts()],
+        [withSVG({
+            exclude: [/\.data-url\./, /\.inline\./],
+        })],
+        [withSVG({
+            include: /\.data-url\./,
+            options: {
+                limit: Number.MAX_SAFE_INTEGER,
+            },
+        })],
+        [withSVG({
+            test: /\.inline\./,
+            inline: true,
+        })],
     ], {
         webpack: (config, { dev, isServer }) => {
             const { defaultConfig: { assetPrefix } } = nextConfig;
@@ -49,19 +74,6 @@ module.exports = (phase, nextConfig) =>
                 delete transpilingRule.exclude;
             }
 
-            // Raster images (png, jpg, etc)
-            config.module.rules.push({
-                test: /\.(png|jpg|jpeg|gif|webp)$/,
-                exclude: /favicons\/.*$/,
-                loader: require.resolve('file-loader'),
-                options: {
-                    name: dev ? 'images/[name].[ext]' : 'images/[name].[hash:15].[ext]',
-                    publicPath: `${assetPrefix}/_next/static/chunks/media`,
-                    outputPath: 'static/chunks/media',
-                    emitFile: !isServer,
-                },
-            });
-
             // Favicons used in the server
             config.module.rules.push({
                 test: /favicons\/.*$/,
@@ -72,72 +84,6 @@ module.exports = (phase, nextConfig) =>
                     outputPath: '../static/chunks/media',
                     emitFile: isServer,
                 },
-            });
-
-            // Web fonts
-            config.module.rules.push({
-                test: /\.(eot|ttf|woff|woff2|otf)$/,
-                loader: require.resolve('file-loader'),
-                options: {
-                    name: dev ? 'fonts/[name].[ext]' : 'fonts/[name].[hash:15].[ext]',
-                    publicPath: `${assetPrefix}/_next/static/chunks/media`,
-                    outputPath: 'static/chunks/media',
-                    emitFile: !isServer,
-                },
-            });
-
-            // Audio & Video
-            config.module.rules.push({
-                test: /\.(mp3|flac|wav|aac|ogg|oga|mp4|m4a|webm|ogv)$/,
-                loader: require.resolve('file-loader'),
-                options: {
-                    name: dev ? 'playback/[name].[ext]' : 'playback/[name].[hash:15].[ext]',
-                    publicPath: `${assetPrefix}/_next/static/chunks/media`,
-                    outputPath: 'static/chunks/media',
-                    emitFile: !isServer,
-                },
-            });
-
-            // SVG files
-            config.module.rules.push({
-                test: /images\/.*.svg$/,
-                loader: require.resolve('file-loader'),
-                options: {
-                    name: dev ? 'images/[name].[ext]' : 'images/[name].[hash:15].[ext]',
-                    publicPath: `${assetPrefix}/_next/static/chunks/media`,
-                    outputPath: 'static/chunks/media',
-                    emitFile: !isServer,
-                },
-            });
-
-            // Inline SVGs
-            config.module.rules.push({
-                test: /\.svg$/,
-                exclude: /images\/.*.svg$/,
-                use: [
-                    {
-                        loader: require.resolve('raw-loader'),
-                    },
-                    {
-                        loader: require.resolve('svgo-loader'),
-                        options: {
-                            plugins: [
-                                { removeTitle: true },
-                                { removeDimensions: false },
-                                { removeViewBox: false },
-                                { cleanupIDs: false },
-                            ],
-                        },
-                    },
-                    // Uniquify classnames and ids so that they are unique and
-                    // don't conflict with each other
-                    {
-                        loader: require.resolve('svg-css-modules-loader'),
-                        options: {
-                            transformId: true,
-                        },
-                    },
-                ],
             });
 
             // Pre-compress assets that can be compressed

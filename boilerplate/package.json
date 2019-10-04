@@ -32,6 +32,7 @@
     "lint:stylelint": "stylelint --ignore-path .gitignore \"**/*.css\""
   },
   "dependencies": {
+    "@moxy/next-common-files": "^1.1.0",
     "compression": "^1.7.4",
     "cross-env": "^5.2.0",
     "dotenv": "^8.1.0",
