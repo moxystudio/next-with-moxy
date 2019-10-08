@@ -32,7 +32,9 @@
     "lint:stylelint": "stylelint --ignore-path .gitignore \"**/*.css\""
   },
   "dependencies": {
-    "@moxy/next-common-files": "^1.1.0",
+    "@moxy/next-common-files": "^1.1.1",
+    "@moxy/next-compression": "^1.0.2",
+    "@moxy/next-env": "^2.0.0",
     "compression": "^1.7.4",
     "cross-env": "^5.2.0",
     "dotenv": "^8.1.0",
@@ -45,7 +47,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-ga": "^2.6.0"
+    "react-ga": "^2.6.0",
+    "url-loader": "^2.2.0"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.0.0",

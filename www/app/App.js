@@ -3,10 +3,13 @@ import BaseApp from 'next/app';
 import Head from 'next/head';
 import keyboardOnlyOutlines from 'keyboard-only-outlines';
 import ReactGA from 'react-ga';
+import getConfig from 'next/config';
 
 import seoImage from '../shared/media/images/seo.png';
 
 import '../shared/styles/index.css';
+
+const { publicRuntimeConfig } = getConfig();
 
 const SEO_DATA = {
     url: 'https://{project-domain}',
@@ -21,8 +24,8 @@ class App extends BaseApp {
         keyboardOnlyOutlines();
 
         // Initialize Google Analytics
-        if (process.env.REACT_APP_GA_TRACKING_ID) {
-            ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
+        if (publicRuntimeConfig.NEXT_PUBLIC_GA_TRACKING_ID) {
+            ReactGA.initialize(publicRuntimeConfig.NEXT_PUBLIC_GA_TRACKING_ID);
             ReactGA.pageview(window.location.pathname + window.location.search);
         }
     }

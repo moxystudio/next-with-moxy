@@ -2,24 +2,12 @@
 
 const withPlugins = require('next-compose-plugins');
 const { withRasterImages, withPlayback, withSVG, withFonts } = require('@moxy/next-common-files');
+const { withCompression } = require('@moxy/next-compression');
+const withEnv = require('@moxy/next-env');
 const withCSS = require('@zeit/next-css');
-const CompressionPlugin = require('compression-webpack-plugin');
 const { PHASE_PRODUCTION_BUILD } = require('next/constants');
-const zlib = require('zlib');
-const webpack = require('webpack');
-const mimeDb = require('mime-db');
-const pickBy = require('lodash/pickBy');
 
 require('dotenv').config();
-
-const compressibleRegExps = Object
-.values(mimeDb)
-.filter((mime) => mime.compressible && mime.extensions)
-.reduce((extensions, mime) => {
-    mime.extensions.forEach((ext) => extensions.push(new RegExp(`\\.${ext}`)));
-
-    return extensions;
-}, []);
 
 module.exports = (phase, nextConfig) =>
     withPlugins([
@@ -32,40 +20,35 @@ module.exports = (phase, nextConfig) =>
                     '[name]__[local]___[hash:base64:5]',
             },
         }],
-        [withRasterImages({
+        withRasterImages({
             exclude: [/favicons\/.*$/, /\.data-url\./],
-        })],
-        [withRasterImages({
+        }),
+        withRasterImages({
             include: /\.data-url\./,
             options: {
-                limit: Number.MAX_SAFE_INTEGER,
+                limit: Infinity,
             },
-        })],
-        [withPlayback()],
-        [withFonts()],
-        [withSVG({
+        }),
+        withPlayback(),
+        withFonts(),
+        withSVG({
             exclude: [/\.data-url\./, /\.inline\./],
-        })],
-        [withSVG({
+        }),
+        withSVG({
             include: /\.data-url\./,
             options: {
-                limit: Number.MAX_SAFE_INTEGER,
+                limit: Infinity,
             },
-        })],
-        [withSVG({
-            test: /\.inline\./,
+        }),
+        withSVG({
+            include: /\.inline\./,
             inline: true,
-        })],
+        }),
+        withCompression,
+        withEnv(),
     ], {
         webpack: (config, { dev, isServer }) => {
             const { defaultConfig: { assetPrefix } } = nextConfig;
-
-            // Setup env variables that will be available in the client-side
-            {
-                const envVars = pickBy(process.env, (value, key) => key.startsWith('REACT_APP_'));
-
-                config.plugins.push(new webpack.EnvironmentPlugin(envVars));
-            }
 
             // Remove exclude condition to transpile every node_module
             {
@@ -85,25 +68,6 @@ module.exports = (phase, nextConfig) =>
                     emitFile: isServer,
                 },
             });
-
-            // Pre-compress assets that can be compressed
-            if (phase === PHASE_PRODUCTION_BUILD) {
-                config.plugins.push(new CompressionPlugin({
-                    filename: '[path].gz[query]',
-                    algorithm: 'gzip',
-                    include: compressibleRegExps,
-                }));
-
-                // This check is need since we're using zeit/now for staging deploy
-                // and it's node version doesn't have brotli compression
-                if (zlib.brotliCompress) {
-                    config.plugins.push(new CompressionPlugin({
-                        filename: '[path].br[query]',
-                        algorithm: 'brotliCompress',
-                        include: compressibleRegExps,
-                    }));
-                }
-            }
 
             return config;
         },

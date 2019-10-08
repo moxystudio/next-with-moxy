@@ -7,7 +7,7 @@ ARG GA_TRACKING_ID
 # Define environment variables
 ENV PORT 3000
 ENV HOST 0.0.0.0
-ENV REACT_APP_GA_TRACKING_ID ${GA_TRACKING_ID}
+ENV NEXT_PUBLIC_GA_TRACKING_ID ${GA_TRACKING_ID}
 
 # Define project dir
 WORKDIR /usr/src/app
