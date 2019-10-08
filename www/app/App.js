@@ -6,6 +6,7 @@ import ReactGA from 'react-ga';
 import getConfig from 'next/config';
 
 import seoImage from '../shared/media/images/seo.png';
+import favicon from '../shared/media/favicons/favicon.ico';
 
 import '../shared/styles/index.css';
 
@@ -39,7 +40,7 @@ class App extends BaseApp {
                     <title>{ SEO_DATA.title }</title>
                     <meta name="description" content={ SEO_DATA.description } />
                     <meta name="keywords" content={ SEO_DATA.keywords.join(' ') } />
-                    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
+                    <link rel="shortcut icon" type="image/x-icon" href={ favicon } />
                     {/* Facebook & search engines */}
                     <meta property="og:url" content={ SEO_DATA.url } />
                     <meta property="og:type" content="website" />
