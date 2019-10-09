@@ -5,7 +5,7 @@ import keyboardOnlyOutlines from 'keyboard-only-outlines';
 import ReactGA from 'react-ga';
 import getConfig from 'next/config';
 import favicon from '../shared/media/favicons/favicon.ico';
-import SEO_DATA from './App.data';
+import SEO_DATA from './App.data.js';
 
 import '../shared/styles/index.css';
 
@@ -20,7 +20,7 @@ export default class App extends NextApp {
             ReactGA.initialize(publicRuntimeConfig.NEXT_PUBLIC_GA_TRACKING_ID);
             ReactGA.pageview(this.props.router.asPath);
 
-            this.props.router.events.one('routeChangeComplete', this.handleRouteChange);
+            this.props.router.events.on('routeChangeComplete', this.handleRouteChange);
         }
     }
 
