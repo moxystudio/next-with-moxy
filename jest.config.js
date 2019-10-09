@@ -29,4 +29,10 @@ module.exports = {
             statements: -10,
         },
     },
+    testPathIgnorePatterns: [
+        '*.data.js',
+    ],
+    coveragePathIgnorePatterns: [
+        '*.data.js',
+    ],
 };

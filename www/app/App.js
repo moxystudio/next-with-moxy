@@ -1,35 +1,40 @@
 import React from 'react';
-import BaseApp from 'next/app';
+import NextApp from 'next/app';
 import Head from 'next/head';
 import keyboardOnlyOutlines from 'keyboard-only-outlines';
 import ReactGA from 'react-ga';
 import getConfig from 'next/config';
-
-import seoImage from '../shared/media/images/seo.png';
 import favicon from '../shared/media/favicons/favicon.ico';
+import SEO_DATA from './App.data';
 
 import '../shared/styles/index.css';
 
 const { publicRuntimeConfig } = getConfig();
 
-const SEO_DATA = {
-    url: 'https://{project-domain}',
-    title: '{project-name}',
-    description: '{project-description}',
-    keywords: ['{project-keyword-1}', '{project-keyword-2}'],
-    image: { src: seoImage, width: 1200, height: 630 },
-};
-
-class App extends BaseApp {
+export default class App extends NextApp {
     componentDidMount() {
         keyboardOnlyOutlines();
 
         // Initialize Google Analytics
         if (publicRuntimeConfig.NEXT_PUBLIC_GA_TRACKING_ID) {
             ReactGA.initialize(publicRuntimeConfig.NEXT_PUBLIC_GA_TRACKING_ID);
-            ReactGA.pageview(window.location.pathname + window.location.search);
+            ReactGA.pageview(this.props.router.asPath);
+
+            this.props.router.events.one('routeChangeComplete', this.handleRouteChange);
         }
     }
+
+    componentWillUnmount() {
+        if (publicRuntimeConfig.NEXT_PUBLIC_GA_TRACKING_ID) {
+            this.props.router.events.off('routeChangeComplete', this.handleRouteChange);
+        }
+    }
+
+    handleRouteChange = (url) => {
+        if (publicRuntimeConfig.NEXT_PUBLIC_GA_TRACKING_ID) {
+            ReactGA.pageview(url);
+        }
+    };
 
     render() {
         const { Component, pageProps } = this.props;
@@ -62,5 +67,3 @@ class App extends BaseApp {
         );
     }
 }
-
-export default App;

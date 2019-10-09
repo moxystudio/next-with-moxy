@@ -23,7 +23,7 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server",
     "test": "jest",
-    "coverage-report": "open coverage/lcov-report/index.html",
+    "lcov": "open coverage/lcov-report/index.html",
     "release": "standard-version",
     "postrelease": "git push --follow-tags origin master",
     "export": "next export",
