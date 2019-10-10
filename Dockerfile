@@ -1,13 +1,13 @@
 # Use latest stable version of node (12 at the moment)
 FROM node:12-alpine
 
-# Define args
+# Define build args
 ARG GA_TRACKING_ID
 
 # Define environment variables
 ENV PORT 3000
 ENV HOST 0.0.0.0
-ENV NEXT_PUBLIC_GA_TRACKING_ID ${GA_TRACKING_ID}
+ENV GA_TRACKING_ID ${GA_TRACKING_ID}
 
 # Define project dir
 WORKDIR /usr/src/app

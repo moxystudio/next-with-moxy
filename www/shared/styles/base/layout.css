@@ -26,7 +26,6 @@ html {
     min-height: 100%; /* 1 */
     display: flex; /* 2 */
     flex-direction: column; /* 2 */
-    -webkit-tap-highlight-color: transparent;
 }
 
 /* ==========================================================================

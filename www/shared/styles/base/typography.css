@@ -14,6 +14,7 @@ body {
     @mixin typography-body rem;
     @mixin text-smooth;
     overflow-wrap: break-word;  /* Break long words by default */
+    -webkit-tap-highlight-color: transparent;  /* Do not show a highlight (rectangle around the link) while tapping it */
 }
 
 /* ==========================================================================

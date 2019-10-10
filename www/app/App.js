@@ -2,39 +2,22 @@ import React from 'react';
 import NextApp from 'next/app';
 import Head from 'next/head';
 import keyboardOnlyOutlines from 'keyboard-only-outlines';
-import ReactGA from 'react-ga';
-import getConfig from 'next/config';
+import registerGoogleTracking from './ga-tracking';
 import favicon from '../shared/media/favicons/favicon.ico';
 import SEO_DATA from './App.data.js';
 
 import '../shared/styles/index.css';
 
-const { publicRuntimeConfig } = getConfig();
-
 export default class App extends NextApp {
     componentDidMount() {
         keyboardOnlyOutlines();
 
-        // Initialize Google Analytics
-        if (publicRuntimeConfig.NEXT_PUBLIC_GA_TRACKING_ID) {
-            ReactGA.initialize(publicRuntimeConfig.NEXT_PUBLIC_GA_TRACKING_ID);
-            ReactGA.pageview(this.props.router.asPath);
-
-            this.props.router.events.on('routeChangeComplete', this.handleRouteChange);
-        }
+        this.unregisterGoogleTracking = registerGoogleTracking(this.props.router);
     }
 
     componentWillUnmount() {
-        if (publicRuntimeConfig.NEXT_PUBLIC_GA_TRACKING_ID) {
-            this.props.router.events.off('routeChangeComplete', this.handleRouteChange);
-        }
+        this.unregisterGoogleTracking();
     }
-
-    handleRouteChange = (url) => {
-        if (publicRuntimeConfig.NEXT_PUBLIC_GA_TRACKING_ID) {
-            ReactGA.pageview(url);
-        }
-    };
 
     render() {
         const { Component, pageProps } = this.props;

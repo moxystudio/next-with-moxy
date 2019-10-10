@@ -1,6 +1,11 @@
 {
     "version": 2,
-    "name": "next-boilerplate",
-    "alias": "next-boilerplate",
-    "public": true
+    "name": "{project-name}",
+    "public": true,
+    "builds": [{ "src": "package.json", "use": "@now/next" }],
+    "build": {
+        "env": {
+            "GA_TRACKING_ID": "@ga_tracking_id"
+        }
+    }
 }

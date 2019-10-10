@@ -1,9 +1,6 @@
-/* eslint-disable prefer-import/prefer-import-over-require */
-
 const withPlugins = require('next-compose-plugins');
 const { withRasterImages, withPlayback, withSVG, withFonts } = require('@moxy/next-common-files');
-const { withCompression } = require('@moxy/next-compression');
-const withEnv = require('@moxy/next-env');
+const withCompression = require('@moxy/next-compression');
 const withCSS = require('@zeit/next-css');
 const { PHASE_PRODUCTION_BUILD } = require('next/constants');
 
@@ -45,8 +42,10 @@ module.exports = (phase, nextConfig) =>
             inline: true,
         }),
         withCompression,
-        withEnv(),
     ], {
+        env: {
+            GA_TRACKING_ID: process.env.GA_TRACKING_ID,
+        },
         webpack: (config, { dev, isServer }) => {
             const { defaultConfig: { assetPrefix } } = nextConfig;
 

@@ -1,6 +1,3 @@
 {
-    "extends": "stylelint-config-moxy",
-    "rules": {
-        "length-zero-no-unit": [true, { "ignore": "custom-properties" }]
-    }
+    "extends": "stylelint-config-moxy"
 }
