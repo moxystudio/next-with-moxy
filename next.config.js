@@ -1,6 +1,7 @@
 const withPlugins = require('next-compose-plugins');
 const { withRasterImages, withPlayback, withSVG, withFonts } = require('@moxy/next-common-files');
 const withCompression = require('@moxy/next-compression');
+const withCompileNodeModules = require('@moxy/next-compile-node-modules');
 const withCSS = require('@zeit/next-css');
 const { PHASE_PRODUCTION_BUILD } = require('next/constants');
 
@@ -42,18 +43,9 @@ module.exports = (phase, nextConfig) =>
             inline: true,
         }),
         withCompression,
+        withCompileNodeModules(),
     ], {
         env: {
             GA_TRACKING_ID: process.env.GA_TRACKING_ID,
-        },
-        webpack: (config) => {
-            // Remove exclude condition to transpile every node_module
-            {
-                const transpilingRule = config.module.rules.find((rule) => rule.use.loader === 'next-babel-loader');
-
-                delete transpilingRule.exclude;
-            }
-
-            return config;
         },
     })(phase, nextConfig);
