@@ -18,7 +18,7 @@ module.exports = (phase, nextConfig) =>
             },
         }],
         withRasterImages({
-            exclude: [/favicons\/.*$/, /\.data-url\./],
+            exclude: [/\.data-url\./],
         }),
         withRasterImages({
             include: /\.data-url\./,
@@ -46,27 +46,13 @@ module.exports = (phase, nextConfig) =>
         env: {
             GA_TRACKING_ID: process.env.GA_TRACKING_ID,
         },
-        webpack: (config, { dev, isServer }) => {
-            const { defaultConfig: { assetPrefix } } = nextConfig;
-
+        webpack: (config) => {
             // Remove exclude condition to transpile every node_module
             {
                 const transpilingRule = config.module.rules.find((rule) => rule.use.loader === 'next-babel-loader');
 
                 delete transpilingRule.exclude;
             }
-
-            // Favicons used in the server
-            config.module.rules.push({
-                test: /favicons\/.*$/,
-                loader: require.resolve('file-loader'),
-                options: {
-                    name: dev ? 'favicons/[name].[ext]' : 'favicons/[name].[hash:15].[ext]',
-                    publicPath: `${assetPrefix}/_next/static/chunks/media`,
-                    outputPath: '../static/chunks/media',
-                    emitFile: isServer,
-                },
-            });
 
             return config;
         },
