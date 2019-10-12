@@ -2,7 +2,6 @@
 
 const express = require('express');
 const next = require('next');
-const compression = require('compression');
 const { compressionMiddleware } = require('@moxy/next-compression');
 const host = process.env.HOST || '0.0.0.0';
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -16,9 +15,6 @@ app.prepare().then(() => {
     if (!dev) {
         // Server pre-compressed assets that were created at build time
         server.use(compressionMiddleware());
-
-        // Activate compression for anything else, such as regular HTML pages
-        server.use(compression());
     }
 
     server.get('*', (req, res) => handle(req, res));
