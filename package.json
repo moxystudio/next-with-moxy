@@ -1,0 +1,69 @@
+{
+  "name": "project-name",
+  "version": "0.0.0",
+  "description": "The https://{project-domain}.com web app",
+  "author": "MOXY <hello@moxy.studio>",
+  "private": true,
+  "license": "UNLICENSED",
+  "keywords": [
+    "www",
+    "next"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:{project-org}/{project-name}"
+  },
+  "browserslist": [
+    "extends browserslist-config-google/modern"
+  ],
+  "scripts": {
+    "dev": "node server",
+    "prebuild": "rimraf .next",
+    "build": "next build",
+    "start": "cross-env NODE_ENV=production node server",
+    "test": "jest",
+    "release": "standard-version",
+    "postrelease": "git push --follow-tags origin master",
+    "lint": "npm run lint:eslint && npm run lint:stylelint",
+    "lint:eslint": "eslint --ignore-path .gitignore .",
+    "lint:stylelint": "stylelint --ignore-path .gitignore \"**/*.css\""
+  },
+  "dependencies": {
+    "@moxy/next-common-files": "^1.1.1",
+    "@moxy/next-compile-node-modules": "1.0.0",
+    "@moxy/next-compression": "^2.0.0",
+    "@zeit/next-css": "^0.2.1-canary.4",
+    "cross-env": "^5.2.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "keyboard-only-outlines": "^1.0.4",
+    "next": "9.0.6",
+    "next-compose-plugins": "^2.2.0",
+    "normalize.css": "^8.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-ga": "^2.6.0"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^8.0.0",
+    "babel-jest": "^24.8.0",
+    "babel-preset-moxy": "^3.1.0",
+    "commitlint": "^8.0.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.2",
+    "eslint": "^5.16.0",
+    "eslint-config-moxy": "^8.1.0",
+    "husky": "^3.0.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.8.0",
+    "jest-enzyme": "^7.0.2",
+    "jest-file": "^1.0.0",
+    "lint-staged": "^9.1.0",
+    "postcss-preset-moxy": "^4.3.0",
+    "rimraf": "^3.0.0",
+    "standard-version": "^7.0.0",
+    "stylelint": "^11.1.1",
+    "stylelint-config-moxy": "^6.3.0"
+  }
+}

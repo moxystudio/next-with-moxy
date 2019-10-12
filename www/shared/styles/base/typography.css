@@ -1,0 +1,45 @@
+@import "../variables";
+@import "../mixins/typography";
+@import "../mixins/text";
+
+/* ==========================================================================
+   Typography Defaults
+   ========================================================================== */
+
+html {
+    font-size: 62.5%; /* 62.5% so that all the REM measurements re based on 10px sizing */
+}
+
+body {
+    @mixin typography-body rem;
+    @mixin text-smooth;
+    overflow-wrap: break-word;  /* Break long words by default */
+    -webkit-tap-highlight-color: transparent;  /* Do not show a highlight (rectangle around the link) while tapping it */
+}
+
+/* ==========================================================================
+  Headings
+  ========================================================================== */
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0.7em 0;
+}
+
+h1 {
+    @mixin typography-h1 rem;
+}
+
+h2 {
+    @mixin typography-h2 rem;
+}
+
+h3 {
+    @mixin typography-h3 rem;
+}
+
+h4 {
+    @mixin typography-h4 rem;
+}

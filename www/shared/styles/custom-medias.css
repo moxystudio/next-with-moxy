@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Custom media queries
+
+   Use it like so: @media (--layout-small) { ... }
+   ========================================================================== */
+
+/* Use these if you developing desktop first and want to target lower resolutions */
+
+@custom-media --layout-lte-small-mobile (width <= 20em); /* 320px * 0.0625 */
+@custom-media --layout-lte-mobile (width <= 26.2em); /* 420px * 0.0625 */
+@custom-media --layout-lte-tablet (width <= 48em); /* 768px * 0.0625 */
+@custom-media --layout-lte-small-desktop (width <= 64em); /* 1024 * 0.0625 */
+@custom-media --layout-lte-desktop (width <= 90em); /* 1440 * 0.0625 */
+@custom-media --layout-lte-big-desktop (width <= 120em); /* 1920px * 0.0625 */
