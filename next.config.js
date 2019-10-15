@@ -1,6 +1,7 @@
 const withPlugins = require('next-compose-plugins');
 const { withRasterImages, withPlayback, withSVG, withFonts } = require('@moxy/next-common-files');
 const withCompression = require('@moxy/next-compression');
+const withOneOf = require('@moxy/next-webpack-oneof');
 const withCompileNodeModules = require('@moxy/next-compile-node-modules');
 const withCSS = require('@zeit/next-css');
 const { PHASE_PRODUCTION_BUILD } = require('next/constants');
@@ -9,6 +10,7 @@ require('dotenv').config();
 
 module.exports = (phase, nextConfig) =>
     withPlugins([
+        withOneOf,
         [withCSS, {
             cssModules: true,
             cssLoaderOptions: {
@@ -18,9 +20,7 @@ module.exports = (phase, nextConfig) =>
                     '[name]__[local]___[hash:base64:5]',
             },
         }],
-        withRasterImages({
-            exclude: [/\.data-url\./],
-        }),
+        withRasterImages(),
         withRasterImages({
             include: /\.data-url\./,
             options: {
@@ -29,9 +29,7 @@ module.exports = (phase, nextConfig) =>
         }),
         withPlayback(),
         withFonts(),
-        withSVG({
-            exclude: [/\.data-url\./, /\.inline\./],
-        }),
+        withSVG(),
         withSVG({
             include: /\.data-url\./,
             options: {
