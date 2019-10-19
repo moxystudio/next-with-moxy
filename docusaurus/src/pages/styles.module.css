@@ -1,0 +1,30 @@
+.heroBanner {
+    position: relative;
+    overflow: hidden;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.features {
+    width: 100%;
+    padding: 2rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.featureImage {
+    width: 200px;
+    height: 200px;
+}
+
+@media screen and (max-width: 966px) {
+    .heroBanner {
+        padding: 2rem;
+    }
+}

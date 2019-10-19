@@ -1,5 +1,6 @@
 node_modules
 npm-debug.log*
-.env
-.next
+/.env
+/.next
 /coverage
+/docusaurus/.docusaurus
