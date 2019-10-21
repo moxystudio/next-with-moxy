@@ -8,7 +8,5 @@
     font-family: "Montserrat";
     font-weight: normal;
     font-style: normal;
-    src:
-        url("../../media/fonts/montserrat/montserrat-regular.woff") format("woff"),
-        url("../../media/fonts/montserrat/montserrat-regular.woff2") format("woff2");
+    src: url("../../media/fonts/montserrat/montserrat-regular.data-url.woff2") format("woff2");
 }
