@@ -1,5 +1,5 @@
 const withPlugins = require('next-compose-plugins');
-const { withRasterImages, withPlayback, withSVG, withFonts } = require('@moxy/next-common-files');
+const { withRasterImages, withPlayback, withSVG, withFonts, with3D } = require('@moxy/next-common-files');
 const withCompression = require('@moxy/next-pre-compression');
 const withOneOf = require('@moxy/next-webpack-oneof');
 const withCompileNodeModules = require('@moxy/next-compile-node-modules');
@@ -28,7 +28,26 @@ module.exports = (phase, nextConfig) =>
             },
         }),
         withPlayback(),
+        withPlayback({
+            include: /\.data-url\./,
+            options: {
+                limit: Infinity,
+            },
+        }),
         withFonts(),
+        withFonts({
+            include: /\.data-url\./,
+            options: {
+                limit: Infinity,
+            },
+        }),
+        with3D(),
+        with3D({
+            include: /\.data-url\./,
+            options: {
+                limit: Infinity,
+            },
+        }),
         withSVG(),
         withSVG({
             include: /\.data-url\./,
