@@ -18,8 +18,12 @@ module.exports = {
     // Snapshots
     setupFilesAfterEnv: ['./node_modules/jest-enzyme/lib/index.js'],
     // Coverage
+    collectCoverage: true,
     collectCoverageFrom: [
-        'src/**/*.js',
+        'www/**/*.js',
+    ],
+    coveragePathIgnorePatterns: [
+        '.*\\.data\\.js',
     ],
     coverageThreshold: {
         global: {
@@ -29,10 +33,4 @@ module.exports = {
             statements: -10,
         },
     },
-    testPathIgnorePatterns: [
-        '*.data.js',
-    ],
-    coveragePathIgnorePatterns: [
-        '*.data.js',
-    ],
 };
