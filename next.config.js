@@ -1,6 +1,6 @@
 const withPlugins = require('next-compose-plugins');
 const { withRasterImages, withPlayback, withSVG, withFonts } = require('@moxy/next-common-files');
-const withCompression = require('@moxy/next-compression');
+const withCompression = require('@moxy/next-pre-compression');
 const withOneOf = require('@moxy/next-webpack-oneof');
 const withCompileNodeModules = require('@moxy/next-compile-node-modules');
 const withCSS = require('@zeit/next-css');
@@ -43,6 +43,7 @@ module.exports = (phase, nextConfig) =>
         withCompression,
         withCompileNodeModules(),
     ], {
+        compress: process.env.COMPRESSION !== '0',
         env: {
             GA_TRACKING_ID: process.env.GA_TRACKING_ID,
         },
