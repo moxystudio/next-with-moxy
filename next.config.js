@@ -1,12 +1,11 @@
 require('dotenv').config();
 
-const withPlugins = require('next-compose-plugins');
 const { withRasterImages, withPlayback, withSVG, withFonts, with3D } = require('@moxy/next-common-files');
-const withCompression = require('@moxy/next-pre-compression');
 const withOneOf = require('@moxy/next-webpack-oneof');
 const withCompileNodeModules = require('@moxy/next-compile-node-modules');
 const withCSS = require('@zeit/next-css');
 const { PHASE_PRODUCTION_BUILD } = require('next/constants');
+const withPlugins = require('next-compose-plugins');
 
 module.exports = (phase, nextConfig) =>
     withPlugins([
@@ -59,7 +58,6 @@ module.exports = (phase, nextConfig) =>
             include: /\.inline\./,
             inline: true,
         }),
-        withCompression,
         withCompileNodeModules(),
     ], {
         compress: process.env.COMPRESSION !== '0',
