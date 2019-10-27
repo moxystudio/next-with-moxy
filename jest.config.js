@@ -1,5 +1,6 @@
 module.exports = {
-    setupFiles: ['./jest.setup.js'],
+    // Matchers for testing-library
+    setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
     // Transform files for Jest
     transform: {
         '\\.js$': require.resolve('babel-jest'),
@@ -15,8 +16,6 @@ module.exports = {
     moduleNameMapper: {
         '\\.css$': require.resolve('identity-obj-proxy'),
     },
-    // Snapshots
-    setupFilesAfterEnv: ['./node_modules/jest-enzyme/lib/index.js'],
     // Coverage
     collectCoverage: true,
     collectCoverageFrom: [

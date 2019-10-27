@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import Home from './Home';
 
 it('should render correctly', () => {
-    const tree = shallow(<Home />);
+    const { container } = render(<Home />);
 
-    expect(tree).toMatchSnapshot();
+    expect(container).toHaveTextContent('Home');
 });
