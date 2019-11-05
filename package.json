@@ -47,6 +47,7 @@
     "react-ga": "^2.6.0"
   },
   "devDependencies": {
+    "@moxy/jest-config": "^1.0.0",
     "@commitlint/config-conventional": "^8.0.0",
     "@testing-library/jest-dom": "^4.2.0",
     "@testing-library/react": "^9.3.0",
