@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@moxy/next-common-files": "^1.2.0",
-    "@moxy/next-compile-node-modules": "1.0.0",
+    "@moxy/next-compile-node-modules": "^1.1.0",
     "@moxy/next-webpack-oneof": "^1.0.0",
     "@zeit/next-css": "^0.2.1-canary.4",
     "cross-env": "^6.0.0",
