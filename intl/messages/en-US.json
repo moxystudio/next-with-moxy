@@ -1,0 +1,5 @@
+{
+    "home.title": "Homepage",
+    "contacts.name": "Name: { name }",
+    "contacts.email": "Email: { email }"
+}
