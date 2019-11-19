@@ -1,10 +1,16 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import contacts from './Contacts.data.js';
 
 const Contacts = () => (
     <>
-        <p>Name: { contacts.name }</p>
-        <p>Email: { contacts.email }</p>
+        <p>
+            <FormattedMessage id="contacts.name" values={ { name: contacts.name } } />
+        </p>
+
+        <p>
+            <FormattedMessage id="contacts.email" values={ { email: contacts.email } } />
+        </p>
     </>
 );
 
