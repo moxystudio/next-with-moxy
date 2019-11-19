@@ -4,9 +4,13 @@
    directory.
    ================================================================================ */
 
+/* stylelint-disable scale-unlimited/declaration-strict-value */
+
 @font-face {
     font-family: "Montserrat";
     font-weight: normal;
     font-style: normal;
     src: url("../../media/fonts/montserrat/montserrat-regular.data-url.woff2") format("woff2");
 }
+
+/* stylelint-enable scale-unlimited/declaration-strict-value */
