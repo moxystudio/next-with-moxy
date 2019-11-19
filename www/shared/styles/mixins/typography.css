@@ -5,7 +5,7 @@
   ========================================================================== */
 
 @define-mixin font-montserrat $fontWeight: 400 {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-family);
     font-weight: $(fontWeight);
 }
 
