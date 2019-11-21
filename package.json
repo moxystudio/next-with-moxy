@@ -47,10 +47,9 @@
     "react-ga": "^2.6.0"
   },
   "devDependencies": {
-    "@moxy/jest-config": "^1.0.0",
+    "@moxy/jest-config": "^1.1.1",
     "@commitlint/config-conventional": "^8.0.0",
     "@testing-library/react": "^9.3.0",
-    "babel-jest": "^24.8.0",
     "babel-preset-moxy": "^3.1.0",
     "commitlint": "^8.0.0",
     "eslint": "^6.5.1",
