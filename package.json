@@ -47,20 +47,20 @@
     "react-ga": "^2.6.0"
   },
   "devDependencies": {
-    "@moxy/jest-config": "^1.1.1",
     "@commitlint/config-conventional": "^8.0.0",
+    "@moxy/babel-preset": "^3.2.1",
+    "@moxy/eslint-config": "^9.1.2",
+    "@moxy/jest-config": "^1.1.1",
+    "@moxy/postcss-preset": "^4.3.0",
+    "@moxy/stylelint-config": "^7.1.0",
     "@testing-library/react": "^9.3.0",
-    "babel-preset-moxy": "^3.1.0",
     "commitlint": "^8.0.0",
     "eslint": "^6.5.1",
-    "eslint-config-moxy": "^9.1.0",
     "husky": "^3.0.0",
     "jest": "^24.8.0",
     "lint-staged": "^9.1.0",
-    "postcss-preset-moxy": "^4.3.0",
     "rimraf": "^3.0.0",
     "standard-version": "^7.0.0",
-    "stylelint": "^11.1.1",
-    "stylelint-config-moxy": "^7.0.1"
+    "stylelint": "^11.1.1"
   }
 }

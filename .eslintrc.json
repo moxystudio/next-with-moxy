@@ -1,12 +1,12 @@
 {
     "root": true,
     "extends": [
-        "eslint-config-moxy/es9",
-        "eslint-config-moxy/addons/babel-parser",
-        "eslint-config-moxy/addons/browser",
-        "eslint-config-moxy/addons/node",
-        "eslint-config-moxy/addons/es-modules",
-        "eslint-config-moxy/addons/jest",
-        "eslint-config-moxy/addons/react"
+        "@moxy/eslint-config/es9",
+        "@moxy/eslint-config/addons/babel-parser",
+        "@moxy/eslint-config/addons/browser",
+        "@moxy/eslint-config/addons/node",
+        "@moxy/eslint-config/addons/es-modules",
+        "@moxy/eslint-config/addons/jest",
+        "@moxy/eslint-config/addons/react"
     ]
 }
