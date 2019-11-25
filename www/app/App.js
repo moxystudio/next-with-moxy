@@ -1,7 +1,7 @@
 import React from 'react';
 import NextApp from 'next/app';
 import Head from 'next/head';
-import keyboardOnlyOutlines from 'keyboard-only-outlines';
+import KeyboardOnlyOutlines from '@moxy/react-keyboard-only-outlines';
 import registerGoogleTracking from './ga-tracking';
 import favicon from '../shared/media/favicons/favicon.ico';
 import SEO_DATA from './App.data.js';
@@ -10,8 +10,6 @@ import '../shared/styles/index.css';
 
 export default class App extends NextApp {
     componentDidMount() {
-        keyboardOnlyOutlines();
-
         this.unregisterGoogleTracking = registerGoogleTracking(this.props.router);
     }
 
@@ -45,7 +43,9 @@ export default class App extends NextApp {
                     <meta property="twitter:description" content={ SEO_DATA.description } />
                     <meta property="twitter:image" content={ SEO_DATA.image.src } />
                 </Head>
-                <Component { ...pageProps } />
+                <KeyboardOnlyOutlines>
+                    <Component { ...pageProps } />
+                </KeyboardOnlyOutlines>
             </>
         );
     }
