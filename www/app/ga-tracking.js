@@ -1,13 +1,16 @@
 import ReactGA from 'react-ga';
+import getConfig from 'next/config';
+
+const { GA_TRACKING_ID } = getConfig().publicRuntimeConfig;
 
 const registerGoogleTracking = (router) => {
-    if (!process.env.GA_TRACKING_ID) {
+    if (!GA_TRACKING_ID) {
         return () => {};
     }
 
     const handleRouteChange = (url) => ReactGA.pageview(url);
 
-    ReactGA.initialize(process.env.GA_TRACKING_ID);
+    ReactGA.initialize(GA_TRACKING_ID);
     ReactGA.pageview(router.asPath);
 
     router.events.on('routeChangeComplete', handleRouteChange);

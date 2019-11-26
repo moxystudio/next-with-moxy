@@ -61,7 +61,7 @@ module.exports = (phase, nextConfig) =>
         withCompileNodeModules(),
     ], {
         compress: process.env.COMPRESSION !== '0',
-        env: {
+        publicRuntimeConfig: {
             GA_TRACKING_ID: process.env.GA_TRACKING_ID,
         },
     })(phase, nextConfig);

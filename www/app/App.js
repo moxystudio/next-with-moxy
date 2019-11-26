@@ -9,6 +9,11 @@ import SEO_DATA from './App.data.js';
 import '../shared/styles/index.css';
 
 export default class App extends NextApp {
+    static getInitialProps() {
+        // Opt out of static optimization since we use runtime configuration
+        return {};
+    }
+
     componentDidMount() {
         this.unregisterGoogleTracking = registerGoogleTracking(this.props.router);
     }
