@@ -34,7 +34,7 @@ This script runs your application in a development environment.
 You application will then be available at http://localhost:3000.
 However, if you need to use a different port, you can set the PORT environment variable with the command line, using the following script and changing `{PORT_NUMBER}` with the port you wish to use:
 
-```shell
+```bash
 PORT={PORT_NUMBER} npm run dev
 ```
 
@@ -45,7 +45,7 @@ This will not happen in a production environment, because all pages will have al
 
 ## `npm run docs`
 
-This script readies your documentation for reading.
+This script prepares the documentation for reading.
 This script will automatically open the documentation in your default browser.
 
 Keep in mind, you must have your documentation's dependencies installed before running this script!

@@ -1,28 +1,42 @@
 module.exports = {
-    docs: {
-        Welcome: ['motivation'],
-        'Getting Started': [
-            'getting-started/instructions',
-            {
-                type: 'category',
-                label: 'What\'s included',
-                items: [
-                    'getting-started/what-s-included/file-loaders',
-                    'getting-started/what-s-included/environment-variables',
-                    'getting-started/what-s-included/node-modules-compiling',
-                    'getting-started/what-s-included/css-modules',
-                    'getting-started/what-s-included/docker',
-                    'getting-started/what-s-included/eslint-stylelint',
-                    'getting-started/what-s-included/jest-rtl',
-                    'getting-started/what-s-included/browser-support',
-                    'getting-started/what-s-included/one-of-webpack',
-                    'getting-started/what-s-included/everything-else',
-                ],
-            },
-            'getting-started/conventions',
-            'getting-started/available-scripts',
-        ],
-        Recipes: ['recipes/recipes'],
-        About: ['this-document'],
-    },
+    docs: [
+        {
+            type: 'category',
+            label: 'Welcome',
+            items: [
+                'welcome/what-is-this',
+                'welcome/instructions',
+                'welcome/conventions',
+            ],
+        },
+        {
+            type: 'category',
+            label: 'What\'s included',
+            items: [
+                'what-is-included/available-scripts',
+                'what-is-included/eslint-stylelint',
+                'what-is-included/css-modules',
+                'what-is-included/internationalization',
+                'what-is-included/testing-with-jest-rtl',
+                'what-is-included/browser-support',
+                'what-is-included/environment-variables',
+                'what-is-included/docker',
+                'what-is-included/webpack-file-loaders',
+                'what-is-included/webpack-one-of-rules',
+                'what-is-included/node-modules-compiling',
+                'what-is-included/everything-else',
+            ],
+        },
+        {
+            type: 'category',
+            label: 'Recipes',
+            items: [
+                'recipes/api/recipe-api',
+            ],
+        },
+        {
+            type: 'doc',
+            id: 'this-document',
+        },
+    ],
 };

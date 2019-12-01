@@ -9,7 +9,9 @@ import styles from './styles.module.css';
 
 const Home = () => {
     const context = useDocusaurusContext();
-    const { siteConfig = {} } = context;
+    const { siteConfig } = context;
+
+    const docsLink = siteConfig.themeConfig.navbar.links.find(({ label }) => label === 'Docs');
 
     return (
         <Layout
@@ -25,7 +27,7 @@ const Home = () => {
                                 'button button--outline button--secondary button--lg',
                                 styles.getStarted,
                             ) }
-                            to={ useBaseUrl('docs/motivation') }>
+                            to={ useBaseUrl(docsLink.to) }>
                             Get Started
                         </Link>
                     </div>

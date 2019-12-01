@@ -1,7 +1,7 @@
 ---
 id: everything-else
 title: And everything that comes with Next.js
-sidebar_label: And everything that comes with Next.js
+sidebar_label: And everything from Next.js
 ---
 
 ## File-System Routing
@@ -10,7 +10,7 @@ Next.js comes with a default routing system, which will serve each file in the `
 
 ## Automatic Code Splitting
 
-Next.js will automatically know not to reload content that is very common in your application, loading only what is unique to each page, improving load time performance.
+Next.js will automatically split pages and common code into separate chunks based on several metrics, improving load time performance.
 
 ## Server Side Rendering
 

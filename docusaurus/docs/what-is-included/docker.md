@@ -4,9 +4,9 @@ title: Docker
 sidebar_label: Docker
 ---
 
-We provide a `Dockerfile` so that you can easily use [Docker](https://www.docker.com/) to run the application you're building in a containerized environment.
+We provide a `Dockerfile` so that you can easily use [**Docker**](https://www.docker.com/) to run the application you're building in a containerized environment.
 
-To run this app in docker, you can use the following commands from the project's folder:
+To run this app in Docker, you can use the following commands from the project's folder:
 
 ```bash
 docker build -t {project-name}:latest .

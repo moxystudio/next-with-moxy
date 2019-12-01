@@ -1,5 +1,5 @@
 module.exports = {
-    title: 'next-with-moxy',
+    title: 'Next.js with MOXY',
     tagline: 'MOXY\'s boilerplate to create Next.js based applications',
     url: 'https://next-with.moxy.tech',
     baseUrl: '/',
@@ -10,11 +10,11 @@ module.exports = {
         navbar: {
             title: 'Next.js with MOXY',
             logo: {
-                alt: 'Next with MOXY logo',
-                src: 'img/logo-rwm.png',
+                alt: 'Next.js with MOXY',
+                src: 'img/logo-nwm.png',
             },
             links: [
-                { to: 'docs/motivation', label: 'Docs', position: 'right' },
+                { to: 'docs/welcome/what-is-this', label: 'Docs', position: 'right' },
                 {
                     href: 'https://github.com/moxystudio/next-with-moxy',
                     label: 'GitHub',

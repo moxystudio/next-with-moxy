@@ -11,13 +11,13 @@ Though much of the information in this document is shared between projects, we r
 
 The first time you do this, you must install the dependencies of the documentation. From the folder of the project, run:
 
-```shell
+```bash
 npm install --prefix docusaurus
 ```
 
 Afterwards, and every time you need to access the documentation again, you can run:
 
-```shell
+```bash
 npm run docs
 ```
 

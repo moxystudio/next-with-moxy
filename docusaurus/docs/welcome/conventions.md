@@ -4,11 +4,11 @@ title: Conventions
 sidebar_label: Conventions
 ---
 
-This boilerplate establishes a convention for structuring files that favours co-location of assets and their requesters.
-
-We also use a naming convention to easily co-locate data files, which we explain further below.
+This boilerplate establishes some conventions that the team executing the project should follow.
 
 ## Folder structure
+
+The folder-structure convention favours co-location of assets and their requesters. Here's how it looks like:
 
 ```
 ├── server.js
@@ -36,6 +36,8 @@ We also use a naming convention to easily co-locate data files, which we explain
         └── styles
 ```
 
+...where:
+
 - `pages`: This folder is necessary for Next.js since we're taking advantage of its file system routing, and this is where Next.js will search for files to route to by default.
 - `www`: Where the code for your application will be.
     - `app`: Where your App component will be.
@@ -51,7 +53,7 @@ We also use a naming convention to easily co-locate data files, which we explain
         - `components`: The folder for components that are shared between pages. You can find an example just above of what files each component is expected to have.
         - `media`: The folder for media (images, fonts, etc.) that is shared between many components.
             - `favicons`: This is where you can store your favicons.
-            - `fonts`: This is where you can store your font files. **Keep in mind**, this boilerplate only has support for `.woff2` font files!
+            - `fonts`: This is where you can store your font files.
             - `images`: This is where you can store image files.
         - `styles`:  The folder for `.css` files that are shared between many components.
 
