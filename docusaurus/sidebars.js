@@ -1,0 +1,42 @@
+module.exports = {
+    docs: [
+        {
+            type: 'category',
+            label: 'Welcome',
+            items: [
+                'welcome/what-is-this',
+                'welcome/instructions',
+                'welcome/conventions',
+            ],
+        },
+        {
+            type: 'category',
+            label: 'What\'s included',
+            items: [
+                'what-is-included/available-scripts',
+                'what-is-included/eslint-stylelint',
+                'what-is-included/css-modules',
+                'what-is-included/internationalization',
+                'what-is-included/testing-with-jest-rtl',
+                'what-is-included/browser-support',
+                'what-is-included/environment-variables',
+                'what-is-included/docker',
+                'what-is-included/webpack-file-loaders',
+                'what-is-included/webpack-one-of-rules',
+                'what-is-included/node-modules-compiling',
+                'what-is-included/everything-else',
+            ],
+        },
+        {
+            type: 'category',
+            label: 'Recipes',
+            items: [
+                'recipes/api/recipe-api',
+            ],
+        },
+        {
+            type: 'doc',
+            id: 'this-document',
+        },
+    ],
+};
