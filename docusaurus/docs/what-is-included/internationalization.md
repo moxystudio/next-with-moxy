@@ -13,7 +13,7 @@ We have choosen [`react-intl`](https://github.com/formatjs/react-intl/) for inte
 - It can localize strings, numbers, dates and relative dates.
 - Runs in the browser and Node.js.
 
-The integration of `react-intl` into Next.js is made by [next-intl](https://github.com/moxystudio/).
+The integration of `react-intl` into Next.js is made with [@moxy/next-intl](https://github.com/moxystudio/next-intl).
 
 ## Adding a new locale
 
@@ -26,4 +26,4 @@ Policies control which locale is active at a given point, amongst other things.
 
 You may want to create custom policies for certain use-cases. One common use-case is to have a policy that matches against the locale saved in the account preferences of authenticated users.
 
-Please check `next-intl` [documentation](https://github.com/moxystudio/next-intl#custom-policies) to know more.
+Please check the `next-intl` [documentation](https://github.com/moxystudio/next-intl#custom-policies) to know more.
