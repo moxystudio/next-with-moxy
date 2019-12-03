@@ -46,9 +46,7 @@ and then simply wrap your endpints with `micro()`:
 import micro from 'micro';
 
 export default micro((req, res) => {
-    res.setHeader('Content-Type', 'application/json')
-    res.statusCode = 200
-    res.end(JSON.stringify({ name: 'Nextjs' }))
+    // Do something..
 });
 ```
 
