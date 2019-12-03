@@ -26,6 +26,10 @@ Next.js requires pages to be defined in `pages/` so we must create `pages/api/my
 export { default } from '../../api/my-endpoint';
 ```
 
+### 3. Access your API at `/api/my-endpoint`
+
+Next.js will map every file in `api/` to a corresponding `/api/...` route. For example, the file `api/post.js` will map to the `/api/post` endpoint.
+
 ## Micro
 
 If the built-in extended `req` and `res` objects and middleware are not sufficient to the needs of your API endpoints, you may use [micro](https://github.com/zeit/micro). It's fast, lightweight, and compatible with serverless deployments.
