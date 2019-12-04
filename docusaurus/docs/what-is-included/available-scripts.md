@@ -67,4 +67,4 @@ This script lints only your Javascript files.
 
 ### `npm run lint:stylelint`
 
-This script lints only your Javascript files.
+This script lints only your CSS files.
