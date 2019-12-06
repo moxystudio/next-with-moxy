@@ -19,6 +19,9 @@
   "browserslist": [
     "extends browserslist-config-google/modern"
   ],
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "dev": "cross-env NODE_ICU_DATA=node_modules/full-icu next",
     "prebuild": "rimraf .next",
