@@ -32,6 +32,11 @@ module.exports = {
             label: 'Recipes',
             items: [
                 'recipes/recipe-rest-api',
+                {
+                    type: 'link',
+                    label: 'Private recipes',
+                    href: 'https://next-with-moxy-recipes.moxy.tech',
+                },
             ],
         },
         {

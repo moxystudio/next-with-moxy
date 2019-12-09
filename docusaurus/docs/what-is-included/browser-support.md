@@ -1,7 +1,7 @@
 ---
 id: browser-support
-title: Browser Support
-sidebar_label: Browser Support
+title: Browser support
+sidebar_label: Browser support
 ---
 
 By default, this boilerplate is configured to support the latest two versions of the most popular desktop and mobile browsers.
