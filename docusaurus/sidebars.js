@@ -31,7 +31,7 @@ module.exports = {
             type: 'category',
             label: 'Recipes',
             items: [
-                'recipes/recipe-api',
+                'recipes/recipe-rest-api',
                 {
                     type: 'link',
                     label: 'Private recipes',
