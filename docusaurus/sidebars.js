@@ -31,7 +31,7 @@ module.exports = {
             type: 'category',
             label: 'Recipes',
             items: [
-                'recipes/api/recipe-api',
+                'recipes/recipe-rest-api',
             ],
         },
         {
