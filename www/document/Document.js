@@ -1,6 +1,6 @@
 import React from 'react';
-import { NextIntlScript } from '@moxy/next-intl';
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
+import { NextIntlScript } from '@moxy/next-intl';
 
 export default class Document extends NextDocument {
     render() {
