@@ -7,16 +7,9 @@ import styles from './Home.css';
 
 const Home = () => (
     <div className={ styles.home }>
-        <Link href="/foo">
-            <a>Foo</a>
-        </Link>
+        <FormattedMessage id="home.title" />
 
-        <div>
-            <FormattedMessage id="home.title" />
-
-            <Contacts />
-        </div>
-
+        <Contacts />
     </div>
 );
 
