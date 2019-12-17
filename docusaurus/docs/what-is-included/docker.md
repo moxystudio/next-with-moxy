@@ -27,7 +27,7 @@ Example:
 ARG SOME_ARGUMENT
 
 # Define environment variables
-ENV SOME_ENV_VAR ${SOME_ARGUMENT}
+ENV SOME_ENV_VAR $SOME_ARGUMENT
 ```
 
 You can check the existing `Dockerfile` to see how we're configuring `GA_TRACKING_ID` for an example on this process.
