@@ -35,7 +35,7 @@ You application will then be available at http://localhost:3000.
 However, if you need to use a different port, you can set the PORT environment variable with the command line, using the following script and changing `{PORT_NUMBER}` with the port you wish to use:
 
 ```bash
-PORT={PORT_NUMBER} npm run dev
+npm run dev -- --port={PORT_NUMBER}
 ```
 
 When running in a development environment, Next.js will only build pages as they're requested to reduce the impact of this process on your computer's performance.

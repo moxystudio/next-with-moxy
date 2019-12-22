@@ -6,7 +6,6 @@ ARG GA_TRACKING_ID
 
 # Define environment variables
 ENV PORT 3000
-ENV HOST 0.0.0.0
 ENV GA_TRACKING_ID $GA_TRACKING_ID
 
 # Define project dir
