@@ -30,7 +30,7 @@
     "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:eslint": "eslint --ignore-path .gitignore .",
     "lint:stylelint": "stylelint --ignore-path .gitignore \"**/*.css\"",
-    "docs": "npm run start --prefix docusaurus"
+    "docs": "npm run start --prefix docusaurus -- --port 4000"
   },
   "dependencies": {
     "@moxy/next-common-files": "^1.2.1",
