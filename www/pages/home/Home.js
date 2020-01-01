@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { FormattedMessage } from 'react-intl';
 import { Contacts } from '../../shared/components';
 
