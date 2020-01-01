@@ -13,7 +13,7 @@ MOXY's boilerplate to accelerate the setup of new [Next.js](https://nextjs.org/)
 
 Please check out the documentation page at https://next-with.moxy.tech.
 
-To view the documentation localy, you may run:
+To view the documentation locally, you may run:
 
 ```bash
 npm i --prefix docusarus

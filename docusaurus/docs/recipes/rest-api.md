@@ -6,7 +6,7 @@ sidebar_label: Adding a simple REST API
 
 Sometimes a project may require a simple REST API (e.g. to send an email). Next.js comes with the ability to create API endpoints, which makes this recipe very straightforward. Please read their [API routes](https://nextjs.org/docs#api-routes) documentation as they extend Node.js `req` and `res` objects with additional functionality and ship with built-in middleware.
 
-⚠️ Please note that if you require more than a simple API with one or two endpoints, it's better if you create a separate project (and repository) for it.
+> ⚠️ Please note that if you require more than a simple API with one or two endpoints, it's better if you create a separate project (and repository) for it.
 
 ## Walk-through
 
