@@ -67,7 +67,7 @@ if (process.env.FEATURE_A) {
 While build-time environments are prefereable, there are some scenarios where they might pose a problem.
 One scenario is when it's impossible or unfesable to having to rebuild the project when configuration changes. If that's the case, you may use [runtime configuration](https://nextjs.org/docs#runtime-configuration) instead.
 
-⚠️ Be aware that runtime configuration will make your project incompatible with serverless deployments and static optimization.
+> ⚠️ Be aware that runtime configuration will make your project incompatible with serverless deployments and static optimization.
 
 You can access runtime configuration by using `next/config`:
 

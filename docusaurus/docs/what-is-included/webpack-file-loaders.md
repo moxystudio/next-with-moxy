@@ -15,13 +15,13 @@ Here's the list of conventions:
 
     This suffix is used when you want a file to be translated into base64 and sent with your bundle instead of being loaded with a standard URL (e.g., for assets above the fold, you might want to use this to avoid [flashing of unstyled content](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)).
 
-    ⚠️ Be aware that base64 encoding increases file sizes by roughly 33%.
+    > ⚠️ Be aware that base64 encoding increases file sizes by roughly 33%.
 
 - `.inline.`
 
     This suffix is used when you want your `.svg` files to be put as inline HTML on your pages.
 
-    ℹ️ Support is limited to `.svg` files for now.
+    > ℹ️ Support is limited to `.svg` files for now.
 
 - No suffix
 
