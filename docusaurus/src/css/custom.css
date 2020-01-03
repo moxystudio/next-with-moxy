@@ -15,8 +15,6 @@ main {
     flex-grow: 1;
 }
 
-@media (max-width: 996px) {
-    .navbar .navbar__items.navbar__items--right {
-        display: none;
-    }
+.navbar .navbar__items {
+    flex: 0 1 auto;
 }

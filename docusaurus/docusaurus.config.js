@@ -30,6 +30,10 @@ module.exports = {
             },
             copyright: `Copyright © ${new Date().getFullYear()} MOXY studio`,
         },
+        algolia: {
+            apiKey: '08e70f81e1b9b6e6c8c5bd149eaa9ff3',
+            indexName: 'moxy_nextjs',
+        },
     },
     presets: [
         [
