@@ -4,25 +4,25 @@ This website is built using [Docusaurus 2](http://v2.docusaurus.io/), a modern s
 
 ### Installation
 
-```
+```bash
 npm i
 ```
 
 Or if you're in the root of the project, run:
 
-```
+```bash
 npm i --prefix docusaurus
 ```
 
 ### Local Development
 
-```
+```bash
 npm run start
 ```
 
 Or if you're in the root of the project, run:
 
-```
+```bash
 npm run docs
 ```
 
