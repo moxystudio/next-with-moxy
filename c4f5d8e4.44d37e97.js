@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[17],{107:function(t,e,n){"use strict";n.r(e);var c=n(0),o=n(116);e.default=()=>{const t=Object(o.a)(),{siteConfig:e}=t;return Object(c.useEffect)(()=>{window.location=`${e.baseUrl}docs/welcome/what-is-this`},[e]),null}},116:function(t,e,n){"use strict";var c=n(0),o=n(33);e.a=function(){return Object(c.useContext)(o.a)}}}]);
