@@ -47,4 +47,9 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
     ```
     ````
 
-5. Prepare the rest of the documentation website to be deliverable to your clients!
+5. Remove algolia search from Docusaurus config:
+
+    Remove the `themeConfig.algolia` key from `docusaurus/docusaurus.config.js`. The reason is that the search results indexed by Algolia will become out of sync with the documentation, causing it to possibly return wrong results (404 pages).
+
+
+6. Prepare the rest of the documentation website to be deliverable to your clients!

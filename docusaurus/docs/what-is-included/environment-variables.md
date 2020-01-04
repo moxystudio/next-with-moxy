@@ -74,10 +74,12 @@ You can access runtime configuration by using `next/config`:
 ```js
 import { getConfig } from 'next/config';
 
-const { serverRuntimeConfig, publicRuntimeConfig } = getConfig()
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
-console.log(serverRuntimeConfig.SOME_SERVICE_PRIVATE_KEY) // Will only be available on the server side
-console.log(publicRuntimeConfig.SOME_SERVICE_PUBLIC_KEY) // Will be available on both server and client
+// Config below will be available only on the server side
+console.log(serverRuntimeConfig.SOME_SERVICE_PRIVATE_KEY);
+// Config below will be available on both server and client
+console.log(publicRuntimeConfig.SOME_SERVICE_PUBLIC_KEY);
 ```
 
 ### Adding a new runtime config

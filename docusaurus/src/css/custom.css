@@ -1,19 +1,36 @@
+/* ==========================================================================
+   Infima theme variables
+   ========================================================================== */
+
 :root {
-    --ifm-color-primary: #a0a4b8;
+    --ifm-font-base-color: #180d2d; /* Darkest variant of Dark Blue - #221240 */
+    --ifm-color-primary: #2932d3; /* Vivid Blue */
+    --ifm-color-primary-dark: #252dbe;
+    --ifm-color-primary-darker: #232ab3;
+    --ifm-color-primary-darkest: #1d2394;
+    --ifm-color-primary-light: #3c44d9;
+    --ifm-color-primary-lighter: #474edb;
+    --ifm-color-primary-lightest: #666de1;
+    --ifm-code-font-size: 95%;
+    --ifm-code-border-radius: 3px;
+    --ifm-code-background: rgba(34, 18, 64, 0.05);
 }
 
-html,
-body,
-#__docusaurus {
-    min-height: 100%;
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
+/* ==========================================================================
+   Code block tweaks
+   ========================================================================== */
+
+code {
+    --ifm-code-font-size: 85%;
 }
 
-main {
-    flex-grow: 1;
+a > code {
+    color: inherit;
 }
+
+/* ==========================================================================
+   Navbar tweaks
+   ========================================================================== */
 
 .navbar .navbar__inner {
     flex-wrap: nowrap;
@@ -48,10 +65,6 @@ main {
 
     .navbar .navbar__inner .navbar__brand {
         max-width: calc(100% - 33px);
-    }
-
-    .navbar .navbar-sidebar .navbar__brand {
-        max-width: calc(100% - 66px);
     }
 }
 

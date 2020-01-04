@@ -1,7 +1,7 @@
 ---
 id: webpack-file-loaders
-title: Webpack loaders for common files
-sidebar_label: Webpack file loaders
+title: Webpack loaders for common files
+sidebar_label: Webpack file loaders
 ---
 
 The boilerplate includes [`@moxy/next-common-files`](https://github.com/moxystudio/next-common-files), a Next.js plugin that exports webpack loader rules for common files like images and fonts.

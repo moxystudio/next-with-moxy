@@ -1,7 +1,7 @@
 ---
 id: everything-else
-title: And everything that comes with Next.js
-sidebar_label: And everything from Next.js
+title: And everything that comes with Next.js
+sidebar_label: And everything from Next.js
 ---
 
 ## File-System Routing

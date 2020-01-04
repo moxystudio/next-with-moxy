@@ -7,7 +7,13 @@ module.exports = {
     organizationName: 'moxystudio',
     projectName: 'next-with-moxy',
     themeConfig: {
+        algolia: {
+            apiKey: '08e70f81e1b9b6e6c8c5bd149eaa9ff3',
+            indexName: 'moxy_nextjs',
+        },
+        disableDarkMode: true,
         navbar: {
+            hideOnScroll: true,
             title: 'Next.js with MOXY',
             logo: {
                 alt: 'Next.js with MOXY',
@@ -28,10 +34,6 @@ module.exports = {
                 src: 'img/logo-moxy.svg',
             },
             copyright: `Copyright © ${new Date().getFullYear()} MOXY studio`,
-        },
-        algolia: {
-            apiKey: '08e70f81e1b9b6e6c8c5bd149eaa9ff3',
-            indexName: 'moxy_nextjs',
         },
     },
     presets: [
