@@ -14,7 +14,6 @@ module.exports = {
                 src: 'img/logo-nwm.png',
             },
             links: [
-                { to: 'docs/welcome/what-is-this', label: 'Docs', position: 'right' },
                 {
                     href: 'https://github.com/moxystudio/next-with-moxy',
                     label: 'GitHub',

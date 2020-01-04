@@ -15,6 +15,52 @@ main {
     flex-grow: 1;
 }
 
+.navbar .navbar__inner {
+    flex-wrap: nowrap;
+}
+
 .navbar .navbar__items {
-    flex: 0 1 auto;
+    max-width: 50%;
+    flex: 1 1 auto;
+}
+
+.navbar .navbar__inner .navbar__brand,
+.navbar .navbar-sidebar .navbar__brand {
+    max-width: 100%;
+    flex: 1 1 auto;
+}
+
+.navbar .navbar__inner .navbar__brand strong,
+.navbar .navbar-sidebar .navbar__brand strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (max-width: 996px) {
+    .navbar .navbar__items:not(.navbar__items--right) {
+        max-width: calc(100% - 160px);
+    }
+
+    .navbar .navbar__items--right {
+        max-width: 160px;
+    }
+
+    .navbar .navbar__inner .navbar__brand {
+        max-width: calc(100% - 33px);
+    }
+
+    .navbar .navbar-sidebar .navbar__brand {
+        max-width: calc(100% - 66px);
+    }
+}
+
+@media (max-width: 360px) {
+    .navbar .navbar__items:not(.navbar__items--right) {
+        max-width: calc(100% - 38px);
+    }
+
+    .navbar .navbar__items--right {
+        max-width: 38px;
+    }
 }
