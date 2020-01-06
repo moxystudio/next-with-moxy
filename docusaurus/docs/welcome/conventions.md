@@ -11,7 +11,8 @@ This boilerplate establishes some conventions that the team executing the projec
 The folder-structure convention favours co-location of assets and their requesters. Here's how it looks like:
 
 ```
-├── server.js
+├── package.json
+├── package-lock.json
 ├── pages
 │   ├── _app.js
 │   └── index.js
