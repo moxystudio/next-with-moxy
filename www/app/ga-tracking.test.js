@@ -15,8 +15,6 @@ const mockedRouter = {
     },
 };
 
-// const getTree = (props) => render(<GoogleAnalytics router={ mockedRouter } { ...props } />);
-
 describe('Google Analytics', () => {
     beforeAll(() => {
         process.env.GA_TRACKING_ID = '12345';
