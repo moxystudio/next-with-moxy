@@ -1,0 +1,26 @@
+@import "../variables";
+@import "../custom-medias";
+
+/* Usage: @mixin layout-main .content-selector;
+============================================= */
+
+/* ==========================================================================
+   Mixin Layout
+   ========================================================================== */
+
+@define-mixin layout-main $content-selector {
+    $content-selector {
+        width: 100%;
+        max-width: var(--layout-content-max-width);
+        height: 100%;
+        margin: 0 auto;
+    }
+
+    @media (--layout-lte-container-width) {
+        $content-selector {
+            max-width: none;
+            padding-left: var(--layout-content-spacing-x);
+            padding-right: var(--layout-content-spacing-x);
+        }
+    }
+}

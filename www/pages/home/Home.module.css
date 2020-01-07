@@ -1,7 +1,12 @@
-@import "../../shared/styles/variables";
+@import "../../shared/styles/imports";
+
+:root {
+    --layout-home-width: 100vw;
+    --layout-home-height: 100vh;
+}
 
 .home {
-    width: var(--home-width);
-    height: var(--home-height);
+    width: var(--layout-home-width);
+    height: var(--layout-home-height);
     background-color: var(--color-white);
 }
