@@ -18,7 +18,7 @@ Sometimes a project may require a simple REST API (e.g. to send an email). Next.
 npm i @moxy/next-rest-api @hapi/joi @hapi/boom
 ```
 
-### 2. Create `api/my-endpoint.js` file
+### 2. Create `/api/my-endpoint.js` file
 
 Similarly to `/www`, which is where our frontend code lives, we have a convention to put all our API code into the `/api` folder.
 
@@ -34,7 +34,7 @@ export default withRest({
 });
 ```
 
-### 3. Map `api/my-endpoint.js` to `pages/api/my-endpoint.js`
+### 3. Map `/api/my-endpoint.js` to `/pages/api/my-endpoint.js`
 
 Next.js requires pages to be defined in `pages/` so we must create `pages/api/my-endpoint.js`:
 
@@ -44,4 +44,4 @@ export { default } from '../../api/my-endpoint';
 
 ### 4. Access your API at `/api/my-endpoint`
 
-Next.js will map every file in `api/` to a corresponding `/api/...` route. For example, the file `api/products.js` will map to the `/api/products` endpoint.
+Next.js will map every file in `/pages/api` to a corresponding `/api/...` URL. For example, the file `/pages/api/products.js` will map to the `/api/products` URL.
