@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render with Intl should correctly render formatted message 1`] = `"foo"`;
+
+exports[`Render with Intl should correctly rerender 1`] = `"bar"`;
