@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Custom media queries
+   Custom media queries - for more information check https://github.com/postcss/postcss-custom-media
 
    Use it like so: @media (--layout-small) { ... }
    ========================================================================== */

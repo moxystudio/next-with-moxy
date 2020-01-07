@@ -4,107 +4,95 @@
   Fonts
   ========================================================================== */
 
-@define-mixin font-montserrat $fontWeight: 400 {
-    font-family: var(--font-family);
+@define-mixin _font-montserrat $fontWeight: 400 {
+    font-family: "Montserrat", sans-serif; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
     font-weight: $(fontWeight);
 }
 
 /* ==========================================================================
   All typography variants
-
-  $unit - Either em or rem
+  $unit: Either em or rem
   ========================================================================== */
 
-@define-mixin typography-numbers $unit {
-    @mixin font-montserrat 700;
+@define-mixin typography-numbers $unit: rem {
+    @mixin _font-montserrat 700;
     font-size: 6$(unit);
-    line-height: calc(5.8em / 6);
+    line-height: normal;
 
     @media (--layout-lte-tablet) {
         font-size: 4.8$(unit);
-        line-height: calc(5.8em / 4.8);
     }
 }
 
-@define-mixin typography-h1 $unit {
-    @mixin font-montserrat 600;
+@define-mixin typography-h1 $unit: rem {
+    @mixin _font-montserrat 600;
     font-size: 4.2$(unit);
-    line-height: calc(5.8 / 4.2);
+    line-height: normal;
 
     @media (--layout-lte-mobile) {
         font-size: 2.6$(unit);
-        line-height: calc(3.2em / 2.6);
     }
 }
 
-@define-mixin typography-h2 $unit {
-    @mixin font-montserrat;
+@define-mixin typography-h2 $unit: rem {
+    @mixin _font-montserrat;
     font-size: 3.4$(unit);
-    line-height: calc(5.2em / 3.4);
-
-    @media (--layout-lte-mobile) {
-        line-height: calc(3.7em / 3.4);
-    }
+    line-height: normal;
 
     @media (--layout-lte-small-mobile) {
         font-size: 1.8$(unit);
-        line-height: calc(3.7em / 1.8);
     }
 }
 
-@define-mixin typography-h3 $unit {
-    @mixin font-montserrat 600;
+@define-mixin typography-h3 $unit: rem {
+    @mixin _font-montserrat 600;
     font-size: 2.2$(unit);
-    line-height: calc(4.2em / 2.2);
+    line-height: normal;
 }
 
-@define-mixin typography-h4 $unit {
-    @mixin font-montserrat;
+@define-mixin typography-h4 $unit: rem {
+    @mixin _font-montserrat;
     font-size: 1.8$(unit);
-    line-height: calc(3.6em / 1.8);
+    line-height: normal;
 
     @media (--layout-lte-mobile) {
         font-size: 1.5$(unit);
-        line-height: calc(3.6em / 1.5);
     }
 
     @media (--layout-lte-small-mobile) {
         font-size: 1.4$(unit);
-        line-height: calc(3.6em / 1.4);
     }
 }
 
-@define-mixin typography-h5 $unit {
-    @mixin font-montserrat;
+@define-mixin typography-h5 $unit: rem {
+    @mixin _font-montserrat;
     font-size: 1.2$(unit);
-    line-height: calc(1.8em / 1.2);
+    line-height: normal;
 
     @media (--layout-lte-small-mobile) {
         font-size: 1.1$(unit);
-        line-height: calc(1.8em / 1.1);
     }
 }
 
-@define-mixin typography-body $unit {
-    @mixin font-montserrat;
+@define-mixin typography-body $unit: rem {
+    @mixin _font-montserrat;
     font-size: 1.5$(unit);
-    line-height: calc(3em / 1.5);
+    line-height: normal;
 
     @media (--layout-lte-mobile) {
         font-size: 1.3$(unit);
-        line-height: calc(2.8em / 1.3);
     }
 }
 
-@define-mixin typography-captions $unit {
-    @mixin font-montserrat 600;
+@define-mixin typography-captions $unit: rem {
+    @mixin _font-montserrat 600;
     font-size: 1.1$(unit);
     text-transform: uppercase;
-    line-height: calc(1.3em / 1.1);
+    line-height: normal;
 }
 
-@define-mixin typography-heavy-captions $unit {
-    @mixin font-montserrat 600;
+@define-mixin typography-heavy-captions $unit: rem {
+    @mixin _font-montserrat 600;
     font-size: 2$(unit);
-    line-height: calc(2.4em / 1.1);
+    line-height: normal;
 }
