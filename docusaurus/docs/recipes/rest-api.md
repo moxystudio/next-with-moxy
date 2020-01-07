@@ -4,18 +4,32 @@ title: Adding a simple REST API
 sidebar_label: Adding a simple REST API
 ---
 
-Sometimes a project may require a simple REST API (e.g. to send an email). Next.js comes with the ability to create API endpoints, which makes this recipe very straightforward. Please read their [API routes](https://nextjs.org/docs#api-routes) documentation as they extend Node.js `req` and `res` objects with additional functionality and ship with built-in middleware.
+Sometimes a project may require a simple REST API (e.g. to send an email). Next.js brought API routes support in v9, but you have to provide your own implementation for handling different HTTP methods, validation, error handling and so on. We have created [`@moxy/next-rest-api`](https://github.com/moxystudio/next-rest-api/) to solve these problems, so that you can focus on writing your business logic.
+
+> ℹ️ Besides getting familiar with the `next-rest-api`, you might want to give a quick read over Next.js [API routes](https://nextjs.org/docs#api-routes) documentation. Next.js extend Node.js `req` and `res` objects with additional functionality and ship with built-in middleware.
 
 > ⚠️ Please note that if you require more than a simple API with one or two endpoints, it's better if you create a separate project (and repository) for it.
 
 ## Walk-through
 
+### 1. Install `@moxy/next-rest-api`
+
+```bash
+npm i @moxy/next-rest-api @hapi/joi @hapi/boom
+```
+
 ### 1. Create `api/my-endpoint.js` file
 
 ```js
-export default (req, res) => {
-    res.status(200).json({ hello: 'world' });
-};
+import withRest from '@moxy/next-rest-api';
+
+export default withRest({
+    GET: async (req, res) => {
+        // Do something..
+
+        return { hello: 'world' };
+    },
+});
 ```
 
 ### 2. Map `api/my-endpoint.js` to `pages/api/my-endpoint.js`
@@ -28,26 +42,4 @@ export { default } from '../../api/my-endpoint';
 
 ### 3. Access your API at `/api/my-endpoint`
 
-Next.js will map every file in `api/` to a corresponding `/api/...` route. For example, the file `api/post.js` will map to the `/api/post` endpoint.
-
-## Micro
-
-If the built-in extended `req` and `res` objects and middleware are not sufficient to the needs of your API endpoints, you may use [micro](https://github.com/zeit/micro). It's fast, lightweight, and compatible with serverless deployments.
-
-To set it up simply install it:
-
-```bash
-npm install micro --save
-```
-
-and then simply wrap your endpints with `micro()`:
-
-```js
-import micro from 'micro';
-
-export default micro((req, res) => {
-    // Do something..
-});
-```
-
-You may want to look into [awesome-micro](https://github.com/amio/awesome-micro) for a list of useful micro related packages.
+Next.js will map every file in `api/` to a corresponding `/api/...` route. For example, the file `api/products.js` will map to the `/api/products` endpoint.
