@@ -1,0 +1,94 @@
+name: Docker CI
+
+on:
+  push:
+    paths-ignore:
+      - docusaurus/**/*
+  pull_request:
+    paths-ignore:
+      - docusaurus/**/*
+
+env:
+  DOCKER_REGISTRY: docker.pkg.github.com
+  DOCKER_BUILDKIT: 1
+
+jobs:
+
+  prepare:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+
+    - name: Build base image
+      env:
+        DOCKER_BASE_IMAGE: ${{ env.DOCKER_REGISTRY }}/moxystudio/next-with-moxy/base
+      run: |
+        echo ${{ secrets.GITHUB_TOKEN }} | docker login -u $GITHUB_ACTOR --password-stdin $DOCKER_REGISTRY
+
+        docker pull ${DOCKER_BASE_IMAGE}:latest || true
+        docker build . \
+            --target base \
+            --cache-from ${DOCKER_BASE_IMAGE}:latest \
+            -t ${DOCKER_BASE_IMAGE}:latest \
+            --build-arg BUILDKIT_INLINE_CACHE=1
+        docker push ${DOCKER_BASE_IMAGE}:latest
+
+  check:
+    runs-on: ubuntu-latest
+    needs: prepare
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+
+    - name: Run checks
+      env:
+        DOCKER_BASE_IMAGE: ${{ env.DOCKER_REGISTRY }}/moxystudio/next-with-moxy/base
+      run: |
+        echo ${{ secrets.GITHUB_TOKEN }} | docker login -u $GITHUB_ACTOR --password-stdin $DOCKER_REGISTRY
+
+        docker pull ${DOCKER_BASE_IMAGE}:latest || true
+        docker build . \
+          --cache-from ${DOCKER_BASE_IMAGE}:latest \
+          --target check \
+          -t check:latest \
+          --build-arg CI=1
+
+    - name: Export coverage
+      run: |
+        docker create -ti --name check-container check bash
+        docker cp check-container:/src/coverage .
+
+    - name: Submit coverage
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+
+  build-and-run:
+    runs-on: ubuntu-latest
+    needs: prepare
+    name: build and run
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+
+    - name: Build image
+      env:
+        DOCKER_BASE_IMAGE: ${{ env.DOCKER_REGISTRY }}/moxystudio/next-with-moxy/base
+      run: |
+        echo ${{ secrets.GITHUB_TOKEN }} | docker login -u $GITHUB_ACTOR --password-stdin $DOCKER_REGISTRY
+
+        docker pull ${DOCKER_BASE_IMAGE}:latest || true
+        docker build . \
+          --cache-from ${DOCKER_BASE_IMAGE}:latest \
+          --target runtime  \
+          -t runtime:latest
+
+    - name: Run image & check status code
+      run: |
+        docker run --name runtime -p 3000:3000 -d runtime:latest
+        sleep 5
+        curl http://localhost:3000 > /dev/null
