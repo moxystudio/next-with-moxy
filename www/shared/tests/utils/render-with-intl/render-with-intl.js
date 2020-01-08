@@ -4,14 +4,19 @@ import { render } from '@testing-library/react';
 import { merge } from 'lodash';
 
 import defaultMessages from '../../../../../intl/messages/en-US.json';
-import testMessages from '../../../../../intl/messages/test.json';
+
+const mockTestMessages = {
+    foo: 'foo',
+    bar: 'bar',
+    home: 'home',
+};
 
 export const renderWithIntl = (
     children,
     options = {},
     id = 'en-US',
     locale = 'en',
-    messages = merge(defaultMessages, testMessages)) => {
+    messages = merge(defaultMessages, mockTestMessages)) => {
     const { rerender, ...rest } = render(
         <IntlProvider id={ id } locale={ locale } messages={ messages }>
             { children }
