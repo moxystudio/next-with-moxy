@@ -6,7 +6,7 @@ sidebar_label: Adding a simple REST API
 
 Sometimes a project may require a simple REST API (e.g. to send an email). Next.js brought API routes support in v9, but you have to provide your own implementation for handling different HTTP methods, validation, error handling and so on. We have created [`@moxy/next-rest-api`](https://github.com/moxystudio/next-rest-api/) to solve these problems, so that you can focus on writing your business logic.
 
-> ℹ️ Besides getting familiar with the `@moxy/next-rest-api`, you might want to give a quick read over Next.js [API routes](https://nextjs.org/docs#api-routes) documentation. Next.js extends Node.js `req` and `res` objects with additional functionality and ships with built-in middleware.
+Besides getting familiar with the `@moxy/next-rest-api`, you might want to give a quick read over Next.js [API routes](https://nextjs.org/docs#api-routes) documentation. Next.js extends Node.js `req` and `res` objects with additional functionality and ships with built-in middleware.
 
 > ⚠️ Please note that if you require more than a simple API with one or two endpoints, it's better if you create a separate project (and repository) for it.
 
