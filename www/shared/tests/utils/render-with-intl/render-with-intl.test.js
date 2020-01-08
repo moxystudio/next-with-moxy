@@ -5,7 +5,7 @@ import { renderWithIntl } from './render-with-intl';
 
 it('should correctly render formatted message', () => {
     const { container, getByText } = renderWithIntl(
-        <FormattedMessage id={ 'foo' } />,
+        <FormattedMessage id="foo" />,
     );
 
     expect(container.innerHTML).toMatchSnapshot();
@@ -14,7 +14,7 @@ it('should correctly render formatted message', () => {
 
 it('should correctly rerender with passed children', () => {
     const { rerenderWithIntl, getByText } = renderWithIntl(
-        <FormattedMessage id={ 'foo' } />,
+        <FormattedMessage id="foo" />,
     );
 
     rerenderWithIntl('bar');
