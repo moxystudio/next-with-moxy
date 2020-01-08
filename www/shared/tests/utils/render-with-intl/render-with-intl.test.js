@@ -4,11 +4,10 @@ import { FormattedMessage } from 'react-intl';
 import { renderWithIntl } from './render-with-intl';
 
 it('should correctly render formatted message', () => {
-    const { container, getByText } = renderWithIntl(
+    const { getByText } = renderWithIntl(
         <FormattedMessage id="foo" />,
     );
 
-    expect(container.innerHTML).toMatchSnapshot();
     expect(getByText('foo')).toBeInTheDocument();
 });
 

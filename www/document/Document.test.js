@@ -12,7 +12,7 @@ jest.mock('next/document', () => ({
 
 import { Document } from './Document';
 
-beforeEach(() => {
+beforeAll(() => {
     global.__NEXT_INTL_POLYFILL_URL__ = 'foo.js';
 });
 
