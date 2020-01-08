@@ -10,7 +10,7 @@ import SEO_DATA from './App.data.js';
 
 import '../shared/styles/index.css';
 
-class App extends NextApp {
+export class App extends NextApp {
     componentDidMount() {
         this.unregisterGoogleTracking = registerGoogleTracking(this.props.router);
     }
