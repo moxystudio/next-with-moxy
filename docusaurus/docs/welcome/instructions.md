@@ -26,9 +26,10 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
     - `package.json`: In the `description` field.
     - `App.data.js`: In the `url` field.
 
-3. Delete the following files:
+3. Delete the following files and folders:
 
     - `LICENSE`
+    - `.github`
 
 4. Tweak the root README.md file of the project:
 
