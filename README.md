@@ -1,11 +1,15 @@
 # next-with-moxy
 
-[![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url]
+[![Build Status][build-status-image]][build-status-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url]
 
-[david-dm-url]:https://david-dm.org/moxystudio/next-intl
-[david-dm-image]:https://img.shields.io/david/moxystudio/next-intl.svg
-[david-dm-dev-url]:https://david-dm.org/moxystudio/next-intl?type=dev
-[david-dm-dev-image]:https://img.shields.io/david/dev/moxystudio/next-intl.svg
+[build-status-url]:https://github.com/moxystudio/next-with-moxy/actions
+[build-status-image]:https://img.shields.io/github/workflow/status/moxystudio/next-with-moxy/Node%20CI/master
+[codecov-url]:https://codecov.io/gh/moxystudio/next-with-moxy
+[codecov-image]:https://img.shields.io/codecov/c/github/moxystudio/next-with-moxy/master.svg
+[david-dm-url]:https://david-dm.org/moxystudio/next-with-moxy
+[david-dm-image]:https://img.shields.io/david/moxystudio/next-with-moxy.svg
+[david-dm-dev-url]:https://david-dm.org/moxystudio/next-with-moxy?type=dev
+[david-dm-dev-image]:https://img.shields.io/david/dev/moxystudio/next-with-moxy.svg
 
 MOXY's boilerplate to accelerate the setup of new [Next.js](https://nextjs.org/) based web applications.
 
