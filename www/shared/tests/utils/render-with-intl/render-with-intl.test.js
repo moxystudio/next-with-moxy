@@ -16,7 +16,7 @@ it('should correctly rerender with passed children', () => {
         <FormattedMessage id="foo" />,
     );
 
-    rerenderWithIntl('bar');
+    rerenderWithIntl(<FormattedMessage id={ 'bar' } />);
 
     expect(getByText('bar')).toBeInTheDocument();
 });
