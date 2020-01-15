@@ -3,14 +3,14 @@ import React from 'react';
 import { App } from './App';
 import { renderWithIntl } from '../shared/tests/utils';
 
-const getTree = (props) => renderWithIntl(
+const Tree = (props) => (
     <App
-        Component={ () => <div>Hello World</div> } // eslint-disable-line react/jsx-no-bind
-        { ...props } />,
+        Component={ () => <div>Hello World</div> }
+        { ...props } />
 );
 
 it('should render correctly', () => {
-    const { container } = getTree();
+    const { container } = renderWithIntl(<Tree />);
 
     expect(container).toHaveTextContent('Hello World');
 });

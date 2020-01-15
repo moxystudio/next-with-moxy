@@ -54,7 +54,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^8.0.0",
     "@moxy/babel-preset": "^3.2.1",
-    "@moxy/eslint-config": "^9.1.2",
+    "@moxy/eslint-config": "^10.1.0",
     "@moxy/jest-config": "^1.1.1",
     "@moxy/postcss-preset": "^4.3.0",
     "@moxy/stylelint-config": "^7.1.0",

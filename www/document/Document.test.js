@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 jest.mock('next/document', () => ({
     __esModule: true,
     Html: ({ children }) => children,
-    Head: ({ children }) => <head>{ children }</head>, // eslint-disable-line react/prop-types
+    Head: ({ children }) => <head>{ children }</head>,
     Main: () => <div />,
     NextScript: () => <div />,
     default: require('react').Component,
