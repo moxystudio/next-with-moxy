@@ -4,14 +4,14 @@ import { IntlProvider } from 'react-intl';
 import messages from '../../../intl/messages/en-US.json';
 import Home from './Home';
 
-const renderTree = (children) => render(
+const Tree = (props) => (
     <IntlProvider locale="en-US" messages={ messages }>
-        { children }
-    </IntlProvider>,
+        { props.children }
+    </IntlProvider>
 );
 
 it('should render correctly', () => {
-    const { container } = renderTree(<Home />);
+    const { container } = render(<Tree><Home /></Tree>);
 
     expect(container).toHaveTextContent('Home');
 });
