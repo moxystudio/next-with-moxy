@@ -4,22 +4,11 @@ const { withRasterImages, withPlayback, withSVG, withFonts, with3D } = require('
 const withOneOf = require('@moxy/next-webpack-oneof');
 const withCompileNodeModules = require('@moxy/next-compile-node-modules');
 const withNextIntl = require('@moxy/next-intl/plugin');
-const withCSS = require('@zeit/next-css');
-const { PHASE_PRODUCTION_BUILD } = require('next/constants');
 const withPlugins = require('next-compose-plugins');
 
 module.exports = (phase, nextConfig) =>
     withPlugins([
         withOneOf,
-        [withCSS, {
-            cssModules: true,
-            cssLoaderOptions: {
-                importLoaders: 1,
-                localIdentName: phase === PHASE_PRODUCTION_BUILD ?
-                    '[hash:base64:5]' :
-                    '[name]__[local]___[hash:base64:5]',
-            },
-        }],
         withRasterImages(),
         withRasterImages({
             include: /\.data-url\./,

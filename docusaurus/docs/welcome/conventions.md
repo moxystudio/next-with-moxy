@@ -24,7 +24,7 @@ The folder-structure convention favours co-location of assets and their requeste
     │   │   ├── Home.js
     │   │   ├── Home.test.js
     │   │   ├── Home.data.js
-    │   │   ├── Home.css
+    │   │   ├── Home.module.css
     │   │   └── components
     │   └── ...
     └── shared
