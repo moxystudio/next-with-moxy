@@ -8,8 +8,6 @@ import registerGoogleTracking from './ga-tracking';
 import favicon from '../shared/media/favicons/favicon.ico';
 import SEO_DATA from './App.data.js';
 
-import '../shared/styles/index.css';
-
 export class App extends NextApp {
     componentDidMount() {
         this.unregisterGoogleTracking = registerGoogleTracking(this.props.router);
