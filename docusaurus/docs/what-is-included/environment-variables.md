@@ -53,12 +53,8 @@ if (process.env.FEATURE_A) {
 3. Add it to the Dockerfile
 
     ```dockerfile
-    # Define build args
-    # ...
+    # Define build arguments & map them to environment variables
     ARG FEATURE_A
-
-    # Define environment variables
-    # ...
     ENV FEATURE_A ${FEATURE_A}
     ```
 
