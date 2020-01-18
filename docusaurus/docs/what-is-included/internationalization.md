@@ -26,4 +26,4 @@ Policies control which locale is active at a given point, amongst other things.
 
 You may want to create custom policies for certain use-cases. One common use-case is to have a policy that matches against the locale saved in the account preferences of authenticated users.
 
-Please check the `next-intl` [documentation](https://github.com/moxystudio/next-intl#custom-policies) to know more.
+Please check `@moxy/next-intl`'s [documentation](https://github.com/moxystudio/next-intl#custom-policies) to know more.
