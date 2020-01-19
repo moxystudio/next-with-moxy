@@ -48,7 +48,7 @@ The folder-structure convention favours co-location of assets and their requeste
             - `Home.js`: This is your component file.
             - `Home.test.js`: This is the test file corresponding to this component.
             - `Home.data.js`: This is where you'll find data that will be used by this component. You can find a more in depth explanation of this file convention further below.
-            - `Home.css`: This is where you'll have styles that are only used in this component.
+            - `Home.module.css`: This is where you'll have styles that are only used in this component.
             - `components`: If you have abstracted parts of this component into smaller components, use this folder to co-locate them.
     - `shared`: Where you can put content that is shared between pages and cannot be directly co-located with its interested parties.
         - `components`: The folder for components that are shared between pages. You can find an example just above of what files each component is expected to have.
