@@ -1,0 +1,27 @@
+/* Usage: @mixin position absolute, top, right, bottom, left
+   Example: @mixin position absolute, 10px, null, null, 0 -> positon: absolute; top: 10px; left: 0;
+============================================= */
+
+/* ==========================================================================
+   Mixin to position
+   ========================================================================== */
+
+@define-mixin position $type: absolute, $top: null, $right: null, $bottom: null, $left: null {
+    position: $type;
+
+    @if $top != null {
+        top: $top;
+    }
+
+    @if $right != null {
+        right: $right;
+    }
+
+    @if $bottom != null {
+        bottom: $bottom;
+    }
+
+    @if $left != null {
+        left: $left;
+    }
+}

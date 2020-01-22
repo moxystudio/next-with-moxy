@@ -1,7 +1,5 @@
-@import "../../shared/styles/variables";
+@import "../../shared/styles/imports";
 
 .home {
-    width: var(--home-width);
-    height: var(--home-height);
     background-color: var(--color-white);
 }

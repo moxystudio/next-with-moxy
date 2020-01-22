@@ -1,0 +1,16 @@
+@define-mixin unstyled-button {
+    padding: 0;
+    border: none;
+    outline-style: none;
+    background: transparent;
+    border-radius: 0;
+    cursor: pointer;
+    appearance: none;
+
+    &:active,
+    &:focus,
+    &:visited,
+    &:hover {
+        outline: none;
+    }
+}
