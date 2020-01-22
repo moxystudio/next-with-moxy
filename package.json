@@ -54,17 +54,17 @@
     "@commitlint/config-conventional": "^8.0.0",
     "@moxy/babel-preset": "^3.2.1",
     "@moxy/eslint-config": "^10.1.0",
-    "@moxy/jest-config": "^1.1.1",
+    "@moxy/jest-config": "^1.3.0",
     "@moxy/postcss-preset": "^4.4.1",
     "@moxy/stylelint-config": "^7.1.0",
     "@testing-library/react": "^9.3.0",
     "commitlint": "^8.0.0",
     "eslint": "^6.5.1",
-    "husky": "^4.0.10",
-    "jest": "^24.8.0",
-    "lint-staged": "^9.5.0",
+    "husky": "^4.2.0",
+    "jest": "^25.1.0",
+    "lint-staged": "^10.0.2",
     "rimraf": "^3.0.0",
-    "standard-version": "^7.0.0",
+    "standard-version": "^7.1.0",
     "stylelint": "^13.0.0"
   }
 }
