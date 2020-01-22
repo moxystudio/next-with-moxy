@@ -4,9 +4,6 @@
    Use it like so: @media (--layout-small) { ... }
    ========================================================================== */
 
-/* this need to be according to the sum of --layout-content-max-width and 2 * --layout-content-spacing-x */
-@custom-media --layout-lte-content-max-width (width <= 96.25em); /* 1540px */
-
 /* Use these if you developing desktop first and want to target lower resolutions */
 
 @custom-media --layout-lte-small-mobile (width <= 20em); /* 320px * 0.0625 */

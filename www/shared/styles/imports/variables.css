@@ -28,7 +28,6 @@
 
 :root {
     --z-index-base: 0;
-    --z-index-header: 2;
 }
 
 /* ==========================================================================
@@ -39,29 +38,4 @@
     --duration-fast: 0.15s;
     --duration-standard: 0.3s;
     --duration-long: 0.4s;
-}
-
-/* ==========================================================================
-   Layout vars
-   ==========================================================================
-
-   --layout-content-max-width: App content maximum width - if this is changed you need to update the custom media --layout-lte-container-width
-   --layout-content-spacing-x: Spacing around main contents of the website - if this is changed you need to update the custom media --layout-lte-container-width
-
-   ========================================================================== */
-
-:root {
-    --layout-content-max-width: 140rem;
-    --layout-content-spacing-x: 5%;
-    --layout-header-height: 9rem;
-}
-
-/* ==========================================================================
-   Responsive vars
-   ========================================================================== */
-
-@media (--layout-lte-small-desktop) {
-    :root {
-        --layout-header-height: 6rem;
-    }
 }
