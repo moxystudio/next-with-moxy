@@ -9,9 +9,10 @@ html {
 }
 
 body {
-    @mixin typography-body rem;
+    @mixin typography-body;
     @mixin text-smooth;
 
+    color: var(--color-black);
     overflow-wrap: break-word;  /* Break long words by default */
     -webkit-tap-highlight-color: transparent;  /* Do not show a highlight (rectangle around the link) while tapping it */
 }
@@ -23,22 +24,29 @@ body {
 h1,
 h2,
 h3,
-h4 {
-    margin: 0.7em 0;
+h4,
+h5,
+h6,
+p {
+    margin: 0;
 }
 
 h1 {
-    @mixin typography-h1 rem;
+    @mixin typography-h1;
 }
 
 h2 {
-    @mixin typography-h2 rem;
+    @mixin typography-h2;
 }
 
 h3 {
-    @mixin typography-h3 rem;
+    @mixin typography-h3;
 }
 
 h4 {
-    @mixin typography-h4 rem;
+    @mixin typography-h4;
+}
+
+h5 {
+    @mixin typography-h5;
 }
