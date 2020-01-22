@@ -4,11 +4,42 @@
    Use it like so: @media (--layout-small) { ... }
    ========================================================================== */
 
-/* Use these if you developing desktop first and want to target lower resolutions */
+/* Use these if you are developing for desktop first and want to target lower resolutions (including) */
 
-@custom-media --layout-lte-small-mobile (width <= 20em); /* 320px * 0.0625 */
-@custom-media --layout-lte-mobile (width <= 26.2em); /* 420px * 0.0625 */
-@custom-media --layout-lte-tablet (width <= 48em); /* 768px * 0.0625 */
-@custom-media --layout-lte-small-desktop (width <= 64em); /* 1024 * 0.0625 */
-@custom-media --layout-lte-desktop (width <= 90em); /* 1440 * 0.0625 */
-@custom-media --layout-lte-big-desktop (width <= 120em); /* 1920px * 0.0625 */
+@custom-media --layout-lte-xxsmall (width <= 23.4375em); /* 375px */
+@custom-media --layout-lte-xsmall (width <= 30em); /* 480px */
+@custom-media --layout-lte-small (width <= 48em); /* 768px */
+@custom-media --layout-lte-medium (width <= 64em); /* 1024px */
+@custom-media --layout-lte-large (width <= 80em); /* 1280px */
+@custom-media --layout-lte-xlarge (width <= 90em); /* 1440px */
+@custom-media --layout-lte-xxlarge (width <= 120em); /* 1920px */
+
+/* Use these if you are developing for desktop first and want to target lower resolutions (not including) */
+
+@custom-media --layout-lt-xxsmall (width < 23.4375em); /* 375px */
+@custom-media --layout-lt-xsmall (width < 30em); /* 480px */
+@custom-media --layout-lt-small (width < 48em); /* 768px */
+@custom-media --layout-lt-medium (width < 64em); /* 1024px */
+@custom-media --layout-lt-large (width < 80em); /* 1280px */
+@custom-media --layout-lt-xlarge (width < 90em); /* 1440px */
+@custom-media --layout-lt-xxlarge (width < 120em); /* 1920px */
+
+/* Use these if you are developing for mobile first and want to target higher resolutions (including) */
+
+@custom-media --layout-gte-xxsmall (width >= 23.4375em); /* 375px */
+@custom-media --layout-gte-xsmall (width >= 30em); /* 480px */
+@custom-media --layout-gte-small (width >= 48em); /* 768px */
+@custom-media --layout-gte-medium (width >= 64em); /* 1024px */
+@custom-media --layout-gte-large (width >= 80em); /* 1280px */
+@custom-media --layout-gte-xlarge (width >= 90em); /* 1440px */
+@custom-media --layout-gte-xxlarge (width >= 120em); /* 1920px */
+
+/* Use these if you are developing for mobile first and want to target higher resolutions (not including) */
+
+@custom-media --layout-gt-xxsmall (width > 23.4375em); /* 375px */
+@custom-media --layout-gt-xsmall (width > 30em); /* 480px */
+@custom-media --layout-gt-small (width > 48em); /* 768px */
+@custom-media --layout-gt-medium (width > 64em); /* 1024px */
+@custom-media --layout-gt-large (width > 80em); /* 1280px */
+@custom-media --layout-gt-xlarge (width > 90em); /* 1440px */
+@custom-media --layout-gt-xxlarge (width > 120em); /* 1920px */
