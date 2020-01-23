@@ -29,7 +29,7 @@
     "postrelease": "git push --follow-tags origin HEAD",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:eslint": "eslint --ignore-path .gitignore .",
-    "lint:stylelint": "stylelint --ignore-path .gitignore \"**/*.css\"",
+    "lint:stylelint": "stylelint --ignore-path .gitignore .",
     "docs": "npm run start --prefix docusaurus -- --port 4000"
   },
   "dependencies": {
@@ -62,6 +62,7 @@
     "commitlint": "^8.0.0",
     "eslint": "^6.5.1",
     "husky": "^4.2.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^25.1.0",
     "lint-staged": "^10.0.2",
     "rimraf": "^3.0.0",

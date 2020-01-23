@@ -1,3 +1,6 @@
 {
-    "extends": "@moxy/stylelint-config"
+    "extends": "@moxy/stylelint-config",
+    "ignoreFiles": [
+        "!**/*.css"
+    ]
 }
