@@ -1,17 +1,14 @@
 import React from 'react';
-
+import { render } from '@testing-library/react';
 import { App } from './App';
-import { renderWithIntl } from '../shared/tests/utils';
-
-const Tree = (props) => (
-    <App
-        Component={ () => <div>Hello World</div> }
-        { ...props } />
-);
+import { AppTreeWrapper } from '../shared/tests';
 
 it('should render correctly', () => {
-    const { container } = renderWithIntl(<Tree />);
+    const { container } = render(
+        <AppTreeWrapper>
+            <App Component={ () => 'Hello World' } />
+        </AppTreeWrapper>,
+    );
 
     expect(container).toHaveTextContent('Hello World');
 });
-
