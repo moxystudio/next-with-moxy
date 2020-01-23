@@ -1,7 +1,7 @@
 ---
 id: favicon-os-theme
 title: Changing favicon according to OS theme
-sidebar_label: Changing favicon according to OS theme
+sidebar_label: Favicon according to OS theme
 ---
 
 Most operating systems now offer light and dark modes. Sometimes the default favicon does not work well in dark mode due to the lack of contrast. This recipe explains how to add a favicon variant for dark mode into the project.
