@@ -57,7 +57,7 @@
     "@moxy/eslint-config": "^10.1.0",
     "@moxy/jest-config": "^1.3.0",
     "@moxy/postcss-preset": "^4.4.1",
-    "@moxy/stylelint-config": "^7.1.0",
+    "@moxy/stylelint-config": "^8.1.0",
     "@testing-library/react": "^9.3.0",
     "commitlint": "^8.0.0",
     "eslint": "^6.5.1",
