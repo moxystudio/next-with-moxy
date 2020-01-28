@@ -32,6 +32,7 @@ module.exports = {
             label: 'Recipes',
             items: [
                 'recipes/recipe-rest-api',
+                'recipes/recipe-add-favicon',
                 {
                     type: 'link',
                     label: 'Private recipes',
