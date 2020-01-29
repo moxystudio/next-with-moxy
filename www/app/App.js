@@ -5,7 +5,6 @@ import KeyboardOnlyOutlines from '@moxy/react-keyboard-only-outlines';
 import { withNextIntlSetup } from '@moxy/next-intl';
 import nextIntlConfig from '../../intl';
 import registerGoogleTracking from './ga-tracking';
-import favicon from '../shared/media/favicons/favicon.ico';
 import SEO_DATA from './App.data.js';
 
 export class App extends NextApp {
@@ -26,7 +25,17 @@ export class App extends NextApp {
                     <title>{ SEO_DATA.title }</title>
                     <meta name="description" content={ SEO_DATA.description } />
                     <meta name="keywords" content={ SEO_DATA.keywords.join(' ') } />
-                    <link rel="shortcut icon" type="image/x-icon" href={ favicon } />
+                    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png?v=M4KN2GElyG" />
+                    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png?v=M4KN2GElyG" />
+                    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png?v=M4KN2GElyG" />
+                    <link rel="manifest" href="/favicons/site.webmanifest?v=M4KN2GElyG" />
+                    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg?v=M4KN2GElyG" color="#5bbad5" />
+                    <link rel="shortcut icon" href="/favicons/favicon.ico?v=M4KN2GElyG" />
+                    <meta name="apple-mobile-web-app-title" content="project-name" />
+                    <meta name="application-name" content="project-name" />
+                    <meta name="msapplication-TileColor" content="#ffffff" />
+                    <meta name="msapplication-config" content="/favicons/browserconfig.xml?v=M4KN2GElyG" />
+                    <meta name="theme-color" content="#ffffff" />
                     {/* Facebook & search engines */}
                     <meta property="og:url" content={ SEO_DATA.url } />
                     <meta property="og:type" content="website" />
