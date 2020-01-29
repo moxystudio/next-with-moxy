@@ -1,47 +1,34 @@
 ---
-id: recipe-add-favicon
-title: Adding a favicon
-sidebar_label: Adding a favicon
+id: recipe-add-favicon-manifest
+title: Generate favicons & manifest
+sidebar_label: Generate favicons & manifest
 ---
 
-In every project it is necessary to add a favicon to improve the user experience.
-
-In this recipe, you will be guided through the process of adding a favicon that is supported by the latest versions of the [browsers](https://browserl.ist/?q=last%202%20Chrome%20versions%2C%20last%202%20Firefox%20versions%2C%20last%202%20Safari%20versions%2C%20last%202%20Edge%20versions%2C%20last%202%20ChromeAndroid%20versions%2C%20last%202%20iOS%20versions) this boilerplate supports.
+In this recipe, you will be guided through the process of setting up a favicon for your app that is supported by the latest versions of the [browsers](https://browserl.ist/?q=last%202%20Chrome%20versions%2C%20last%202%20Firefox%20versions%2C%20last%202%20Safari%20versions%2C%20last%202%20Edge%20versions%2C%20last%202%20ChromeAndroid%20versions%2C%20last%202%20iOS%20versions) this boilerplate supports.
 
 ## Walk-through
 
 ### 1. Use a favicon generator
 
-It is recommended the use of the generator [realfavicongenerator](https://realfavicongenerator.net/).
-All you need to do is add the image and the generator will give you a `.zip` with all the necessary files.
+It is recommended the use of the generator [RealFaviconGenerator](https://realfavicongenerator.net/). Follow the next steps:
 
-### 2. Add the favicon files to the folder `www/shared/media/favicons`
+- Select an image (PNG, JPG or SVG). Your image should be 260x260 or more for optimal results.
 
-It is recommended to add the following files:
-- `.ico` format - `favicon.ico`*
-- `.png` format 16x16 - `favicon-16x16.png`*
-- `.png` format 32x32 - `favicon-32x32.png`*
-- `.png` format 180x180 - `apple-touch-icon.png`*
-- `.svg` format - `safari-pinned-tab.svg`*
+- Configure all the options (background, margins, ...) for each browser.
 
-\* Name of the files provided by the generator
+- [**Important**] At the bottom, on the "Favicon Generator Options" section:
+  - Go to the "Path" tab, select the second option and write `/favicons`.
+  - Go to the "Version/Refresh" tab and select the second option.
+  - Go to the "App name" tab, select the second option and add your app name.
 
-### 3. Import the icons and add the tags to the `www/app/App.js` file
+- Click on the button to generate the favicons and HTML code.
 
-```js
-import Favicon from '../shared/media/favicons/favicon.ico';
-import IconApple from '../shared/media/favicons/apple-touch-icon.png';
-import Icon16 from '../shared/media/favicons/favicon-16x16.png';
-import Icon32 from '../shared/media/favicons/favicon-32x32.png';
-import IconSafariPinned from '../shared/media/favicons/safari-pinned-tab.svg';
+- You will be redirected to another page. Download the package and save the HTML code.
 
-...
+### 2. Add the files to the `public/favicons` folder
 
-<Head>
-    ...
-    <link rel="shortcut icon" type="image/x-icon" href={ Favicon } />
-    <link rel="apple-touch-icon" href={ IconApple } sizes="180x180" />
-    <link rel="icon" type="image/png" href={ Icon16 } sizes="16x16" />
-    <link rel="icon" type="image/png" href={ Icon32 } sizes="32x32" />
-    <link rel="mask-icon" href={ IconSafariPinned } color="#5bbad5" />
-```
+You should add all the files to the `public/favicons` folder
+
+### 3. Add the HTML code to `www/app/App.js`
+
+Finally just add the HTML code generated and place it before "Facebook & search engines".
