@@ -4,11 +4,11 @@ import Head from 'next/head';
 import KeyboardOnlyOutlines from '@moxy/react-keyboard-only-outlines';
 import { withNextIntlSetup } from '@moxy/next-intl';
 import nextIntlConfig from '../../intl';
-import { trackOnRouteChanged } from '../shared/utils';
+import { trackPageViews } from '../shared/utils/google-analytics';
 import SEO_DATA from './App.data.js';
 
 export const App = ({ Component, pageProps, router }) => {
-    useEffect(() => trackOnRouteChanged(router), [router]);
+    useEffect(() => trackPageViews(router), [router]);
 
     return (
         <>

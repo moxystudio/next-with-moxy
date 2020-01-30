@@ -9,7 +9,7 @@ const mockedRouter = {
     },
 };
 
-describe('trackOnRouteChanged function', () => {
+describe('trackPageViews function', () => {
     beforeEach(() => {
         process.env.GA_TRACKING_ID = '12345';
     });
@@ -29,19 +29,19 @@ describe('trackOnRouteChanged function', () => {
 
         delete process.env.GA_TRACKING_ID;
 
-        const { trackOnRouteChanged } = require('./google-analytics');
+        const { trackPageViews } = require('.');
 
-        trackOnRouteChanged(mockedRouter);
+        trackPageViews(mockedRouter);
 
         expect(mockSend).toHaveBeenCalledTimes(0);
     });
 
     it('should replace route if utm parameters are included', () => {
-        const { trackOnRouteChanged } = require('./google-analytics');
+        const { trackPageViews } = require('.');
 
         window.history.replaceState({}, 'Test UTM', '/?utm_source=foo&utm_medium=bar&utm_campaign=baz');
 
-        trackOnRouteChanged(mockedRouter);
+        trackPageViews(mockedRouter);
         expect(mockedRouter.replace).toHaveBeenCalledTimes(1);
         expect(mockedRouter.replace).toHaveBeenCalledWith('/');
     });
@@ -53,9 +53,9 @@ describe('trackOnRouteChanged function', () => {
             send: mockSend,
         }));
 
-        const { trackOnRouteChanged } = require('./google-analytics');
+        const { trackPageViews } = require('.');
 
-        trackOnRouteChanged(mockedRouter);
+        trackPageViews(mockedRouter);
 
         expect(mockedRouter.events.on).toHaveBeenCalledTimes(1);
         expect(mockedRouter.events.on).toHaveBeenCalledWith('routeChangeStart', expect.any(Function));
@@ -68,9 +68,9 @@ describe('trackOnRouteChanged function', () => {
     });
 
     it('should remove router event handlers when cleaning up', () => {
-        const { trackOnRouteChanged } = require('./google-analytics');
+        const { trackPageViews } = require('.');
 
-        trackOnRouteChanged(mockedRouter)();
+        trackPageViews(mockedRouter)();
 
         expect(mockedRouter.events.off).toHaveBeenCalledTimes(1);
         expect(mockedRouter.events.off.mock.calls[0][0]).toBe('routeChangeStart');
