@@ -1,7 +1,10 @@
 import ganalytics from 'ganalytics';
+
+const mockGanalytics = () => ({ send: () => {}, args: {}, _mock: true });
+
 const ga = typeof window !== 'undefined' && process.env.GA_TRACKING_ID ?
     ganalytics(process.env.GA_TRACKING_ID, {}, true) :
-    { send: () => {} };
+    mockGanalytics();
 
 export const trackOnRouteChanged = (router) => {
     const handleRouteChange = () => ga.send('pageview');

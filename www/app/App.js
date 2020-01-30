@@ -8,13 +8,7 @@ import { trackOnRouteChanged } from '../shared/utils';
 import SEO_DATA from './App.data.js';
 
 export const App = ({ Component, pageProps, router }) => {
-    useEffect(() => {
-        trackOnRouteChanged(router);
-
-        return () => {
-            trackOnRouteChanged(router);
-        };
-    });
+    useEffect(() => trackOnRouteChanged(router), [router]);
 
     return (
         <>
