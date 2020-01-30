@@ -7,9 +7,9 @@ sidebar_label: Instructions
 To kick-start your own project from this boilerplate, you can fork it from its [repository](https://github.com/moxystudio/next-with-moxy).
 Afterwards, you'll just need to install its dependencies and you're good to go! 🚀
 
-## Preparing for delivery
+Keep in mind, part of adapting this boilerplate into a deliverable project is also changing this document into one that's about your project in specific. There are some things you must change to clean up any evidence of using this boilerplate.
 
-Keep in mind, part of adapting this boilerplate into a deliverable project is also changing this document into one that's about your project in specific. There are some things you must change to clean up any evidence of using this boilerplate:
+## 1. Tweak some files
 
 1. Change all instances of `{project-name}` into the name of your project:
 
@@ -31,26 +31,58 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
     - `LICENSE`
     - `.github`
 
-4. Tweak the root README.md file of the project:
+## 2. Setup documentation
 
-    ````md
-    # {Project Name}
-
-    {Brief explanation of the project}
-
-    ## Documentation
-
-    This project comes with a documentation web page. To view it:
-
-    ```bash
-    npm i --prefix docusarus
-    npm run docs
-    ```
-    ````
-
-5. Remove algolia search from Docusaurus config:
+1. Remove algolia search from Docusaurus config:
 
     Remove the `themeConfig.algolia` key from `docusaurus/docusaurus.config.js`. The reason is that the search results indexed by Algolia will become out of sync with the documentation, causing it to possibly return wrong results (404 pages).
 
+2. Prepare the rest of the documentation website to be deliverable to your clients!
 
-6. Prepare the rest of the documentation website to be deliverable to your clients!
+## 3. Setup your favicon & manifest
+
+1. Use a favicon generator
+
+  It is recommended the use of the generator [RealFaviconGenerator](https://realfavicongenerator.net/). Follow the next steps:
+
+   1. Select an image (PNG, JPG or SVG). Your image should be 260x260 or more for optimal results.
+
+   2. Configure all the options (background, margins, ...) for each browser.
+
+   3. **[Important]** At the bottom, on the "Favicon Generator Options" section go to:
+      - The "Path" tab, select the second option and write `/favicons`.
+      - The "Version/Refresh" tab and select the second option.
+      - The "Compression" tab and select "Very high quality, very low compression factor".
+      - The "App name" tab, select the second option and add the name of your project.
+
+   4. Click on the button to generate the favicons and HTML code.
+
+   5. You will be redirected to another page. Download the package and save the HTML code.
+
+2. Add the files to the `public/favicons` folder
+
+  Extract the package you downloaded to the `public/favicons` folder, overwriting all the files that are already there.
+
+3. Add the HTML code to `www/app/App.js`
+
+  Finally, add the HTML code you previously saved to the `<Head>`, replacing the same tags that are already there.
+
+## 4. Change your README.md
+
+Tweak the root README.md file of the project:
+
+````md
+# {Project Name}
+
+{Brief explanation of the project}
+
+## Documentation
+
+This project comes with a documentation web page. To view it:
+
+```bash
+npm i --prefix docusarus
+npm run docs
+```
+
+````
