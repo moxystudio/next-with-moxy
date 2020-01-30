@@ -31,8 +31,8 @@ export class App extends NextApp {
                     <link rel="manifest" href="/favicons/site.webmanifest?v=M4KN2GElyG" />
                     <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg?v=M4KN2GElyG" color="#5bbad5" />
                     <link rel="shortcut icon" href="/favicons/favicon.ico?v=M4KN2GElyG" />
-                    <meta name="apple-mobile-web-app-title" content="project-name" />
-                    <meta name="application-name" content="project-name" />
+                    <meta name="apple-mobile-web-app-title" content="{project-name}" />
+                    <meta name="application-name" content="{project-name}" />
                     <meta name="msapplication-TileColor" content="#ffffff" />
                     <meta name="msapplication-config" content="/favicons/browserconfig.xml?v=M4KN2GElyG" />
                     <meta name="theme-color" content="#ffffff" />
