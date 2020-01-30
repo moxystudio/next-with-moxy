@@ -49,10 +49,11 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
 
    2. Configure all the options (background, margins, ...) for each browser.
 
-   3. **[Important]** At the bottom, on the "Favicon Generator Options" section:
-      - Go to the "Path" tab, select the second option and write `/favicons`.
-      - Go to the "Version/Refresh" tab and select the second option.
-      - Go to the "App name" tab, select the second option and add the name of your project.
+   3. **[Important]** At the bottom, on the "Favicon Generator Options" section go to:
+      - The "Path" tab, select the second option and write `/favicons`.
+      - The "Version/Refresh" tab and select the second option.
+      - The "Compression" tab and select "Very high quality, very low compression factor".
+      - The "App name" tab, select the second option and add the name of your project.
 
    4. Click on the button to generate the favicons and HTML code.
 
