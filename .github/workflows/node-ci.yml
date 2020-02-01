@@ -4,9 +4,6 @@ on:
   push:
     paths-ignore:
       - docusaurus/**/*
-  pull_request:
-    paths-ignore:
-      - docusaurus/**/*
 
 jobs:
 
