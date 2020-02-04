@@ -67,7 +67,7 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
 
   Finally, add the HTML code you previously saved to the `<Head>`, replacing the same tags that are already there.
 
-[Additional] Most of the operating systems now offer dark and light modes. If your favicon is not visible with any of these modes you can [setup different favicons for each OS theme](/docs/recipes/favicon-os-theme).
+ℹ️ Most operating systems now offer dark and light modes. If your favicon is not visible with any of these modes you can [setup different favicons for each OS theme](/docs/recipes/favicon-os-theme).
 
 ## 4. Change your README.md
 
