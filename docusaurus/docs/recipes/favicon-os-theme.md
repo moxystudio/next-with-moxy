@@ -8,7 +8,7 @@ Most operating systems offer by now light and dark modes. Sometimes your favicon
 
 This recipe explains how to use different favicons for different OS themes. To do so follow the next steps:
 
-1. Install the package.
+1. Install `react-use-system-theme`.
 
    `npm install react-use-system-theme`
 
@@ -19,12 +19,13 @@ This recipe explains how to use different favicons for different OS themes. To d
 3. Add the new favicon files to the `public/favicons` folder.
 
 4. Add conditional clauses to the HTML.
+
    If your default favicon works better with a light background you should use `dark` theme for the conditional clauses or vice versa.
 
 Example of the `App.js` file:
 
 ```js
-{/* Imports */}
+// ...other imports
 import useSystemTheme from 'react-use-system-theme';
 
 export const App = ({ Component, pageProps, router }) => {
@@ -39,7 +40,6 @@ export const App = ({ Component, pageProps, router }) => {
                 { systemTheme !== 'dark' &&
                     <link rel="shortcut icon" href="/favicons/favicon.ico?v=M4KN2GElyG" />
                 }
-
                 { systemTheme === 'dark' &&
                     <link rel="shortcut icon" href="/favicons/favicon-dark.ico?v=M4KN2GElyG" />
                 }
@@ -49,7 +49,6 @@ export const App = ({ Component, pageProps, router }) => {
         </>
     );
 };
-
 ```
 
 In this example we use the "dark favicon" only for the dark theme and the default favicon to all the other cases.
