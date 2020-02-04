@@ -38,7 +38,7 @@ body {
     flex-direction: column;
 }
 
-:global(#__next) {
+#__next {
     display: flex;
     flex: 1 0 auto;
     flex-direction: column;
