@@ -26,7 +26,7 @@ It is recommended the use of the generator [RealFaviconGenerator](https://realfa
 
 2. Rename `favicon-32x32.png`, `favicon-16x16.png` and `favicon.ico` to `favicon-dark-32x32.png`, `favicon-dark-16x16.png` and `favicon-dark.ico` respectively.
 
-3. Copy just these files to the `public/favicons` folder.
+3. Copy these same files to the `public/favicons` folder.
 
 ### 3. Install `react-use-system-theme`
 
