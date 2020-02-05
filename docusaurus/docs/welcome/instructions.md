@@ -47,7 +47,7 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
 
     1. Select an image (PNG, JPG or SVG). Your image should be 260x260 or more for optimal results.
 
-    2. Tweak all the options for each of the sections: "Favicon for Desktop Browsers and Google Result Pages", "Favicon for iOS - Web Clip", "Favicon for Android Chrome", "Windows Metro" and "macOS Safari". Please include a UI Designer in this process for optimal results.
+    2. Tweak the options for each of the sections. Please include a UI Designer in this process for optimal results.
 
     3. **[Important]** At the bottom, on the "Favicon Generator Options" section go to:
         - The "Path" tab, select the second option and write `/favicons`.
@@ -55,7 +55,7 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
         - The "Compression" tab and select "Very high quality, very low compression factor".
         - The "App name" tab, select the second option and add the name of your project.
 
-    4. Press the button to generate the favicons and HTML code. Once the package is ready, download it and save the HTML code.
+    4. Press the button to generate the favicon package and HTML code. Once the package is ready, download it and save the HTML code.
 
 2. Add the files to the `public/favicons` folder
 
