@@ -65,8 +65,6 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
 
     Finally, add the HTML code you previously saved to the `<Head>`, replacing the same tags that are already there.
 
-Most operating systems now offer light and dark modes. Sometimes the favicon does not work well in dark mode. This recipe explains how you setup favicon variant to be used in dark mode.
-
 ℹ️ Most operating systems now offer light and dark modes. You may [setup different favicons for each OS theme](/docs/recipes/favicon-os-theme) if the favicon does doesn't have enough contrast in dark mode.
 
 ## 4. Change your README.md
