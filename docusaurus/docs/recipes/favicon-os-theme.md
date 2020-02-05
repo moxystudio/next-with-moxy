@@ -4,7 +4,7 @@ title: Changing favicon according to OS theme
 sidebar_label: Changing favicon according to OS theme
 ---
 
-Most operating systems now offer light and dark modes. Sometimes the default favicon does not work well in dark mode due to the lack of contrast. This recipe explains how to add a dark mode favicon variant into the project.
+Most operating systems now offer light and dark modes. Sometimes the default favicon does not work well in dark mode due to the lack of contrast. This recipe explains how to add a favicon variant for dark mode into the project.
 
 ## Walk-through
 
@@ -36,7 +36,7 @@ npm install react-use-system-theme
 
 ### 4. Use the `useSystemTheme` hook in the `App.js`
 
-We will be using [react-use-system-theme](https://github.com/zebateira/react-use-system-theme) to get the current OS theme and conditionally render the both variants of the favicon:
+We will be using [react-use-system-theme](https://github.com/zebateira/react-use-system-theme) to get the current OS theme and conditionally render both favicon variants:
 
 ```js
 // ...
@@ -73,4 +73,4 @@ export const App = ({ Component, pageProps, router }) => {
 };
 ```
 
-Pleas note that we have duplicated some of the head tags and rendered them conditionally based on the system theme. Moreover, we have kept the same version query string (`?v=xxxxx`) as before and for both variants.
+Please note that some of the head tags were duplicated and are being rendered conditionally based on the system theme. Moreover, we have used the same version (`?v=xxxxx`) for both variants.
