@@ -43,31 +43,31 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
 
 1. Use a favicon generator
 
-  It is recommended the use of the generator [RealFaviconGenerator](https://realfavicongenerator.net/). Follow the next steps:
+    It is recommended the use of the generator [RealFaviconGenerator](https://realfavicongenerator.net/). Follow the next steps:
 
-   1. Select an image (PNG, JPG or SVG). Your image should be 260x260 or more for optimal results.
+    1. Select an image (PNG, JPG or SVG). Your image should be 260x260 or more for optimal results.
 
-   2. Configure all the options (background, margins, ...) for each browser.
+    2. Tweak all the options for each of the sections: "Favicon for Desktop Browsers and Google Result Pages", "Favicon for iOS - Web Clip", "Favicon for Android Chrome", "Windows Metro" and "macOS Safari". Please include a UI Designer in this process for optimal results.
 
-   3. **[Important]** At the bottom, on the "Favicon Generator Options" section go to:
-      - The "Path" tab, select the second option and write `/favicons`.
-      - The "Version/Refresh" tab and select the second option.
-      - The "Compression" tab and select "Very high quality, very low compression factor".
-      - The "App name" tab, select the second option and add the name of your project.
+    3. **[Important]** At the bottom, on the "Favicon Generator Options" section go to:
+        - The "Path" tab, select the second option and write `/favicons`.
+        - The "Version/Refresh" tab and select the second option.
+        - The "Compression" tab and select "Very high quality, very low compression factor".
+        - The "App name" tab, select the second option and add the name of your project.
 
-   4. Click on the button to generate the favicons and HTML code.
-
-   5. You will be redirected to another page. Download the package and save the HTML code.
+    4. Press the button to generate the favicons and HTML code. Once the package is ready, download it and save the HTML code.
 
 2. Add the files to the `public/favicons` folder
 
-  Extract the package you downloaded to the `public/favicons` folder, overwriting all the files that are already there.
+    Extract the package you downloaded to the `public/favicons` folder, overwriting all the files that are already there.
 
 3. Add the HTML code to `www/app/App.js`
 
-  Finally, add the HTML code you previously saved to the `<Head>`, replacing the same tags that are already there.
+    Finally, add the HTML code you previously saved to the `<Head>`, replacing the same tags that are already there.
 
-ℹ️ Most operating systems now offer dark and light modes. If your favicon is not visible with any of these modes you can [setup different favicons for each OS theme](/docs/recipes/favicon-os-theme).
+Most operating systems now offer light and dark modes. Sometimes the favicon does not work well in dark mode. This recipe explains how you setup favicon variant to be used in dark mode.
+
+ℹ️ Most operating systems now offer light and dark modes. You may [setup different favicons for each OS theme](/docs/recipes/favicon-os-theme) if the favicon does doesn't have enough contrast in dark mode.
 
 ## 4. Change your README.md
 
