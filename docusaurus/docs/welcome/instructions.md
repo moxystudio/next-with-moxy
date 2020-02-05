@@ -49,7 +49,7 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
 
     2. Tweak the options for each of the sections. Please include a UI Designer in this process for optimal results.
 
-    3. **[Important]** At the bottom, on the "Favicon Generator Options" section go to:
+    3. ❗️At the bottom, on the "Favicon Generator Options" section go to:
         - The "Path" tab, select the second option and write `/favicons`.
         - The "Version/Refresh" tab and select the second option.
         - The "Compression" tab and select "Very high quality, very low compression factor".
