@@ -36,7 +36,7 @@ npm install react-use-system-theme
 
 ### 4. Use the `useSystemTheme` hook in the `App.js`
 
-We will be using [react-use-system-theme](https://github.com/zebateira/react-use-system-theme) to get the current OS theme and conditionally render the standard and dark variants of the favicon:
+We will be using [react-use-system-theme](https://github.com/zebateira/react-use-system-theme) to get the current OS theme and conditionally render the both variants of the favicon:
 
 ```js
 // ...
@@ -73,4 +73,4 @@ export const App = ({ Component, pageProps, router }) => {
 };
 ```
 
-Notice that we have duplicated some of the head tags and rendered them conditionally based on the system theme. Moreover, we have kept the same version query string (`?v=xxxxx`) as before and for both variants.
+Pleas note that we have duplicated some of the head tags and rendered them conditionally based on the system theme. Moreover, we have kept the same version query string (`?v=xxxxx`) as before and for both variants.
