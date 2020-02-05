@@ -4,7 +4,7 @@ title: Changing favicon according to OS theme
 sidebar_label: Changing favicon according to OS theme
 ---
 
-Most operating systems now offer light and dark modes. Sometimes the default favicon does not work well in dark mode. This recipe explains how you can setup a favicon variant to be used in dark mode.
+Most operating systems now offer light and dark modes. Sometimes the default favicon does not work well in dark mode due to the lack of contrast. This recipe explains how to add a dark mode favicon variant into the project.
 
 ## Walk-through
 
@@ -18,7 +18,7 @@ It is recommended the use of the generator [RealFaviconGenerator](https://realfa
 
 3. **[Important]** At the bottom, on the "Favicon Generator Options" section go to the "Compression" tab and select "Very high quality, very low compression factor".
 
-4. Press the button to generate the favicons. Once the package is ready, download it to your computer.
+4. Press the button to generate the favicon package. Once the package is ready, download it to your computer.
 
 ### 2. Add the files to the project
 
@@ -73,4 +73,4 @@ export const App = ({ Component, pageProps, router }) => {
 };
 ```
 
-The example above uses the dark favicon variant only for the dark theme and the default favicon for all other cases. Notice that we have duplicated some of the head tags and rendered them conditionally based on the system theme. Moreover, we have kept the same version query string (`?v=xxxxx`) as before and for both variants.
+Notice that we have duplicated some of the head tags and rendered them conditionally based on the system theme. Moreover, we have kept the same version query string (`?v=xxxxx`) as before and for both variants.
