@@ -4,7 +4,7 @@ title: Internationalization
 sidebar_label: Internationalization
 ---
 
-All of our projects have I18N support built-in, even if there's no need to initially have more than one locale. By having I18N support from the very beggining, the project itself is built with that in mind, making it very easy to add new locales in the future without having to refactor a good surface of your app.
+All of our projects have I18N support built-in, even if there's no need to initially have more than one locale. By having I18N support from the very beginning, the project itself is built with that in mind, making it very easy to add new locales in the future without having to refactor a good surface of your app.
 
 We have choosen [`react-intl`](https://github.com/formatjs/react-intl/) for internalization and localization because:
 
