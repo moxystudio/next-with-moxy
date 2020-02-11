@@ -9,7 +9,7 @@ Afterwards, you'll just need to install its dependencies and you're good to go! 
 
 Keep in mind, part of adapting this boilerplate into a deliverable project is also changing this document into one that's about your project in specific. There are some things you must change to clean up any evidence of using this boilerplate.
 
-## 1. Tweak some files
+## 1. Tweak some project files
 
 1. Change all instances of `{project-name}` into the name of your project:
 
@@ -31,15 +31,27 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
     - `LICENSE`
     - `.github`
 
-## 2. Setup documentation
+## 2. Replace the root README.md
 
-1. Remove algolia search from Docusaurus config:
+Replace the root README.md file of the project with:
 
-    Remove the `themeConfig.algolia` key from `docusaurus/docusaurus.config.js`. The reason is that the search results indexed by Algolia will become out of sync with the documentation, causing it to possibly return wrong results (404 pages).
+````md
+# {Project Name}
 
-2. Prepare the rest of the documentation website to be deliverable to your clients!
+{Brief explanation of the project}
 
-## 3. Setup your favicon & manifest
+## Documentation
+
+This project comes with a documentation web page. To view it:
+
+```bash
+npm i --prefix docusarus
+npm run docs
+```
+
+````
+
+## 3. Setup favicon & manifest
 
 1. Use a favicon generator
 
@@ -49,7 +61,7 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
 
     2. Tweak the options for each of the sections. Please include a UI Designer in this process for optimal results.
 
-    3. ❗️At the bottom, on the "Favicon Generator Options" section go to:
+    3. ❗️ At the bottom, on the "Favicon Generator Options" section go to:
         - The "Path" tab, select the second option and write `/favicons`.
         - The "Version/Refresh" tab and select the second option.
         - The "Compression" tab and select "Very high quality, very low compression factor".
@@ -67,22 +79,10 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
 
 ℹ️ Most operating systems now offer light and dark modes. You may [setup different favicons for each OS theme](/docs/recipes/favicon-os-theme) if the favicon does doesn't have enough contrast in dark mode.
 
-## 4. Change your README.md
+## 4. Setup documentation
 
-Tweak the root README.md file of the project:
+1. Remove algolia search from Docusaurus config:
 
-````md
-# {Project Name}
+    Remove the `themeConfig.algolia` key from `docusaurus/docusaurus.config.js`. The reason is that the search results indexed by Algolia will become out of sync with the documentation, causing it to possibly return wrong results (404 pages).
 
-{Brief explanation of the project}
-
-## Documentation
-
-This project comes with a documentation web page. To view it:
-
-```bash
-npm i --prefix docusarus
-npm run docs
-```
-
-````
+2. Prepare the rest of the documentation website to be deliverable to your clients!

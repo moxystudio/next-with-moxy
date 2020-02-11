@@ -16,7 +16,7 @@ It is recommended the use of the generator [RealFaviconGenerator](https://realfa
 
 2. Tweak the options just for the "Favicon for Desktop Browsers and Google Result Pages" section. Please include a UI Designer in this process for optimal results.
 
-3. ❗️At the bottom, on the "Favicon Generator Options" section go to the "Compression" tab and select "Very high quality, very low compression factor".
+3. ❗️ At the bottom, on the "Favicon Generator Options" section go to the "Compression" tab and select "Very high quality, very low compression factor".
 
 4. Press the button to generate the favicon package. Once the package is ready, download it to your computer.
 
