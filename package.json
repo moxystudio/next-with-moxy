@@ -1,7 +1,7 @@
 {
   "name": "project-name",
   "version": "0.0.0",
-  "description": "The https://{project-domain} web app",
+  "description": "{project-name} web app",
   "author": "MOXY <hello@moxy.studio>",
   "private": true,
   "license": "UNLICENSED",

@@ -21,10 +21,7 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
     - `Contacts.data.js`: In the `name` field. This file is a sample file and you might want to delete it altogether.
     - In this document, in case you want to use it.
 
-2. Change all instances of `{project-domain}` into the domain that will be used in production:
-
-    - `package.json`: In the `description` field.
-    - `App.data.js`: In the `url` field.
+2. For local development, create a `.env` file and set a value for `SITE_URL` environment variable. You will likely want to use the provided example, `http://localhost:3000`
 
 3. Delete the following files and folders:
 

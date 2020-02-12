@@ -13,6 +13,7 @@ The following environment variables already come with the boilerplate:
 | Identifier | Type | Description | Value |
 |----------- | ---- | ----------- |-------|
 | GA_TRACKING_ID | Build-time | Google Analytics Tracking ID that is used to track page views | `undefined` |
+| SITE_URL | Build-time | Fully qualified URL where the application will be available at (without trailing slash) | `undefined` |
 
 ## Build-time environment variables
 
