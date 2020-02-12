@@ -21,7 +21,7 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
     - `Contacts.data.js`: In the `name` field. This file is a sample file and you might want to delete it altogether.
     - In this document, in case you want to use it.
 
-2. For local development, create a `.env` file and set a value for `SITE_URL` environment variable. You will likely want to use the provided example, `http://localhost:3000`
+2. Copy `.env.sample` to `.env`. Ensure `SITE_URL` has a value set, and that it points to the same URL as where your development server is running. If you are using all default values, it should just work out of the box.
 
 3. Delete the following files and folders:
 
