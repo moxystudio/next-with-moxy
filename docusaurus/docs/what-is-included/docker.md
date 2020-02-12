@@ -28,7 +28,7 @@ ARG SOME_ARGUMENT
 ENV SOME_ENV_VAR $SOME_ARGUMENT
 ```
 
-You can check the existing `Dockerfile` to see how we're configuring `GA_TRACKING_ID`.
+You can check the existing `Dockerfile` to see how we're configuring `GA_TRACKING_ID` and `SITE_URL`.
 
 ## Multi-stage builds
 
