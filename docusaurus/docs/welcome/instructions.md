@@ -83,3 +83,19 @@ npm run docs
     Remove the `themeConfig.algolia` key from `docusaurus/docusaurus.config.js`. The reason is that the search results indexed by Algolia will become out of sync with the documentation, causing it to possibly return wrong results (404 pages).
 
 2. Prepare the rest of the documentation website to be deliverable to your clients!
+
+## 5. Customize the error page
+
+The boilerplate supports an unstyled error page that is able to distinguish between `Page Not Found` and `Internal Error` (both server and client errors). It contains appropriate copy for each case, and a link to `/`.
+
+You should update `<ErrorPage />` to fit your project's image. To do so, you will need to update the following files:
+
+```
+www
+├── pages
+│   ├── error
+│   │   ├── ErrorPage.js
+│   │   ├── ErrorPage.module.css
+│   │   ├── ErrorPage.test.js
+│   │   └── ...
+```
