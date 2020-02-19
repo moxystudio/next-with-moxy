@@ -50,7 +50,9 @@
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.8.6",
+    "react-gtm-module": "^2.0.8",
     "react-intl": "^4.1.0"
   },
   "devDependencies": {

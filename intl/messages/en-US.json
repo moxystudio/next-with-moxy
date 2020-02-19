@@ -7,5 +7,9 @@
 
     "contacts.title": "Contacts",
     "contacts.name": "Name: { name }",
-    "contacts.email": "Email: { email }"
+    "contacts.email": "Email: { email }",
+
+    "cookieBanner.text": "We use cookies to personalize content and to collect analytics to improve our website. Please review our <link>terms and conditions</link> for more information.",
+    "cookieBanner.accept": "Accept",
+    "cookieBanner.reject": "Reject"
 }
