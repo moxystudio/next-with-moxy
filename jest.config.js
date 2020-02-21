@@ -1,3 +1,3 @@
-const { compose, baseConfig, withWeb } = require('@moxy/jest-config');
+const { compose, baseConfig, withWeb, withRTL } = require('@moxy/jest-config');
 
-module.exports = compose([baseConfig, withWeb]);
+module.exports = compose([baseConfig, withWeb, withRTL]);
