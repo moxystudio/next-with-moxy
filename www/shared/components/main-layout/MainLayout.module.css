@@ -1,0 +1,22 @@
+@import "../../styles/imports/variables";
+
+.mainLayout {
+    min-height: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    & .header {
+        flex: 0 0 auto;
+    }
+
+    & .content {
+        padding: 2.5rem;
+        flex: 1 0 auto;
+        background-color: var(--color-white);
+    }
+
+    & .footer {
+        flex: 0 0 auto;
+    }
+}

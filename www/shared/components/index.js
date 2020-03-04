@@ -1,1 +1,1 @@
-export { default as Contacts } from './contacts';
+export { default as MainLayout } from './main-layout';

@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import KeyboardOnlyOutlines from '@moxy/react-keyboard-only-outlines';
 import { withNextIntlSetup } from '@moxy/next-intl';
+import { LayoutTree } from '@moxy/next-layout';
 import nextIntlConfig from '../../intl';
 import { trackPageViews } from '../shared/utils/google-analytics';
+import { MainLayout } from '../shared/components';
 import SEO_DATA from './App.data.js';
 
 export const App = ({ Component, pageProps, router }) => {
@@ -44,7 +46,10 @@ export const App = ({ Component, pageProps, router }) => {
                 <meta property="twitter:image" content={ SEO_DATA.image.src } />
             </Head>
             <KeyboardOnlyOutlines>
-                <Component { ...pageProps } />
+                <LayoutTree
+                    Component={ Component }
+                    pageProps={ pageProps }
+                    defaultLayout={ <MainLayout /> } />
             </KeyboardOnlyOutlines>
         </>
     );

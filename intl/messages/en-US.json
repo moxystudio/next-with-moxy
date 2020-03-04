@@ -5,6 +5,7 @@
     "error.not_found.title": "Page not found",
     "error.return_to_home": "Return to home",
 
+    "contacts.title": "Contacts",
     "contacts.name": "Name: { name }",
     "contacts.email": "Email: { email }"
 }

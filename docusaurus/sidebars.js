@@ -16,6 +16,7 @@ module.exports = {
                 'what-is-included/available-scripts',
                 'what-is-included/eslint-stylelint',
                 'what-is-included/css-modules',
+                'what-is-included/customizable-layout-support',
                 'what-is-included/internationalization',
                 'what-is-included/testing-with-jest-rtl',
                 'what-is-included/browser-support',
