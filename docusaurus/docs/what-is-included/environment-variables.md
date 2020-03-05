@@ -1,7 +1,7 @@
 ---
 id: environment-variables
-title: Environment Variables
-sidebar_label: Environment Variables
+title: Environment variables
+sidebar_label: Environment variables
 ---
 
 This boilerplate is setup to use [`dotenv`](https://www.npmjs.com/package/dotenv) to facilitate loading environment variables from the `.env` file. We already provide an `.env.sample` file, which you can clone to a `.env` file so you have a starting point with all the environment variables suitable for development.
