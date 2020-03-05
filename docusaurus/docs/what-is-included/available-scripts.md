@@ -1,7 +1,7 @@
 ---
 id: available-scripts
-title: Available Scripts
-sidebar_label: Available Scripts
+title: Available scripts
+sidebar_label: Available scripts
 ---
 
 Here you'll find scripts that we have defined in our `package.json`.
