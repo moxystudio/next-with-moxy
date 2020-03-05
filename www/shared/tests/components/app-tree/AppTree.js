@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { IntlProvider } from 'react-intl';
 import idObj from 'identity-obj-proxy';
+import { LayoutTree } from '@moxy/next-layout';
 
 // AppTreeWrapper setups providers defined ONLY by HOCs that wrap your www/app/App.js
 // It's used by www/app/App.test.js to perform unit tests
@@ -20,7 +21,7 @@ export const AppTreeWrapper = ({ intlProvider, children }) => {
 
 AppTreeWrapper.propTypes = {
     intlProvider: PropTypes.object,
-    children: PropTypes.node,
+    children: PropTypes.element.isRequired,
 };
 
 // AppTree setups providers defined by HOCs that wrap your www/app/App.js,
@@ -29,14 +30,15 @@ AppTreeWrapper.propTypes = {
 
 const AppTree = ({ children, ...props }) => (
     <AppTreeWrapper { ...props }>
-        { children }
+        <LayoutTree
+            Component={ children.type }
+            pageProps={ children.props } />
     </AppTreeWrapper>
 );
 
 AppTree.propTypes = {
-    innerProviders: PropTypes.bool,
     intlProvider: PropTypes.object,
-    children: PropTypes.node,
+    children: PropTypes.element.isRequired,
 };
 
 export default AppTree;

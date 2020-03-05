@@ -13,7 +13,7 @@ We have chosen [`react-intl`](https://github.com/formatjs/react-intl/) for inter
 - It can localize strings, numbers, dates and relative dates.
 - Runs in the browser and Node.js.
 
-The integration of `react-intl` into Next.js is made with [@moxy/next-intl](https://github.com/moxystudio/next-intl).
+The integration of `react-intl` into Next.js is made with [`@moxy/next-intl`](https://github.com/moxystudio/next-intl).
 
 ## Adding a new locale
 
@@ -27,3 +27,15 @@ Policies control which locale is active at a given point, amongst other things.
 You may want to create custom policies for certain use-cases. One common use-case is to have a policy that matches against the locale saved in the account preferences of authenticated users.
 
 Please check `@moxy/next-intl`'s [documentation](https://github.com/moxystudio/next-intl#custom-policies) to know more.
+
+## Removing this feature
+
+If you are really sure internationalization is not needed in your project, you'll want to remove all the unnecessary `intl` related code. Be sure to follow these steps in order to clean your project properly:
+
+1. Uninstall `react-intl`, `@moxy/next-intl` and `full-icu`.
+2. Remove the `NODE_ICU_DATA` environment variable from both `dev` and `start` scripts, found in `package.json`.
+3. Remove the `intl` folder.
+4. Search globally for `react-intl` and `@moxy/next-intl` and remove the corresponding code across the project. Be sure to update your unit tests after cleaning up the code.
+5. In the `Dockerfile`, remove the line that installs the dependencies related to `node-canvas`, which starts with `apk add`.
+
+ℹ️ The packages related to `node-canvas`, that come in the `Dockerfile`, are no longer needed and this is why removing the line that installs them is recommended. If for whatever reason you need any of those or any other packages, you must leave the line there and add/remove packages as needed.

@@ -4,7 +4,11 @@ import { render } from '@testing-library/react';
 import AppTree from './AppTree';
 
 it('should render children correctly', () => {
-    const { container } = render(<AppTree>foo</AppTree>);
+    const { container } = render(
+        <AppTree>
+            <div>foo</div>
+        </AppTree>,
+    );
 
     expect(container).toHaveTextContent('foo');
 });
