@@ -36,6 +36,3 @@ If you are really sure internationalization is not needed in your project, you'l
 2. Remove the `NODE_ICU_DATA` environment variable from both `dev` and `start` scripts, found in `package.json`.
 3. Remove the `intl` folder.
 4. Search globally for `react-intl` and `@moxy/next-intl` and remove the corresponding code across the project. Be sure to update your unit tests after cleaning up the code.
-5. In the `Dockerfile`, remove the line that installs the dependencies related to `node-canvas`, which starts with `apk add`.
-
-ℹ️ The packages related to `node-canvas`, that come in the `Dockerfile`, are no longer needed and this is why removing the line that installs them is recommended. If for whatever reason you need any of those or any other packages, you must leave the line there and add/remove packages as needed.
