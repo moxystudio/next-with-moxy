@@ -5,15 +5,6 @@
 
 FROM node:12-alpine AS base
 
-# Install OS libs necessary by some packages during `npm i` (e.g.: node-canvas)
-RUN apk add --update --no-cache \
-    make \
-    g++ \
-    jpeg-dev \
-    cairo-dev \
-    giflib-dev \
-    pango-dev
-
 WORKDIR /src
 
 COPY package*.json ./
