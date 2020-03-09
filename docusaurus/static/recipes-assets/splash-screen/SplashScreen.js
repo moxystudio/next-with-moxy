@@ -6,6 +6,7 @@ import WaitForReact from '@moxy/react-wait-for-react';
 
 import styles from './SplashScreen.module.css';
 
+const progressInterval = 200; // Keep this duration in sync with the one defined in the CSS
 const applyProgressBeforeInteractive = `function (elements, progress) {
     elements.progressBar.style.transform = 'scaleX(' + progress + ')';
     elements.progressBar.style.opacity = progress > 0 ? 1 : 0;
@@ -13,7 +14,7 @@ const applyProgressBeforeInteractive = `function (elements, progress) {
 
 const SplashScreen = memo((props) => (
     <WaitForReact
-        progressInterval={ 200 }
+        progressInterval={ progressInterval }
         applyProgressBeforeInteractive={ applyProgressBeforeInteractive }
         maxProgressBeforeInteractive={ process.env.NODE_ENV === 'production' ? undefined : 0 }
         { ...props }>
