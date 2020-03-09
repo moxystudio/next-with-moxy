@@ -15,6 +15,7 @@
 
 :root {
     --z-index-base: 0;
+    --z-index-max: 1000; /* This should be the higher z-index value in the project */
 }
 
 /* ==========================================================================
