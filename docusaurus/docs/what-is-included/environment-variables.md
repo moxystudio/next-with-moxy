@@ -17,7 +17,7 @@ The following environment variables already come with the boilerplate:
 
 ## Build-time environment variables
 
-In general, [build-time configuration](#build-time-configuration) via environment variables is preferable as they give us many benefits, such as serverless compatibility and dead-code elimination.
+In general, [build-time configuration](https://nextjs.org/docs/api-reference/next.config.js/environment-variables) via environment variables is preferable as they give us many benefits, such as serverless compatibility and dead-code elimination.
 
 You can access these variables from `process.env`:
 
