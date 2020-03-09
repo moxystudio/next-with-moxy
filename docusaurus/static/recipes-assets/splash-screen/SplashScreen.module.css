@@ -1,7 +1,7 @@
+@import "../../styles/imports/variables";
 @import "../../styles/imports/mixins";
 
 :root {
-    --z-index-max: 2147483647;
     --color-background: #221240;
     --color-text: #fff;
     --color-progress-bar: #f64f51;
@@ -15,7 +15,7 @@
     align-items: center;
     background-color: var(--color-background);
     color: var(--color-text);
-    transition: opacity 0.25s ease 0.2s, visibility 0s linear 0.45s;
+    transition: opacity var(--duration-standard) ease var(--duration-standard), visibility 0s linear calc(var(--duration-standard) * 2);
 
     &.loaded {
         visibility: hidden;
@@ -29,6 +29,6 @@
         transform-origin: left center;
         opacity: 0;
         background-color: var(--color-progress-bar);
-        transition: transform 0.2s linear, opacity 0.25s ease 2.5s;
+        transition: transform var(--duration-fast) linear, opacity var(--duration-standard) ease 2.5s;
     }
 }
