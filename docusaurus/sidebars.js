@@ -32,7 +32,8 @@ module.exports = {
             type: 'category',
             label: 'Recipes',
             items: [
-                'recipes/recipe-rest-api',
+                'recipes/rest-api',
+                'recipes/splash-screen',
                 'recipes/favicon-os-theme',
                 {
                     type: 'link',
