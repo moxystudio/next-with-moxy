@@ -48,57 +48,58 @@ a > code {
    Navbar tweaks
    ========================================================================== */
 
-.navbar .navbar__inner {
+.navbar.navbar .navbar__inner {
     flex-wrap: nowrap;
 }
 
-.navbar .navbar__items {
+.navbar.navbar .navbar__items {
     max-width: 50%;
     flex: 1 1 auto;
 }
 
-.navbar .navbar__inner .navbar__brand,
-.navbar .navbar-sidebar .navbar__brand {
+.navbar.navbar .navbar__inner .navbar__brand,
+.navbar.navbar .navbar-sidebar .navbar__brand {
     max-width: 100%;
     flex: 1 1 auto;
 }
 
-.navbar .navbar__inner .navbar__brand strong,
-.navbar .navbar-sidebar .navbar__brand strong {
+.navbar.navbar .navbar__inner .navbar__brand strong,
+.navbar.navbar .navbar-sidebar .navbar__brand strong {
     overflow: hidden;
+    flex-shrink: initial;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-html[data-theme="dark"] .navbar .navbar__inner .navbar__brand .navbar__logo,
-html[data-theme="dark"] .navbar .navbar-sidebar .navbar__brand .navbar__logo {
+html[data-theme="dark"] .navbar.navbar .navbar__inner .navbar__brand .navbar__logo,
+html[data-theme="dark"] .navbar.navbar .navbar-sidebar .navbar__brand .navbar__logo {
     filter: brightness(0) invert(1);
 }
 
 @media (max-width: 996px) {
-    .navbar .navbar__items:not(.navbar__items--right) {
+    .navbar.navbar .navbar__items:not(.navbar__items--right) {
         max-width: calc(100% - 160px);
     }
 
-    .navbar .navbar__items--right {
+    .navbar.navbar .navbar__items--right {
         max-width: 160px;
     }
 
-    .navbar .navbar__inner .navbar__brand {
+    .navbar.navbar .navbar__inner .navbar__brand {
         max-width: calc(100% - 33px);
     }
 
-    .navbar .navbar-sidebar .navbar__brand {
+    .navbar.navbar .navbar-sidebar .navbar__brand {
         max-width: calc(100% - 50px - 16px);
     }
 }
 
 @media (max-width: 360px) {
-    .navbar .navbar__items:not(.navbar__items--right) {
+    .navbar.navbar .navbar__items:not(.navbar__items--right) {
         max-width: calc(100% - 38px);
     }
 
-    .navbar .navbar__items--right {
+    .navbar.navbar .navbar__items--right {
         max-width: 38px;
     }
 }
