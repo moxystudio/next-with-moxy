@@ -71,15 +71,15 @@ import SplashScreen from '../splash-screen';
 // ...
 
 const MainLayout = ({ splashPromise, splashOnDone, children }) => (
-    <>
+    <div className={ styles.mainLayout }>
         { splashPromise && (
             <SplashScreen
                 promise={ splashPromise }
                 onDone={ splashOnDone } />
         ) }
 
-        // ...
-    </>
+        { /* ... */ }
+    </div>
 );
 
 MainLayout.propTypes = {

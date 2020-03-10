@@ -1,11 +1,6 @@
 @import "../../styles/imports/variables";
 @import "../../styles/imports/mixins";
 
-.splashScreen,
-.loaded {
-    --progress-bar-transition-duration: 200ms; /* Keep this value slightly lower than the `progressInterval` defined in the JS */
-}
-
 .splashScreen {
     --color-background: #221240;
     --color-text: #fff;
@@ -26,11 +21,14 @@
         height: 0.4rem;
         transform: scaleX(0);
         transform-origin: left center;
+        opacity: 0;
         background-color: var(--color-progress-bar);
         pointer-events: none;
-        transition:
-            transform var(--progress-bar-transition-duration) linear,
-            opacity var(--duration-standard) ease 2.5s;
+    }
+
+    &.loading,
+    &.loaded {
+        --progress-bar-transition-duration: 200ms; /* Keep this value slightly lower than the `progressInterval` defined in the JS */
     }
 
     &.loaded {
@@ -41,10 +39,23 @@
             visibility 0s linear calc(var(--duration-standard) + var(--progress-bar-transition-duration));
     }
 
+    &.loaded,
     &.loading {
-        &.zero .progressBar {
-            opacity: 0;
-            transition: none;
+        & .progressBar {
+            /* We are using an animation for the opacity instead of a transition because it */
+            /* bugs out in DEV due to Next.js FOUC */
+            animation: progressBarAppear var(--duration-standard) linear 2.5s forwards;
+            transition: transform var(--progress-bar-transition-duration) linear;
         }
+    }
+}
+
+@keyframes progressBarAppear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
