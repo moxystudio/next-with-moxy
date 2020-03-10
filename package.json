@@ -54,10 +54,10 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.0.0",
-    "@moxy/babel-preset": "^3.2.1",
+    "@moxy/babel-preset": "^3.2.5",
     "@moxy/eslint-config": "^10.1.0",
     "@moxy/jest-config": "^2.0.0",
-    "@moxy/postcss-preset": "^4.4.1",
+    "@moxy/postcss-preset": "^4.4.2",
     "@moxy/stylelint-config": "^8.1.0",
     "@testing-library/react": "^9.4.0",
     "commitlint": "^8.0.0",

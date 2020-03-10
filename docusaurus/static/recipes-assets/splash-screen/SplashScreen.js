@@ -6,27 +6,29 @@ import WaitForReact from '@moxy/react-wait-for-react';
 
 import styles from './SplashScreen.module.css';
 
-const progressInterval = 200; // Keep this duration in sync with the one defined in the CSS
+const progressInterval = 250; // Keep this value slightly higher than the one defined in the CSS
 const applyProgressBeforeInteractive = `function (elements, progress) {
     elements.progressBar.style.transform = 'scaleX(' + progress + ')';
-    elements.progressBar.style.opacity = progress > 0 ? 1 : 0;
+    elements.splashScreen.classList.add('${styles.loading}');
 }`.replace(/\n\s*/gm, ' ');
 
 const SplashScreen = memo((props) => (
     <WaitForReact
         progressInterval={ progressInterval }
         applyProgressBeforeInteractive={ applyProgressBeforeInteractive }
-        maxProgressBeforeInteractive={ process.env.NODE_ENV === 'production' ? undefined : 0 }
         { ...props }>
         { ({ progress, error }) => (
-            <div className={ classNames(styles.splashScreen, { [styles.loaded]: progress >= 1 }) }>
+            <div
+                data-wait-for-react-element="splashScreen"
+                className={ classNames(styles.splashScreen, {
+                    [styles.zero]: progress === 0,
+                    [styles.loading]: progress >= 0 && progress < 1,
+                    [styles.loaded]: progress === 1,
+                }) }>
                 <div
                     data-wait-for-react-element="progressBar"
                     className={ styles.progressBar }
-                    style={ {
-                        transform: `scaleX(${progress})`,
-                        opacity: progress > 0 ? 1 : 0,
-                    } } />
+                    style={ { transform: `scaleX(${progress})` } } />
 
                 { error ? <FormattedMessage id="splash-screen.error" /> : 'Logo or some welcome text' }
             </div>

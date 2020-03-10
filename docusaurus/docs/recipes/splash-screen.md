@@ -15,7 +15,7 @@ It's then often normal to preload all the required files for an uninterrupted ex
 ### 1. Install `@moxy/react-wait-for-react`
 
 ```sh
-npm i `@moxy/react-wait-for-react`
+npm i @moxy/react-wait-for-react
 ```
 
 ### 2. Add `<SplashScreen />` to your project
@@ -41,7 +41,24 @@ The `splash-screen.error` message will be displayed in case the promise is rejec
 }
 ```
 
-### 4. Include `<SplashScreen />` into your root layout(s)
+### 4. Define the `z-index-splash-screen` CSS variable
+
+Add `z-index-splash-screen` CSS variable to `www/shared/styles/imports/variables.css`:
+
+```css
+/* ==========================================================================
+   Z-index
+   ========================================================================== */
+
+:root {
+    /* ... */
+    --z-index-splash-screen: 1000;
+}
+```
+
+The value of `z-index-splash-screen` should be one of the highest `z-index` values so that the splash screen appears above everything else.
+
+### 5. Include `<SplashScreen />` into your root layout(s)
 
 Because browsers stream the HTML response from the server and render it as soon as possible, the splash screen should be one of the top most HTML elements. One way to do this, is to include the `<SplashScreen />` in your root layout(s).
 
@@ -49,7 +66,7 @@ As an example, here's how you would integrate `<SplashScreen />` into the built-
 
 ```js
 // ...
-import SplashScreen from '../splash-screen/SplashScreen';
+import SplashScreen from '../splash-screen';
 
 // ...
 
@@ -72,7 +89,7 @@ MainLayout.propTypes = {
 };
 ```
 
-### 5. Finally, use it in a page
+### 6. Finally, use it in a page
 
 Assuming you integrated the splash screen into the `<MainLayout />` as exemplified above, you could then use `withLayout` to set the layout's `splashPromise` prop directly from a page. Here's an example of the `<Home />` page defining a fake `splashPromise` that resolves in 5 seconds: 
 
