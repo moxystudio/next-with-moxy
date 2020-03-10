@@ -8,7 +8,7 @@ Certain pages have impactful experiences. These experiences can make the total b
 
 It's then often normal to preload all the required files for an uninterrupted experience. This recipe explains how you can leverage [`@moxy/react-wait-for-react`](https://github.com/moxystudio/react-wait-for-react) to display a **splash screen** before your static or server-side rendered app becomes interactive, and optionally until all the required files are loaded (via a promise).
 
-⚠️ You should still render the app or page contents "below" the splash screen, to keep your website SEO friendly.
+> ⚠️ You should still render the app or page contents "below" the splash screen, to keep your website SEO friendly.
 
 ## Walk-through
 
@@ -29,7 +29,7 @@ export { default as SplashScreen } from './splash-screen';
 
 Finally, adjust the component you just copied according to what was designed for your project.
 
-ℹ️ As a rule of thumb, you should show the app icon or a welcoming message in the splash screen while the page is being preloaded, and only reveal a loading indicator after **2 or 3 seconds**. Users don't like seing a loading indicator, therefore we defer showing it only if the preload is taking more than usual.
+> ℹ️ As a rule of thumb, you should show the app icon or a welcoming message in the splash screen while the page is being preloaded, and only reveal a loading indicator after **2 or 3 seconds**. Users don't like seing a loading indicator, therefore we defer showing it only if the preload is taking more than usual.
 
 ### 3. Add the error message translation
 
@@ -112,4 +112,4 @@ const Home = () => (
 export default withLayout(<MainLayout splashPromise={ splashPromise } />)(Home);
 ```
 
-ℹ️ If your project doesn't use `@moxy/next-layout` nor layouts, you may instead use `<SplashScreen />` directly at the top of your page components.
+> ℹ️ If your project doesn't use `@moxy/next-layout` nor layouts, you may instead use `<SplashScreen />` directly at the top of your page components.
