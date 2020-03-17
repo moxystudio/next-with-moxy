@@ -34,7 +34,8 @@ The folder-structure convention favours co-location of assets and their requeste
         │   └── favicons
         │  	└── fonts
         │   └── images
-        └── styles
+        ├── styles
+        └── services
 ```
 
 ...where:
@@ -57,6 +58,7 @@ The folder-structure convention favours co-location of assets and their requeste
             - `fonts`: This is where you can store your font files.
             - `images`: This is where you can store image files.
         - `styles`:  The folder for `.css` files that are shared between many components.
+        - `services`: This is where you can store your web API clients.
 
 ## Data Files
 
