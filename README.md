@@ -20,7 +20,7 @@ Please check out the documentation page at https://next-with.moxy.tech.
 To view the documentation locally, you may run:
 
 ```bash
-npm i --prefix docusarus
+npm i --prefix docusaurus
 npm run docs
 ```
 
