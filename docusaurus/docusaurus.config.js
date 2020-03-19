@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     title: 'Next.js with MOXY',
     tagline: 'MOXY\'s boilerplate to create Next.js based applications',

@@ -1,0 +1,27 @@
+{
+    "root": true,
+    "overrides": [
+        {
+            "files": "./**/*.js",
+            "excludedFiles": "./sidebars.js",
+            "env": {
+                "browser": true
+            },
+            "extends": [
+                "@moxy/eslint-config-base/esm",
+                "@moxy/eslint-config-babel",
+                "@moxy/eslint-config-react",
+                "@moxy/eslint-config-jest"
+            ]
+        },
+        {
+            "files": "./sidebars.js",
+            "env": {
+                "node": true
+            },
+            "extends": [
+                "@moxy/eslint-config-base/cjs"
+            ]
+        }
+    ]
+}

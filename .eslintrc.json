@@ -1,8 +1,18 @@
 {
     "root": true,
+    "env": {
+        "browser": true,
+        "node": true
+    },
     "extends": [
-        "@moxy/eslint-config-isomorphic",
-        "@moxy/eslint-config-jest",
-        "@moxy/eslint-config-react"
-    ]
+        "@moxy/eslint-config-base/esm",
+        "@moxy/eslint-config-babel",
+        "@moxy/eslint-config-react",
+        "@moxy/eslint-config-react-web-a11y",
+        "@moxy/eslint-config-jest"
+    ],
+    "rules": {
+        // Next.js <Link> component doesn't play nice with anchor validation
+        "jsx-a11y/anchor-is-valid": 0
+    }
 }
