@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { AppTree } from '../../shared/tests';
+import { AppTree } from '../../shared/test-utils';
 import ErrorPage from './ErrorPage';
 
 it('should render internal server error when `statusCode` is not 404', () => {

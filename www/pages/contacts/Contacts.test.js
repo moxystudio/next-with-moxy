@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import Contacts from './Contacts';
-import { AppTree } from '../../shared/tests';
+import { AppTree } from '../../shared/test-utils';
 
 it('should render correctly', () => {
     const { container } = render(<AppTree><Contacts /></AppTree>);
