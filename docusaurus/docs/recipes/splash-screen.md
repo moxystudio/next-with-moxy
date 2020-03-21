@@ -89,6 +89,8 @@ MainLayout.propTypes = {
 };
 ```
 
+> ⚠️ You may need to adjust the tests for the `<MainLayout />` component to account fo the splash screen.
+
 ### 6. Finally, use it in a page
 
 Assuming you integrated the splash screen into the `<MainLayout />` as exemplified above, you could then use `withLayout` to set the layout's `splashPromise` prop directly from a page. Here's an example of the `<Home />` page defining a fake `splashPromise` that resolves in 5 seconds: 
