@@ -8,6 +8,7 @@ on:
 env:
   DOCKER_REGISTRY: docker.pkg.github.com
   DOCKER_BUILDKIT: 1
+  SITE_URL: http://localhost
 
 jobs:
 

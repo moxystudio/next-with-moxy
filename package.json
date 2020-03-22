@@ -33,6 +33,7 @@
     "docs": "npm run start --prefix docusaurus -- --port 4000"
   },
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "@moxy/next-common-files": "^1.2.1",
     "@moxy/next-compile-node-modules": "^1.3.2",
     "@moxy/next-intl": "^2.0.0",

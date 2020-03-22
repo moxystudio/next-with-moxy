@@ -7,6 +7,7 @@ const withOneOf = require('@moxy/next-webpack-oneof');
 const withCompileNodeModules = require('@moxy/next-compile-node-modules');
 const withNextIntl = require('@moxy/next-intl/plugin');
 const withPlugins = require('next-compose-plugins');
+const Joi = require('@hapi/joi');
 
 module.exports = (phase, nextConfig) =>
     withPlugins([
@@ -61,6 +62,10 @@ module.exports = (phase, nextConfig) =>
         compress: process.env.COMPRESSION !== '0',
         env: {
             GA_TRACKING_ID: process.env.GA_TRACKING_ID,
-            SITE_URL: process.env.SITE_URL,
+            SITE_URL: Joi.attempt(process.env.SITE_URL,
+                Joi.string()
+                    .uri({ scheme: ['https', 'http'] })
+                    .pattern(/\/$/, { invert: true })
+                    .message('process.env.SITE_URL must be a valid URL')),
         },
     })(phase, nextConfig);

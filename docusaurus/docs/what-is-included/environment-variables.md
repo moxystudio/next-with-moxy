@@ -51,6 +51,19 @@ if (process.env.FEATURE_A) {
     }
     ```
 
+    If you want to validate environment variables, we suggest you do it in this step. We suggest using [`@hapi/joi`](https://github.com/hapijs/joi) with its [`attempt`](https://github.com/hapijs/joi/blob/master/API.md#attemptvalue-schema-message-options) function, like the following example:
+    ```js
+    {
+        env: {
+            // ...
+            FEATURE_A: Joi.attempt(process.env.FEATURE_A, Joi.boolean()
+                .truthy('1')
+                .falsy('0')
+                .message('process.env.FEATURE_A must be one of "true", "1", "false", or "0".')),
+        },
+    }
+    ```
+
 3. Add it to the Dockerfile
 
     ```dockerfile
