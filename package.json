@@ -60,7 +60,7 @@
     "@moxy/eslint-config-jest": "^11.0.2",
     "@moxy/eslint-config-react": "^11.0.2",
     "@moxy/eslint-config-react-web-a11y": "^11.0.2",
-    "@moxy/jest-config": "^2.0.2",
+    "@moxy/jest-config": "^4.0.1",
     "@moxy/postcss-preset": "^4.4.2",
     "@moxy/stylelint-config": "^8.1.0",
     "@testing-library/react": "^10.0.1",
