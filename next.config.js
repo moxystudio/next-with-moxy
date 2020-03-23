@@ -62,10 +62,13 @@ module.exports = (phase, nextConfig) =>
         compress: process.env.COMPRESSION !== '0',
         env: {
             GA_TRACKING_ID: process.env.GA_TRACKING_ID,
-            SITE_URL: Joi.attempt(process.env.SITE_URL,
+            SITE_URL: Joi.attempt(
+                process.env.SITE_URL,
                 Joi.string()
+                    .required()
                     .uri({ scheme: ['https', 'http'] })
-                    .pattern(/\/$/, { invert: true })
-                    .message('process.env.SITE_URL must be a valid URL')),
+                    .pattern(/\/$/, { invert: true }),
+                'SITE_URL - ',
+            ),
         },
     })(phase, nextConfig);

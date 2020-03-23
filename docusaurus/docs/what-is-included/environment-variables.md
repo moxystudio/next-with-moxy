@@ -56,10 +56,14 @@ if (process.env.FEATURE_A) {
     {
         env: {
             // ...
-            FEATURE_A: Joi.attempt(process.env.FEATURE_A, Joi.boolean()
-                .truthy('1')
-                .falsy('0')
-                .message('process.env.FEATURE_A must be one of "true", "1", "false", or "0".')),
+            FEATURE_A: Joi.attempt(
+                process.env.FEATURE_A,
+                Joi.boolean()
+                    .truthy('1')
+                    .falsy('0')
+                    .required()
+                'FEATURE_A - '
+            ),
         },
     }
     ```

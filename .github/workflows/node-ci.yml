@@ -5,8 +5,10 @@ on:
     paths-ignore:
       - docusaurus/**/*
 
-jobs:
+env:
+    SITE_URL: https://next-with.moxy.tech
 
+jobs:
   prepare:
     runs-on: ubuntu-latest
     strategy:

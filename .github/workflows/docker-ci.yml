@@ -8,7 +8,7 @@ on:
 env:
   DOCKER_REGISTRY: docker.pkg.github.com
   DOCKER_BUILDKIT: 1
-  SITE_URL: http://localhost
+  SITE_URL: https://next-with.moxy.tech
 
 jobs:
 
@@ -83,7 +83,8 @@ jobs:
         docker build . \
           --cache-from ${DOCKER_BASE_IMAGE}:latest \
           --target runtime  \
-          -t runtime:latest
+          -t runtime:latest \
+          --build-arg SITE_URL=${{ env.SITE_URL }}
 
     - name: Run image & check status code
       run: |
