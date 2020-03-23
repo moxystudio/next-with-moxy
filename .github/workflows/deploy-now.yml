@@ -1,0 +1,35 @@
+name: Deploy on Zeit Now
+
+on:
+  push:
+    paths-ignore:
+      - docusaurus/**/*
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy
+        id: deploy-now
+        env:
+          NOW_ORG_ID: team_p8EekuXu9HkFUEY7yLOeujBS
+          NOW_PROJECT_ID: QmYUpNNm3Aw2W2W59sdNwKdcNduZXXQGhNgc4crdtASxNZ
+          ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+          BRANCH: ${{ github.base_ref }}
+          SITE_URL: https://next-with.moxy.tech
+        run: |
+          npx now \
+            -t $ZEIT_TOKEN \
+            --build-env SITE_URL=${SITE_URL} > .url.txt
+
+          echo "::set-output name=DEPLOYMENT_URL::$(cat .url.txt)"
+
+      - name: Comment deployment URL
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: ${{ steps.deploy-now.outputs.DEPLOYMENT_URL }}

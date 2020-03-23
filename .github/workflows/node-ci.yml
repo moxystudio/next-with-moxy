@@ -5,9 +5,6 @@ on:
     paths-ignore:
       - docusaurus/**/*
 
-env:
-    SITE_URL: https://next-with.moxy.tech
-
 jobs:
   prepare:
     runs-on: ubuntu-latest
@@ -94,6 +91,8 @@ jobs:
         npm ci
 
     - name: Build
+      env:
+        SITE_URL: https://next-with.moxy.tech
       run: |
         npm run build
 

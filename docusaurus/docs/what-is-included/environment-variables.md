@@ -51,7 +51,8 @@ if (process.env.FEATURE_A) {
     }
     ```
 
-    If you want to validate environment variables, we suggest you do it in this step. We suggest using [`@hapi/joi`](https://github.com/hapijs/joi) with its [`attempt`](https://github.com/hapijs/joi/blob/master/API.md#attemptvalue-schema-message-options) function, like the following example:
+    If you want to validate environment variables, we suggest you to use [`@hapi/joi`](https://github.com/hapijs/joi) with its [`attempt`](https://github.com/hapijs/joi/blob/master/API.md#attemptvalue-schema-message-options) function, like the following example:
+
     ```js
     {
         env: {
@@ -61,12 +62,14 @@ if (process.env.FEATURE_A) {
                 Joi.boolean()
                     .truthy('1')
                     .falsy('0')
-                    .required()
+                    .default(false)
                 'FEATURE_A - '
             ),
         },
     }
     ```
+
+    If your environment variable is mandatory, please use `.presence()` like `SITE_URL` is using.
 
 3. Add it to the Dockerfile
 

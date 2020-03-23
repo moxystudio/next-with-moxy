@@ -8,10 +8,8 @@ on:
 env:
   DOCKER_REGISTRY: docker.pkg.github.com
   DOCKER_BUILDKIT: 1
-  SITE_URL: https://next-with.moxy.tech
 
 jobs:
-
   prepare:
     runs-on: ubuntu-latest
 
@@ -76,6 +74,7 @@ jobs:
     - name: Build image
       env:
         DOCKER_BASE_IMAGE: ${{ env.DOCKER_REGISTRY }}/moxystudio/next-with-moxy/base
+        SITE_URL: https://next-with.moxy.tech
       run: |
         echo ${{ secrets.GITHUB_TOKEN }} | docker login -u $GITHUB_ACTOR --password-stdin $DOCKER_REGISTRY
 
