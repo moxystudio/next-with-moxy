@@ -74,7 +74,7 @@ jobs:
     - name: Build image
       env:
         DOCKER_BASE_IMAGE: ${{ env.DOCKER_REGISTRY }}/moxystudio/next-with-moxy/base
-        SITE_URL: https://next-with.moxy.tech
+        SITE_URL: http://localhost
       run: |
         echo ${{ secrets.GITHUB_TOKEN }} | docker login -u $GITHUB_ACTOR --password-stdin $DOCKER_REGISTRY
 

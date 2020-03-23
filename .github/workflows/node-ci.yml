@@ -92,7 +92,7 @@ jobs:
 
     - name: Build
       env:
-        SITE_URL: https://next-with.moxy.tech
+        SITE_URL: http://localhost
       run: |
         npm run build
 
