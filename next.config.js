@@ -7,6 +7,10 @@ const withOneOf = require('@moxy/next-webpack-oneof');
 const withCompileNodeModules = require('@moxy/next-compile-node-modules');
 const withNextIntl = require('@moxy/next-intl/plugin');
 const withPlugins = require('next-compose-plugins');
+const Joi = require('@hapi/joi');
+const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/constants');
+
+const isRequired = (phase) => phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD ? 'required' : 'optional';
 
 module.exports = (phase, nextConfig) =>
     withPlugins([
@@ -61,6 +65,13 @@ module.exports = (phase, nextConfig) =>
         compress: process.env.COMPRESSION !== '0',
         env: {
             GA_TRACKING_ID: process.env.GA_TRACKING_ID,
-            SITE_URL: process.env.SITE_URL,
+            SITE_URL: Joi.attempt(
+                process.env.SITE_URL,
+                Joi.string()
+                    .presence(isRequired(phase))
+                    .uri({ scheme: ['https', 'http'] })
+                    .pattern(/\/$/, { invert: true }),
+                'SITE_URL - ',
+            ),
         },
     })(phase, nextConfig);

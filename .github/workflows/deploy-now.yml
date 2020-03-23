@@ -1,0 +1,58 @@
+name: Deploy on Zeit Now
+
+on:
+  push:
+    paths-ignore:
+      - docusaurus/**/*
+
+env:
+  NOW_ORG_ID: team_p8EekuXu9HkFUEY7yLOeujBS
+  NOW_PROJECT_ID: QmYUpNNm3Aw2W2W59sdNwKdcNduZXXQGhNgc4crdtASxNZ
+  ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy
+        id: deploy-now
+        if: github.ref != 'refs/heads/master'
+        env:
+          SITE_URL: https://next-with-moxy-${{ github.sha }}.now.sh
+        run: |
+          npx now \
+            -t $ZEIT_TOKEN \
+            --build-env SITE_URL=${SITE_URL} \
+            > .now-url
+
+          DEPLOYMENT_URL=$(cat .now-url)
+
+          npx now alias \
+            -t $ZEIT_TOKEN \
+            $DEPLOYMENT_URL \
+            $SITE_URL
+
+          echo "::set-output name=SITE_URL::$SITE_URL"
+
+      - name: Deploy master
+        id: deploy-now-master
+        if: github.ref == 'refs/heads/master'
+        env:
+          SITE_URL: https://next-with.moxy.tech
+        run: |
+          npx now \
+            -t $ZEIT_TOKEN \
+            --prod \
+            --build-env SITE_URL=${SITE_URL}
+
+          echo "::set-output name=SITE_URL::$SITE_URL"
+
+      - name: Comment URL
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          msg: "Deployed at Zeit Now: ${{ steps.deploy-now.outputs.SITE_URL || steps.deploy-now-master.outputs.SITE_URL }}"

@@ -6,7 +6,6 @@ on:
       - docusaurus/**/*
 
 jobs:
-
   prepare:
     runs-on: ubuntu-latest
     strategy:
@@ -92,6 +91,8 @@ jobs:
         npm ci
 
     - name: Build
+      env:
+        SITE_URL: http://localhost
       run: |
         npm run build
 
