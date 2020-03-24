@@ -2,6 +2,11 @@ name: Deploy on Zeit Now
 
 on:
   push:
+    branches:
+      - master
+    paths-ignore:
+      - docusaurus/**/*
+  pull_request:
     paths-ignore:
       - docusaurus/**/*
 
@@ -17,42 +22,70 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Deploy master
-        id: deploy-now-master
+      - name: Set environment variables (master)
         if: github.ref == 'refs/heads/master'
         env:
           SITE_URL: https://next-with.moxy.tech
         run: |
-          npx now \
-            -t $ZEIT_TOKEN \
-            --prod \
-            --build-env SITE_URL=${SITE_URL}
+          echo "::set-env name=SITE_URL::$SITE_URL"
 
-          echo "::set-output name=SITE_URL::$SITE_URL"
-
-      - name: Deploy PR
-        if: github.event == 'pull_request'
-        id: deploy-now-pr
+      - name: Set environment variables (PR)
+        if: github.event_name == 'pull_request'
         env:
-          SITE_URL: https://next-with-moxy-${{ github.sha }}.now.sh
+          SITE_URL: https://next-with-moxy-pr-${{ github.event.number }}.now.sh
+        run: |
+          echo "::set-env name=SITE_URL::$SITE_URL"
+
+      - name: Comment URL
+        if: github.event_name == 'pull_request' && github.event.action == 'opened'
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          msg: |
+            This pull-request can be previewed at ${{ env.SITE_URL }}.
+            Please check "Zeit Now" status to see when it's ready.
+
+      - name: Set deployment status
+        uses: pbrandone/create-status-action@master
+        with:
+          token: ${{ github.token }}
+          state: pending
+          context: Zeit Now
+          description: Deploying to Zeit Now...
+
+      - name: Deploy
         run: |
           npx now \
             -t $ZEIT_TOKEN \
-            --build-env SITE_URL=${SITE_URL} \
+            --build-env SITE_URL=$SITE_URL \
             > .now-url
 
-          DEPLOYMENT_URL=$(cat .now-url)
+            echo "::set-env name=NOW_URL::$(cat .now-url)"
 
+      - name: Add deployment alias
+        if: github.event_name == 'pull_request'
+        run: |
           npx now alias \
             -t $ZEIT_TOKEN \
-            $DEPLOYMENT_URL \
+            $NOW_URL \
             $SITE_URL
 
-          echo "::set-output name=SITE_URL::$SITE_URL"
-
-      - name: Comment URL on PR
-        if: github.event == 'pull_request'
-        uses: github-actions-up-and-running/pr-comment@v1.0.0
+      - name: Set success deployment status
+        if: success()
+        uses: pbrandone/create-status-action@master
         with:
-          repo-token: ${{ github.token }}
-          message: "Deployed at Zeit Now: ${{ steps.deploy-now-pr.outputs.SITE_URL }}"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          state: success
+          context: Zeit Now
+          description: Zeit Now deployment ready!
+          url: ${{ env.SITE_URL }}
+
+      - name: Set failed deployment status
+        if: failure()
+        uses: pbrandone/create-status-action@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          state: failure
+          context: Zeit Now
+          description: Zeit Now deployment failed
