@@ -54,21 +54,25 @@ jobs:
           context: Zeit Now
           description: Deploying to Zeit Now...
 
-      - name: Deploy
+      - name: Deploy (master)
+        if: github.ref == 'refs/heads/master'
+        run: |
+          npx now \
+            -t $ZEIT_TOKEN \
+            --prod \
+            --build-env SITE_URL=$SITE_URL
+
+      - name: Deploy (PR)
+        if: github.event_name == 'pull_request'
         run: |
           npx now \
             -t $ZEIT_TOKEN \
             --build-env SITE_URL=$SITE_URL \
             > .now-url
 
-            echo "::set-env name=NOW_URL::$(cat .now-url)"
-
-      - name: Add deployment alias
-        if: github.event_name == 'pull_request'
-        run: |
           npx now alias \
             -t $ZEIT_TOKEN \
-            $NOW_URL \
+            $(cat .now-url) \
             $SITE_URL
 
       - name: Set success deployment status
