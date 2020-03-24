@@ -9,7 +9,7 @@ const ErrorPage = ({ statusCode }) => (
     <div className={ styles.error }>
         <h1>
             { statusCode === 404 ?
-                <FormattedMessage id="error.not_found.title" /> :
+                <FormattedMessage id="error.not-found.title" /> :
                 <FormattedMessage id="error.internal.title" />
             }
         </h1>
@@ -17,7 +17,7 @@ const ErrorPage = ({ statusCode }) => (
         <p>
             <Link href="/">
                 <a>
-                    <FormattedMessage id="error.return_to_home" />
+                    <FormattedMessage id="error.return-to-home" />
                 </a>
             </Link>
         </p>
