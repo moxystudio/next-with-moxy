@@ -12,7 +12,7 @@ it('should render internal server error when `statusCode` is not 404', () => {
     );
 
     expect(getByText('error.internal.title')).toBeInTheDocument();
-    expect(getByText('error.return_to_home')).toBeInTheDocument();
+    expect(getByText('error.return-to-home')).toBeInTheDocument();
 });
 
 it('should render not found error when `statusCode` is 404', () => {
@@ -22,8 +22,8 @@ it('should render not found error when `statusCode` is 404', () => {
         </AppTree>,
     );
 
-    expect(getByText('error.not_found.title')).toBeInTheDocument();
-    expect(getByText('error.return_to_home')).toBeInTheDocument();
+    expect(getByText('error.not-found.title')).toBeInTheDocument();
+    expect(getByText('error.return-to-home')).toBeInTheDocument();
 });
 
 describe('getInitialProps', () => {
