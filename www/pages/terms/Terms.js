@@ -1,11 +1,12 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import styles from './Terms.module.css';
 
-const Contacts = () => (
+const Terms = () => (
     <div className={ styles.terms }>
-        <h1>Terms and Conditions</h1>
+        <h1><FormattedMessage id="terms.title" /></h1>
     </div>
 );
 
-export default Contacts;
+export default Terms;

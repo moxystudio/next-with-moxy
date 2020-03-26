@@ -66,7 +66,6 @@ module.exports = (phase, nextConfig) =>
         compress: process.env.COMPRESSION !== '0',
         env: {
             GTM_CONTAINER_ID: process.env.GTM_CONTAINER_ID,
-            GTM_DATA_LAYER: process.env.GTM_DATA_LAYER || 'dataLayer',
             SITE_URL: Joi.attempt(
                 process.env.SITE_URL,
                 Joi.string()
