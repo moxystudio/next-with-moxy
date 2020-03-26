@@ -35,4 +35,5 @@ If you are really sure internationalization is not needed in your project, you'l
 1. Uninstall `react-intl`, `@moxy/next-intl` and `full-icu`.
 2. Remove the `NODE_ICU_DATA` environment variable from both `dev` and `start` scripts, found in `package.json`.
 3. Remove the `intl` folder.
-4. Search globally for `react-intl` and `@moxy/next-intl` and remove the corresponding code across the project. Be sure to update your unit tests after cleaning up the code.
+4. Search globally for `react-intl` and `@moxy/next-intl` and remove the corresponding code across the project.
+5. Update your unit tests if necessary so that they all pass!

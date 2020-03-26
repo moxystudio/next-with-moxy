@@ -1,0 +1,5 @@
+@import "../../shared/styles/imports";
+
+.terms {
+    background-color: var(--color-white);
+}

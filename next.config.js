@@ -65,7 +65,7 @@ module.exports = (phase, nextConfig) =>
     ], {
         compress: process.env.COMPRESSION !== '0',
         env: {
-            GA_TRACKING_ID: process.env.GA_TRACKING_ID,
+            GTM_CONTAINER_ID: process.env.GTM_CONTAINER_ID,
             SITE_URL: Joi.attempt(
                 process.env.SITE_URL,
                 Joi.string()

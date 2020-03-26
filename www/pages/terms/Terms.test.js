@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Contacts from './Contacts';
+import Home from './Terms';
 import { AppTree } from '../../shared/test-utils/components';
 
 it('should render correctly', () => {
-    const { container } = render(<AppTree><Contacts /></AppTree>);
+    const { container } = render(<AppTree><Home /></AppTree>);
 
-    expect(container).toHaveTextContent('contacts.title');
+    expect(container).toHaveTextContent('terms.title');
 });

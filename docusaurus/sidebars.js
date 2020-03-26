@@ -20,6 +20,7 @@ module.exports = {
                 'what-is-included/css-modules',
                 'what-is-included/customizable-layout-support',
                 'what-is-included/internationalization',
+                'what-is-included/analytics',
                 'what-is-included/testing-with-jest-rtl',
                 'what-is-included/browser-support',
                 'what-is-included/environment-variables',

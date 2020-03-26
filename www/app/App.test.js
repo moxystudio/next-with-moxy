@@ -1,11 +1,16 @@
-import React from 'react';
-import Router from 'next/router';
+import React, { useEffect } from 'react';
 import { render } from '@testing-library/react';
 import { App } from './App';
-import { AppTreeWrapper } from '../shared/test-utils';
-import { trackPageViews } from '../shared/utils/google-analytics';
+import { CookieBanner } from '../shared/components';
+import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
+import { AppTreeWrapper } from '../shared/test-utils/components';
 
-jest.mock('../shared/utils/google-analytics', () => ({ trackPageViews: jest.fn(() => jest.fn()) }));
+jest.mock('../shared/components/cookie-banner', () => jest.fn(() => null));
+
+jest.mock('../shared/utils/google-tag-manager', () => ({
+    initGTM: jest.fn(),
+    destroyGTM: jest.fn(),
+}));
 
 beforeEach(() => {
     jest.clearAllMocks();
@@ -14,27 +19,49 @@ beforeEach(() => {
 it('should render correctly', () => {
     const { container } = render(
         <AppTreeWrapper>
-            <App Component={ () => 'Hello World' } router={ Router } />
+            <App Component={ () => 'Hello World' } />
         </AppTreeWrapper>,
     );
 
     expect(container).toHaveTextContent('Hello World');
 });
 
-it('should call ga\'s trackPageViews on mount including cleanup on unmount', () => {
-    const { unmount } = render(
-        <AppTreeWrapper>
-            <App Component={ () => 'Hello World' } router={ Router } />
-        </AppTreeWrapper>,
-    );
+describe('GTM', () => {
+    it('should initialize GTM if analytics is in the cookies consent', () => {
+        CookieBanner.mockImplementation(({ onCookieConsents }) => {
+            useEffect(() => {
+                onCookieConsents(['analytics']);
+            }, [onCookieConsents]);
 
-    expect(trackPageViews).toHaveBeenCalledTimes(1);
-    expect(trackPageViews).toHaveBeenCalledWith(Router);
+            return null;
+        });
 
-    const cleanup = trackPageViews.mock.results[0].value;
+        render(
+            <AppTreeWrapper>
+                <App Component={ () => 'Hello World' } />
+            </AppTreeWrapper>,
+        );
 
-    unmount();
+        expect(initGTM).toHaveBeenCalledTimes(1);
+        expect(destroyGTM).toHaveBeenCalledTimes(0);
+    });
 
-    expect(cleanup).toHaveBeenCalledTimes(1);
+    it('should destroy GTM if analytics is not on the cookies consent', () => {
+        CookieBanner.mockImplementation(({ onCookieConsents }) => {
+            useEffect(() => {
+                onCookieConsents(['foo']);
+            }, [onCookieConsents]);
+
+            return null;
+        });
+
+        render(
+            <AppTreeWrapper>
+                <App Component={ () => 'Hello World' } />
+            </AppTreeWrapper>,
+        );
+
+        expect(initGTM).toHaveBeenCalledTimes(0);
+        expect(destroyGTM).toHaveBeenCalledTimes(1);
+    });
 });
-

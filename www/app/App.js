@@ -1,19 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import KeyboardOnlyOutlines from '@moxy/react-keyboard-only-outlines';
 import { withNextIntlSetup } from '@moxy/next-intl';
 import { LayoutTree } from '@moxy/next-layout';
+import { CookiesProvider } from 'react-cookie';
 import nextIntlConfig from '../../intl';
-import { trackPageViews } from '../shared/utils/google-analytics';
-import { MainLayout } from '../shared/components';
+import { MainLayout, CookieBanner } from '../shared/components';
+import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
 import SEO_DATA from './App.data.js';
 
-export const App = ({ Component, pageProps, router }) => {
-    useEffect(() => trackPageViews(router), [router]);
+export const App = ({ Component, pageProps }) => {
+    const handleCookieConsents = useCallback((cookieConsents) => {
+        if (cookieConsents.includes('analytics')) {
+            initGTM();
+        } else {
+            destroyGTM();
+        }
+    }, []);
 
     return (
-        <>
+        <CookiesProvider>
             <Head>
                 <title>{ SEO_DATA.title }</title>
                 <meta name="description" content={ SEO_DATA.description } />
@@ -45,20 +52,21 @@ export const App = ({ Component, pageProps, router }) => {
                 <meta property="twitter:description" content={ SEO_DATA.description } />
                 <meta property="twitter:image" content={ SEO_DATA.image.src } />
             </Head>
-            <KeyboardOnlyOutlines>
-                <LayoutTree
-                    Component={ Component }
-                    pageProps={ pageProps }
-                    defaultLayout={ <MainLayout /> } />
-            </KeyboardOnlyOutlines>
-        </>
+
+            <KeyboardOnlyOutlines />
+            <CookieBanner onCookieConsents={ handleCookieConsents } />
+
+            <LayoutTree
+                Component={ Component }
+                pageProps={ pageProps }
+                defaultLayout={ <MainLayout /> } />
+        </CookiesProvider>
     );
 };
 
 App.propTypes = {
     Component: PropTypes.elementType.isRequired,
     pageProps: PropTypes.object,
-    router: PropTypes.object.isRequired,
 };
 
 export default withNextIntlSetup(nextIntlConfig)(App);
