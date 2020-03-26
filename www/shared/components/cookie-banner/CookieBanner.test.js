@@ -1,123 +1,124 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { CookieBanner } from './CookieBanner';
-import { AppTree } from '../../tests/components';
-import { useCookieConsents } from '@enzsft/react-cookie-consents';
+import { AppTree } from '../../test-utils/components';
 
-const mockAdd = jest.fn();
-
-jest.mock('@enzsft/react-cookie-consents',
-    () => ({
-        useCookieConsents: jest.fn(() => ({
-            get: () => [],
-            add: mockAdd,
-        })),
-    }),
-);
-
-const initialProps = {
-    setDaysToExpire: jest.fn(),
-    onCookieConsent: jest.fn(),
-};
-
-describe('Render Cookie Banner', () => {
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
-
-    it('should render banner when cookie consent was not yet accepted or rejected', () => {
-        const { container } = render(
-            <AppTree><CookieBanner { ...initialProps } /></AppTree>,
-        );
-
-        expect(container).toHaveTextContent('cookieBanner');
-    });
-
-    it('should not initialize GTM when cookie consent was rejected ', () => {
-        const { getByText } = render(
-            <AppTree><CookieBanner { ...initialProps } /></AppTree>,
-        );
-
-        const buttonNode = getByText('cookieBanner.reject');
-
-        fireEvent.click(buttonNode);
-
-        expect(mockAdd).toHaveBeenCalledWith('reject');
-        expect(initialProps.setDaysToExpire).toHaveBeenCalledWith(7);
-
-        const { container } = render(
-            <AppTree><CookieBanner { ...initialProps } /></AppTree>,
-        );
-
-        expect(container).toHaveTextContent('cookieBanner');
-    });
-
-    it('should add analytics and initiliaze gtm when accept button is clicked', () => {
-        const { getByText } = render(
-            <AppTree><CookieBanner { ...initialProps } /></AppTree>,
-        );
-
-        const buttonNode = getByText('cookieBanner.accept');
-
-        fireEvent.click(buttonNode);
-
-        expect(mockAdd).toHaveBeenCalledWith('analytics');
-        expect(initialProps.setDaysToExpire).toHaveBeenCalledWith(365);
-        expect(initialProps.onCookieConsent).toHaveBeenCalled();
-    });
+afterEach(() => {
+    jest.resetAllMocks();
 });
 
-describe('Initialize GTM', () => {
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
+it('should not render banner when banner was previously dismissed', () => {
+    jest.spyOn(document, 'cookie', 'get').mockImplementation(() => 'cookieBannerDismissed=true');
 
-    it('should initialize analytics if cookies were accepted', () => {
-        useCookieConsents.mockImplementation(() => ({
-            get: () => ['analytics'],
-            add: mockAdd,
-        }));
+    const { container } = render(
+        <AppTree>
+            <CookieBanner onCookieConsents={ () => {} } />
+        </AppTree>,
+    );
 
-        render(<AppTree><CookieBanner { ...initialProps } /></AppTree>);
+    expect(container.innerHTML).toBe('');
+});
 
-        expect(initialProps.onCookieConsent).toHaveBeenCalled();
-    });
+it('should not render banner if there\'s at least one consent', () => {
+    jest.spyOn(document, 'cookie', 'get').mockImplementation(() => 'cookieConsents=%5B%22analytics%22%5D');
 
-    it('should not initialize analytics if cookies were rejected', () => {
-        useCookieConsents.mockImplementation(() => ({
-            get: () => ['reject'],
-            add: mockAdd,
-        }));
+    const { container } = render(
+        <AppTree>
+            <CookieBanner onCookieConsents={ () => {} } />
+        </AppTree>,
+    );
 
-        render(<AppTree><CookieBanner { ...initialProps } /></AppTree>);
+    expect(container.innerHTML).toBe('');
+});
 
-        expect(initialProps.onCookieConsent).not.toHaveBeenCalled();
-    });
+it('should render if not dismissed and no consent was given', () => {
+    const { container } = render(
+        <AppTree>
+            <CookieBanner onCookieConsents={ () => {} } />
+        </AppTree>,
+    );
 
-    it('should not call onCookieConsent more than once, even if there is a rerender', () => {
-        useCookieConsents.mockImplementation(() => ({
-            get: () => ['analytics'],
-            add: mockAdd,
-        }));
+    expect(container).toHaveTextContent('cookieBanner');
+});
 
-        const setDaysToExpire = jest.fn();
-        const onCookieConsent = jest.fn();
+it('should call onCookieConsents with the correct consents on mount', () => {
+    jest.spyOn(document, 'cookie', 'get').mockImplementation(() => 'cookieConsents=%5B%22analytics%22%5D');
 
-        const { rerender } = render(
-            <AppTree>
-                <CookieBanner
-                    { ...initialProps } />
-            </AppTree>,
-        );
+    const handleCookieConsents = jest.fn();
 
-        rerender(
-            <AppTree>
-                <CookieBanner
-                    setDaysToExpire={ setDaysToExpire }
-                    onCookieConsent={ onCookieConsent } />
-            </AppTree>,
-        );
+    render(
+        <AppTree>
+            <CookieBanner onCookieConsents={ handleCookieConsents } />
+        </AppTree>,
+    );
 
-        expect(initialProps.onCookieConsent).toHaveBeenCalledTimes(1);
-    });
+    expect(handleCookieConsents).toHaveBeenCalledTimes(1);
+    expect(handleCookieConsents).toHaveBeenCalledWith(['analytics']);
+
+    handleCookieConsents.mockReset();
+    jest.spyOn(document, 'cookie', 'get').mockImplementation(() => '');
+
+    render(
+        <AppTree>
+            <CookieBanner onCookieConsents={ handleCookieConsents } />
+        </AppTree>,
+    );
+
+    expect(handleCookieConsents).toHaveBeenCalledTimes(1);
+    expect(handleCookieConsents).toHaveBeenCalledWith([]);
+});
+
+it('should behave well when the accept button is clicked', () => {
+    const handleCookieConsents = jest.fn();
+
+    const { container, rerender, getByText } = render(
+        <AppTree>
+            <CookieBanner onCookieConsents={ handleCookieConsents } />
+        </AppTree>,
+    );
+
+    handleCookieConsents.mockClear();
+
+    fireEvent.click(getByText('cookieBanner.accept'));
+
+    expect(handleCookieConsents).toHaveBeenCalledTimes(1);
+    expect(handleCookieConsents).toHaveBeenCalledWith(['analytics']);
+
+    handleCookieConsents.mockClear();
+
+    rerender(
+        <AppTree>
+            <CookieBanner onCookieConsents={ handleCookieConsents } />
+        </AppTree>,
+    );
+
+    expect(handleCookieConsents).toHaveBeenCalledTimes(0);
+    expect(container.innerHTML).toBe('');
+});
+
+it('should behave well when the reject button is clicked', () => {
+    const handleCookieConsents = jest.fn();
+
+    const { container, rerender, getByText } = render(
+        <AppTree>
+            <CookieBanner onCookieConsents={ handleCookieConsents } />
+        </AppTree>,
+    );
+
+    expect(container.innerHTML).not.toBe('');
+
+    handleCookieConsents.mockClear();
+
+    fireEvent.click(getByText('cookieBanner.reject'));
+
+    expect(handleCookieConsents).toHaveBeenCalledTimes(0);
+
+    rerender(
+        <AppTree>
+            <CookieBanner onCookieConsents={ handleCookieConsents } />
+        </AppTree>,
+    );
+
+    expect(handleCookieConsents).toHaveBeenCalledTimes(0);
+    expect(container.innerHTML).toBe('');
 });

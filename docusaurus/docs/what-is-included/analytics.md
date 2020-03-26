@@ -22,7 +22,7 @@ It may be the case that you need to collect some more complex data for some more
 
 `UTM's` are parameters put in external urls that will help understand where did the redirect to your website come from. These are especially helpful for determing the effectiveness of marketing campaigns. Usually, you would use the official [`Campaign URL Builder`](https://ga-dev-tools.appspot.com/campaign-url-builder/) . But then, your URL would look something like this: `https://www.example.com/?utm_source=youtube&utm_medium=video&utm_campaign=winter_sale&utm_term=shirt`. A little bit ugly of a URL, isn't it? Well, `GTM` lets you make prettier URLs that collect the exact same data. We strongly recommend taking the approach described in this very detailed [article](https://www.getelevar.com/how-to/hide-google-utm-parameters-from-url/). Using this, your url would instead look something like `https://www.example.com/#youtube` and allow you to have the same valuable data provided by the `UTM's`, if setup properly. Go check it out your GA dashboard, in Real Time > Traffic Sources. The medium and sources you setup in GTM should be there. If not, `(none)` and `(direct)` will appear for each, respectively, and you need to take another look at the article to figure out what you did wrong.
 
-## Cookie Consent
+## Prompting for consent
 
 For privacy purposes, and in compliance with `GDPR`, apps need to ask the user for permission to collect user data. The boilerplate comes with a `<CookieBanner />` component that allows exactly this. Built with [`@enzsft/react-cookie-consents`](https://github.com/enzsft/react-cookie-consents), it will allow `GTM` to be initialized if the user has clicked that he accepts the data collection. It also saves the cookie for 365 days.
 
@@ -34,4 +34,4 @@ If you are sure you do not need analytics in your project, you can remove all th
 2. Remove the `<CookieBanner />` component and its associated components.
 3. Delete the `initialize-tag-manager` module. Also, make sure to cleanup the files where `initialize-tag-manager` is being used. The global search feature of your editor will be your best friend here.
 
-Make sure to check your unit tests and update them if need be.
+Make sure to check your unit tests and update them if needed.

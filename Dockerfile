@@ -26,9 +26,9 @@ RUN npm test
 FROM base AS build
 
 # Define build arguments & map them to environment variables
-ARG GA_TRACKING_ID
+ARG GTM_TRACKING_ID
 ARG SITE_URL
-ENV GA_TRACKING_ID $GA_TRACKING_ID
+ENV GTM_TRACKING_ID $GTM_TRACKING_ID
 ENV SITE_URL $SITE_URL
 
 # Build the project and then dispose files not necessary to run the project

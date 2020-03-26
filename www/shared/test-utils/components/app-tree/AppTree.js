@@ -1,26 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { IntlProvider } from 'react-intl';
+import { CookiesProvider } from 'react-cookie';
 import idObj from 'identity-obj-proxy';
 import { LayoutTree } from '@moxy/next-layout';
 
 // AppTreeWrapper setups providers defined ONLY by HOCs that wrap your www/app/App.js
 // It's used by www/app/App.test.js to perform unit tests
 
-export const AppTreeWrapper = ({ intlProvider, children }) => {
-    const intlProviderProps = {
+export const AppTreeWrapper = ({ intlProvider, cookiesProvider, children }) => {
+    intlProvider = {
         locale: 'en-US',
         messages: idObj,
         ...intlProvider,
     };
 
     return (
-        <IntlProvider { ...intlProviderProps }>{ children }</IntlProvider>
+        <IntlProvider { ...intlProvider }>
+            <CookiesProvider { ...cookiesProvider }>
+                { children }
+            </CookiesProvider>
+        </IntlProvider>
     );
 };
 
 AppTreeWrapper.propTypes = {
     intlProvider: PropTypes.object,
+    cookiesProvider: PropTypes.object,
     children: PropTypes.element.isRequired,
 };
 
@@ -38,6 +44,7 @@ const AppTree = ({ children, ...props }) => (
 
 AppTree.propTypes = {
     intlProvider: PropTypes.object,
+    cookiesProvider: PropTypes.object,
     children: PropTypes.element.isRequired,
 };
 

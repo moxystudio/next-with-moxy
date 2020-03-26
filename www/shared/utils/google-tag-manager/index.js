@@ -1,1 +1,1 @@
-export { default } from './initialize-tag-manager';
+export * from './google-tag-manager';

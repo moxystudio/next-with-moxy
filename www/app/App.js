@@ -7,18 +7,20 @@ import { LayoutTree } from '@moxy/next-layout';
 import { CookiesProvider } from 'react-cookie';
 import nextIntlConfig from '../../intl';
 import { MainLayout, CookieBanner } from '../shared/components';
+import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
 import SEO_DATA from './App.data.js';
-import initializeTagManager from '../shared/utils/google-tag-manager';
 
 export const App = ({ Component, pageProps }) => {
     const handleCookieConsents = useCallback((cookieConsents) => {
         if (cookieConsents.includes('analytics')) {
-            initializeTagManager();
+            initGTM();
+        } else {
+            destroyGTM();
         }
     }, []);
 
     return (
-        <>
+        <CookiesProvider>
             <Head>
                 <title>{ SEO_DATA.title }</title>
                 <meta name="description" content={ SEO_DATA.description } />
@@ -50,18 +52,17 @@ export const App = ({ Component, pageProps }) => {
                 <meta property="twitter:description" content={ SEO_DATA.description } />
                 <meta property="twitter:image" content={ SEO_DATA.image.src } />
             </Head>
-            <CookiesProvider>
-                <KeyboardOnlyOutlines />
-                <CookieBanner onCookieConsents={ handleCookieConsents } />
 
-                <LayoutTree
-                    Component={ Component }
-                    pageProps={ pageProps }
-                    defaultLayout={ <MainLayout /> } />
-            </CookiesProvider>
-        </>
-    )
-;
+            <KeyboardOnlyOutlines />
+            <CookieBanner onCookieConsents={ handleCookieConsents } />
+
+            <LayoutTree
+                Component={ Component }
+                pageProps={ pageProps }
+                defaultLayout={ <MainLayout /> } />
+        </CookiesProvider>
+    );
+};
 
 App.propTypes = {
     Component: PropTypes.elementType.isRequired,

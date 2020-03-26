@@ -12,13 +12,12 @@ export const CookieBanner = ({ onCookieConsents }) => {
 
     const { cookieConsents = [], cookieBannerDismissed = false } = cookies;
 
-    useEffect(() => {
-        setMounted(true);
-    }, []);
+    useEffect(() => setMounted(true), []);
 
     useEffect(() => {
         onCookieConsents(cookieConsents);
-    }, [onCookieConsents, cookieConsents]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [onCookieConsents, cookieConsents.join(',')]);
 
     const handleAcceptClick = useCallback(() => {
         setCookie('cookieConsents', ['analytics'], { maxAge: 365 * 24 * 60 * 60 });
@@ -36,8 +35,8 @@ export const CookieBanner = ({ onCookieConsents }) => {
     }
 
     return (
-        <span className={ styles.cookieBanner }>
-            <span>
+        <div className={ styles.cookieBanner }>
+            <p>
                 <FormattedMessage
                     id="cookieBanner.text"
                     values={ {
@@ -47,7 +46,7 @@ export const CookieBanner = ({ onCookieConsents }) => {
                             </Link>
                         ),
                     } } />
-            </span>
+            </p>
 
             <div className={ styles.buttons }>
                 <button className={ styles.accept } type="button" onClick={ handleAcceptClick }>
@@ -57,7 +56,7 @@ export const CookieBanner = ({ onCookieConsents }) => {
                     <FormattedMessage id="cookieBanner.reject" />
                 </button>
             </div>
-        </span>
+        </div>
     );
 };
 

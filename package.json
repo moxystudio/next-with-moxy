@@ -52,14 +52,13 @@
     "react": "^16.8.6",
     "react-cookie": "^4.0.3",
     "react-dom": "^16.8.6",
-    "react-gtm-module": "^2.0.8",
     "react-intl": "^4.1.0"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.0.0",
     "@moxy/babel-preset": "^3.2.5",
-    "@moxy/eslint-config-base": "^11.0.2",
     "@moxy/eslint-config-babel": "^11.0.2",
+    "@moxy/eslint-config-base": "^11.0.2",
     "@moxy/eslint-config-jest": "^11.0.2",
     "@moxy/eslint-config-react": "^11.0.2",
     "@moxy/eslint-config-react-web-a11y": "^11.0.2",
