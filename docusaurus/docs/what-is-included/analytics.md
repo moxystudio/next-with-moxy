@@ -45,7 +45,7 @@ const Blog = ({ blog }) => {
 
 ## Prompting for consent
 
-For privacy purposes, and in compliance with [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) and other regulations, apps need to ask the user for permission to collect user data. The boilerplate comes with a `<CookieBanner />` component that allows exactly this. Built with [`@enzsft/react-cookie-consents`](https://github.com/enzsft/react-cookie-consents), it will allow `GTM` to be initialized if the user has clicked that he accepts the data collection. It also saves the cookie for 365 days.
+For privacy purposes, and in compliance with [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) and other regulations, apps need to ask the user for permission to collect user data. The boilerplate comes with a `<CookieBanner />` component that allows exactly this. It prompts the user to consent the use of Cookies, namely for analytics, and saves the preference for 365 days.
 
 ## Removing this feature
 
