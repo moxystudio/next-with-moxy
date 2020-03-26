@@ -1,8 +1,11 @@
-import React from 'react';
-import Router from 'next/router';
+import React, { useEffect } from 'react';
 import { render } from '@testing-library/react';
 import { App } from './App';
-import { AppTreeWrapper } from '../shared/test-utils';
+import { CookieBanner } from '../shared/components';
+import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
+import { AppTreeWrapper } from '../shared/test-utils/components';
+
+jest.mock('../shared/components/cookie-banner', () => jest.fn(() => null));
 
 jest.mock('../shared/utils/google-tag-manager', () => ({
     initGTM: jest.fn(),
@@ -16,7 +19,7 @@ beforeEach(() => {
 it('should render correctly', () => {
     const { container } = render(
         <AppTreeWrapper>
-            <App Component={ () => 'Hello World' } router={ Router } />
+            <App Component={ () => 'Hello World' } />
         </AppTreeWrapper>,
     );
 
@@ -24,7 +27,41 @@ it('should render correctly', () => {
 });
 
 describe('GTM', () => {
-    it.todo('should initialize GTM if analytics is in the cookies consent');
+    it('should initialize GTM if analytics is in the cookies consent', () => {
+        CookieBanner.mockImplementation(({ onCookieConsents }) => {
+            useEffect(() => {
+                onCookieConsents(['analytics']);
+            }, [onCookieConsents]);
 
-    it.todo('should destroy GTM if analytics is not on the cookies consent');
+            return null;
+        });
+
+        render(
+            <AppTreeWrapper>
+                <App Component={ () => 'Hello World' } />
+            </AppTreeWrapper>,
+        );
+
+        expect(initGTM).toHaveBeenCalledTimes(1);
+        expect(destroyGTM).toHaveBeenCalledTimes(0);
+    });
+
+    it('should destroy GTM if analytics is not on the cookies consent', () => {
+        CookieBanner.mockImplementation(({ onCookieConsents }) => {
+            useEffect(() => {
+                onCookieConsents(['foo']);
+            }, [onCookieConsents]);
+
+            return null;
+        });
+
+        render(
+            <AppTreeWrapper>
+                <App Component={ () => 'Hello World' } />
+            </AppTreeWrapper>,
+        );
+
+        expect(initGTM).toHaveBeenCalledTimes(0);
+        expect(destroyGTM).toHaveBeenCalledTimes(1);
+    });
 });

@@ -1,6 +1,5 @@
 beforeEach(() => {
     process.env.GTM_TRACKING_ID = 'foo';
-    process.env.GTM_DATA_LAYER = 'bar';
 });
 
 afterEach(() => {
@@ -8,7 +7,7 @@ afterEach(() => {
 
     destroyGTM();
 
-    delete window[process.env.GTM_DATA_LAYER];
+    delete window.dataLayer;
 
     jest.resetModules();
     jest.clearAllMocks();
@@ -23,7 +22,6 @@ describe('initGTM', () => {
         const script = document.getElementById(`gtm-${process.env.GTM_TRACKING_ID}`);
 
         expect(script).toBeInstanceOf(HTMLElement);
-        expect(script.innerHTML).toContain(`'${process.env.GTM_DATA_LAYER}'`);
         expect(script.innerHTML).toContain(`'${process.env.GTM_TRACKING_ID}'`);
     });
 
@@ -41,7 +39,7 @@ describe('initGTM', () => {
         expect(document.querySelectorAll(`[id="gtm-${process.env.GTM_TRACKING_ID}"]`)).toHaveLength(1);
     });
 
-    it('should not initialize GTM script if env variables are missing', () => {
+    it('should not initialize GTM script if GTM_TRACKING_ID is missing', () => {
         delete process.env.GTM_TRACKING_ID;
 
         const { initGTM } = require('./google-tag-manager');
@@ -65,14 +63,14 @@ describe('destroyGTM', () => {
     it('should reset dataLayer', () => {
         const { destroyGTM } = require('./google-tag-manager');
 
-        window[process.env.GTM_DATA_LAYER] = [{ foo: 'bar' }];
+        window.dataLayer = [{ foo: 'bar' }];
 
         destroyGTM();
 
-        expect(window[process.env.GTM_DATA_LAYER]).toBe(undefined);
+        expect(window.dataLayer).toBe(undefined);
     });
 
-    it('should do nothing if env variables are missing', () => {
+    it('should do nothing if GTM_TRACKING_ID is missing', () => {
         delete process.env.GTM_TRACKING_ID;
 
         const { destroyGTM } = require('./google-tag-manager');
@@ -95,16 +93,16 @@ describe('dataLayer', () => {
 
         dataLayer({ foo: 'bar' });
 
-        expect(window[process.env.GTM_DATA_LAYER]).toEqual([{ foo: 'bar' }]);
+        expect(window.dataLayer).toEqual([{ foo: 'bar' }]);
     });
 
-    it('should do nothing if env variables are missing', () => {
+    it('should do nothing if GTM_TRACKING_ID is missing', () => {
         delete process.env.GTM_TRACKING_ID;
 
         const { dataLayer } = require('./google-tag-manager');
 
         dataLayer({ foo: 'bar' });
 
-        expect(window[process.env.GTM_DATA_LAYER]).toBe(undefined);
+        expect(window.dataLayer).toBe(undefined);
     });
 });
