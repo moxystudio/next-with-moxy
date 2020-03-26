@@ -16,7 +16,26 @@ Note that you can start developing your application as usual without having `GTM
 
 As stated before, one of the most common examples of an event to track would be page views, namely with `GA`. To do this, deploy GA with Tag Manager, as explained [here](https://support.google.com/tagmanager/answer/6107124). Note that for correctly tracking page views in an application built with Next.js, you need to take into account that the router uses HTML5 push. As in, route changing happens without the page actually being refreshed. It is of the utmost importance that you properly configure the `History Change Trigger`, as explained [`here`](https://support.google.com/tagmanager/answer/7679322).
 
-It may be the case that you need to collect some more complex data for some more complex tags. For that, you're probably going to want to use the [Data Layer](https://developers.google.com/tag-manager/devguide), which [`react-gtm`](https://www.npmjs.com/package/react-gtm-module#datalayer) also allows for. An example would be a blog post page, where developers would inject blog related data such as its ID, title, author and date, and then marketeers can pick this data to populate events in `GTM`.
+It may be the case that you need to collect some more complex data for some more complex tags. For that, you're probably going to want to use the [Data Layer](https://developers.google.com/tag-manager/devguide). The utility module available in `www/shared/utils/google-tag-manager` has a `dataLayer` function that you can use in your components. An example would be a blog post page, where developers would inject blog related data such as its ID, title, author and date, and then marketeers can pick this data to populate events in `GTM`:
+
+```js
+import { dataLayer } from './shared/utils/google-tag-manager';
+
+const Blog = ({ blog }) => {
+    useEffect(() => {
+        dataLayer({
+            id: blog.id,
+            title: blog.title,
+            author: blog.author,
+            date: blog.date
+        });
+    }, [blog]);
+
+    return (
+        <div>{ /* ... */ }</div>
+    );
+};
+```
 
 ## Urchin Tracking Module
 
@@ -30,8 +49,7 @@ For privacy purposes, and in compliance with `GDPR`, apps need to ask the user f
 
 If you are sure you do not need analytics in your project, you can remove all the analytics related code. To do so, take the following steps:
 
-1. Uninstall `react-gtm-module` and `@enzsft/react-cookie-consents`.
+1. Uninstall `react-cookies` if no other component uses it.
 2. Remove the `<CookieBanner />` component and its associated components.
-3. Delete the `initialize-tag-manager` module. Also, make sure to cleanup the files where `initialize-tag-manager` is being used. The global search feature of your editor will be your best friend here.
-
-Make sure to check your unit tests and update them if needed.
+3. Delete the `www/shared/utils/google-tag-manager` module. Also, make sure to cleanup the files where it was being used, such as the `<App />` component. The global search feature of your editor will be your best friend here.
+4. Update your unit tests if necessary so that they all pass!

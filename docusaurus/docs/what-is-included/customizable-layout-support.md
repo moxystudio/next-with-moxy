@@ -20,4 +20,5 @@ If your project is composed of a simple page where a layout is not needed, this 
 
 1. Uninstall `@moxy/next-layout`.
 2. Remove the `<MainLayout />` component and its associated components.
-3. Remove all the usages of `@moxy/next-layout` throughout the project so they don't pollute your code. A global search for `@moxy/next-layout` should speed up this process. Just be sure to update your unit tests after doing this.
+3. Remove all the usages of `@moxy/next-layout` throughout the project so they don't pollute your code. A global search for `@moxy/next-layout` should speed up this process.
+4. Update your unit tests if necessary so that they all pass!
