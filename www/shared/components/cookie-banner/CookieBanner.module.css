@@ -11,6 +11,7 @@
     align-items: center;
     border-top: 0.1rem solid;
     background-color: var(--color-white);
+    font-size: 1.4rem;
 }
 
 .buttons {
