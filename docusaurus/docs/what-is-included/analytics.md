@@ -1,12 +1,14 @@
 ---
 id: analytics
-title: Analytics and Cookie Consent
-sidebar_label: Analytics and Cookie Consent
+title: Analytics and cookie consents
+sidebar_label: Analytics and cookie sonsents
 ---
 
 ## Analytics with Google Tag Manager
 
-Being able to evaluate how your audience interacts with your website is crucial in order to understand if the content you are creating is getting to them the way it's intended to. Also, wouldn't it be good to know how did said audience get to your website? Was it through a Google search? Facebook post, maybe? Is your investment in digital marketing being worthwhile? With all these topics in mind, an analytics solution was integrated into this boilerplate, with [`react-gtm`](https://github.com/alinemorelli/react-gtm). This `Google Tag Manager` (`GTM`) module allows for easy data collection about how users interact with your application, ultimately giving you a sense of how well your website is performing, as well as how effective your digital marketing strategies are at any given moment. Also, `GTM` presents huge advantages in terms of ease of implementation, as it offers a lot of tracking features that can be integrated out of the box into your website without the need to interfere with the code. Anyone can start implementing tags and make the most of `GTM`, provided they learn how it works.
+Being able to evaluate how your audience interacts with your website is crucial in order to understand if the content you are creating is getting to them the way it's intended to. Also, wouldn't it be good to know how did said audience get to your website? Was it through a Google search? Facebook post, maybe? Is your investment in digital marketing being worthwhile? With all these topics in mind, an analytics solution was integrated into this boilerplate, allowing for easy data collection about how users interact with your application, ultimately giving you a sense of how well your website is performing, as well as how effective your digital marketing strategies are at any given moment.
+
+The solution is based on [Google Tag Manager](https://tagmanager.google.com/) (`GTM`), which has huge advantages in terms of ease of implementation, as it offers a lot of tracking features that can be integrated out of the box into your website without the need to interfere with the code. Anyone can start implementing tags and make the most of `GTM`, provided they learn how it works.
 
 >ℹ️ It's recommended that you have a `Google Analytics` (`GA`) account setup properly prior to start collecting data with `GTM`. It would also allow you to properly benefit from the use of `Urchin Tracking Module` (`UTM`) in your URLs (we will talk about this in a moment). If you haven't already setup your `GA` account, check the `Get Started With Analytics` section of the official [documentation](https://support.google.com/analytics/answer/1008015). Nevertheless, if you think `GA` won't fill your needs, fear not, as `GTM` supports a whole array of different tags and marketing pixels. Check a list of them all [here](https://support.google.com/tagmanager/answer/6106924), if you'd like.
 
@@ -43,7 +45,7 @@ const Blog = ({ blog }) => {
 
 ## Prompting for consent
 
-For privacy purposes, and in compliance with `GDPR`, apps need to ask the user for permission to collect user data. The boilerplate comes with a `<CookieBanner />` component that allows exactly this. Built with [`@enzsft/react-cookie-consents`](https://github.com/enzsft/react-cookie-consents), it will allow `GTM` to be initialized if the user has clicked that he accepts the data collection. It also saves the cookie for 365 days.
+For privacy purposes, and in compliance with [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) and other regulations, apps need to ask the user for permission to collect user data. The boilerplate comes with a `<CookieBanner />` component that allows exactly this. Built with [`@enzsft/react-cookie-consents`](https://github.com/enzsft/react-cookie-consents), it will allow `GTM` to be initialized if the user has clicked that he accepts the data collection. It also saves the cookie for 365 days.
 
 ## Removing this feature
 
