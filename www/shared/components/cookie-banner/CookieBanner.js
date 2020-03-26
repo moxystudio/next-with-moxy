@@ -40,7 +40,7 @@ export const CookieBanner = ({ onCookieConsents }) => {
                 <FormattedMessage
                     id="cookieBanner.text"
                     values={ {
-                        link: (...chunks) => (
+                        link: /* istanbul ignore next */ (...chunks) => (
                             <Link href="/terms">
                                 <a>{ chunks }</a>
                             </Link>
