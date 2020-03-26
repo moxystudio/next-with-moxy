@@ -1,5 +1,5 @@
 beforeEach(() => {
-    process.env.GTM_TRACKING_ID = 'foo';
+    process.env.GTM_CONTAINER_ID = 'foo';
 });
 
 afterEach(() => {
@@ -19,10 +19,10 @@ describe('initGTM', () => {
 
         initGTM();
 
-        const script = document.getElementById(`gtm-${process.env.GTM_TRACKING_ID}`);
+        const script = document.getElementById(`gtm-${process.env.GTM_CONTAINER_ID}`);
 
         expect(script).toBeInstanceOf(HTMLElement);
-        expect(script.innerHTML).toContain(`'${process.env.GTM_TRACKING_ID}'`);
+        expect(script.innerHTML).toContain(`'${process.env.GTM_CONTAINER_ID}'`);
     });
 
     it('should skip initializing if already initialized', () => {
@@ -30,23 +30,23 @@ describe('initGTM', () => {
 
         const script = document.createElement('script');
 
-        script.id = `gtm-${process.env.GTM_TRACKING_ID}`;
+        script.id = `gtm-${process.env.GTM_CONTAINER_ID}`;
 
         document.head.appendChild(script);
 
         initGTM();
 
-        expect(document.querySelectorAll(`[id="gtm-${process.env.GTM_TRACKING_ID}"]`)).toHaveLength(1);
+        expect(document.querySelectorAll(`[id="gtm-${process.env.GTM_CONTAINER_ID}"]`)).toHaveLength(1);
     });
 
-    it('should not initialize GTM script if GTM_TRACKING_ID is missing', () => {
-        delete process.env.GTM_TRACKING_ID;
+    it('should not initialize GTM script if GTM_CONTAINER_ID is missing', () => {
+        delete process.env.GTM_CONTAINER_ID;
 
         const { initGTM } = require('./google-tag-manager');
 
         initGTM();
 
-        expect(document.getElementById(`gtm-${process.env.GTM_TRACKING_ID}`)).toBe(null);
+        expect(document.getElementById(`gtm-${process.env.GTM_CONTAINER_ID}`)).toBe(null);
     });
 });
 
@@ -57,7 +57,7 @@ describe('destroyGTM', () => {
         initGTM();
         destroyGTM();
 
-        expect(document.getElementById(`gtm-${process.env.GTM_TRACKING_ID}`)).toBe(null);
+        expect(document.getElementById(`gtm-${process.env.GTM_CONTAINER_ID}`)).toBe(null);
     });
 
     it('should reset dataLayer', () => {
@@ -70,20 +70,20 @@ describe('destroyGTM', () => {
         expect(window.dataLayer).toBe(undefined);
     });
 
-    it('should do nothing if GTM_TRACKING_ID is missing', () => {
-        delete process.env.GTM_TRACKING_ID;
+    it('should do nothing if GTM_CONTAINER_ID is missing', () => {
+        delete process.env.GTM_CONTAINER_ID;
 
         const { destroyGTM } = require('./google-tag-manager');
 
         const script = document.createElement('script');
 
-        script.id = `gtm-${process.env.GTM_TRACKING_ID}`;
+        script.id = `gtm-${process.env.GTM_CONTAINER_ID}`;
 
         document.head.appendChild(script);
 
         destroyGTM();
 
-        expect(document.getElementById(`gtm-${process.env.GTM_TRACKING_ID}`)).toBe(script);
+        expect(document.getElementById(`gtm-${process.env.GTM_CONTAINER_ID}`)).toBe(script);
     });
 });
 
@@ -96,8 +96,8 @@ describe('dataLayer', () => {
         expect(window.dataLayer).toEqual([{ foo: 'bar' }]);
     });
 
-    it('should do nothing if GTM_TRACKING_ID is missing', () => {
-        delete process.env.GTM_TRACKING_ID;
+    it('should do nothing if GTM_CONTAINER_ID is missing', () => {
+        delete process.env.GTM_CONTAINER_ID;
 
         const { dataLayer } = require('./google-tag-manager');
 
