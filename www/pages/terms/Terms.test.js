@@ -1,9 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Terms from './Terms';
+import Home from './Terms';
+import { AppTree } from '../../shared/test-utils/components';
 
 it('should render correctly', () => {
-    const { container } = render(<Terms />);
+    const { container } = render(<AppTree><Home /></AppTree>);
 
-    expect(container).toHaveTextContent('Terms and Conditions');
+    expect(container).toHaveTextContent('terms.title');
 });
