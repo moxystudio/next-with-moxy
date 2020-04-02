@@ -28,7 +28,7 @@ The folder-structure convention favours co-location of assets and their requeste
     │   │   └── components
     │   └── ...
     └── shared
-        └── components
+        └── react
         │   └── ...
         └── media
         │   └── favicons
@@ -52,7 +52,7 @@ The folder-structure convention favours co-location of assets and their requeste
             - `Home.module.css`: This is where you'll have styles that are only used in this component.
             - `components`: If you have abstracted parts of this component into smaller components, use this folder to co-locate them.
     - `shared`: Where you can put content that is shared between pages and cannot be directly co-located with its interested parties.
-        - `components`: The folder for components that are shared between pages. You can find an example just above of what files each component is expected to have.
+        - `react`: The folder for all react components that are shared between pages. You can find an example just above of what files each component is expected to have.
         - `media`: The folder for media (images, fonts, etc.) that is shared between many components.
             - `favicons`: This is where you can store your favicons.
             - `fonts`: This is where you can store your font files.

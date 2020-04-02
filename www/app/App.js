@@ -6,7 +6,7 @@ import { withNextIntlSetup } from '@moxy/next-intl';
 import { LayoutTree } from '@moxy/next-layout';
 import { CookiesProvider } from 'react-cookie';
 import nextIntlConfig from '../../intl';
-import { MainLayout, CookieBanner } from '../shared/components';
+import { MainLayout, CookieBanner } from '../shared/react';
 import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
 import SEO_DATA from './App.data.js';
 
