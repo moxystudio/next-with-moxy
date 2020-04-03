@@ -19,7 +19,7 @@
     font-size: 6$(unit);
     line-height: normal;
 
-    @media (--layout-lte-tablet) {
+    @media (--layout-lte-medium) {
         font-size: 4.8$(unit);
     }
 }
@@ -29,7 +29,7 @@
     font-size: 4.2$(unit);
     line-height: normal;
 
-    @media (--layout-lte-mobile) {
+    @media (--layout-lte-small) {
         font-size: 2.6$(unit);
     }
 }
@@ -39,7 +39,7 @@
     font-size: 3.4$(unit);
     line-height: normal;
 
-    @media (--layout-lte-small-mobile) {
+    @media (--layout-lte-xsmall) {
         font-size: 1.8$(unit);
     }
 }
@@ -55,11 +55,11 @@
     font-size: 1.8$(unit);
     line-height: normal;
 
-    @media (--layout-lte-mobile) {
+    @media (--layout-lte-small) {
         font-size: 1.5$(unit);
     }
 
-    @media (--layout-lte-small-mobile) {
+    @media (--layout-lte-xsmall) {
         font-size: 1.4$(unit);
     }
 }
@@ -69,7 +69,7 @@
     font-size: 1.2$(unit);
     line-height: normal;
 
-    @media (--layout-lte-small-mobile) {
+    @media (--layout-lte-xsmall) {
         font-size: 1.1$(unit);
     }
 }
@@ -79,7 +79,7 @@
     font-size: 1.5$(unit);
     line-height: normal;
 
-    @media (--layout-lte-mobile) {
+    @media (--layout-lte-small) {
         font-size: 1.3$(unit);
     }
 }
