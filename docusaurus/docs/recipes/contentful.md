@@ -350,3 +350,62 @@ Currently Conentful doesn't enforce any limits on requests that hit their CDN ca
 When a client gets rate limited, the API responds with the `429 Too Many Requests` status code and sets the `X-Contentful-RateLimit-Reset` header that tells the client when it can make its next request. 
 
 ### 2. Custom Caching Layer
+
+One preventive measure for avoiding hitting the rate limit for Contentful is to implement our own custom caching layer.
+This can be done by setting up a proxy server which will add an `s-maxage` HTTP header into the Contentful's response.
+
+This header will then be interpreted by the _CDN_ we may be using (currently _CloudFlare_), which will cache the response and avoid repeating the same request to Contentful during a specific time interval.
+
+The first thing you'll need in order to implement this solution is to install [http-proxy](https://www.npmjs.com/package/http-proxy):
+
+```sh
+$ npm i http-proxy
+```
+
+Then, you'll want to create an endpoint in your application which will serve as a proxy for all the requests directed at Contentful's API.
+
+For this, you'll have to the file `pages/api/cms/[...cms].js`. This file and directory structure and naming is important because you'll want to receive any requests directed to `<hostname>/api/cms/*`.
+
+This file will contain the following code. Here you will create the `proxy` server and, on each request, remove `/api/cms` from the request, rewrite the `host` header to the correct host (`cdn.contentful.com`), redirect the request to `cdn.contentful.com` and set the `Cache-Control` HTTP header of the response to `s-maxage=60`.
+
+```js
+import httpProxy from 'http-proxy';
+
+const proxy = httpProxy.createProxyServer({});
+
+export default (req, res) => {
+    req.url = req.url.replace('/api/cms', '');
+    req.headers.host = 'cdn.contentful.com';
+
+    proxy.web(req, res, {
+        target: {
+            host: 'cdn.contentful.com',
+        },
+    });
+
+    if (req.method === 'GET') {
+        res.setHeader('Cache-Control', 's-maxage=60');
+    }
+};
+```
+
+Finally, you will need to setup the Contentful client to direct it's requests to the endpoint you just configured. Please note that you only want to cache the requests when in a production environment.
+
+```js
+const clientOptions = {
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_TOKEN,
+};
+
+if (process.env.NODE_ENV === 'production') {
+    clientOptions.host = process.env.SITE_URL;
+    clientOptions.basePath = '/api/contentful';
+}
+
+const client = createClient(clientOptions);
+```
+
+**NOTES:**
+- you have to be able to access to `process.env.NODE_ENV` from the client side as well as the server side, to proxy client side requests to Contentful in production environments.
+- the `process.env.SITE_URL` variable has to be correctly configured and accessible from both server and client side, otherwise the request to the proxy endpoint will not happen correctly. This may mean that preview url's in merge request will not function correctly, which will happen if the application is started with `process.env.NODE_ENV` set to `production`.
+
