@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { CookieBanner } from './CookieBanner';
-import { AppTree } from '../../test-utils/components';
+import { AppTree } from '../../test-utils/modules';
 
 afterEach(() => {
     jest.resetAllMocks();

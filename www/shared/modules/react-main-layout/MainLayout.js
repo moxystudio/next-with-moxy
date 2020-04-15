@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Header from '../header';
-import Footer from '../footer';
+import Header from '../react-header';
+import Footer from '../react-footer';
 
 import styles from './MainLayout.module.css';
 

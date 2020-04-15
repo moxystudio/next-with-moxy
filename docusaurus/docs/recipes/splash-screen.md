@@ -20,7 +20,7 @@ npm i @moxy/react-wait-for-react
 
 ### 2. Add `<SplashScreen />` to your project
 
-Copy the [`splash-screen`](https://github.com/moxystudio/next-with-moxy/tree/master/docusaurus/static/recipes-assets/splash-screen) component folder into `www/shared/components` and edit `www/shared/components/index.js` to export it:
+Copy the [`splash-screen`](https://github.com/moxystudio/next-with-moxy/tree/master/docusaurus/static/recipes-assets/splash-screen) component folder into `www/shared/modules` and edit `www/shared/modules/index.js` to export it:
 
 ```js
 // ....
@@ -93,12 +93,12 @@ MainLayout.propTypes = {
 
 ### 6. Finally, use it in a page
 
-Assuming you integrated the splash screen into the `<MainLayout />` as exemplified above, you could then use `withLayout` to set the layout's `splashPromise` prop directly from a page. Here's an example of the `<Home />` page defining a fake `splashPromise` that resolves in 5 seconds: 
+Assuming you integrated the splash screen into the `<MainLayout />` as exemplified above, you could then use `withLayout` to set the layout's `splashPromise` prop directly from a page. Here's an example of the `<Home />` page defining a fake `splashPromise` that resolves in 5 seconds:
 
 ```js
 // ...
 import { withLayout } from '@moxy/next-layout';
-import { MainLayout } from '../../shared/components';
+import { MainLayout } from '../../shared/modules';
 
 // ...
 
