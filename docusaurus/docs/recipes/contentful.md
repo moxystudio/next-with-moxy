@@ -18,7 +18,7 @@ For more information about **Contentful**'s API please [refer to their documenta
 
 ## Modeling your database
 
-As a developer working on the App that will consume the content stored in the CMS, you're also responsible for creating and modeling the database itself. This will mean creating new content models that must be usable by the client team which will eventually handle **Contentful** after hand off of the project. One **major** consideration to have is the usability and readability of the content models you're creating, remember that they are meant to be usable without any previous technical knowledge of this context. 
+As a developer working on the App that will consume the content stored in the CMS, you're also responsible for creating and modeling the database itself. This will mean creating new content models that must be usable by the client team which will eventually handle **Contentful** after the hand off of the project. One **major** consideration to have is the usability and readability of the content models you're creating. Remember that they are meant to be usable without any previous technical knowledge of this context. 
 
 **Contentful** offers many options for validations and input appearance and descriptions to help the users understand what kind of input is expected, and you should use all of them to minimize the chance of users not understanding what's expected of them, in what ways they are limited, reducing the chances of unexpected content in your application.
 
@@ -88,7 +88,7 @@ const result = await client.getEntries({
 If you're taking advantage of localization in your **Contentful** space, you must add to the request a field with your intended language code, like so:
 
 ```js
-const result = client.getEntries({
+const result = await client.getEntries({
     content_type: 'clients',
     locale: 'en-US'
 });
@@ -100,7 +100,7 @@ To populate the app with the fetched content, we will explore two possible imple
 
 #### 2.1. Accessing the client directly though `getInitialProps`
 
-In Next.js apps, the `getInitialProps` function in general components typically receives a context object, which exposes many aspects of the context in which the page is rendered. Because we are building a custom app, and doing ourselves the work of running these `getInitialProps` functions, we can control what data they receive. In practice, we will be populating the context object with the information we want to propagate to our components. So, in your `App.js` file, you can check whether the page was loaded with a `cms-preview` query parameter, build your client, and share it across the app.
+In Next.js apps, the `getInitialProps` function in general components typically receives a context object, which exposes many aspects of the context in which the page is rendered. Because we are building a custom app, and doing the work of running these `getInitialProps` functions ourselves, we can control what data they receive. In practice, we will be populating the context object with the information we want to propagate to our components. So, in your `App.js` file, you can check whether the page was loaded with a `cms-preview` query parameter, build your client, and share it across the app.
 
 This function also has the advantage letting you return props to your App function, making it easier to signal the App itself if you're in preview mode.
 
@@ -307,11 +307,11 @@ const App = ({ Component, pageProps, rootSelector, router }) => {
 
 ### 4. CMS Translations
 
-This boilerplate already includes **Internationalization** using [`@moxy/next-intl`](https://github.com/moxystudio/next-intl), this is done by staticaly configuring individual `intl/messages/<locale>.json` per locale. You can do this dynamically by moving this static files to a **Contentful** content model and by enabling localization in it.
+This boilerplate already includes **Internationalization** using [`@moxy/next-intl`](https://github.com/moxystudio/next-intl), this is done by statically configuring individual `intl/messages/<locale>.json` per locale. You can do this dynamically by moving this static files to a **Contentful** content model and by enabling localization in it.
 
 #### 1. Defining the content type
 
-Firstly define the content type that will consist on a list of key/value pairs. Add the fields necessary to fit your needs, for example `homePageTitle`.
+Firstly, define the content type that will consist on a list of key/value pairs. Add the fields necessary to fit your needs, for example `homePageTitle`.
 
 > ℹ️ Make sure that you enable localization on every field you set in your content type.
 
@@ -351,10 +351,10 @@ When a client gets rate limited, the API responds with the `429 Too Many Request
 
 ### 2. Custom Caching Layer
 
-One preventive measure for avoiding hitting the rate limit for Contentful is to implement our own custom caching layer.
+One preventive measure for avoiding hitting the rate limit for Contentful is to implement your own custom caching layer.
 This can be done by setting up a proxy server which will add an `s-maxage` HTTP header into the Contentful's response.
 
-This header will then be interpreted by the _CDN_ we may be using (currently _CloudFlare_), which will cache the response and avoid repeating the same request to Contentful during a specific time interval.
+This header will then be interpreted by the _CDN_ that is delivering the application (for example _CloudFlare_), which will cache the response and avoid repeating the same request to Contentful during a specified time interval.
 
 The first thing you'll need in order to implement this solution is to install [http-proxy](https://www.npmjs.com/package/http-proxy):
 
@@ -364,9 +364,9 @@ $ npm i http-proxy
 
 Then, you'll want to create an endpoint in your application which will serve as a proxy for all the requests directed at Contentful's API.
 
-For this, you'll have to the file `pages/api/cms/[...cms].js`. This file and directory structure and naming is important because you'll want to receive any requests directed to `<hostname>/api/cms/*`.
+For this, you'll have to create the file `pages/api/cms/[...cms].js`. This file/directory structure and naming is important because you'll want to receive any requests directed to `<hostname>/api/cms/*`.
 
-This file will contain the following code. Here you will create the `proxy` server and, on each request, remove `/api/cms` from the request, rewrite the `host` header to the correct host (`cdn.contentful.com`), redirect the request to `cdn.contentful.com` and set the `Cache-Control` HTTP header of the response to `s-maxage=60`.
+This endpoint will create the `proxy` server and, on each request, remove `/api/cms` from the request, rewrite the `host` header to the correct host (`cdn.contentful.com`), redirect the request to `cdn.contentful.com` and set the `Cache-Control` HTTP header of the response to `s-maxage=60`.
 
 ```js
 import httpProxy from 'http-proxy';
@@ -406,6 +406,85 @@ const client = createClient(clientOptions);
 ```
 
 **NOTES:**
-- you have to be able to access to `process.env.NODE_ENV` from the client side as well as the server side, to proxy client side requests to Contentful in production environments.
-- the `process.env.SITE_URL` variable has to be correctly configured and accessible from both server and client side, otherwise the request to the proxy endpoint will not happen correctly. This may mean that preview url's in merge request will not function correctly, which will happen if the application is started with `process.env.NODE_ENV` set to `production`.
+> ❗️ You have to be able to access to `process.env.NODE_ENV` from the client side as well as the server side, to proxy client side requests to Contentful in production environments.
+
+> ❗️ The `process.env.SITE_URL` variable has to be correctly configured and accessible from both server and client side, otherwise the request to the proxy endpoint will not happen correctly. This may mean that preview url's in merge request will not function correctly, which will happen if the application is started with `process.env.NODE_ENV` set to `production`.
+
+## Custom SEO
+
+There may be cases where you will want to configure custom SEO per page. Unfortunately, Contentful does not provide out-of-the-box SEO support, so you will need to implement your own strategy. The approach we suggest is the following:
+
+- Create a content model for SEO.
+- Add a field `Title` that should be only used to identify the model, e.g. "Homepage SEO".
+- Add a SEO field (not-rich long text) to the model. Here, the SEO related tags (title, meta, etc.) will be defined in a _json_ format like so:
+
+```json
+{
+    "title": "MyPage Title",
+    "meta": [
+        {
+            "name": "description",
+            "content":"MyPage Description",
+        },
+        {
+            "property": "og:title",
+            "content": "MyPage Title",
+        },
+        {
+            "property": "og:image",
+            "content": {
+                "id": "6fU8dkL1P9eZlPE9JPw89n"
+            }
+        }
+    ],
+}
+```
+
+- Add a SEO Assets field (many file, media input) to the model.
+- Create a link field type in the models you need SEO and link it to the model you just created.
+
+The resulting content model should look like this.
+
+![SEO Content Model](../../static/img/SEO%20content%20model.png)
+
+In order to obtain the `id` used for meta tags whose content is an asset, you need to select the asset entry and, on the right side panel of the asset, select **Info** and copy the **id**. Later in the application you'll use this **id** to generate the URL for the asset.
+
+On the application itself, the steps to customize the SEO are the following:
+
+- Define a _default_ SEO data.
+- Merge this _default_ SEO data with the data you may have obtained when getting the current page content from Contentful.
+  - If you followed the approach mentioned before, the SEO content and assets will come included in the content of the page you're fetching.
+
+```js
+const seoData = {
+    title: cmsSEO.title || defaultSEO.title,
+    meta: [...defaultSEO.meta, ...cmsSEO.meta],
+    link: [...defaultSEO.link, ...cmsSEO.link],
+}
+```
+- Convert entries corresponding to assets into the asset URL
+
+```js
+// This function will determine if a meta entry's content is an id
+// If it is, it obtains the url to the asset that matches the id
+// Otherwise it returns the content 
+
+const getContent = (content, assets) => {
+    if (isPlainObject(content)) {
+        const asset = assets.find(({ sys }) => sys.id === content.id);
+
+        return asset.fields.file.url.slice(2);
+    }
+
+    return content;
+};
+```
+
+- Render the SEO data (title and tags) inside the `Head` in the `App.js` file.
+
+For the rendering step, we recommend using [@moxy/next-seo](https://www.npmjs.com/package/@moxy/next-seo), as this package takes care of two things:
+
+- Discards any repeated meta tags.
+- Renders any `title`, `meta` and `link` tags inside an `Head` tag.
+
 
