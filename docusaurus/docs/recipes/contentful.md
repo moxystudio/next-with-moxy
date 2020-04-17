@@ -16,7 +16,7 @@ A CMS, or Content Management System, is a platform that helps in the creation an
 
 For more information about **Contentful**'s API please [refer to their documentation](https://www.contentful.com/developers/docs/).
 
-## Modeling your database
+## Modeling your schema
 
 As a developer working on the App that will consume the content stored in the CMS, you're also responsible for creating and modeling the database itself. This will mean creating new content models that must be usable by the client team which will eventually handle **Contentful** after the hand off of the project. One **major** consideration to have is the usability and readability of the content models you're creating. Remember that they are meant to be usable without any previous technical knowledge of this context. 
 
@@ -109,25 +109,19 @@ This function also has the advantage letting you return props to your App functi
 import { createClient } from 'contentful';
 
 App.getInitialProps = async ({Component, context, router}) => {
-
-    // Create default client
-    let client = createClient({
-        space: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_TOKEN, // Delivery API Token
-        host: 'cdn.contentful.com', // Delivery API host
-    });
-
+    
     // Check whether route has `cms-preview` query parameter
     const isPreviewingContentful = Object.hasOwnProperty.call(router.query, 'cms-preview');
 
-    // Change client accordingly
-    if (isPreviewingContentful) {
-        client = createClient ({
-            space: process.env.CONTENTFUL_SPACE_ID,
-            accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN, // Preview API Token
-            host: 'preview.contentful.com', // Preview API host
-        });
-    };
+    // Set the preview or regular host
+    const contentfulHost = isPreviewingContentful ? 'preview.contentful.com' : 'cdn.contentful.com';
+
+    // Create client with correct host
+    const client = createClient({
+        space: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_TOKEN, // Delivery API Token
+        host: contentfulHost, // Delivery API host
+    });
     
     // Append it to the context object so other Components can access it
     context.contentfulClient = client;
@@ -333,7 +327,7 @@ locales: [
                 // The parameter bellow is needed to avoid the problem described at the top of the file.
             });
 
-            return content.items[0].fields; melhorar isto
+            return content.items[0].fields;
         },
     },
 ],
@@ -452,19 +446,12 @@ In order to obtain the `id` used for meta tags whose content is an asset, you ne
 On the application itself, the steps to customize the SEO are the following:
 
 - Define a _default_ SEO data.
-- Merge this _default_ SEO data with the data you may have obtained when getting the current page content from Contentful.
-  - If you followed the approach mentioned before, the SEO content and assets will come included in the content of the page you're fetching.
+- Fetch page data as you normally would.
+- Obtain the SEO data from the Contentful page data (example code for the Contentful SEO _parser_)
 
 ```js
-const seoData = {
-    title: cmsSEO.title || defaultSEO.title,
-    meta: [...defaultSEO.meta, ...cmsSEO.meta],
-    link: [...defaultSEO.link, ...cmsSEO.link],
-}
-```
-- Convert entries corresponding to assets into the asset URL
+import { mapValues } from 'lodash';
 
-```js
 // This function will determine if a meta entry's content is an id
 // If it is, it obtains the url to the asset that matches the id
 // Otherwise it returns the content 
@@ -478,6 +465,43 @@ const getContent = (content, assets) => {
 
     return content;
 };
+
+// Provided with the result from the Contentful API call and the entryID for the current page content,
+// This function will extract the SEO data, and complete it with the URL of any needed asset.
+
+const contentfulSEOParser = (contentfulData, entryID) => {
+    const entry = contentfulData.items.find((item) => item.sys.id === entryID);
+    const seoID = entry.fields.seo.id;
+    const seoEntry = entry.includes.Entry.find((entry) => entry.sys.id === seoID);
+    let seoContent;
+
+    try {
+        seoContent = JSON.parse(seoEntry.fields.seo);
+    } catch (parsingError) {
+        console.err('Unvalid JSON in SEO content');
+        console.err(parsingError);
+        return;
+    }
+
+    // Convert every content: { id: ''} into a content: url, keep unchanged otherwise
+    const content = {
+        title: seoContent.title,
+        meta: seoContent.meta.map((entry) => mapValues(entry, (value) => getContent(value, contentfulData.includes.Asset)))
+        link: seoContent.link.map((entry) => mapValues(entry, (value) => getContent(value, contentfulData.includes.Asset)))
+    }
+
+    return content;
+}
+```
+
+- Merge the _default_ SEO data with the SEO data fetched from the Contentful.
+
+```js
+const seoData = {
+    title: contentfulSEO.title || defaultSEO.title,
+    meta: [...defaultSEO.meta, ...contentfulSEO.meta],
+    link: [...defaultSEO.link, ...contentfulSEO.link],
+}
 ```
 
 - Render the SEO data (title and tags) inside the `Head` in the `App.js` file.
@@ -487,4 +511,4 @@ For the rendering step, we recommend using [@moxy/next-seo](https://www.npmjs.co
 - Discards any repeated meta tags.
 - Renders any `title`, `meta` and `link` tags inside an `Head` tag.
 
-
+If you intend to use `@moxy/next-seo`, please find the [documentation here](https://github.com/moxystudio/next-seo#usage).
