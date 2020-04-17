@@ -20,14 +20,7 @@ npm i @moxy/react-wait-for-react
 
 ### 2. Add `<SplashScreen />` to your project
 
-Copy the [`splash-screen`](https://github.com/moxystudio/next-with-moxy/tree/master/docusaurus/static/recipes-assets/splash-screen) component folder into `www/shared/modules` and edit `www/shared/modules/index.js` to export it:
-
-```js
-// ....
-export { default as SplashScreen } from './splash-screen';
-```
-
-Finally, adjust the component you just copied according to what was designed for your project.
+Copy the [`splash-screen`](https://github.com/moxystudio/next-with-moxy/tree/master/docusaurus/static/recipes-assets/splash-screen) component folder into `www/shared/modules` and adjust the component you just copied according to what was designed for your project.
 
 > ℹ️ As a rule of thumb, you should show the app icon or a welcoming message in the splash screen while the page is being preloaded, and only reveal a loading indicator after **2 or 3 seconds**. Users don't like seing a loading indicator, therefore we defer showing it only if the preload is taking more than usual.
 
@@ -98,7 +91,7 @@ Assuming you integrated the splash screen into the `<MainLayout />` as exemplifi
 ```js
 // ...
 import { withLayout } from '@moxy/next-layout';
-import { MainLayout } from '../../shared/modules';
+import MainLayout from '../../shared/modules/react-main-layout';
 
 // ...
 
