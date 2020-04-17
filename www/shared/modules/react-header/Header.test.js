@@ -1,24 +1,24 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Footer from './Footer';
-import { AppTree } from '../../test-utils/components';
+import Header from './Header';
+import AppTree from '../../test-utils/modules/react-app-tree';
 
 it('should render correctly', () => {
     const { container } = render((
         <AppTree>
-            <Footer />
+            <Header />
         </AppTree>
     ));
 
-    expect(container.querySelector('footer')).toBeInTheDocument();
+    expect(container.querySelector('header')).toBeInTheDocument();
 });
 
 it('should respect passed className', () => {
     const { container } = render((
         <AppTree>
-            <Footer className="foo" />
+            <Header className="foo" />
         </AppTree>
     ));
 
-    expect(container.querySelector('footer')).toHaveClass('foo');
+    expect(container.querySelector('header')).toHaveClass('foo');
 });

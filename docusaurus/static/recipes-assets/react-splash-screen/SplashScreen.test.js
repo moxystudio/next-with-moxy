@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import WaitForReact from '@moxy/react-wait-for-react';
 import SplashScreen from './SplashScreen';
-import { AppTree } from '../../tests';
+import AppTree from '../../test-utils/modules/react-app-tree';
 
 jest.mock('@moxy/react-wait-for-react', () => jest.fn(() => null));
 

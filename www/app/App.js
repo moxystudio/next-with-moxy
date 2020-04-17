@@ -7,7 +7,8 @@ import { LayoutTree } from '@moxy/next-layout';
 import Seo from '@moxy/next-seo';
 import { CookiesProvider } from 'react-cookie';
 import nextIntlConfig from '../../intl';
-import { MainLayout, CookieBanner } from '../shared/components';
+import MainLayout from '../shared/modules/react-main-layout';
+import CookieBanner from '../shared/modules/react-cookie-banner';
 import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
 import { seoData } from './App.data.js';
 
