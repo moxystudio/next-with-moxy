@@ -61,7 +61,7 @@ The folder-structure convention favours co-location of assets and their requeste
             - `Home.test.js`: This is the test file corresponding to this component.
             - `Home.data.js`: This is where you'll find data that will be used by this component. You can find a more in depth explanation of this file convention further below.
             - `Home.module.css`: This is where you'll have styles that are only used in this component.
-            - `hero`: This is an example of a section for the `Home` page. Inside it, you'll have the files you are used to have:
+            - `hero`: This is an example of a section for the `Home` page. The folder should follow the same common structure:
             	- `index.js`: This file will export the section component.
             	- `Hero.js`: This is your component file.
             	- `Hero.test.js`: This is the test file corresponding to this component.
