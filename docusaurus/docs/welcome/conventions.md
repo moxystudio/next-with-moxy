@@ -25,17 +25,28 @@ The folder-structure convention favours co-location of assets and their requeste
     │   │   ├── Home.test.js
     │   │   ├── Home.data.js
     │   │   ├── Home.module.css
-    │   │   └── components
+    │   │   ├── hero
+    │   │   │   ├── index.js
+    │   │   │   ├── Hero.js
+    │   │   │   ├── Hero.test.js
+    │   │   │   └── Hero.module.css
+    │   │   └── ...
     │   └── ...
     └── shared
-        └── components
+        └── modules
+        │   ├── api-sdk
+        │   ├── react-button
+        │   ├── react-card
+        │   ├── react-progress-bar
+        │   ├── react-icons
+        │   │   ├── svgs
+        │   │   └── index.js
         │   └── ...
         └── media
         │   └── favicons
         │  	└── fonts
         │   └── images
-        ├── styles
-        └── services
+        └── styles
 ```
 
 ...where:
@@ -43,22 +54,25 @@ The folder-structure convention favours co-location of assets and their requeste
 - `pages`: This folder is necessary for Next.js since we're taking advantage of its file system routing, and this is where Next.js will search for files to route to by default.
 - `www`: Where the code for your application will be.
     - `app`: Where your App component will be.
-    - `pages`: Where you can store the source code of your pages. This means that every file in `/pages` will import a component from here. We use this method since we only use `/pages` for routing and `www` for code that will be compiled.
+    - `pages`: Where you can store the source code of your pages. Every file in `/pages` will import a component from here. We use this method since we only use `/pages` for routing and `www` for code that will be compiled. Usually, a page is a set of sections and each section can be a set of another sections or a set of components. You have enough freedom to create logical groups according to the page composition. However, make sure the file structure chosen inside `www/pages` reflects it and is clear to every other developer.
         - `home`: This an example of a component and the structure you'll find inside. Commonly, you'll find the following files here:
             - `index.js`: This file will simply export your component file.
             - `Home.js`: This is your component file.
             - `Home.test.js`: This is the test file corresponding to this component.
             - `Home.data.js`: This is where you'll find data that will be used by this component. You can find a more in depth explanation of this file convention further below.
             - `Home.module.css`: This is where you'll have styles that are only used in this component.
-            - `components`: If you have abstracted parts of this component into smaller components, use this folder to co-locate them.
+            - `hero`: This is an example of a section for the `Home` page. Inside it, you'll have the files you are used to have:
+            	- `index.js`: This file will export the section component.
+            	- `Hero.js`: This is your component file.
+            	- `Hero.test.js`: This is the test file corresponding to this component.
+            	- `Hero.module.css`: This is where you'll have styles that are only used in this component.
     - `shared`: Where you can put content that is shared between pages and cannot be directly co-located with its interested parties.
-        - `components`: The folder for components that are shared between pages. You can find an example just above of what files each component is expected to have.
+        - `modules`: The folder for modules that are shared between pages. Here you can store components, services such as your web API clients, etc. You can find an example in the diagram above of what files this folder might have. Please note that every module should have a good prefix for better understandability. For example, a react based module should have `react-` as a prefix.
         - `media`: The folder for media (images, fonts, etc.) that is shared between many components.
             - `favicons`: This is where you can store your favicons.
             - `fonts`: This is where you can store your font files.
             - `images`: This is where you can store image files.
         - `styles`:  The folder for `.css` files that are shared between many components.
-        - `services`: This is where you can store your web API clients.
 
 ## Data Files
 
