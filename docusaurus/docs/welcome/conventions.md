@@ -44,7 +44,7 @@ The folder-structure convention favours co-location of assets and their requeste
         │   └── ...
         └── media
         │   └── favicons
-        │  	└── fonts
+        │   └── fonts
         │   └── images
         └── styles
 ```
