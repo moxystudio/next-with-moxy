@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import Header from './Header';
-import { AppTree } from '../../test-utils/modules';
+import AppTree from '../../test-utils/modules/react-app-tree';
 
 it('should render correctly', () => {
     const { container } = render((

@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { App } from './App';
 import CookieBanner from '../shared/modules/react-cookie-banner';
 import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
-import { AppTreeWrapper } from '../shared/test-utils/modules';
+import { AppTreeWrapper } from '../shared/test-utils/modules/react-app-tree';
 
 jest.mock('../shared/modules/react-cookie-banner', () => jest.fn(() => null));
 
