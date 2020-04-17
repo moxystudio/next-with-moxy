@@ -38,6 +38,7 @@
     "@moxy/next-compile-node-modules": "^1.3.5",
     "@moxy/next-intl": "^2.0.0",
     "@moxy/next-layout": "^2.1.2",
+    "@moxy/next-seo": "0.0.1",
     "@moxy/next-webpack-oneof": "^1.0.2",
     "@moxy/react-keyboard-only-outlines": "^1.0.1",
     "classnames": "^2.2.6",
