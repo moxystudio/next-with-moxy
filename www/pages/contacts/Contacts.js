@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { ProjectInfo } from './modules';
+import ProjectInfo from './project-info';
 import contacts from './Contacts.data.js';
 
 import styles from './Contacts.module.css';
