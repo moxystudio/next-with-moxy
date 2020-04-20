@@ -39,6 +39,7 @@ module.exports = {
                 'recipes/splash-screen',
                 'recipes/favicon-os-theme',
                 'recipes/contentful',
+                'recipes/dato-cms',
                 {
                     type: 'link',
                     label: 'Private recipes',
