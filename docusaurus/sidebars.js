@@ -38,6 +38,7 @@ module.exports = {
                 'recipes/rest-api',
                 'recipes/splash-screen',
                 'recipes/favicon-os-theme',
+                'recipes/contentful',
                 {
                     type: 'link',
                     label: 'Private recipes',
