@@ -4,7 +4,7 @@ title: Implementing Contentful
 sidebar_label: Contentful
 ---
 
-This recipe aims to guide you through the implementation of Contetful in the project and also provides custom solutions for different use-cases.  
+This recipe aims to guide you through the implementation of Contentful in the project and also provides custom solutions for different use-cases.  
 
 ### What is a CMS?
 
@@ -16,19 +16,19 @@ A CMS, or Content Management System, is a platform that helps in the creation an
 
 For more information about **Contentful**'s API please [refer to their documentation](https://www.contentful.com/developers/docs/).
 
-## Modeling your schema
+## Modeling the schema
 
-As a developer working on the App that will consume the content stored in the CMS, you're also responsible for creating and modeling the database itself. This will mean creating new content models that must be usable by the client team which will eventually handle **Contentful** after the hand off of the project. One **major** consideration to have is the usability and readability of the content models you're creating. Remember that they are meant to be usable without any previous technical knowledge of this context. 
+As a developer working on the App that will consume the content stored in the CMS, you're also responsible for creating and modeling the schema itself. This will mean creating new content models that must be usable by the client team which will eventually handle **Contentful** after the hand off of the project. One **major** consideration to have is the usability and readability of the content models you're creating. Remember that they are meant to be usable without any previous technical knowledge of this context. 
 
-**Contentful** offers many options for validations and input appearance and descriptions to help the users understand what kind of input is expected, and you should use all of them to minimize the chance of users not understanding what's expected of them, in what ways they are limited, reducing the chances of unexpected content in your application.
+**Contentful** offers many options for type validations, input appearance and descriptions to help the users understand what kind of input is expected. You should use all of them to minimize the chance of users not understanding what's expected of them, in what ways they are limited, reducing the chances of unexpected content in your application.
 
 Keep in mind:
 
 → Always use appropriate types when possible,
 
-→ Always use validation where appropriate,
+→ Use validations where appropriate to make sure the input values are what the developer expects,
 
-→ Write titles and descriptions to ensure the user knows what's expected of that field.
+→ Use meaningful titles and descriptions to ensure the user knows what's expected of that field.
 
 ## Localization
 
@@ -38,7 +38,13 @@ Once having these locales, you can then use the **Contentful** API signaling you
 
 ## Preview
 
-Contentful allows you to fetch content that is not in a `published` state, also including content that is in a `changed` or `draft` state.  This can help users see how content would look on their website before publishing it and making it available on for every visitor.
+Contentful splits content changes in 3 states:
+
+- `Published` : when a user saves some content.
+- `Changed`: when the user changes previously saved content but still hasn't saved the new one.
+- `Draft`: when the user creates new content but doesn't save.
+  
+Usually, only `Published` content is available, unless a specific request is done. This request is called `Preview` and may help users see beforehand how content would look like on their website before publishing it and making it available for every visitor.
 
 However, Contentful **does not validate content that is not published.** This means that, if your app relies on validation from Contentful, **it will likely break in preview mode unless all content in Contentful already passes validation.** This is assumed and must taken into account when developing your applications and communicated to potential users.
 
@@ -52,9 +58,9 @@ Using Contenful in your application can be done using [the **Contentful** SDK av
 npm install --save contenful
 ```
 
-This SDK provides access to **Contentful**'s [Delivery AP](https://www.contentful.com/developers/docs/references/content-delivery-api/)I and [Preview API](https://www.contentful.com/developers/docs/references/content-preview-api/), both of which will be used in the integration of **Contentful** in your app. 
+This SDK provides access to **Contentful**'s [Delivery API](https://www.contentful.com/developers/docs/references/content-delivery-api/) and [Preview API](https://www.contentful.com/developers/docs/references/content-preview-api/), both of which will be used in the integration of **Contentful** in your app. 
 
-First, you'll need **Contentful**'s access tokens, of which you'll need three. These can all be found in the Settings menu, under the `API keys` option:
+First, you'll need two **Contentful** access tokens and a space identifier. All three can be found in the Settings menu, under the `API keys` option:
 
 - Space ID,
 - Delivery token,
@@ -96,7 +102,7 @@ const result = await client.getEntries({
 
 ### 2. Populating the app with fetched content
 
-To populate the app with the fetched content, we will explore two possible implementations: one for bigger applications that justify the inclusion of Redux store, and those which don't.
+To populate the app with the fetched content, we will explore two possible implementations: one for bigger applications that justify the inclusion of a Redux store, and another which doesn't.
 
 #### 2.1. Accessing the client directly though `getInitialProps`
 
@@ -182,11 +188,12 @@ export const buildStore = (initialState, { query }) => {
         host: 'cdn.contentful.com', // Delivery API host
     });
 
-    if {
-    // For server-side, check wether `query` exists and has the `cms-preview` key
-    (typeof query !== 'undefined' && Object.hasOwnProperty.call(query, 'cms-preview')) ||
-    // For client-side, check wether `window` exist and has the `cms-preview` query parameter
-    (typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('cms-preview')) {
+    if (
+        // For server-side, check wether `query` exists and has the `cms-preview` key
+        (typeof query !== 'undefined' && Object.hasOwnProperty.call(query, 'cms-preview')) ||
+        // For client-side, check wether `window` exist and has the `cms-preview` query parameter
+        (typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('cms-preview'))
+    ) {
         // In a positive case, switch the client instance to access the Preview API instead		
         client = createClient({
             space: process.env.CONTENTFUL_SPACE_ID,
@@ -289,13 +296,13 @@ const App = ({ Component, pageProps, rootSelector, router }) => {
     const [isPreviewingContentful, setIsPreviewingContentful] = useState(false);
     
     // Using a useEffect hook with no dependencies guaranties that it fires only once per instance of App
-    useEffect(() => setIsPreviewingContentful(Object.hasOwnProperty.call(router.query, 'cms-preview')), [])
+    useEffect(() => setIsPreviewingContentful(Object.hasOwnProperty.call(router.query, 'cms-preview')), []);
 
     return (
-            (...)
-                { this.isPreviewingContentful && <ContentfulPreview> }
-            (...)
-        )
+        (...)
+            { this.isPreviewingContentful && <ContentfulPreview> }
+        (...)
+    );
 }
 ```
 
@@ -337,15 +344,15 @@ locales: [
 
 ### 1. Contentful API rate limits
 
-API Rate limits specify the number of requests a client can make to Contentful APIs in a specific time frame. Every request counts against a per second rate limit.
+API Rate limits specify the maximum number of requests a client can make to Contentful APIs in a specific time frame. Every request counts against a per second rate limit.
 
-Currently Conentful doesn't enforce any limits on requests that hit their CDN cache. For requests that do hit the Content Delivery API enforces rate limits of 78 requests per second.
+Currently, Contentful doesn't enforce any limits on requests that hit their CDN cache. For requests that do hit the Content Delivery API enforces rate limits of 78 requests per second.
 
 When a client gets rate limited, the API responds with the `429 Too Many Requests` status code and sets the `X-Contentful-RateLimit-Reset` header that tells the client when it can make its next request. 
 
 ### 2. Custom Caching Layer
 
-One preventive measure for avoiding hitting the rate limit for Contentful is to implement your own custom caching layer.
+One preventive measure to avoid hitting the rate limit for Contentful is to implement your own custom caching layer.
 This can be done by setting up a proxy server which will add an `s-maxage` HTTP header into the Contentful's response.
 
 This header will then be interpreted by the _CDN_ that is delivering the application (for example _CloudFlare_), which will cache the response and avoid repeating the same request to Contentful during a specified time interval.
@@ -410,7 +417,7 @@ There may be cases where you will want to configure custom SEO per page. Unfortu
 
 - Create a content model for SEO.
 - Add a field `Title` that should be only used to identify the model, e.g. "Homepage SEO".
-- Add a SEO field (not-rich long text) to the model. Here, the SEO related tags (title, meta, etc.) will be defined in a _json_ format like so:
+- Add a SEO field (json) to the model. Here, the SEO related tags (title, meta, etc.) will be defined in a _json_ format like so:
 
 ```json
 {
@@ -446,6 +453,7 @@ In order to obtain the `id` used for meta tags whose content is an asset, you ne
 On the application itself, the steps to customize the SEO are the following:
 
 - Define a _default_ SEO data.
+- Render the _default_ SEO data in the `App.js` file using [@moxy/next-seo](https://www.npmjs.com/package/@moxy/next-seo) (outside the `Head` tag).
 - Fetch page data as you normally would.
 - Obtain the SEO data from the Contentful page data (example code for the Contentful SEO _parser_)
 
@@ -469,7 +477,7 @@ const getContent = (content, assets) => {
 // Provided with the result from the Contentful API call and the entryID for the current page content,
 // This function will extract the SEO data, and complete it with the URL of any needed asset.
 
-const contentfulSEOParser = (contentfulData, entryID) => {
+const parseContentfulSEO = (contentfulData, entryID) => {
     const entry = contentfulData.items.find((item) => item.sys.id === entryID);
     const seoID = entry.fields.seo.id;
     const seoEntry = entry.includes.Entry.find((entry) => entry.sys.id === seoID);
@@ -494,21 +502,10 @@ const contentfulSEOParser = (contentfulData, entryID) => {
 }
 ```
 
-- Merge the _default_ SEO data with the SEO data fetched from the Contentful.
+- Render the SEO data (title and tags) in the `App.js` file using [@moxy/next-seo](https://www.npmjs.com/package/@moxy/next-seo) (outside the `Head` tag).
 
-```js
-const seoData = {
-    title: contentfulSEO.title || defaultSEO.title,
-    meta: [...defaultSEO.meta, ...contentfulSEO.meta],
-    link: [...defaultSEO.link, ...contentfulSEO.link],
-}
-```
-
-- Render the SEO data (title and tags) inside the `Head` in the `App.js` file.
-
-For the rendering step, we recommend using [@moxy/next-seo](https://www.npmjs.com/package/@moxy/next-seo), as this package takes care of two things:
+We use this module for the rendering of meta tags as it takes care of two concerns:
 
 - Discards any repeated meta tags.
 - Renders any `title`, `meta` and `link` tags inside an `Head` tag.
 
-If you intend to use `@moxy/next-seo`, please find the [documentation here](https://github.com/moxystudio/next-seo#usage).
