@@ -16,17 +16,17 @@ This is an important part of this recipe. All the models should be user friendly
 When creating a new model you should:
 
 - Choose a descriptive and user friendly name;
-- ❗️Select the option **"Enable draft/published system?"** in the **"Additional Settings"** tab. **DatoCMS** doesn't have draft models by default;
+- ❗️ Select the option **"Enable draft/published system?"** in the **"Additional Settings"** tab. **DatoCMS** doesn't have draft models by default;
 - Check the rest of the additional settings that you might need - e.g. collection order, visualization mode, required content in all languages.
 
-When creating a new field type for your models you should
+When creating a new field type for your models you should:
 
 - Choose a descriptive and user friendly name;
 - Select the option "Enable localization on this field?" in case you want it to be translatable;
 - Add all the necessary validations - e.g. mark the field as required or unique, limit the number of records;
 - Add an "Help text" in the "Presentation" tab giving more information about the field.
 
-> ⚠️ You should avoid using JSON field types as they are not user friendly;
+> ⚠️ You should avoid using JSON field types as they are not user friendly.
 
 ### 2. How to include DatoCMS in your App
 
@@ -38,12 +38,12 @@ For this recipe we will use **Apollo** but feel free to use other alternatives.
 You will need the following packages:
 
 ```sh
-npm i @apollo/client @apollo/react-hooks apollo-client @apollo/react-ssr isomorphic-unfetch graphql
+npm i next-with-apollo @apollo/client @apollo/react-hooks apollo-client graphql
 ```
 
 Then copy the files inside [next-with-apollo](https://github.com/moxystudio/next-with-moxy/tree/master/docusaurus/static/recipes-assets/dato-cms/next-with-apollo) into `www/shared/modules/next-with-apollo`.
 
-The HOC is already configured with the Content Delivery API endpoint and the respective authorization header using the variable `DATOCMS_TOKEN`, so you don't need to do any changes.
+The [apollo client](https://github.com/moxystudio/next-with-moxy/tree/master/docusaurus/static/recipes-assets/dato-cms/next-with-apollo/apollo-client.js) is already configured with the Content Delivery API endpoint and the respective authorization header using the variable `DATOCMS_TOKEN`, so you don't need to do any changes.
 
 Now let's use it! 🚀  
 All you need to do is wrap your pages with the HOC. Using the page `Home` as example you would need to do the following:
@@ -54,7 +54,7 @@ import { withApollo } from '../../shared/modules/next-with-apollo';
 
 //...
 
-export default withApollo()(Home);
+export default withApollo(Home);
 ```
 
 Now you can access `apolloClient` in your `getInitialProps` to fetch data:
@@ -173,7 +173,7 @@ Home.getInitialProps = async ({ apolloClient }) => {
 };
 ```
 
-> ❗The Content Delivery API uses underscore instead of dash for locales. As you can see in the example we used `en_US`, and not `en-US`.
+> ❗ The Content Delivery API uses underscore instead of dash for locales. As you can see in the example we used `en_US`, and not `en-US`.
 
 #### Static translations
 
@@ -192,11 +192,11 @@ To overcome this problem we can add the static translations to **DatoCMS**, so i
 To do so you need to add the plugin, then go to the field's settings and change the "Field editor" to "Hidden Field", on "Presentation" tab. This will hide the field and every time there is a need to change it you have to change the "Field editor" back to "Default editor".
 
 Now we need to get the translations!  
-First it is necessary to export the `createApolloClient` function on the `www/shared/modules/next-with-apollo/index.js` file:
+First it is necessary to export the `createApolloClient` function in the `www/shared/modules/next-with-apollo/index.js` file:
 
 ```js
 // ...
-export { default as createApolloClient } from './apolloClient';
+export { default as createApolloClient } from './apollo-client';
 ```
 
 Then use it and get the translations in the `intl/index.js` file:
@@ -301,6 +301,7 @@ export const config = {
 
 export { default } from '../../api/graphql';
 ```
+
 Your server is ready, you can access http://localhost:3000/api/grahpql and try it!
 
 Now you need to change the Apollo Client to consume this new endpoint with APQ:
@@ -350,6 +351,7 @@ const apolloServer = new ApolloServer({
     },
 });
 ```
+
 This will return `Cache-control: max-age=60, public` in the response headers.
 
 If you just want to use shared cache it is necessary to change the response headers and include the `s-maxage`:
