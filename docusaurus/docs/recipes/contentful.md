@@ -40,7 +40,7 @@ Once having these locales, you can then use the **Contentful** API signaling you
 
 Contentful splits content changes in 3 states:
 
-- `Published` : when a user saves some content.
+- `Published`: when a user saves some content.
 - `Changed`: when the user changes previously saved content but still hasn't saved the new one.
 - `Draft`: when the user creates new content but doesn't save.
   
@@ -70,6 +70,14 @@ Each token must be used together with their specific host, as follows:
 
 - Delivery host: `cdn.contentful.com`,
 - Preview host: `preview.contentful.com`;
+
+After obtaining the **Contentful** access tokens, you need to [set these environment variables](/docs/what-is-included/environment-variables#adding-a-new-environment-variable):
+
+```
+CONTENTFUL_SPACE_ID=<SPACE_ID>
+CONTENTFUL_TOKEN=<DELIVERY_TOKEN>
+CONTENTFUL_PREVIEW_TOKEN=<PREVIEW_TOKEN>
+```
 
 Setting up the SDK can be done as follows: 
 
@@ -108,14 +116,13 @@ To populate the app with the fetched content, we will explore two possible imple
 
 In Next.js apps, the `getInitialProps` function in general components typically receives a context object, which exposes many aspects of the context in which the page is rendered. Because we are building a custom app, and doing the work of running these `getInitialProps` functions ourselves, we can control what data they receive. In practice, we will be populating the context object with the information we want to propagate to our components. So, in your `App.js` file, you can check whether the page was loaded with a `cms-preview` query parameter, build your client, and share it across the app.
 
-This function also has the advantage letting you return props to your App function, making it easier to signal the App itself if you're in preview mode.
+This function also has the advantage of letting you return props to your App function, making it easier to signal the App itself if you're in preview mode.
 
 ```js
-// App.js
+// www/app/App.js
 import { createClient } from 'contentful';
 
 App.getInitialProps = async ({Component, context, router}) => {
-    
     // Check whether route has `cms-preview` query parameter
     const isPreviewingContentful = Object.hasOwnProperty.call(router.query, 'cms-preview');
 
@@ -132,7 +139,7 @@ App.getInitialProps = async ({Component, context, router}) => {
     // Append it to the context object so other Components can access it
     context.contentfulClient = client;
 
-    let pageProps = {}
+    let pageProps = {};
 
     if (Component.getInitialProps) {
         pageProps = await Component.getInitialProps(context);
@@ -140,17 +147,16 @@ App.getInitialProps = async ({Component, context, router}) => {
     
     // Return the state here to receive as a prop,
     // allowing you to conditionally render a DOM element in case of preview
-    return { pageProps, isPreviewingContentful }
+    return { pageProps, isPreviewingContentful };
 };
 ```
 
 Afterwards, you can use the **Contentful** client in your component's `getInitialProps` to fetch content required for that component.
 
 ```js
-// UseCases.js
+// www/pages/use-cases/UseCases.js
 
 UseCases.getInitialProps = async (context) => {
-
     const { contentfulClient } = context;
 
     // Fetch data from Contentful
@@ -159,7 +165,7 @@ UseCases.getInitialProps = async (context) => {
     });
 
     // Return result as props
-    return { entries }
+    return { entries };
 };
 ```
 
@@ -174,13 +180,12 @@ Given the nature of Next.js and the implementation of [next-redux-wrapper](https
 In the following example we will be checking the presence of a `cms-preview` query parameter to decide whether to show preview content or the standard, published content, i.e. something like `www.example.com/?cms-preview`. 
 
 ```js
-// buildStore.js
-import { createClient } form 'contentful';
+// www/shared/redux/buildStore.js
+import { createClient } from 'contentful';
 import { applyMiddleware, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
 export const buildStore = (initialState, { query }) => {
-    
     // Instantiate standard client by default
     let client = createClient({
         space: process.env.CONTENTFUL_SPACE_ID,
@@ -207,11 +212,10 @@ export const buildStore = (initialState, { query }) => {
     };
     
     // Add client as a thunk middleware
-    // This will give us access to the `client` object in our action functions as an argument
+    // This will give us access to the `client` object in our fetcher functions as an argument
     const middlewares = applyMiddleware(thunkMiddleware.withExtraArgument({ client }));
 
     return createStore(reducer, initialState, middlewares);
-    }
 }
 
 export default buildStore;
@@ -220,17 +224,17 @@ export default buildStore;
 Then, in your actions scripts, you can use the provided client to fetch the content that you need, like so:
 
 ```js
-// usecases/actions.js
+// www/shared/redux/usecases/actions.js
 // Create a fetch action that fetches data from Contentful
 const fetch = () => async (dispatch, getState, { client }) => {
-    dispatch({ type: 'Fetching'})
+    dispatch({ type: 'Fetching' });
 
     try {
         // Fetch content that are instances of `useCase` content model, in Spanish
         const result = await client.getEntries({
             content_type: 'useCase',
             locale: 'es-ES',
-        })
+        });
 
         // The incoming object will be fairly complex, and it's recommended to build
         // a more conveniently structured object here so that other scrips in the pipeline
@@ -246,7 +250,7 @@ const fetch = () => async (dispatch, getState, { client }) => {
         dispatch({
             type: 'Success',
             payload: { entries },
-        })
+        });
     } catch (error) {
         dispatch({
             type: 'Failure',
@@ -260,13 +264,33 @@ const fetch = () => async (dispatch, getState, { client }) => {
 
 Since we're on the topic, you must use a similar strategy in your `App.js` file to conditionally render a DOM element to let the user know they are in a preview state. This must happen once per instance of the App, since we will not perpetuate the `cms-preview` query parameter on route changes.
 
+As an example, we show how to conditionally render `ContentfulPreview`, which is a component that consists in a ribbon that is placed on the page to indicate the user is viewing a preview version of the content.
+
+Using hooks: 
+
+```js
+// www/app/App.js
+const App = ({ Component, pageProps, rootSelector, router }) => {
+    const [isPreviewingContentful, setIsPreviewingContentful] = useState(false);
+    
+    // Using a useEffect hook with no dependencies guaranties that it fires only once per instance of App
+    useEffect(() => setIsPreviewingContentful(Object.hasOwnProperty.call(router.query, 'cms-preview')), []);
+
+    return (
+        (...)
+            { isPreviewingContentful && <ContentfulPreview /> }
+        (...)
+    );
+}
+```
+
 Class component:
 
 ```js
-// App.js
-class App extends Nextapp {
+// www/app/App.js
+class App extends NextApp {
     state = {
-        isPreviewingContentful = false,
+        isPreviewingContentful: false,
     };
 
     // Using the componentWillMount() lifecycle function guarantees that this runs only once per instance of App
@@ -281,28 +305,10 @@ class App extends Nextapp {
     render() {
         return (
             (...)
-                { this.isPreviewingContentful && <ContentfulPreview> }
+                { this.isPreviewingContentful && <ContentfulPreview /> }
             (...)
         );
     }
-}
-```
-
-Using hooks: 
-
-```js
-// App.js
-const App = ({ Component, pageProps, rootSelector, router }) => {
-    const [isPreviewingContentful, setIsPreviewingContentful] = useState(false);
-    
-    // Using a useEffect hook with no dependencies guaranties that it fires only once per instance of App
-    useEffect(() => setIsPreviewingContentful(Object.hasOwnProperty.call(router.query, 'cms-preview')), []);
-
-    return (
-        (...)
-            { this.isPreviewingContentful && <ContentfulPreview> }
-        (...)
-    );
 }
 ```
 
@@ -370,6 +376,7 @@ For this, you'll have to create the file `pages/api/cms/[...cms].js`. This file/
 This endpoint will create the `proxy` server and, on each request, remove `/api/cms` from the request, rewrite the `host` header to the correct host (`cdn.contentful.com`), redirect the request to `cdn.contentful.com` and set the `Cache-Control` HTTP header of the response to `s-maxage=60`.
 
 ```js
+// pages/api/cms/[...cms].js
 import httpProxy from 'http-proxy';
 
 const proxy = httpProxy.createProxyServer({});
@@ -407,9 +414,10 @@ const client = createClient(clientOptions);
 ```
 
 **NOTES:**
-> ❗️ You have to be able to access to `process.env.NODE_ENV` from the client side as well as the server side, to proxy client side requests to Contentful in production environments.
 
-> ❗️ The `process.env.SITE_URL` variable has to be correctly configured and accessible from both server and client side, otherwise the request to the proxy endpoint will not happen correctly. This may mean that preview url's in merge request will not function correctly, which will happen if the application is started with `process.env.NODE_ENV` set to `production`.
+> ℹ️ You have to be able to access to `process.env.NODE_ENV` from the client side as well as the server side, to proxy client side requests to Contentful in production environments.
+
+> ℹ️ The `process.env.SITE_URL` variable has to be correctly configured and accessible from both server and client side, otherwise the request to the proxy endpoint will not happen correctly. This may mean that preview url's in merge request will not function correctly, which will happen if the application is started with `process.env.NODE_ENV` set to `production`.
 
 ## Custom SEO
 
@@ -458,7 +466,8 @@ On the application itself, the steps to customize the SEO are the following:
 - Obtain the SEO data from the Contentful page data (example code for the Contentful SEO _parser_)
 
 ```js
-import { mapValues } from 'lodash';
+// www/shared/utils/seo-parser/seoParser.js
+import { mapValues, isPlainObject } from 'lodash';
 
 // This function will determine if a meta entry's content is an id
 // If it is, it obtains the url to the asset that matches the id
@@ -474,13 +483,10 @@ const getContent = (content, assets) => {
     return content;
 };
 
-// Provided with the result from the Contentful API call and the entryID for the current page content,
+// Provided with the result from the Contentful API call and the correct SEO entry,
 // This function will extract the SEO data, and complete it with the URL of any needed asset.
 
-const parseContentfulSEO = (contentfulData, entryID) => {
-    const entry = contentfulData.items.find((item) => item.sys.id === entryID);
-    const seoID = entry.fields.seo.id;
-    const seoEntry = entry.includes.Entry.find((entry) => entry.sys.id === seoID);
+const parseContentfulSEO = (seoEntry) => {
     let seoContent;
 
     try {
@@ -493,13 +499,15 @@ const parseContentfulSEO = (contentfulData, entryID) => {
 
     // Convert every content: { id: ''} into a content: url, keep unchanged otherwise
     const content = {
-        title: seoContent.title,
-        meta: seoContent.meta.map((entry) => mapValues(entry, (value) => getContent(value, contentfulData.includes.Asset)))
-        link: seoContent.link.map((entry) => mapValues(entry, (value) => getContent(value, contentfulData.includes.Asset)))
+        title: seoContent.fields.title,
+        meta: seoContent.meta.map((entry) => mapValues(entry, (value) => getContent(value, seoContent.fields.seoAssets))),
+        link: seoContent.link.map((entry) => mapValues(entry, (value) => getContent(value, seoContent.fields.seoAssets))),
     }
 
     return content;
 }
+
+export default parseContentfulSEO;
 ```
 
 - Render the SEO data (title and tags) in the `App.js` file using [@moxy/next-seo](https://www.npmjs.com/package/@moxy/next-seo) (outside the `Head` tag).
