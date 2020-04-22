@@ -533,12 +533,10 @@ width="100%" />
     );
 
     export default AppTree;
-
     ```
 
 
-    When testing a connected component, do not forget to wrap the component you're testing in the newly created `AppTree` to make sure it has access to the store.
-
+5. When testing a connected component, do not forget to wrap the component you're testing in the newly created `AppTree` to make sure it has access to the store.
 
     ```js
     // Home.test.js
@@ -560,10 +558,9 @@ width="100%" />
 
         expect(asFragment()).toMatchSnapshot();
     });
+    ```
 
-
-
-5. To test `reducer.js`, you can just call the inner reducer functions and pass a mock state as the first argument.
+6. To test `reducer.js`, you can just call the inner reducer functions and pass a mock state as the first argument.
 
     ```js
     // reducer.test.js
@@ -637,7 +634,7 @@ width="100%" />
     });
     ```
 
-6. To test `actions.js`, in this case you just need to check that the correct dispatches are being made.
+7. To test `actions.js`, in this case you just need to check that the correct dispatches are being made.
 
    Here we will need to mock an error response for our fetch to assert that the `FAIL` action type is being correctly dispatched.
    Also, tests that involve these async methods should also be async, so we can await for all the store dispatches to be executed:

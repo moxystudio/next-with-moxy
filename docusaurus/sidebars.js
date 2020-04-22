@@ -40,6 +40,7 @@ module.exports = {
                 'recipes/favicon-os-theme',
                 'recipes/contentful',
                 'recipes/dato-cms',
+                'recipes/setting-up-redux',
                 {
                     type: 'link',
                     label: 'Private recipes',
