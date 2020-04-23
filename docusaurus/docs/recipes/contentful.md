@@ -108,6 +108,17 @@ const result = await client.getEntries({
 });
 ```
 
+In the contents you are retrieving, you may have links to other contents. In this case, you will have to decide if you want the SDK to resolve those links for you. This way, instead of a content link being returned in the `includes` property of the response, the actual content will be placed in the field where the linked entry metadata would be.
+
+You can change the depth to which links will be resolved with the option `include`. By default it is set at `1`, and its maximum value is `10`. Please consider that a higher `include` value will introduce more complexity to the resolver and may result in a loss of performance.
+
+```js
+const result = await client.getEntries({ 
+    content_type: 'clients',
+    include: 0,
+});
+```
+
 ### 2. Populating the app with fetched content
 
 To populate the app with the fetched content, we will explore two possible implementations: one for bigger applications that justify the inclusion of a Redux store, and another which doesn't.
@@ -429,7 +440,6 @@ There may be cases where you will want to configure custom SEO per page. Unfortu
 
 ```json
 {
-    "title": "MyPage Title",
     "meta": [
         {
             "name": "description",
