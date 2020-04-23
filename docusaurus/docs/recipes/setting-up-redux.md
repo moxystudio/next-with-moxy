@@ -1,7 +1,7 @@
 ---
 id: setting-up-redux
 title: Setting Up Redux
-sidebar_label: Setting Up Redux
+sidebar_label: Redux
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
