@@ -211,7 +211,10 @@ const apolloClient = createApolloClient(null, null);
 const GET_TRANSLATIONS = gql`
     query Translations($locale: SiteLocale) {
         translation(locale: $locale) {
-            entries
+            entries {
+                key
+                value
+            }
         }
     }
 `;
@@ -231,7 +234,11 @@ export default {
 
                 const { translation } = result.data;
 
-                return translation.entries;
+                return translation.entries.reduce((map, obj) => {
+                    map[obj.key] = obj.value;
+
+                    return map;
+                }, {});
             },
         },
     ],
