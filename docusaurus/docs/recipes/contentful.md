@@ -55,7 +55,7 @@ However, Contentful **does not validate content that is not published.** This me
 Using Contenful in your application can be done using [the **Contentful** SDK available as an npm package](https://www.npmjs.com/package/contentful), which you can install using the following command:
 
 ```sh
-npm install --save contenful
+npm install --save contentful
 ```
 
 This SDK provides access to **Contentful**'s [Delivery API](https://www.contentful.com/developers/docs/references/content-delivery-api/) and [Preview API](https://www.contentful.com/developers/docs/references/content-preview-api/), both of which will be used in the integration of **Contentful** in your app. 
