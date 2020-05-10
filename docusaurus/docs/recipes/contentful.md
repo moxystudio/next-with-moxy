@@ -12,7 +12,7 @@ A CMS, or Content Management System, is a platform that helps in the creation an
 
 ### Contentful
 
-[Contenful](https://www.contentful.com/) is one such CMS, and the object of this recipe.
+[Contentful](https://www.contentful.com/) is one such CMS, and the object of this recipe.
 
 For more information about **Contentful**'s API please [refer to their documentation](https://www.contentful.com/developers/docs/).
 
@@ -52,7 +52,7 @@ However, Contentful **does not validate content that is not published.** This me
 
 ### 1. Installing Contentful SDK
 
-Using Contenful in your application can be done using [the **Contentful** SDK available as an npm package](https://www.npmjs.com/package/contentful), which you can install using the following command:
+Using Contentful in your application can be done using [the **Contentful** SDK available as an npm package](https://www.npmjs.com/package/contentful), which you can install using the following command:
 
 ```sh
 npm install --save contentful
