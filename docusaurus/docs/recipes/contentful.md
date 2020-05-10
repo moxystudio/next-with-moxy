@@ -133,27 +133,28 @@ This function also has the advantage of letting you return props to your App fun
 // www/app/App.js
 import { createClient } from 'contentful';
 
-App.getInitialProps = async ({Component, context, router}) => {
+App.getInitialProps = async ({Component, ctx, router}) => {
     // Check whether route has `cms-preview` query parameter
     const isPreviewingContentful = Object.hasOwnProperty.call(router.query, 'cms-preview');
 
     // Set the preview or regular host
     const contentfulHost = isPreviewingContentful ? 'preview.contentful.com' : 'cdn.contentful.com';
+    const contentfulToken = isPreviewingContentful ? process.env.CONTENTFUL_PREVIEW_TOKEN : process.env.CONTENTFUL_TOKEN;
 
     // Create client with correct host
     const client = createClient({
         space: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_TOKEN, // Delivery API Token
+        accessToken: contentfulToken, // Delivery API Token
         host: contentfulHost, // Delivery API host
     });
     
     // Append it to the context object so other Components can access it
-    context.contentfulClient = client;
+    ctx.contentfulClient = client;
 
     let pageProps = {};
 
     if (Component.getInitialProps) {
-        pageProps = await Component.getInitialProps(context);
+        pageProps = await Component.getInitialProps(ctx);
     }
     
     // Return the state here to receive as a prop,
@@ -167,8 +168,8 @@ Afterwards, you can use the **Contentful** client in your component's `getInitia
 ```js
 // www/pages/use-cases/UseCases.js
 
-UseCases.getInitialProps = async (context) => {
-    const { contentfulClient } = context;
+UseCases.getInitialProps = async (ctx) => {
+    const { contentfulClient } = ctx;
 
     // Fetch data from Contentful
     const entries = await contentfulClient.getEntries({
