@@ -37,6 +37,7 @@ module.exports = {
             items: [
                 'recipes/rest-api',
                 'recipes/splash-screen',
+                'recipes/video-player',
                 'recipes/favicon-os-theme',
                 'recipes/contentful',
                 'recipes/dato-cms',
