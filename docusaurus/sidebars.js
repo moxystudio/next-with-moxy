@@ -42,6 +42,7 @@ module.exports = {
                 'recipes/contentful',
                 'recipes/dato-cms',
                 'recipes/setting-up-redux',
+                'recipes/dropdown',
                 {
                     type: 'link',
                     label: 'Private recipes',
