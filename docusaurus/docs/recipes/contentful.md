@@ -12,7 +12,7 @@ A CMS, or Content Management System, is a platform that helps in the creation an
 
 ### Contentful
 
-[Contenful](https://www.contentful.com/) is one such CMS, and the object of this recipe.
+[Contentful](https://www.contentful.com/) is one such CMS, and the object of this recipe.
 
 For more information about **Contentful**'s API please [refer to their documentation](https://www.contentful.com/developers/docs/).
 
@@ -52,10 +52,10 @@ However, Contentful **does not validate content that is not published.** This me
 
 ### 1. Installing Contentful SDK
 
-Using Contenful in your application can be done using [the **Contentful** SDK available as an npm package](https://www.npmjs.com/package/contentful), which you can install using the following command:
+Using Contentful in your application can be done using [the **Contentful** SDK available as an npm package](https://www.npmjs.com/package/contentful), which you can install using the following command:
 
 ```sh
-npm install --save contenful
+npm install --save contentful
 ```
 
 This SDK provides access to **Contentful**'s [Delivery API](https://www.contentful.com/developers/docs/references/content-delivery-api/) and [Preview API](https://www.contentful.com/developers/docs/references/content-preview-api/), both of which will be used in the integration of **Contentful** in your app. 
@@ -133,27 +133,28 @@ This function also has the advantage of letting you return props to your App fun
 // www/app/App.js
 import { createClient } from 'contentful';
 
-App.getInitialProps = async ({Component, context, router}) => {
+App.getInitialProps = async ({Component, ctx, router}) => {
     // Check whether route has `cms-preview` query parameter
     const isPreviewingContentful = Object.hasOwnProperty.call(router.query, 'cms-preview');
 
     // Set the preview or regular host
     const contentfulHost = isPreviewingContentful ? 'preview.contentful.com' : 'cdn.contentful.com';
+    const contentfulToken = isPreviewingContentful ? process.env.CONTENTFUL_PREVIEW_TOKEN : process.env.CONTENTFUL_TOKEN;
 
     // Create client with correct host
     const client = createClient({
         space: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_TOKEN, // Delivery API Token
+        accessToken: contentfulToken, // Delivery API Token
         host: contentfulHost, // Delivery API host
     });
     
     // Append it to the context object so other Components can access it
-    context.contentfulClient = client;
+    ctx.contentfulClient = client;
 
     let pageProps = {};
 
     if (Component.getInitialProps) {
-        pageProps = await Component.getInitialProps(context);
+        pageProps = await Component.getInitialProps(ctx);
     }
     
     // Return the state here to receive as a prop,
@@ -167,8 +168,8 @@ Afterwards, you can use the **Contentful** client in your component's `getInitia
 ```js
 // www/pages/use-cases/UseCases.js
 
-UseCases.getInitialProps = async (context) => {
-    const { contentfulClient } = context;
+UseCases.getInitialProps = async (ctx) => {
+    const { contentfulClient } = ctx;
 
     // Fetch data from Contentful
     const entries = await contentfulClient.getEntries({
