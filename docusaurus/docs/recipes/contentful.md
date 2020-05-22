@@ -433,98 +433,155 @@ const client = createClient(clientOptions);
 
 ## Custom SEO
 
-There may be cases where you will want to configure custom SEO per page. Unfortunately, Contentful does not provide out-of-the-box SEO support, so you will need to implement your own strategy. The approach we suggest is the following:
+There may be cases where you will want to configure custom SEO per page. Unfortunately, Contentful does not provide out-of-the-box SEO support, so you will need to implement your own strategy. Bellow you can find our approach to the problem.
 
-- Create a content model for SEO.
-- Add a field `Title` that should be only used to identify the model, e.g. "Homepage SEO".
-- Add a SEO field (json) to the model. Here, the SEO related tags (title, meta, etc.) will be defined in a _json_ format like so:
+### Create a content model for SEO
+
+To make it easier to configure SEO you need to create a specific content model just for it.
+
+While creating a content model for SEO please do the following:
+
+- Add an entry title field to identify the model, e.g. "Homepage SEO".
+- Add a text field called `Title` to be used as the title tag and for the following meta tags: [`og:title`, `twitter:title`].
+- Add a text field called `Description` to be used for the following meta tags: [`description`, `og:description`, `twitter:description`].
+- Add a media field called `Image` to be used for the following meta tags: [`og:image`, `twitter:image`].
+- Add a JSON field called `Additional SEO` to provide the possibility to add more meta tags.
+- Add a many files media field called `Additional SEO Assets` to give the possibility to use CMS images in meta tags.
+
+The resulting content model should look like this:
+
+![SEO Content Model](../../static/img/contentful-seo-content-model.jpg)
+
+The `Additional SEO` must follow the some structure documented in [@moxy/next-seo](https://www.npmjs.com/package/@moxy/next-seo) package but with a small difference. Since Contentful doesn't provide an easy way to obtain an image url directly from their dashboard, we need to reference the assets we want with the `Additional SEO Assets` field and use their ids to specify which one should be used:
 
 ```json
 {
     "meta": [
-        {
-            "name": "description",
-            "content":"MyPage Description",
-        },
-        {
-            "property": "og:title",
-            "content": "MyPage Title",
-        },
         {
             "property": "og:image",
             "content": {
                 "id": "6fU8dkL1P9eZlPE9JPw89n"
             }
         }
-    ],
+    ]
 }
 ```
 
-- Add a SEO Assets field (many file, media input) to the model.
-- Create a link field type in the models you need SEO and link it to the model you just created.
+By defining `content` as an object with an `id` property we make the assumption that the content derives from a CMS asset.
 
-The resulting content model should look like this.
+In order to obtain the `id` you need to select the asset entry and, on the right side panel of the asset, select **Info** and copy the **id**. Later in the application you'll use this **id** to generate the URL for the asset.
 
-![SEO Content Model](../../static/img/SEO%20content%20model.png)
+### Add a link for SEO to other content models
 
-In order to obtain the `id` used for meta tags whose content is an asset, you need to select the asset entry and, on the right side panel of the asset, select **Info** and copy the **id**. Later in the application you'll use this **id** to generate the URL for the asset.
+Now that the SEO content model is created, its time to add a reference field type in other models that might need SEO.
+
+Remember to add a validation to only accept an SEO content type.
+
+### Preparing the application
 
 On the application itself, the steps to customize the SEO are the following:
 
+- Install [@moxy/next-seo](https://www.npmjs.com/package/@moxy/next-seo).
 - Define a _default_ SEO data.
 - Render the _default_ SEO data in the `App.js` file using [@moxy/next-seo](https://www.npmjs.com/package/@moxy/next-seo) (outside the `Head` tag).
-- Fetch page data as you normally would.
-- Obtain the SEO data from the Contentful page data (example code for the Contentful SEO _parser_)
+
+### Create a component to deal with a Contentful SEO entry
+
+After fetching the page data from Contentful as you normally would, you might now have an SEO field. To be able to render its content in the right manner we suggest you use a `ContentfulSeo` component that prepares everything to be rendered with [@moxy/next-seo](https://www.npmjs.com/package/@moxy/next-seo).
 
 ```js
-// www/shared/utils/seo-parser/seoParser.js
-import { mapValues, isPlainObject } from 'lodash';
+import React from 'react';
+import PropTypes from 'prop-types';
+import NextSeo from '@moxy/next-seo';
+import { useRouter } from 'next/router';
+import { isPlainObject } from 'lodash';
 
-// This function will determine if a meta entry's content is an id
-// If it is, it obtains the url to the asset that matches the id
-// Otherwise it returns the content 
+const parseAdditionalSeoItem = (item, assets) => {
+    const { content } = item;
 
-const getContent = (content, assets) => {
     if (isPlainObject(content)) {
         const asset = assets.find(({ sys }) => sys.id === content.id);
 
-        return asset.fields.file.url.slice(2);
+        item.content = asset ? `http:${asset.fields.file.url}` : '';
     }
 
-    return content;
+    return item;
 };
 
-// Provided with the result from the Contentful API call and the correct SEO entry,
-// This function will extract the SEO data, and complete it with the URL of any needed asset.
+const parseAdditionalSeo = (seo, assets) => {
+    const { meta = [], link = [] } = seo;
 
-const parseContentfulSEO = (seoEntry) => {
-    let seoContent;
+    const parsedMeta = meta.map((item) => parseAdditionalSeoItem(item, assets));
+    const parsedLink = link.map((item) => parseAdditionalSeoItem(item, assets));
 
-    try {
-        seoContent = JSON.parse(seoEntry.fields.seo);
-    } catch (parsingError) {
-        console.err('Unvalid JSON in SEO content');
-        console.err(parsingError);
-        return;
+    return {
+        meta: parsedMeta,
+        link: parsedLink,
+    };
+};
+
+const ContentfulSeo = ({ data }) => {
+    const { asPath = '' } = useRouter();
+    const metadata = {
+        meta: [{ property: 'og:url', content: `${process.env.SITE_URL}${asPath}` }],
+        link: [],
+    };
+
+    if (data && data.fields) {
+        const { title, description, image, additionalSeo, additionalSeoAssets } = data.fields;
+
+        if (title) {
+            metadata.title = title;
+            metadata.meta.push({ property: 'og:title', content: title });
+            metadata.meta.push({ property: 'twitter:title', content: title });
+        }
+
+        if (description) {
+            metadata.meta.push({ name: 'description', content: description });
+            metadata.meta.push({ property: 'og:description', content: description });
+            metadata.meta.push({ property: 'twitter:description', content: description });
+        }
+
+        if (image) {
+            const imageUrl = `http:${image.fields.file.url}`;
+
+            metadata.meta.push({ property: 'og:image', content: imageUrl });
+            metadata.meta.push({ property: 'twitter:image', content: imageUrl });
+        }
+
+        if (additionalSeo) {
+            const { meta, link } = parseAdditionalSeo(additionalSeo, additionalSeoAssets);
+
+            metadata.meta = [...metadata.meta, ...meta];
+            metadata.link = [...metadata.link, ...link];
+        }
     }
 
-    // Convert every content: { id: ''} into a content: url, keep unchanged otherwise
-    const content = {
-        title: seoContent.fields.title,
-        meta: seoContent.meta.map((entry) => mapValues(entry, (value) => getContent(value, seoContent.fields.seoAssets))),
-        link: seoContent.link.map((entry) => mapValues(entry, (value) => getContent(value, seoContent.fields.seoAssets))),
-    }
+    return <NextSeo data={ metadata } />;
+};
 
-    return content;
-}
+ContentfulSeo.propTypes = {
+    data: PropTypes.object,
+};
 
-export default parseContentfulSEO;
+export default ContentfulSeo;
 ```
 
-- Render the SEO data (title and tags) in the `App.js` file using [@moxy/next-seo](https://www.npmjs.com/package/@moxy/next-seo) (outside the `Head` tag).
+The `data` it recieves is the SEO field in its original state.
 
-We use this module for the rendering of meta tags as it takes care of two concerns:
+So, to render Contentful SEO you just need to do the following:
 
-- Discards any repeated meta tags.
-- Renders any `title`, `meta` and `link` tags inside an `Head` tag.
+```js
+const MyPage = ({ contentfulData }) => {
+    const { seo } = contentfulData.fields;
 
+    return (
+        <div className={ styles.container }>
+            <ContentfulSeo data={ seo } />
+            ...
+        </div>
+    );
+};
+```
+
+Where `contentfulData` is the data that you have fetched from Contentful.
