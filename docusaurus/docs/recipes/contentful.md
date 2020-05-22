@@ -452,11 +452,15 @@ The resulting content model should look like this:
 
 ![SEO Content Model](../../static/img/contentful-seo-content-model.jpg)
 
-The `Additional SEO` must follow the some structure documented in [@moxy/next-seo](https://www.npmjs.com/package/@moxy/next-seo) package but with a small difference. Since Contentful doesn't provide an easy way to obtain an image url directly from their dashboard, we need to reference the assets we want with the `Additional SEO Assets` field and use their ids to specify which one should be used:
+The `Additional SEO` must follow the same structure documented in [@moxy/next-seo](https://www.npmjs.com/package/@moxy/next-seo) package but with a small difference. Since Contentful doesn't provide an easy way to obtain an image URL directly from their dashboard, we need to reference the assets we want with the `Additional SEO Assets` field and use their ids to specify which one should be used:
 
 ```json
 {
     "meta": [
+        {
+            "property": "og:locale",
+            "content": "en_GB"
+        },
         {
             "property": "og:image",
             "content": {
