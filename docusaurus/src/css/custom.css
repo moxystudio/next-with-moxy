@@ -10,7 +10,7 @@
 }
 
 html:not([data-theme="dark"]) {
-    --ifm-font-base-color: #180d2d; /* A darker variant of Dark Blue - #221240 */
+    --ifm-font-color-base: #180d2d; /* A darker variant of Dark Blue - #221240 */
     --ifm-color-primary: #2932d3; /* Vivid Blue */
     --ifm-color-primary-dark: #252dbe;
     --ifm-color-primary-darker: #232ab3;
