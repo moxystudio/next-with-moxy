@@ -1,18 +1,35 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import KeyboardOnlyOutlines from '@moxy/react-keyboard-only-outlines';
 import { withNextIntlSetup } from '@moxy/next-intl';
 import { LayoutTree } from '@moxy/next-layout';
+import PageSwapper, { getNodeKeyFromPathname } from '@moxy/react-page-swapper';
+import getScrollBehavior from '@moxy/next-scroll-behavior';
 import Seo from '@moxy/next-seo';
 import { CookiesProvider } from 'react-cookie';
 import nextIntlConfig from '../../intl';
 import MainLayout from '../shared/modules/react-main-layout';
 import CookieBanner from '../shared/modules/react-cookie-banner';
+import PageTransition from '../shared/modules/react-page-transition';
 import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
 import { seoData } from './App.data.js';
 
+import styles from './App.module.css';
+
 export const App = ({ Component, pageProps }) => {
+    const scrollBehaviorRef = useRef();
+
+    useEffect(() => {
+        scrollBehaviorRef.current = getScrollBehavior();
+
+        return () => {
+            scrollBehaviorRef.current.stop();
+        };
+    }, []);
+
+    const updateScroll = useCallback(/* istanbul ignore next */ () => scrollBehaviorRef.current.updateScroll(), []);
+
     const handleCookieConsents = useCallback((cookieConsents) => {
         if (cookieConsents.includes('analytics')) {
             initGTM();
@@ -41,10 +58,16 @@ export const App = ({ Component, pageProps }) => {
             <KeyboardOnlyOutlines />
             <CookieBanner onCookieConsents={ handleCookieConsents } />
 
-            <LayoutTree
-                Component={ Component }
-                pageProps={ pageProps }
-                defaultLayout={ <MainLayout /> } />
+            <PageSwapper
+                className={ styles.pageSwapper }
+                updateScroll={ updateScroll }
+                nodeKey={ getNodeKeyFromPathname(2) }
+                node={ <LayoutTree
+                    Component={ Component }
+                    pageProps={ pageProps }
+                    defaultLayout={ <MainLayout /> } /> }>
+                { (props) => <PageTransition { ...props } /> }
+            </PageSwapper>
         </CookiesProvider>
     );
 };
