@@ -1,16 +1,13 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import MainLayout from './MainLayout';
-import AppTree from '../../test-utils/modules/react-app-tree';
+import { render } from '../../test-utils';
 
 it('should render correctly', () => {
-    const { container } = render((
-        <AppTree>
-            <MainLayout>
-                <p className="hello">Hello!</p>
-            </MainLayout>
-        </AppTree>
-    ));
+    const { container } = render(
+        <MainLayout>
+            <p className="hello">Hello!</p>
+        </MainLayout>,
+    );
 
     expect(container.querySelector('header')).toBeInTheDocument();
     expect(container.querySelector('footer')).toBeInTheDocument();

@@ -1,11 +1,10 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import ProjectInfo from './ProjectInfo';
-import AppTree from '../../../shared/test-utils/modules/react-app-tree';
+import { render, screen } from '../../../shared/test-utils';
 
 it('should render correctly', () => {
-    const { container } = render(<AppTree><ProjectInfo name="foo" email="bar" /></AppTree>);
+    render(<ProjectInfo name="foo" email="bar" />);
 
-    expect(container).toHaveTextContent('contacts.name');
-    expect(container).toHaveTextContent('contacts.email');
+    expect(screen.getByText('contacts.name')).toBeInTheDocument();
+    expect(screen.getByText('contacts.email')).toBeInTheDocument();
 });

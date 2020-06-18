@@ -1,10 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import Home from './Terms';
-import AppTree from '../../shared/test-utils/modules/react-app-tree';
+import Terms from './Terms';
+import { render, screen } from '../../shared/test-utils';
 
 it('should render correctly', () => {
-    const { container } = render(<AppTree><Home /></AppTree>);
+    render(<Terms />);
 
-    expect(container).toHaveTextContent('terms.title');
+    expect(screen.getByText('terms.title')).toBeInTheDocument();
 });
