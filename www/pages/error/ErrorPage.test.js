@@ -1,25 +1,20 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import ErrorPage from './ErrorPage';
-import AppTree from '../../shared/test-utils/modules/react-app-tree';
+import { render, screen } from '../../shared/test-utils';
 
 it('should render internal server error when `statusCode` is not 404', () => {
-    const { getByText } = render(
-        <AppTree>
-            <ErrorPage statusCode={ 500 } />
-        </AppTree>,
-    );
+    render(<ErrorPage statusCode={ 500 } />);
+
+    const { getByText } = screen;
 
     expect(getByText('error.internal.title')).toBeInTheDocument();
     expect(getByText('error.return-to-home')).toBeInTheDocument();
 });
 
 it('should render not found error when `statusCode` is 404', () => {
-    const { getByText } = render(
-        <AppTree>
-            <ErrorPage statusCode={ 404 } />
-        </AppTree>,
-    );
+    render(<ErrorPage statusCode={ 404 } />);
+
+    const { getByText } = screen;
 
     expect(getByText('error.not-found.title')).toBeInTheDocument();
     expect(getByText('error.return-to-home')).toBeInTheDocument();

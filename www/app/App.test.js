@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import { render } from '@testing-library/react';
 import { App } from './App';
+import { render, screen } from '../shared/test-utils';
 import CookieBanner from '../shared/modules/react-cookie-banner';
 import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
-import { AppTreeWrapper } from '../shared/test-utils/modules/react-app-tree';
 
 jest.mock('../shared/modules/react-cookie-banner', () => jest.fn(() => null));
 
@@ -29,13 +28,9 @@ beforeEach(() => {
 });
 
 it('should render correctly', () => {
-    const { container } = render(
-        <AppTreeWrapper>
-            <App Component={ () => 'Hello World' } />
-        </AppTreeWrapper>,
-    );
+    render(<App Component={ () => 'Hello World' } />);
 
-    expect(container).toHaveTextContent('Hello World');
+    expect(screen.getByText('Hello World')).toBeInTheDocument();
 });
 
 describe('GTM', () => {
@@ -48,11 +43,7 @@ describe('GTM', () => {
             return null;
         });
 
-        render(
-            <AppTreeWrapper>
-                <App Component={ () => 'Hello World' } />
-            </AppTreeWrapper>,
-        );
+        render(<App Component={ () => 'Hello World' } />);
 
         expect(initGTM).toHaveBeenCalledTimes(1);
         expect(destroyGTM).toHaveBeenCalledTimes(0);
@@ -67,11 +58,7 @@ describe('GTM', () => {
             return null;
         });
 
-        render(
-            <AppTreeWrapper>
-                <App Component={ () => 'Hello World' } />
-            </AppTreeWrapper>,
-        );
+        render(<App Component={ () => 'Hello World' } />);
 
         expect(initGTM).toHaveBeenCalledTimes(0);
         expect(destroyGTM).toHaveBeenCalledTimes(1);

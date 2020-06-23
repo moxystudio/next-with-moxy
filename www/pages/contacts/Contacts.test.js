@@ -1,10 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import Contacts from './Contacts';
-import AppTree from '../../shared/test-utils/modules/react-app-tree';
+import { render, screen } from '../../shared/test-utils';
 
 it('should render correctly', () => {
-    const { container } = render(<AppTree><Contacts /></AppTree>);
+    render(<Contacts />);
 
-    expect(container).toHaveTextContent('contacts.title');
+    expect(screen.getByText('contacts.title')).toBeInTheDocument();
 });

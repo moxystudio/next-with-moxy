@@ -1,24 +1,15 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import Header from './Header';
-import AppTree from '../../test-utils/modules/react-app-tree';
+import { render } from '../../test-utils';
 
 it('should render correctly', () => {
-    const { container } = render((
-        <AppTree>
-            <Header />
-        </AppTree>
-    ));
+    const { container } = render(<Header />);
 
     expect(container.querySelector('header')).toBeInTheDocument();
 });
 
 it('should respect passed className', () => {
-    const { container } = render((
-        <AppTree>
-            <Header className="foo" />
-        </AppTree>
-    ));
+    const { container } = render(<Header className="foo" />);
 
     expect(container.querySelector('header')).toHaveClass('foo');
 });

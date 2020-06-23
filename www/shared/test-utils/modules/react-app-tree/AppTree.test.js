@@ -1,26 +1,26 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import AppTree from './AppTree';
 
 it('should render children correctly', () => {
-    const { container } = render(
+    render(
         <AppTree>
             <div>foo</div>
         </AppTree>,
     );
 
-    expect(container).toHaveTextContent('foo');
+    expect(screen.getByText('foo')).toBeInTheDocument();
 });
 
 it('should correctly setup IntlProvider', () => {
-    const { container } = render(
+    render(
         <AppTree>
             <FormattedMessage id="foo" />
         </AppTree>,
     );
 
-    expect(container).toHaveTextContent('foo');
+    expect(screen.getByText('foo')).toBeInTheDocument();
 });
 
 it('should correctly setup IntlProvider with overrides', () => {
@@ -28,11 +28,11 @@ it('should correctly setup IntlProvider with overrides', () => {
         messages: { foo: 'bar' },
     };
 
-    const { container } = render(
+    render(
         <AppTree intlProvider={ intlProvider }>
             <FormattedMessage id="foo" />
         </AppTree>,
     );
 
-    expect(container).toHaveTextContent('bar');
+    expect(screen.getByText('bar')).toBeInTheDocument();
 });
