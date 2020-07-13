@@ -77,7 +77,7 @@
     "jest": "^25.1.0",
     "lint-staged": "^10.0.2",
     "rimraf": "^3.0.0",
-    "standard-version": "^7.1.0",
+    "standard-version": "^8.0.1",
     "stylelint": "^13.0.0"
   }
 }
