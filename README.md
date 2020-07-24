@@ -1,6 +1,6 @@
 <img src="./docusaurus/static/img/logo-nwm.png" alt="" width="150">
 
-# next-with-moxy
+# Next.js with MOXY
 
 [![Build Status][build-status-image]][build-status-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url]
 
