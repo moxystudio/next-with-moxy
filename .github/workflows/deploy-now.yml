@@ -13,7 +13,7 @@ on:
 env:
   NOW_ORG_ID: team_p8EekuXu9HkFUEY7yLOeujBS
   NOW_PROJECT_ID: QmYUpNNm3Aw2W2W59sdNwKdcNduZXXQGhNgc4crdtASxNZ
-  ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
 jobs:
   deploy:
@@ -57,22 +57,28 @@ jobs:
       - name: Deploy (master)
         if: github.ref == 'refs/heads/master'
         run: |
-          npx now \
-            -t $ZEIT_TOKEN \
-            --prod \
-            --build-env SITE_URL=$SITE_URL
+          DEPLOYMENT_URL=$(\
+            npx vercel \
+              -t $VERCEL_TOKEN \
+              --scope moxystudio \
+              --prod \
+              --build-env SITE_URL=$SITE_URL \
+          )
 
       - name: Deploy (PR)
         if: github.event_name == 'pull_request'
         run: |
-          npx now \
-            -t $ZEIT_TOKEN \
-            --build-env SITE_URL=$SITE_URL \
-            > .now-url
+          DEPLOYMENT_URL=$(\
+            npx vercel \
+              -t $VERCEL_TOKEN \
+              --scope moxystudio \
+              --build-env SITE_URL=$SITE_URL \
+          )
 
-          npx now alias \
-            -t $ZEIT_TOKEN \
-            $(cat .now-url) \
+          npx vercel alias \
+            -t $VERCEL_TOKEN \
+            --scope moxystudio \
+            $DEPLOYMENT_URL \
             $SITE_URL
 
       - name: Set success deployment status
