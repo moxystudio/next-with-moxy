@@ -108,6 +108,13 @@ html[data-theme="dark"] .navbar.navbar .navbar-sidebar .navbar__brand .navbar__l
    Sidebar tweaks
    ========================================================================== */
 
+[class^="sidebarLogo_"] strong {
+    overflow: hidden;
+    flex-shrink: initial;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 html[data-theme="dark"] [class^="sidebarLogo_"] > img {
     filter: brightness(0) invert(1);
 }
