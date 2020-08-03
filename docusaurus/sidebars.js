@@ -21,6 +21,7 @@ module.exports = {
                 'what-is-included/customizable-layout-support',
                 'what-is-included/customizable-page-transitions',
                 'what-is-included/internationalization',
+                'what-is-included/sitemap-robots',
                 'what-is-included/analytics',
                 'what-is-included/testing-with-jest-rtl',
                 'what-is-included/browser-support',
