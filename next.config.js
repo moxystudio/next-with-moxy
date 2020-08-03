@@ -7,6 +7,7 @@ const withOneOf = require('@moxy/next-webpack-oneof');
 const withCompileNodeModules = require('@moxy/next-compile-node-modules');
 const withNextIntl = require('@moxy/next-intl/plugin');
 const withPlugins = require('next-compose-plugins');
+const withSitemap = require('@moxy/next-sitemaps/plugin');
 const Joi = require('@hapi/joi');
 const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/constants');
 
@@ -62,6 +63,7 @@ module.exports = (phase, nextConfig) =>
                 /[\\/]node_modules[\\/]@formatjs[\\/].+?[\\/]locales\.js$/,
             ],
         }),
+        withSitemap(),
     ], {
         compress: process.env.COMPRESSION !== '0',
         env: {
