@@ -4,13 +4,15 @@ title: Sitemap & robots.txt
 sidebar_label: Sitemap & robots.txt
 ---
 
-The boilerplate includes a dynamic sitemap generator and a robots.txt file. This will help search engines and their crawlers index your whole website, including static and dynamic URL's, giving you better results in SEO ranks. [`@moxy/next-sitemaps`](https://www.npmjs.com/package/@moxy/next-sitemaps) helps make this a very simple task. 
+The boilerplate includes a dynamic sitemap generator and a `robots.txt` file. Don't really know what a sitemap is? Check [this](https://support.google.com/webmasters/answer/156184?hl=en) out. Having a sitemap will will help search engines and their crawlers index your whole website, including static and dynamic URL's, giving you better results in SEO ranks. [`@moxy/next-sitemaps`](https://www.npmjs.com/package/@moxy/next-sitemaps) helps make this a very simple task. 
 
-The only thing you have to do is to specify the dynamic routes, if you have any, in `/pages/api/sitemap.xml.js`. Take a look at the step 2 of the usage section of the [docs](https://www.npmjs.com/package/@moxy/next-sitemaps#usage) to get a feel for it. You don't need to worry about static routes, as they will already be taken care of by the package.
+To get started, the only thing you have to do is to specify the dynamic routes, if you have any, in `/pages/api/sitemap.xml.js`. Take a look at the step 2 of the usage section of the [docs](https://www.npmjs.com/package/@moxy/next-sitemaps#usage) to get a feel for it. You don't need to worry about static routes, as they will already be taken care of by the package. 
 
-Access your sitemap at any time, at the `/api/sitemap.xml` route, to check if everything is according to plan. If you see a xml file with all your desired URL's, you're just about ready to go up in those SEO ranks!
+Also, while optional, it's recommended you check out the `cacheControl` option prop of the package [API](https://www.npmjs.com/package/@moxy/next-sitemaps#api), in order to optimize the creation of your sitemap. 
 
-> ℹ️ By default, the rules in robots.txt make no restriction for any crawlers or pages, but you can tweak this to your liking in `/public/robots.txt`.
+Access your sitemap at any time, at the `/api/sitemap.xml` route, to check if everything is according to plan. If you see a xml response with all your desired URL's, you're just about ready to go up in those SEO ranks!
+
+> ℹ️ By default, the rules in the included `robots.txt` make no restriction for any crawlers or pages, but you can tweak this to your liking in `/public/robots.txt`. Check the guidelines [here](https://support.google.com/webmasters/answer/6062596?hl=en)
 
 ## Removing this feature
 
