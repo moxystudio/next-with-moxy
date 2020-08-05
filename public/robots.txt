@@ -1,3 +1,3 @@
-Sitemap: https://example/api/sitemap.xml
+Sitemap: ${siteUrl}/api/sitemap.xml
 User-agent:*
 Disallow:

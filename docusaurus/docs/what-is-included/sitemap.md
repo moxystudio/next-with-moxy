@@ -12,7 +12,7 @@ Also, while optional, it's recommended you check out the `cacheControl` option p
 
 Access your sitemap at any time, at the `/api/sitemap.xml` route, to check if everything is according to plan. If you see a xml response with all your desired URL's, you're just about ready to go up in those SEO ranks!
 
-> ℹ️ By default, the rules in the provided `robots.txt` make no restriction for any crawlers or pages, but you can tweak this to your liking in `/public/robots.txt`. Check the guidelines [here](https://support.google.com/webmasters/answer/6062596?hl=en). Also, don't forget to update the path to the sitemap in the `robots.txt` file, swapping `example.com` with your own website name.
+> ℹ️ By default, the rules in the provided `robots.txt` make no restriction for any crawlers or pages, but you can tweak this to your liking in `/public/robots.txt`. Check the guidelines [here](https://support.google.com/webmasters/answer/6062596?hl=en). Also, you don't need to worry about the path to the sitemap, as `@moxy/next-sitemaps` will deal with it for both staging and production environments.
 
 ## Removing this feature
 
