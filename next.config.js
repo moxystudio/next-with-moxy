@@ -14,7 +14,7 @@ const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/const
 const getEnvJoiPresence = (phase) =>
     phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD ? 'required' : 'optional';
 
-module.exports = (phase, nextConfig) =>
+module.exports = (phase, params) =>
     withPlugins([
         withOneOf,
         withRasterImages(),
@@ -63,7 +63,7 @@ module.exports = (phase, nextConfig) =>
                 /[\\/]node_modules[\\/]@formatjs[\\/].+?[\\/]locales\.js$/,
             ],
         }),
-        withSitemap(),
+        withSitemap(phase, 'https://example.com'),
     ], {
         compress: process.env.COMPRESSION !== '0',
         env: {
@@ -77,4 +77,4 @@ module.exports = (phase, nextConfig) =>
                 'SITE_URL - ',
             ),
         },
-    })(phase, nextConfig);
+    })(phase, params);
