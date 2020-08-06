@@ -7,13 +7,14 @@ const withOneOf = require('@moxy/next-webpack-oneof');
 const withCompileNodeModules = require('@moxy/next-compile-node-modules');
 const withNextIntl = require('@moxy/next-intl/plugin');
 const withPlugins = require('next-compose-plugins');
+const withSitemap = require('@moxy/next-sitemaps/plugin');
 const Joi = require('@hapi/joi');
 const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/constants');
 
 const getEnvJoiPresence = (phase) =>
     phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD ? 'required' : 'optional';
 
-module.exports = (phase, nextConfig) =>
+module.exports = (phase, params) =>
     withPlugins([
         withOneOf,
         withRasterImages(),
@@ -62,6 +63,7 @@ module.exports = (phase, nextConfig) =>
                 /[\\/]node_modules[\\/]@formatjs[\\/].+?[\\/]locales\.js$/,
             ],
         }),
+        withSitemap(phase, process.env.SITE_URL),
     ], {
         compress: process.env.COMPRESSION !== '0',
         env: {
@@ -75,4 +77,4 @@ module.exports = (phase, nextConfig) =>
                 'SITE_URL - ',
             ),
         },
-    })(phase, nextConfig);
+    })(phase, params);

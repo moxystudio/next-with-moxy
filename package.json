@@ -40,6 +40,7 @@
     "@moxy/next-layout": "^2.1.2",
     "@moxy/next-scroll-behavior": "^1.0.1",
     "@moxy/next-seo": "0.0.1",
+    "@moxy/next-sitemaps": "^3.1.0",
     "@moxy/next-webpack-oneof": "^1.0.2",
     "@moxy/react-keyboard-only-outlines": "^1.0.1",
     "@moxy/react-page-swapper": "^1.0.0",
