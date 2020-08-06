@@ -63,7 +63,7 @@ module.exports = (phase, params) =>
                 /[\\/]node_modules[\\/]@formatjs[\\/].+?[\\/]locales\.js$/,
             ],
         }),
-        withSitemap(phase, 'https://example.com'),
+        withSitemap(phase, process.env.SITE_URL),
     ], {
         compress: process.env.COMPRESSION !== '0',
         env: {
