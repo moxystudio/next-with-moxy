@@ -1,4 +1,4 @@
-name: Deploy on Zeit Now
+name: Deploy on Vercel
 
 on:
   push:
@@ -11,8 +11,8 @@ on:
       - docusaurus/**/*
 
 env:
-  NOW_ORG_ID: team_p8EekuXu9HkFUEY7yLOeujBS
-  NOW_PROJECT_ID: QmYUpNNm3Aw2W2W59sdNwKdcNduZXXQGhNgc4crdtASxNZ
+  VERCEL_ORG_ID: team_p8EekuXu9HkFUEY7yLOeujBS
+  VERCEL_PROJECT_ID: QmYUpNNm3Aw2W2W59sdNwKdcNduZXXQGhNgc4crdtASxNZ
   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
       - name: Set environment variables (PR)
         if: github.event_name == 'pull_request'
         env:
-          SITE_URL: https://next-with-moxy-pr-${{ github.event.number }}.now.sh
+          SITE_URL: https://next-with-moxy-pr-${{ github.event.number }}.vercel.app
         run: |
           echo "::set-env name=SITE_URL::$SITE_URL"
 
@@ -44,15 +44,15 @@ jobs:
         with:
           msg: |
             This pull-request can be previewed at ${{ env.SITE_URL }}.
-            Please check the `Zeit Now` status below to see when it's ready.
+            Please check the `Vercel` status below to see when it's ready.
 
       - name: Set deployment status
         uses: pbrandone/create-status-action@master
         with:
           token: ${{ github.token }}
           state: pending
-          context: Zeit Now
-          description: Deploying to Zeit Now...
+          context: Vercel
+          description: Deploying to Vercel...
 
       - name: Deploy (master)
         if: github.ref == 'refs/heads/master'
@@ -87,8 +87,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           state: success
-          context: Zeit Now
-          description: Zeit Now deployment ready!
+          context: Vercel
+          description: Vercel deployment ready!
           url: ${{ env.SITE_URL }}
 
       - name: Set failed deployment status
@@ -97,5 +97,5 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           state: failure
-          context: Zeit Now
-          description: Zeit Now deployment failed
+          context: Vercel
+          description: Vercel deployment failed
