@@ -35,7 +35,7 @@
   "dependencies": {
     "@moxy/next-common-files": "^1.2.2",
     "@moxy/next-compile-node-modules": "^1.3.6",
-    "@moxy/next-intl": "^2.0.3",
+    "@moxy/next-intl": "^2.1.0",
     "@moxy/next-layout": "^2.1.2",
     "@moxy/next-scroll-behavior": "^1.0.2",
     "@moxy/next-seo": "0.0.1",
@@ -54,7 +54,7 @@
     "react": "^16.8.6",
     "react-cookie": "^4.0.3",
     "react-dom": "^16.8.6",
-    "react-intl": "^4.1.0",
+    "react-intl": "^5.4.6",
     "react-transition-group": "^4.4.1"
   },
   "devDependencies": {
