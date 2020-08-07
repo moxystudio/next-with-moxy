@@ -9,8 +9,7 @@ const withSitemap = require('@moxy/next-sitemaps/plugin');
 const envVar = require('env-var');
 const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/constants');
 
-const isEnvRequired = (phase) =>
-    phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD ? 'required' : 'optional';
+const isEnvRequired = (phase) => phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD;
 
 const extEnvVar = envVar.from(process.env, {
     asStringWithPattern(value, regExp) {
