@@ -1,7 +1,5 @@
 'use strict';
 
-require('dotenv').config();
-
 const { withRasterImages, withPlayback, withSVG, withFonts, with3D } = require('@moxy/next-common-files');
 const withOneOf = require('@moxy/next-webpack-oneof');
 const withCompileNodeModules = require('@moxy/next-compile-node-modules');
