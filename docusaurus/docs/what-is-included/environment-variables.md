@@ -4,7 +4,7 @@ title: Environment variables
 sidebar_label: Environment variables
 ---
 
-This boilerplate is setup to use [`dotenv`](https://www.npmjs.com/package/dotenv) to facilitate loading environment variables from the `.env` file. We already provide an `.env.sample` file, which you can clone to a `.env` file so you have a starting point with all the environment variables suitable for development.
+Next.js uses [`dotenv`](https://www.npmjs.com/package/dotenv) to load environment variables from the `.env` file. We already provide an `.env.sample` file, which you can clone to a `.env` file so you have a starting point with all the environment variables suitable for development.
 
 In Next.js, you may inject configuration through environment variables inlined at build-time or through runtime configuration.
 
