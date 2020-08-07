@@ -8,11 +8,23 @@ const withCompileNodeModules = require('@moxy/next-compile-node-modules');
 const withNextIntl = require('@moxy/next-intl/plugin');
 const withPlugins = require('next-compose-plugins');
 const withSitemap = require('@moxy/next-sitemaps/plugin');
-const Joi = require('@hapi/joi');
+const envVar = require('env-var');
 const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/constants');
 
-const getEnvJoiPresence = (phase) =>
+const isEnvRequired = (phase) =>
     phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD ? 'required' : 'optional';
+
+const extEnvVar = envVar.from(process.env, {
+    asStringWithPattern(value, regExp) {
+        const valid = regExp.test(value);
+
+        if (!valid) {
+            throw new Error(`should match pattern ${regExp.toString()}`);
+        }
+
+        return value;
+    },
+});
 
 module.exports = (phase, params) =>
     withPlugins([
@@ -68,13 +80,8 @@ module.exports = (phase, params) =>
         compress: process.env.COMPRESSION !== '0',
         env: {
             GTM_CONTAINER_ID: process.env.GTM_CONTAINER_ID,
-            SITE_URL: Joi.attempt(
-                process.env.SITE_URL,
-                Joi.string()
-                    .presence(getEnvJoiPresence(phase))
-                    .uri({ scheme: ['https', 'http'] })
-                    .pattern(/\/$/, { invert: true }),
-                'SITE_URL - ',
-            ),
+            SITE_URL: extEnvVar.get('SITE_URL')
+                .required(isEnvRequired(phase))
+                .asStringWithPattern(/^http?:\/\/[^/]+$/),
         },
     })(phase, params);
