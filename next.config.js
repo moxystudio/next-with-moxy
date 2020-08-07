@@ -77,6 +77,7 @@ module.exports = (phase, params) =>
         }),
         withSitemap(phase, process.env.SITE_URL),
     ], {
+        poweredByHeader: false,
         compress: process.env.COMPRESSION !== '0',
         env: {
             GTM_CONTAINER_ID: process.env.GTM_CONTAINER_ID,
