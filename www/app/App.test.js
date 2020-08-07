@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { App } from './App';
 import { render, screen } from '../shared/test-utils';
 import CookieBanner from '../shared/modules/react-cookie-banner';
 import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
+import { App } from './App';
 
 jest.mock('../shared/modules/react-cookie-banner', () => jest.fn(() => null));
 

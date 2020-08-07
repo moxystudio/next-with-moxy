@@ -1,6 +1,6 @@
 import React from 'react';
-import ProjectInfo from './ProjectInfo';
 import { render, screen } from '../../../shared/test-utils';
+import ProjectInfo from './ProjectInfo';
 
 it('should render correctly', () => {
     render(<ProjectInfo name="foo" email="bar" />);

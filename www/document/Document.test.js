@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { Document } from './Document';
 
 jest.mock('next/document', () => ({
     __esModule: true,
@@ -9,8 +10,6 @@ jest.mock('next/document', () => ({
     NextScript: () => <div />,
     default: require('react').Component,
 }));
-
-import { Document } from './Document';
 
 beforeAll(() => {
     global.__NEXT_INTL_POLYFILL_URL__ = 'foo.js';

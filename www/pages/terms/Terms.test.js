@@ -1,6 +1,6 @@
 import React from 'react';
-import Terms from './Terms';
 import { render, screen } from '../../shared/test-utils';
+import Terms from './Terms';
 
 it('should render correctly', () => {
     render(<Terms />);

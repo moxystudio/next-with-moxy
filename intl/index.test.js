@@ -1,5 +1,5 @@
-import intlConfig from '.';
 import enMessages from './messages/en-US.json';
+import intlConfig from '.';
 
 it('should export locales and policies', () => {
     expect(intlConfig).toMatchObject({

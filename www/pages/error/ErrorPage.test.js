@@ -1,6 +1,6 @@
 import React from 'react';
-import ErrorPage from './ErrorPage';
 import { render, screen } from '../../shared/test-utils';
+import ErrorPage from './ErrorPage';
 
 it('should render internal server error when `statusCode` is not 404', () => {
     render(<ErrorPage statusCode={ 500 } />);

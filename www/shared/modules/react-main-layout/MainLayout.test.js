@@ -1,6 +1,6 @@
 import React from 'react';
-import MainLayout from './MainLayout';
 import { render } from '../../test-utils';
+import MainLayout from './MainLayout';
 
 it('should render correctly', () => {
     const { container } = render(
