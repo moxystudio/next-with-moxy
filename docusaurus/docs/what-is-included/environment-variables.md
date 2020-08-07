@@ -40,32 +40,21 @@ if (process.env.FEATURE_A) {
 
     You should provide a good default value for development in the `.env.sample`, if applicable.
 
-2. Add it to the `env` key at the very end of the `next.config.js` file:
+2. Add it to function exported by `next.config.js` file, using [`env-var`](https://github.com/evanshortiss/env-var) to validate and normalize values.
 
     ```js
+    const FEATURE_A = envVar.get('FEATURE_A').default('false').asBool();
+
+    // ...
     {
         env: {
             // ...
-            FEATURE_A: process.env.FEATURE_A
+            FEATURE_A,
         },
     }
     ```
 
-    If you want to validate environment variables, we suggest you to use [`env-var`](https://github.com/evanshortiss/env-var), like the following example:
-
-    ```js
-    {
-        env: {
-            // ...
-            FEATURE_A: envVar.get('FEATURE_A)
-                .default('false')
-                .asBool()
-            ),
-        },
-    }
-    ```
-
-    If your environment variable is mandatory, please use `.presence()` like `SITE_URL` is using.
+    If your environment variable is mandatory, please use `.required()` like `SITE_URL` is using.
 
 3. Add it to the Dockerfile
 
@@ -77,7 +66,7 @@ if (process.env.FEATURE_A) {
 
 ## Runtime configuration
 
-While build-time environments are prefereable, there are some scenarios where they might pose a problem.
+While build-time environments are preferable, there are some scenarios where they might pose a problem.
 One scenario is when it's impossible or unfesable to having to rebuild the project when configuration changes. If that's the case, you may use [runtime configuration](https://nextjs.org/docs#runtime-configuration) instead.
 
 > ⚠️ Be aware that runtime configuration will make your project incompatible with serverless deployments and static optimization.
@@ -99,27 +88,35 @@ console.log(publicRuntimeConfig.SOME_SERVICE_PUBLIC_KEY);
 
 1. Define the environment variable in `.env` and `.env.sample`:
 
-```bash
-# ...
+    ```bash
+    # ...
 
-# Some necessary keys to interact with a third-party service
-SOME_SERVICE_PUBLIC_KEY=
-SOME_SERVICE_PRIVATE_KEY=
-```
+    # Some necessary keys to interact with a third-party service
+    SOME_SERVICE_PUBLIC_KEY=
+    SOME_SERVICE_PRIVATE_KEY=
+    ```
 
-You should provide a good default value for development in the `.env.sample`, if applicable.
+    You should provide a good default value for development in the `.env.sample`, if applicable.
 
-2. Add it to the `env` key at the very end of the `next.config.js` file:
+2. Add them to the function exported by `next.config.js` file, using [`env-var`](https://github.com/evanshortiss/env-var) to validate and normalize values:
 
-```js
-{
-    publicRuntimeConfig: {
-        // ...
-        SOME_SERVICE_PUBLIC_KEY: process.env.SOME_SERVICE_PUBLIC_KEY
-    },
-    serverRuntimeConfig: {
-        // ...
-        SOME_SERVICE_PRIVATE_KEY: process.env.SOME_SERVICE_PRIVATE_KEY
-    },
-}
-```
+    ```js
+    const SOME_SERVICE_PUBLIC_KEY = envVar.get('SOME_SERVICE_PUBLIC_KEY')
+        .required(isEnvRequired(phase))
+        .asString();
+    const SOME_SERVICE_PRIVATE_KEY = envVar.get('SOME_SERVICE_PRIVATE_KEY')
+        .required(isEnvRequired(phase))
+        .asString();
+
+    // ...
+    {
+        publicRuntimeConfig: {
+            // ...
+            SOME_SERVICE_PUBLIC_KEY,
+        },
+        serverRuntimeConfig: {
+            // ...
+            SOME_SERVICE_PRIVATE_KEY,
+        },
+    }
+    ```

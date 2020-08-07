@@ -24,8 +24,14 @@ const extEnvVar = envVar.from(process.env, {
     },
 });
 
-module.exports = (phase, params) =>
-    withPlugins([
+module.exports = (phase, params) => {
+    const COMPRESSION = extEnvVar.get('COMPRESSION').asBool();
+    const GTM_CONTAINER_ID = extEnvVar.get('GTM_CONTAINER_ID').asString();
+    const SITE_URL = extEnvVar.get('SITE_URL')
+        .required(isEnvRequired(phase))
+        .asStringWithPattern(/^https?:\/\/[^/]+$/);
+
+    return withPlugins([
         withOneOf,
         withRasterImages(),
         withRasterImages({
@@ -73,14 +79,13 @@ module.exports = (phase, params) =>
                 /[\\/]node_modules[\\/]@formatjs[\\/].+?[\\/]locales\.js$/,
             ],
         }),
-        withSitemap(phase, process.env.SITE_URL),
+        withSitemap(phase, SITE_URL),
     ], {
         poweredByHeader: false,
-        compress: process.env.COMPRESSION !== '0',
+        compress: COMPRESSION,
         env: {
-            GTM_CONTAINER_ID: process.env.GTM_CONTAINER_ID,
-            SITE_URL: extEnvVar.get('SITE_URL')
-                .required(isEnvRequired(phase))
-                .asStringWithPattern(/^http?:\/\/[^/]+$/),
+            GTM_CONTAINER_ID,
+            SITE_URL,
         },
     })(phase, params);
+};
