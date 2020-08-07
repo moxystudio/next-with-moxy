@@ -51,19 +51,15 @@ if (process.env.FEATURE_A) {
     }
     ```
 
-    If you want to validate environment variables, we suggest you to use [`@hapi/joi`](https://github.com/hapijs/joi) with its [`attempt`](https://github.com/hapijs/joi/blob/master/API.md#attemptvalue-schema-message-options) function, like the following example:
+    If you want to validate environment variables, we suggest you to use [`env-var`](https://github.com/evanshortiss/env-var), like the following example:
 
     ```js
     {
         env: {
             // ...
-            FEATURE_A: Joi.attempt(
-                process.env.FEATURE_A,
-                Joi.boolean()
-                    .truthy('1')
-                    .falsy('0')
-                    .default(false)
-                'FEATURE_A - '
+            FEATURE_A: envVar.get('FEATURE_A)
+                .default('false')
+                .asBool()
             ),
         },
     }
