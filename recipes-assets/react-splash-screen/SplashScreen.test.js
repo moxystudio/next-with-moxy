@@ -1,7 +1,7 @@
 import React from 'react';
 import WaitForReact from '@moxy/react-wait-for-react';
-import SplashScreen from './SplashScreen';
 import { render, screen } from 'test-utils';
+import SplashScreen from './SplashScreen';
 
 jest.mock('@moxy/react-wait-for-react', () => jest.fn(() => null));
 
