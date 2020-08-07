@@ -25,7 +25,7 @@ jobs:
       - name: Set environment variables (master)
         if: github.ref == 'refs/heads/master'
         env:
-          SITE_URL: https://next-with.moxy.tech
+          SITE_URL: https://next-with-moxy.vercel.app
         run: |
           echo "::set-env name=SITE_URL::$SITE_URL"
 

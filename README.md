@@ -15,6 +15,8 @@
 
 MOXY's boilerplate to accelerate the setup of new [Next.js](https://nextjs.org/) based web applications.
 
+You may preview the boilerplate at https://next-with-moxy.vercel.app.
+
 ## Documentation
 
 Please check out the documentation page at https://next-with.moxy.tech.
