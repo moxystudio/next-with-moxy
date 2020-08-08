@@ -6,8 +6,6 @@ sidebar_label: ESLint & Stylelint
 
 The boilerplate includes our own linting presets for linting both Javascript and CSS files.
 
-For linting Javascript files, we use [`@moxy/eslint-config-isomorphic`](https://github.com/moxystudio/eslint-config/tree/master/packages/eslint-config-isomorphic), [`@moxy/eslint-config-jest`](https://github.com/moxystudio/eslint-config/tree/master/packages/eslint-config-jest) and [`@moxy/eslint-config-react`](https://github.com/moxystudio/eslint-config/tree/master/packages/eslint-config-react).
-
-For linting CSS files we use [`@moxy/stylelint-config`](https://github.com/moxystudio/stylelint-config).
+For linting Javascript and CSS files, we use [`moxy/eslint-config`](https://github.com/moxystudio/eslint-config) and [`moxy/stylelint-config`](https://github.com/moxystudio/stylelint-config) respectively.
 
 > ℹ️ Make sure that your editor supports [**ESLint**](https://eslint.org/) and [**Stylelint**](https://stylelint.io/) for the best experience.
