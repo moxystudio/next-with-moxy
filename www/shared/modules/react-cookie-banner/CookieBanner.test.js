@@ -29,7 +29,7 @@ it('should not render banner if there\'s at least one consent', () => {
 it('should render if not dismissed and no consent was given', () => {
     render(<CookieBanner onCookieConsents={ () => {} } />);
 
-    expect(screen.getByText('cookieBanner.text')).toBeInTheDocument();
+    expect(screen.getByText('cookie-banner.text')).toBeInTheDocument();
 });
 
 it('should call onCookieConsents with the correct consents on mount', () => {
@@ -64,7 +64,7 @@ it('should behave well when the accept button is clicked', () => {
 
     handleCookieConsents.mockClear();
 
-    fireEvent.click(getByText('cookieBanner.accept'));
+    fireEvent.click(getByText('cookie-banner.accept'));
 
     expect(handleCookieConsents).toHaveBeenCalledTimes(1);
     expect(handleCookieConsents).toHaveBeenCalledWith(['analytics']);
@@ -90,7 +90,7 @@ it('should behave well when the reject button is clicked', () => {
 
     handleCookieConsents.mockClear();
 
-    fireEvent.click(screen.getByText('cookieBanner.reject'));
+    fireEvent.click(screen.getByText('cookie-banner.reject'));
 
     expect(handleCookieConsents).not.toHaveBeenCalled();
 

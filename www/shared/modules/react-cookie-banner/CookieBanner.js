@@ -38,7 +38,7 @@ export const CookieBanner = ({ onCookieConsents }) => {
         <div className={ styles.cookieBanner }>
             <p>
                 <FormattedMessage
-                    id="cookieBanner.text"
+                    id="cookie-banner.text"
                     values={ {
                         link: /* istanbul ignore next */ (...chunks) => (
                             <Link href="/terms">
@@ -50,10 +50,10 @@ export const CookieBanner = ({ onCookieConsents }) => {
 
             <div className={ styles.buttons }>
                 <button className={ styles.accept } type="button" onClick={ handleAcceptClick }>
-                    <FormattedMessage id="cookieBanner.accept" />
+                    <FormattedMessage id="cookie-banner.accept" />
                 </button>
                 <button type="button" onClick={ handleRejectClick }>
-                    <FormattedMessage id="cookieBanner.reject" />
+                    <FormattedMessage id="cookie-banner.reject" />
                 </button>
             </div>
         </div>
