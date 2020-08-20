@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import styles from './CookieBanner.module.css';
 
-export const CookieBanner = ({ onCookieConsents }) => {
+const CookieBanner = ({ onCookieConsents }) => {
     const [mounted, setMounted] = useState(false);
     const [cookies, setCookie] = useCookies(['cookieConsents', 'cookieBannerDismissed']);
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen } from '../../test-utils';
-import { CookieBanner } from './CookieBanner';
+import CookieBanner from './CookieBanner';
 
 afterEach(() => {
     jest.resetAllMocks();
