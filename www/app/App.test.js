@@ -28,7 +28,7 @@ beforeEach(() => {
 });
 
 it('should render correctly', () => {
-    render(<App Component={ () => 'Hello World' } />);
+    render(<App Component={ () => 'Hello World' } pageProps={ {} } />);
 
     expect(screen.getByText('Hello World')).toBeInTheDocument();
 });
@@ -43,7 +43,7 @@ describe('GTM', () => {
             return null;
         });
 
-        render(<App Component={ () => 'Hello World' } />);
+        render(<App Component={ () => 'Hello World' } pageProps={ {} } />);
 
         expect(initGTM).toHaveBeenCalledTimes(1);
         expect(destroyGTM).toHaveBeenCalledTimes(0);
@@ -58,7 +58,7 @@ describe('GTM', () => {
             return null;
         });
 
-        render(<App Component={ () => 'Hello World' } />);
+        render(<App Component={ () => 'Hello World' } pageProps={ {} } />);
 
         expect(initGTM).toHaveBeenCalledTimes(0);
         expect(destroyGTM).toHaveBeenCalledTimes(1);
