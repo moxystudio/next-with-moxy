@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Document } from './Document';
+import Document from './Document';
 
 jest.mock('next/document', () => ({
     __esModule: true,
