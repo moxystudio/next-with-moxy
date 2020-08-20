@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         node-version: ['12', '14']
-    name: "[v${{ matrix.node-version }}] check"
+    name: "[v${{ matrix.node-version }}] prepare"
 
     steps:
     - name: Checkout code
@@ -30,26 +30,31 @@ jobs:
       uses: actions/cache@v1
       with:
         path: node_modules
-        key: ${{ github.sha }}-node_modules-v${{ matrix.node }}
+        key: ${{ github.sha }}-node_modules-v${{ matrix.node-version }}
 
   check:
     runs-on: ubuntu-latest
     needs: prepare
     strategy:
         matrix:
-          node: ['12', '14']
-    name: "[v${{ matrix.node }}] check"
+          node-version: ['12', '14']
+    name: "[v${{ matrix.node-version }}] check"
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v1
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
 
     - name: Cache node_modules
       id: cache-node_modules
       uses: actions/cache@v1
       with:
         path: node_modules
-        key: ${{ github.sha }}-node_modules-v${{ matrix.node }}
+        key: ${{ github.sha }}-node_modules-v${{ matrix.node-version }}
 
     - name: Install dependencies
       if: steps.cache-node_modules.outputs.cache-hit != 'true'
@@ -76,19 +81,24 @@ jobs:
     needs: prepare
     strategy:
         matrix:
-          node: ['12', '14']
-    name: "[v${{ matrix.node }}] build and run"
+          node-version: ['12', '14']
+    name: "[v${{ matrix.node-version }}] build"
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v1
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
 
     - name: Cache node_modules
       id: cache-node_modules
       uses: actions/cache@v1
       with:
         path: node_modules
-        key: ${{ github.sha }}-node_modules-v${{ matrix.node }}
+        key: ${{ github.sha }}-node_modules-v${{ matrix.node-version }}
 
     - name: Install dependencies
       if: steps.cache-node_modules.outputs.cache-hit != 'true'
@@ -97,7 +107,7 @@ jobs:
 
     - name: Build
       env:
-        SITE_URL: http://localhost
+        SITE_URL: http://localhost:3000
       run: |
         npm run build
 
