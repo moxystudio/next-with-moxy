@@ -5,7 +5,7 @@ import { CSSTransition } from 'react-transition-group';
 import styles from './PageTransition.module.css';
 
 /* istanbul ignore next */
-const getZIndex = (inProp) => !inProp && -1;
+const getZIndex = (inProp) => !inProp ? -1 : undefined;
 
 const PageTransition = ({ node, animation, style, in: inProp, onEntered, onExited }) => (
     <CSSTransition
