@@ -1,35 +1,20 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import KeyboardOnlyOutlines from '@moxy/react-keyboard-only-outlines';
 import { withNextIntlSetup } from '@moxy/next-intl';
 import { LayoutTree } from '@moxy/next-layout';
-import PageSwapper, { getNodeKeyFromPathname } from '@moxy/react-page-swapper';
-import getScrollBehavior from '@moxy/next-scroll-behavior';
+import { RouterScrollProvider } from '@moxy/next-router-scroll';
 import Seo from '@moxy/next-seo';
 import { CookiesProvider } from 'react-cookie';
 import nextIntlConfig from '../../intl';
+import PageSwapper from '../shared/modules/react-page-swapper';
 import MainLayout from '../shared/modules/react-main-layout';
 import CookieBanner from '../shared/modules/react-cookie-banner';
-import PageTransition from '../shared/modules/react-page-transition';
 import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
 import { seoData } from './App.data.js';
 
-import styles from './App.module.css';
-
-export const App = ({ Component, pageProps }) => {
-    const scrollBehaviorRef = useRef();
-
-    useEffect(() => {
-        scrollBehaviorRef.current = getScrollBehavior();
-
-        return () => {
-            scrollBehaviorRef.current.stop();
-        };
-    }, []);
-
-    const updateScroll = useCallback(/* istanbul ignore next */ () => scrollBehaviorRef.current.updateScroll(), []);
-
+export const AppInner = ({ Component, pageProps }) => {
     const handleCookieConsents = useCallback((cookieConsents) => {
         if (cookieConsents.includes('analytics')) {
             initGTM();
@@ -39,7 +24,7 @@ export const App = ({ Component, pageProps }) => {
     }, []);
 
     return (
-        <CookiesProvider>
+        <>
             <Head>
                 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png?v=M4KN2GElyG" />
                 <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png?v=M4KN2GElyG" />
@@ -58,19 +43,28 @@ export const App = ({ Component, pageProps }) => {
             <KeyboardOnlyOutlines />
             <CookieBanner onCookieConsents={ handleCookieConsents } />
 
-            <PageSwapper
-                className={ styles.pageSwapper }
-                updateScroll={ updateScroll }
-                nodeKey={ getNodeKeyFromPathname(2) }
-                node={ <LayoutTree
-                    Component={ Component }
-                    pageProps={ pageProps }
-                    defaultLayout={ <MainLayout /> } /> }>
-                { (props) => <PageTransition { ...props } /> }
-            </PageSwapper>
-        </CookiesProvider>
+            <LayoutTree
+                Component={ Component }
+                pageProps={ pageProps }
+                defaultLayout={ <MainLayout /> }>
+                { (tree) => <PageSwapper node={ tree } /> }
+            </LayoutTree>
+        </>
     );
 };
+
+AppInner.propTypes = {
+    Component: PropTypes.elementType.isRequired,
+    pageProps: PropTypes.object.isRequired,
+};
+
+export const App = (props) => (
+    <CookiesProvider>
+        <RouterScrollProvider>
+            <AppInner { ...props } />
+        </RouterScrollProvider>
+    </CookiesProvider>
+);
 
 App.propTypes = {
     Component: PropTypes.elementType.isRequired,

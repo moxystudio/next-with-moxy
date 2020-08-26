@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { IntlProvider } from 'react-intl';
 import { CookiesProvider } from 'react-cookie';
+import { RouterScrollProvider } from '@moxy/next-router-scroll';
 import { LayoutTree } from '@moxy/next-layout';
 
 // AppTreeWrapper setups providers defined ONLY by HOCs that wrap your www/app/App.js.
 // It's used by www/app/App.test.js to perform unit tests.
-
-export const AppTreeWrapper = ({ intlProvider, cookiesProvider, children }) => {
+export const AppTreeWrapper = ({ intlProvider, cookiesProvider, routerScrollProvider, children }) => {
     intlProvider = {
         locale: 'en-US',
         messages: new Proxy({}, {
@@ -20,7 +20,9 @@ export const AppTreeWrapper = ({ intlProvider, cookiesProvider, children }) => {
     return (
         <IntlProvider { ...intlProvider }>
             <CookiesProvider { ...cookiesProvider }>
-                { children }
+                <RouterScrollProvider { ...routerScrollProvider }>
+                    { children }
+                </RouterScrollProvider>
             </CookiesProvider>
         </IntlProvider>
     );
@@ -29,6 +31,7 @@ export const AppTreeWrapper = ({ intlProvider, cookiesProvider, children }) => {
 AppTreeWrapper.propTypes = {
     intlProvider: PropTypes.object,
     cookiesProvider: PropTypes.object,
+    routerScrollProvider: PropTypes.object,
     children: PropTypes.element.isRequired,
 };
 

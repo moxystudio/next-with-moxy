@@ -1,6 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import AppTree from '../../test-utils/modules/react-app-tree';
+import { render, screen } from '../../test-utils';
 
 beforeEach(() => {
     process.env.DATOCMS_TOKEN = 'foo';
@@ -10,17 +9,19 @@ afterEach(() => {
     jest.resetModules();
 });
 
+const MyComponent = ({ children }) => children;
+
 it('should render correctly', () => {
     const withApollo = require('./next-with-apollo').default;
-    const AppWithApollo = withApollo(AppTree);
+    const MyComponentWithApollo = withApollo(MyComponent);
 
-    const { getByText } = render((
-        <AppWithApollo>
+    render((
+        <MyComponentWithApollo>
             <div>withApollo</div>
-        </AppWithApollo>
+        </MyComponentWithApollo>
     ));
 
-    expect(getByText('withApollo')).toBeInTheDocument();
+    screen.getByText('withApollo');
 });
 
 it('should render correctly with a preview URL', () => {
@@ -28,14 +29,13 @@ it('should render correctly with a preview URL', () => {
 
     window.history.replaceState({}, 'foo', 'foo/?cms-preview');
 
-    const AppWithApollo = withApollo(AppTree);
+    const MyComponentWithApollo = withApollo(MyComponent);
 
-    const { getByText } = render((
-        <AppWithApollo>
+    render((
+        <MyComponentWithApollo>
             <div>withApolloPreview</div>
-        </AppWithApollo>
+        </MyComponentWithApollo>
     ));
 
-    expect(getByText('withApolloPreview')).toBeInTheDocument();
+    screen.getByText('withApollo');
 });
-

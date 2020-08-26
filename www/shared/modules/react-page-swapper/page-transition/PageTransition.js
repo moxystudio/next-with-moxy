@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
+import classNames from 'classnames';
 
 import styles from './PageTransition.module.css';
 
 /* istanbul ignore next */
 const getZIndex = (inProp) => !inProp ? -1 : undefined;
 
-const PageTransition = ({ node, animation, style, in: inProp, onEntered, onExited }) => (
+const PageTransition = ({ node, animation, style, in: inProp, onEntered, onExited, className }) => (
     <CSSTransition
         in={ inProp }
         onEntered={ onEntered }
@@ -21,7 +22,7 @@ const PageTransition = ({ node, animation, style, in: inProp, onEntered, onExite
             exitDone: styles.exitDone,
         } }
         timeout={ 1000 }>
-        <div className={ styles[animation] } style={ { ...style, height: '100%', zIndex: getZIndex(inProp) } }>
+        <div className={ classNames(styles[animation], className) } style={ { ...style, zIndex: getZIndex(inProp) } }>
             { node }
         </div>
     </CSSTransition>
@@ -34,6 +35,7 @@ PageTransition.propTypes = {
     in: PropTypes.bool,
     onEntered: PropTypes.func,
     onExited: PropTypes.func,
+    className: PropTypes.string,
 };
 
 PageTransition.defaultProps = {

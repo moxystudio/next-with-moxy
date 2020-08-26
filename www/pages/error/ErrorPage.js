@@ -6,7 +6,7 @@ import Link from 'next/link';
 import styles from './ErrorPage.module.css';
 
 const ErrorPage = ({ statusCode }) => (
-    <div className={ styles.error }>
+    <main className={ styles.error }>
         <h1>
             { statusCode === 404 ?
                 <FormattedMessage id="error.not-found.title" /> :
@@ -21,7 +21,7 @@ const ErrorPage = ({ statusCode }) => (
                 </a>
             </Link>
         </p>
-    </div>
+    </main>
 );
 
 ErrorPage.propTypes = {

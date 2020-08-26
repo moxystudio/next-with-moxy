@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PageSwapper from '../react-page-swapper';
 import Header from '../react-header';
 import Footer from '../react-footer';
 
@@ -9,9 +10,9 @@ const MainLayout = ({ children }) => (
     <div className={ styles.mainLayout }>
         <Header className={ styles.header } />
 
-        <main className={ styles.content }>
-            { children }
-        </main>
+        <div className={ styles.content }>
+            <PageSwapper node={ children } className={ styles.pageSwapper } />
+        </div>
 
         <Footer className={ styles.footer } />
     </div>
