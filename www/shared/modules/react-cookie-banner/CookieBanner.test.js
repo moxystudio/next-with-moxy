@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, screen } from '../../test-utils';
+import { render, screen, userEvent } from '../../test-utils';
 import CookieBanner from './CookieBanner';
 
 afterEach(() => {
@@ -37,7 +37,7 @@ it('should call onCookieConsents with the correct consents on mount', () => {
 
     const handleCookieConsents = jest.fn();
 
-    render(
+    const { unmount } = render(
         <CookieBanner onCookieConsents={ handleCookieConsents } />,
     );
 
@@ -47,6 +47,7 @@ it('should call onCookieConsents with the correct consents on mount', () => {
     handleCookieConsents.mockReset();
     jest.spyOn(document, 'cookie', 'get').mockImplementation(() => '');
 
+    unmount();
     render(
         <CookieBanner onCookieConsents={ handleCookieConsents } />,
     );
@@ -64,7 +65,7 @@ it('should behave well when the accept button is clicked', () => {
 
     handleCookieConsents.mockClear();
 
-    fireEvent.click(getByText('cookie-banner.accept'));
+    userEvent.click(getByText('cookie-banner.accept'));
 
     expect(handleCookieConsents).toHaveBeenCalledTimes(1);
     expect(handleCookieConsents).toHaveBeenCalledWith(['analytics']);
@@ -90,7 +91,7 @@ it('should behave well when the reject button is clicked', () => {
 
     handleCookieConsents.mockClear();
 
-    fireEvent.click(screen.getByText('cookie-banner.reject'));
+    userEvent.click(screen.getByText('cookie-banner.reject'));
 
     expect(handleCookieConsents).not.toHaveBeenCalled();
 

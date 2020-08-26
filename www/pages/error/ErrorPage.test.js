@@ -1,23 +1,21 @@
 import React from 'react';
-import { render, screen } from '../../shared/test-utils';
+import { render, screen, userEvent } from '../../shared/test-utils';
 import ErrorPage from './ErrorPage';
 
 it('should render internal server error when `statusCode` is not 404', () => {
     render(<ErrorPage statusCode={ 500 } />);
 
-    const { getByText } = screen;
+    screen.getByText('error.internal.title');
+    screen.getByText('error.return-to-home');
 
-    expect(getByText('error.internal.title')).toBeInTheDocument();
-    expect(getByText('error.return-to-home')).toBeInTheDocument();
+    userEvent.click(screen.getByText('error.return-to-home'));
 });
 
 it('should render not found error when `statusCode` is 404', () => {
     render(<ErrorPage statusCode={ 404 } />);
 
-    const { getByText } = screen;
-
-    expect(getByText('error.not-found.title')).toBeInTheDocument();
-    expect(getByText('error.return-to-home')).toBeInTheDocument();
+    screen.getByText('error.not-found.title');
+    screen.getByText('error.return-to-home');
 });
 
 describe('getInitialProps', () => {

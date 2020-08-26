@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-imports */
+
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { render, screen } from '@testing-library/react';
@@ -10,7 +12,7 @@ it('should render children correctly', () => {
         </AppTree>,
     );
 
-    expect(screen.getByText('foo')).toBeInTheDocument();
+    screen.getByText('foo');
 });
 
 it('should correctly setup IntlProvider', () => {
@@ -20,7 +22,7 @@ it('should correctly setup IntlProvider', () => {
         </AppTree>,
     );
 
-    expect(screen.getByText('foo')).toBeInTheDocument();
+    screen.getByText('foo');
 });
 
 it('should correctly setup IntlProvider with overrides', () => {
@@ -34,5 +36,5 @@ it('should correctly setup IntlProvider with overrides', () => {
         </AppTree>,
     );
 
-    expect(screen.getByText('bar')).toBeInTheDocument();
+    screen.getByText('bar');
 });

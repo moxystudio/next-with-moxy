@@ -419,7 +419,6 @@ Now that we can access the state from a component, it's time to change it.
         useEffect(() => {
             !ticketHolder && loadTicketHolder();
         }, [ticketHolder, loadTicketHolder]);
-        
 
         return (
             <div className={ styles.home }>
@@ -444,12 +443,12 @@ Now that we can access the state from a component, it's time to change it.
     // ...
     ```
 
-Your home will now show the state data (after fetching the `ticketHolder` 😌) and you can click the buttons to dispatch the `addTicket` and `removeTicket` actions:
+    Your home will now show the state data (after fetching the `ticketHolder` 😌) and you can click the buttons to dispatch the `addTicket` and `removeTicket` actions:
 
-<img
-src={ useBaseUrl('recipes-assets/setting-up-redux/redux-home-with-state.png') }
-alt="Store with empty state"
-width="100%" />
+    <img
+    src={ useBaseUrl('recipes-assets/setting-up-redux/redux-home-with-state.png') }
+    alt="Store with empty state"
+    width="100%" />
 
 ### 7. Testing
 
@@ -512,55 +511,27 @@ width="100%" />
 4. Now, setup a provider with a mock store.
 
     ```js
-    // shared/modules/test-utils/app-tree/AppTree.js
+    // shared/modules/test-utils/react-app-tree/AppTree.js
 
     import React from 'react';
     import PropTypes from 'prop-types';
     import { Provider } from 'react-redux';
     import { mockStore } from '../shared/redux/mocks/buildStore.mock';
 
-    export const AppTreeWrapper = ({ children }) => (
-        <Provider store={ mockStore() }>{ children }</Provider>
-    );
+    export const AppTree = ({ children }) => {
+        // ...
 
-    AppTreeWrapper.propTypes = {
-        children: PropTypes.element.isRequired,
-
+        return (
+            <Provider store={ mockStore() }>
+                { /* ... */ }
+            </Provider>
+        );
     };
 
-    const AppTree = (props) => (
-        <AppTreeWrapper { ...props } />
-    );
-
-    export default AppTree;
+    // ....
     ```
 
-
-5. When testing a connected component, do not forget to wrap the component you're testing in the newly created `AppTree` to make sure it has access to the store.
-
-    ```js
-    // Home.test.js
-
-    import Home from '../Home';
-
-    // ...
-
-    const defaultProps = { /* ... */ };
-
-    // ...
-
-    it('should render correctly', () => {
-        const { asFragment } = render(        
-            <AppTree>
-                <Home { ...defaultProps } />
-            </AppTree>
-        );
-
-        expect(asFragment()).toMatchSnapshot();
-    });
-    ```
-
-6. To test `reducer.js`, you can just call the inner reducer functions and pass a mock state as the first argument.
+5. To test `reducer.js`, you can just call the inner reducer functions and pass a mock state as the first argument.
 
     ```js
     // reducer.test.js
@@ -634,7 +605,7 @@ width="100%" />
     });
     ```
 
-7. To test `actions.js`, in this case you just need to check that the correct dispatches are being made.
+6. To test `actions.js`, in this case you just need to check that the correct dispatches are being made.
 
    Here we will need to mock an error response for our fetch to assert that the `FAIL` action type is being correctly dispatched.
    Also, tests that involve these async methods should also be async, so we can await for all the store dispatches to be executed:
@@ -642,11 +613,12 @@ width="100%" />
     ```js
     // actions.test.js
 
-    import * as actionTypes from './actionTypes';
-    import { actions as ticketsActions } from '.';
-    import { mockStore } from '../mocks/buildStore.mock';
-
     import { enableFetchMocks } from 'jest-fetch-mock';
+    import * as actionTypes from './actionTypes';
+    import { mockStore } from '../mocks/buildStore.mock';
+    import { actions as ticketsActions } from '.';
+
+
     enableFetchMocks();
     fetch.mockResponse('{ "name": "holder" }');
 
@@ -702,7 +674,7 @@ width="100%" />
 
     Packages like [redux-mock-store-await-actions](https://github.com/moxystudio/redux-mock-store-await-actions) or [redux-actions-assertions](https://github.com/redux-things/redux-actions-assertions) may also be helpful in tests like these.
 
-1. `selectors.js`, like `reducer.js`, can be tested by passing a mocked state as the first argument and checking the correct retrieval of the values:
+7. `selectors.js`, like `reducer.js`, can be tested by passing a mocked state as the first argument and checking the correct retrieval of the values:
 
     ```js
     // selectors.test.js
