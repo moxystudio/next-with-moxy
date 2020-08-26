@@ -1,6 +1,8 @@
+/* eslint-disable no-restricted-imports */
+
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { render, screen } from '../../../../shared/test-utils';
+import { render, screen } from '@testing-library/react';
 import AppTree from './AppTree';
 
 it('should render children correctly', () => {
@@ -8,7 +10,6 @@ it('should render children correctly', () => {
         <AppTree>
             <div>foo</div>
         </AppTree>,
-        { wrapper: undefined },
     );
 
     screen.getByText('foo');
@@ -19,7 +20,6 @@ it('should correctly setup IntlProvider', () => {
         <AppTree>
             <FormattedMessage id="foo" />
         </AppTree>,
-        { wrapper: undefined },
     );
 
     screen.getByText('foo');
@@ -34,7 +34,6 @@ it('should correctly setup IntlProvider with overrides', () => {
         <AppTree intlProvider={ intlProvider }>
             <FormattedMessage id="foo" />
         </AppTree>,
-        { wrapper: undefined },
     );
 
     screen.getByText('bar');

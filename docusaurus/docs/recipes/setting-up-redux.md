@@ -518,13 +518,14 @@ Now that we can access the state from a component, it's time to change it.
     import { Provider } from 'react-redux';
     import { mockStore } from '../shared/redux/mocks/buildStore.mock';
 
-    export const AppTreeWrapper = ({ children }) => (
-        <Provider store={ mockStore() }>{ children }</Provider>
-    );
+    export const AppTree = ({ children }) => {
+        // ...
 
-    AppTreeWrapper.propTypes = {
-        children: PropTypes.element.isRequired,
-
+        return (
+            <Provider store={ mockStore() }>
+                { /* ... */ }
+            </Provider>
+        );
     };
 
     // ....

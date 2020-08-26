@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { render, screen } from '../shared/test-utils';
 import CookieBanner from '../shared/modules/react-cookie-banner';
 import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
-import { AppInner } from './App';
+import { App, AppInner } from './App';
 
 jest.mock('../shared/modules/react-cookie-banner', () => jest.fn(() => null));
 
@@ -15,7 +15,13 @@ beforeEach(() => {
     jest.clearAllMocks();
 });
 
-it('should render correctly', () => {
+it('should render providers correctly', () => {
+    render(<App Component={ () => 'Hello World' } pageProps={ {} } />, { wrapper: undefined });
+
+    screen.getByText('Hello World');
+});
+
+it('should render correctly (inner)', () => {
     render(<AppInner Component={ () => 'Hello World' } pageProps={ {} } />);
 
     screen.getByText('Hello World');
