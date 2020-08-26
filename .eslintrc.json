@@ -12,7 +12,25 @@
         "@moxy/eslint-config-jest"
     ],
     "rules": {
-        // Next.js <Link> component doesn't play nice with anchor validation
-        "jsx-a11y/anchor-is-valid": 0
+        // Next.js <Link> component doesn't play nice with anchor validation.
+        "jsx-a11y/anchor-is-valid": 0,
+        // Disallow imports as we have built-in replacements for this project.
+        "no-restricted-imports": ["error", {
+            "paths": [
+                {
+                    "name": "@moxy/react-page-swapper",
+                    "message": "Plase import 'PageSwapper' from 'shared/modules/react-page-swapper' instead."
+                },
+                // Disallow using RTL directly, as we have our own test utils.
+                {
+                    "name": "@testing-library/react",
+                    "message": "Plase import from 'shared/test-utils' instead."
+                },
+                {
+                    "name": "@testing-library/user-event",
+                    "message": "Plase import from 'shared/test-utils' instead."
+                }
+            ]
+        }]
     }
 }

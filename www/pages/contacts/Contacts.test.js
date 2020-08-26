@@ -5,5 +5,5 @@ import Contacts from './Contacts';
 it('should render correctly', () => {
     render(<Contacts />);
 
-    expect(screen.getByText('contacts.title')).toBeInTheDocument();
+    screen.getByText('contacts.title');
 });

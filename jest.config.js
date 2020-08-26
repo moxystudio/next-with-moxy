@@ -8,4 +8,12 @@ module.exports = compose(
     baseConfig(),
     withWeb(),
     withRTL(),
+    (config) => {
+        config.setupFilesAfterEnv = [
+            ...config.setupFilesAfterEnv,
+            './jest.setup.js',
+        ];
+
+        return config;
+    },
 );

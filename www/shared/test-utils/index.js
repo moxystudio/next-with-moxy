@@ -1,4 +1,7 @@
+/* eslint-disable no-restricted-imports */
+
 import { render, queries } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import AppTree from './modules/react-app-tree';
 import * as customQueries from './modules/custom-queries';
 
@@ -9,8 +12,11 @@ const customRender = (ui, options) =>
         ...options,
     });
 
-// re-export everything
+// Export everything from RTL.
 export * from '@testing-library/react';
 
-// Override render method
+// Override render method.
 export { customRender as render };
+
+// Export userEvent to events, such as click.
+export { userEvent };

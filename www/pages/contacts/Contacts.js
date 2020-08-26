@@ -6,10 +6,10 @@ import contacts from './Contacts.data.js';
 import styles from './Contacts.module.css';
 
 const Contacts = () => (
-    <div className={ styles.contacts }>
+    <main className={ styles.contacts }>
         <h1><FormattedMessage id="contacts.title" /></h1>
         <ProjectInfo name={ contacts.name } email={ contacts.email } />
-    </div>
+    </main>
 );
 
 export default Contacts;

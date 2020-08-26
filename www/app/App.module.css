@@ -1,7 +1,0 @@
-.pageSwapper {
-    width: 100%;
-    overflow-x: hidden;
-    display: flex;
-    flex: 1 0 auto;
-    flex-direction: column;
-}

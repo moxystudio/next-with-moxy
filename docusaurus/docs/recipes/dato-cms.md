@@ -203,8 +203,8 @@ Then use it and get the translations in the `intl/index.js` file:
 
 ```js
 // ...
-import { createApolloClient } from '../www/shared/modules/next-with-apollo';
 import gql from 'graphql-tag';
+import { createApolloClient } from '../www/shared/modules/next-with-apollo';
 
 const apolloClient = createApolloClient(null, null);
 
