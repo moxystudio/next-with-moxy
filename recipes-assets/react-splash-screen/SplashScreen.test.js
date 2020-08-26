@@ -1,6 +1,6 @@
 import React from 'react';
 import WaitForReact from '@moxy/react-wait-for-react';
-import { render, screen } from 'test-utils';
+import { render, screen } from '../../test-utils';
 import SplashScreen from './SplashScreen';
 
 jest.mock('@moxy/react-wait-for-react', () => jest.fn(() => null));
@@ -10,7 +10,7 @@ it('should render the content and progress bar correctly when progress is 0', ()
 
     const { getByDataWaitForReactElement } = render(<SplashScreen />);
 
-    expect(screen.getByText('error')).not.toBeInTheDocument();
+    screen.getByText('error');
     expect(getByDataWaitForReactElement('progressBar')).toHaveStyle({ transform: 'scaleX(0)' });
     expect(getByDataWaitForReactElement('splashScreen')).not.toHaveClass('loading', 'loaded');
 });
@@ -20,7 +20,7 @@ it('should render the content and progress bar correctly when progress is betwee
 
     const { getByDataWaitForReactElement } = render(<SplashScreen />);
 
-    expect(screen.getByText('error')).not.toBeInTheDocument();
+    screen.getByText('error');
     expect(getByDataWaitForReactElement('progressBar')).toHaveStyle({ transform: 'scaleX(0.2)' });
     expect(getByDataWaitForReactElement('splashScreen')).toHaveClass('loading');
     expect(getByDataWaitForReactElement('splashScreen')).not.toHaveClass('loaded');
@@ -31,7 +31,7 @@ it('should render the content and progress bar correctly when progress is 1', ()
 
     const { getByDataWaitForReactElement } = render(<SplashScreen />);
 
-    expect(screen.getByText('error')).not.toBeInTheDocument();
+    screen.getByText('error');
     expect(getByDataWaitForReactElement('progressBar')).toHaveStyle({ transform: 'scaleX(1)' });
     expect(getByDataWaitForReactElement('splashScreen')).toHaveClass('loaded');
     expect(getByDataWaitForReactElement('splashScreen')).not.toHaveClass('loading');
@@ -42,7 +42,7 @@ it('should render an error if the promise failed', () => {
 
     const { getByDataWaitForReactElement } = render(<SplashScreen />);
 
-    expect(screen.getByText('error')).toBeInTheDocument();
+    screen.getByText('error');
     expect(getByDataWaitForReactElement('progressBar')).toHaveStyle({ transform: 'scaleX(0.2)' });
     expect(getByDataWaitForReactElement('splashScreen')).toHaveClass('loading');
     expect(getByDataWaitForReactElement('splashScreen')).not.toHaveClass('loaded');
