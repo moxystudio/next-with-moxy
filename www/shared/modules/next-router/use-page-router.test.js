@@ -1,7 +1,7 @@
 import React from 'react';
-import { useRouter as useNextRouter } from 'next/router'; // eslint-disable-line no-restricted-imports
+import { useRouter } from 'next/router'; // eslint-disable-line no-restricted-imports
 import { render } from '../../test-utils';
-import useRouter from './use-router';
+import usePageRouter from './use-page-router';
 
 jest.mock('next/router', () => ({
     __esModule: true,
@@ -16,7 +16,7 @@ it('should return the same router it started with', () => {
     expect.assertions(2);
 
     const MyComponent = () => {
-        const router = useRouter();
+        const router = usePageRouter();
 
         expect(router).toEqual({
             pathname: '/blog/[name]',
@@ -27,18 +27,13 @@ it('should return the same router it started with', () => {
         return null;
     };
 
-    const { rerender } = render(
-        <MyComponent />,
-        { wrapper: undefined },
-    );
+    const { rerender } = render(<MyComponent />, { wrapper: undefined });
 
-    useNextRouter.mockImplementationOnce(() => ({
+    useRouter.mockImplementationOnce(() => ({
         pathname: '/blog/[name]',
         asPath: '/blog/bar?baz=1',
         query: { name: 'bar', baz: 1 },
     }));
 
-    rerender(
-        <MyComponent />,
-    );
+    rerender(<MyComponent />);
 });

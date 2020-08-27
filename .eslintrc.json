@@ -23,7 +23,13 @@
                 },
                 {
                     "name": "next/router",
-                    "message": "Please import from 'shared/modules/next-router' instead."
+                    "importNames": ["useRouter"],
+                    "message": "You most likely want to import 'usePageRouter' from 'shared/modules/next-router' as it preservers the router between page transitions."
+                },
+                {
+                    "name": "next/router",
+                    "importNames": ["withRouter"],
+                    "message": "You most likely want to import 'withPageRouter' from 'shared/modules/next-router' as it preservers the router between page transitions."
                 },
                 {
                     "name": "@testing-library/react",

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useRouter as useNextRouter } from 'next/router'; // eslint-disable-line no-restricted-imports
+import { useRouter } from 'next/router'; // eslint-disable-line no-restricted-imports
 import usePageKey from './use-page-key';
 
 // You should use this hook instead of the one provided by Next.js because it
@@ -7,9 +7,9 @@ import usePageKey from './use-page-key';
 // the old page will still be mounted when animating out, but the router has already changed.
 // This hook returns the same router your page started with.
 
-const useRouter = () => {
+const usePageRouter = () => {
     const pageKey = usePageKey();
-    const router = useNextRouter();
+    const router = useRouter();
 
     const routerRef = useRef(router);
     const pageKeyRef = useRef(pageKey);
@@ -22,4 +22,4 @@ const useRouter = () => {
     return routerRef.current;
 };
 
-export default useRouter;
+export default usePageRouter;

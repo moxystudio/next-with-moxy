@@ -13,10 +13,7 @@ it('should return the correct page key', () => {
     Router.pathname = '/blog/[name]';
     Router.asPath = '/blog/foo?baz=1';
 
-    render(
-        <MyComponent />,
-        { wrapper: undefined },
-    );
+    render(<MyComponent />, { wrapper: undefined });
 
     screen.getByText('/blog/foo');
 });
