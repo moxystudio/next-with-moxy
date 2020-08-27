@@ -19,16 +19,19 @@
             "paths": [
                 {
                     "name": "@moxy/react-page-swapper",
-                    "message": "Plase import 'PageSwapper' from 'shared/modules/react-page-swapper' instead."
+                    "message": "Please import from 'shared/modules/react-page-swapper' instead."
                 },
-                // Disallow using RTL directly, as we have our own test utils.
+                {
+                    "name": "next/router",
+                    "message": "Please import from 'shared/modules/next-router' instead."
+                },
                 {
                     "name": "@testing-library/react",
-                    "message": "Plase import from 'shared/test-utils' instead."
+                    "message": "Please import from 'shared/test-utils' instead."
                 },
                 {
                     "name": "@testing-library/user-event",
-                    "message": "Plase import from 'shared/test-utils' instead."
+                    "message": "Please import from 'shared/test-utils' instead."
                 }
             ]
         }]

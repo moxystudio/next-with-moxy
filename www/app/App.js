@@ -11,10 +11,13 @@ import nextIntlConfig from '../../intl';
 import PageSwapper from '../shared/modules/react-page-swapper';
 import MainLayout from '../shared/modules/react-main-layout';
 import CookieBanner from '../shared/modules/react-cookie-banner';
+import { usePageKey } from '../shared/modules/next-router';
 import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
 import { seoData } from './App.data.js';
 
 export const AppInner = ({ Component, pageProps }) => {
+    const pageKey = usePageKey();
+
     const handleCookieConsents = useCallback((cookieConsents) => {
         if (cookieConsents.includes('analytics')) {
             initGTM();
@@ -46,8 +49,9 @@ export const AppInner = ({ Component, pageProps }) => {
             <LayoutTree
                 Component={ Component }
                 pageProps={ pageProps }
+                pageKey={ pageKey }
                 defaultLayout={ <MainLayout /> }>
-                { (tree) => <PageSwapper node={ tree } /> }
+                { (tree) => <PageSwapper node={ tree } nodeKey={ tree.key } /> }
             </LayoutTree>
         </>
     );
