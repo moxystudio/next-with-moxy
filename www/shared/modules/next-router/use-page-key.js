@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router'; // eslint-disable-line no-restricted-imports
 
-// A hook that returns the page key, based on `location.pathname`.
+// A hook that returns the page key, based on Router's asPath but without the query.
 // This key is to be used in <LayoutTree />, to uniquely identify a page.
 
 const usePageKey = () => {
