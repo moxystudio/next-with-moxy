@@ -4,7 +4,6 @@ import { render } from '../../test-utils';
 import usePageRouter from './use-page-router';
 
 jest.mock('next/router', () => ({
-    __esModule: true,
     useRouter: jest.fn(() => ({
         pathname: '/blog/[name]',
         asPath: '/blog/foo?baz=1',
