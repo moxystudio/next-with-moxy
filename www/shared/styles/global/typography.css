@@ -13,6 +13,7 @@ body {
     @mixin text-smooth;
 
     color: var(--color-black);
+    overflow-wrap: break-word; /* Break long words, while keeping them together if possible (fallback) */
     overflow-wrap: anywhere;  /* Break long words, while keeping them together if possible */
     -webkit-tap-highlight-color: transparent;  /* Do not show a highlight (rectangle around the link) while tapping it */
 }
