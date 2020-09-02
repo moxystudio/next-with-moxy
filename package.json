@@ -35,7 +35,7 @@
   "dependencies": {
     "@moxy/next-common-files": "^1.2.2",
     "@moxy/next-compile-node-modules": "^1.3.6",
-    "@moxy/next-intl": "^2.2.0",
+    "@moxy/next-intl": "^2.2.1",
     "@moxy/next-layout": "^2.2.2",
     "@moxy/next-router-scroll": "^2.0.3",
     "@moxy/next-seo": "0.0.1",
