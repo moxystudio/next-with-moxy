@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import styles from './PageTransition.module.css';
 
 /* istanbul ignore next */
-const getZIndex = (inProp) => !inProp ? 1 : 2;
+const getZIndex = (inProp) => !inProp ? 0 : 1;
 
 const PageTransition = ({ node, animation, style, in: inProp, onEntered, onExited, className }) => (
     <CSSTransition

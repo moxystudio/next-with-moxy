@@ -13,7 +13,7 @@ it('should render correctly when in prop is false', () => {
 
     expect(element).toHaveClass('fade');
     expect(element).not.toHaveClass('exitDone');
-    expect(element).toHaveStyle({ zIndex: '1' });
+    expect(element).toHaveStyle({ zIndex: '0' });
 });
 
 it('should render correctly when in prop is true', () => {
@@ -23,7 +23,7 @@ it('should render correctly when in prop is true', () => {
 
     expect(element).toHaveClass('fade');
     expect(element).not.toHaveClass('enterDone');
-    expect(element).toHaveStyle({ zIndex: '2' });
+    expect(element).toHaveStyle({ zIndex: '1' });
 });
 
 it('should animate in, calling onEntered correctly', () => {
