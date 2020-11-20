@@ -18,8 +18,8 @@ import { seoData } from './App.data.js';
 export const AppInner = ({ Component, pageProps }) => {
     const pageKey = usePageKey();
 
-    const handleCookieConsents = useCallback((cookieConsents) => {
-        if (cookieConsents.includes('analytics')) {
+    const handleCookiesConsent = useCallback((cookiesConsent) => {
+        if (cookiesConsent.includes('analytics')) {
             initGTM();
         } else {
             destroyGTM();
@@ -44,7 +44,7 @@ export const AppInner = ({ Component, pageProps }) => {
             <Seo data={ seoData } />
 
             <KeyboardOnlyOutlines />
-            <CookieBanner onCookieConsents={ handleCookieConsents } />
+            <CookieBanner onCookiesConsent={ handleCookiesConsent } />
 
             <LayoutTree
                 Component={ Component }

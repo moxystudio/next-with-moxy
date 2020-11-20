@@ -6,21 +6,21 @@ import Link from 'next/link';
 
 import styles from './CookieBanner.module.css';
 
-const CookieBanner = ({ onCookieConsents }) => {
+const CookieBanner = ({ onCookiesConsent }) => {
     const [mounted, setMounted] = useState(false);
-    const [cookies, setCookie] = useCookies(['cookieConsents', 'cookieBannerDismissed']);
+    const [cookies, setCookie] = useCookies(['cookiesConsent', 'cookieBannerDismissed']);
 
-    const { cookieConsents = [], cookieBannerDismissed = false } = cookies;
+    const { cookiesConsent = [], cookieBannerDismissed = false } = cookies;
 
     useEffect(() => setMounted(true), []);
 
     useEffect(() => {
-        onCookieConsents(cookieConsents);
+        onCookiesConsent(cookiesConsent);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [onCookieConsents, cookieConsents.join(',')]);
+    }, [onCookiesConsent, cookiesConsent.join(',')]);
 
     const handleAcceptClick = useCallback(() => {
-        setCookie('cookieConsents', ['analytics'], { maxAge: 365 * 24 * 60 * 60 });
+        setCookie('cookiesConsent', ['analytics'], { maxAge: 365 * 24 * 60 * 60 });
     }, [setCookie]);
 
     const handleRejectClick = useCallback(() => {
@@ -30,7 +30,7 @@ const CookieBanner = ({ onCookieConsents }) => {
     // Do not display banner if:
     // - user has previously dismissed or accepted at least one consent
     // - on SSR to avoid having to add "Vary: Cookie" to the response headers, which is bad for reverse proxy caches
-    if (!mounted || cookieBannerDismissed || cookieConsents.length > 0) {
+    if (!mounted || cookieBannerDismissed || cookiesConsent.length > 0) {
         return null;
     }
 
@@ -62,7 +62,7 @@ const CookieBanner = ({ onCookieConsents }) => {
 
 CookieBanner.propTypes = {
     className: PropTypes.string,
-    onCookieConsents: PropTypes.func.isRequired,
+    onCookiesConsent: PropTypes.func.isRequired,
 };
 
 export default CookieBanner;

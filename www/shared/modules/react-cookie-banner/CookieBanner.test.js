@@ -10,95 +10,95 @@ it('should not render banner when banner was previously dismissed', () => {
     jest.spyOn(document, 'cookie', 'get').mockImplementation(() => 'cookieBannerDismissed=true');
 
     const { container } = render(
-        <CookieBanner onCookieConsents={ () => {} } />,
+        <CookieBanner onCookiesConsent={ () => {} } />,
     );
 
     expect(container.innerHTML).toBe('');
 });
 
 it('should not render banner if there\'s at least one consent', () => {
-    jest.spyOn(document, 'cookie', 'get').mockImplementation(() => 'cookieConsents=%5B%22analytics%22%5D');
+    jest.spyOn(document, 'cookie', 'get').mockImplementation(() => 'cookiesConsent=%5B%22analytics%22%5D');
 
     const { container } = render(
-        <CookieBanner onCookieConsents={ () => {} } />,
+        <CookieBanner onCookiesConsent={ () => {} } />,
     );
 
     expect(container.innerHTML).toBe('');
 });
 
 it('should render if not dismissed and no consent was given', () => {
-    render(<CookieBanner onCookieConsents={ () => {} } />);
+    render(<CookieBanner onCookiesConsent={ () => {} } />);
 
     expect(screen.getByText('cookie-banner.text')).toBeInTheDocument();
 });
 
-it('should call onCookieConsents with the correct consents on mount', () => {
-    jest.spyOn(document, 'cookie', 'get').mockImplementation(() => 'cookieConsents=%5B%22analytics%22%5D');
+it('should call onCookiesConsent with the correct consents on mount', () => {
+    jest.spyOn(document, 'cookie', 'get').mockImplementation(() => 'cookiesConsent=%5B%22analytics%22%5D');
 
-    const handleCookieConsents = jest.fn();
+    const handleCookiesConsent = jest.fn();
 
     const { unmount } = render(
-        <CookieBanner onCookieConsents={ handleCookieConsents } />,
+        <CookieBanner onCookiesConsent={ handleCookiesConsent } />,
     );
 
-    expect(handleCookieConsents).toHaveBeenCalledTimes(1);
-    expect(handleCookieConsents).toHaveBeenCalledWith(['analytics']);
+    expect(handleCookiesConsent).toHaveBeenCalledTimes(1);
+    expect(handleCookiesConsent).toHaveBeenCalledWith(['analytics']);
 
-    handleCookieConsents.mockReset();
+    handleCookiesConsent.mockReset();
     jest.spyOn(document, 'cookie', 'get').mockImplementation(() => '');
 
     unmount();
     render(
-        <CookieBanner onCookieConsents={ handleCookieConsents } />,
+        <CookieBanner onCookiesConsent={ handleCookiesConsent } />,
     );
 
-    expect(handleCookieConsents).toHaveBeenCalledTimes(1);
-    expect(handleCookieConsents).toHaveBeenCalledWith([]);
+    expect(handleCookiesConsent).toHaveBeenCalledTimes(1);
+    expect(handleCookiesConsent).toHaveBeenCalledWith([]);
 });
 
 it('should behave well when the accept button is clicked', () => {
-    const handleCookieConsents = jest.fn();
+    const handleCookiesConsent = jest.fn();
 
     const { container, rerender, getByText } = render(
-        <CookieBanner onCookieConsents={ handleCookieConsents } />,
+        <CookieBanner onCookiesConsent={ handleCookiesConsent } />,
     );
 
-    handleCookieConsents.mockClear();
+    handleCookiesConsent.mockClear();
 
     userEvent.click(getByText('cookie-banner.accept'));
 
-    expect(handleCookieConsents).toHaveBeenCalledTimes(1);
-    expect(handleCookieConsents).toHaveBeenCalledWith(['analytics']);
+    expect(handleCookiesConsent).toHaveBeenCalledTimes(1);
+    expect(handleCookiesConsent).toHaveBeenCalledWith(['analytics']);
 
-    handleCookieConsents.mockClear();
+    handleCookiesConsent.mockClear();
 
     rerender(
-        <CookieBanner onCookieConsents={ handleCookieConsents } />,
+        <CookieBanner onCookiesConsent={ handleCookiesConsent } />,
     );
 
-    expect(handleCookieConsents).not.toHaveBeenCalled();
+    expect(handleCookiesConsent).not.toHaveBeenCalled();
     expect(container.innerHTML).toBe('');
 });
 
 it('should behave well when the reject button is clicked', () => {
-    const handleCookieConsents = jest.fn();
+    const handleCookiesConsent = jest.fn();
 
     const { container, rerender } = render(
-        <CookieBanner onCookieConsents={ handleCookieConsents } />,
+        <CookieBanner onCookiesConsent={ handleCookiesConsent } />,
     );
 
     expect(container.innerHTML).not.toBe('');
 
-    handleCookieConsents.mockClear();
+    handleCookiesConsent.mockClear();
 
     userEvent.click(screen.getByText('cookie-banner.reject'));
 
-    expect(handleCookieConsents).not.toHaveBeenCalled();
+    expect(handleCookiesConsent).not.toHaveBeenCalled();
 
     rerender(
-        <CookieBanner onCookieConsents={ handleCookieConsents } />,
+        <CookieBanner onCookiesConsent={ handleCookiesConsent } />,
     );
 
-    expect(handleCookieConsents).not.toHaveBeenCalled();
+    expect(handleCookiesConsent).not.toHaveBeenCalled();
     expect(container.innerHTML).toBe('');
 });
