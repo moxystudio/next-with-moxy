@@ -27,14 +27,14 @@ jobs:
         env:
           SITE_URL: https://next-with-moxy.vercel.app
         run: |
-          echo "::set-env name=SITE_URL::$SITE_URL"
+          echo "SITE_URL=$SITE_URL" >> $GITHUB_ENV
 
       - name: Set environment variables (PR)
         if: github.event_name == 'pull_request'
         env:
           SITE_URL: https://next-with-moxy-pr-${{ github.event.number }}.vercel.app
         run: |
-          echo "::set-env name=SITE_URL::$SITE_URL"
+          echo "SITE_URL=$SITE_URL" >> $GITHUB_ENV
 
       - name: Comment URL
         if: github.event_name == 'pull_request' && github.event.action == 'opened'
