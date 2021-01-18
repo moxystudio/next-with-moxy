@@ -3,7 +3,7 @@
 
 # -- BASE STAGE --------------------------------
 
-FROM node:12-alpine AS base
+FROM node:14-alpine AS base
 
 WORKDIR /src
 
@@ -41,7 +41,7 @@ RUN rm -rf .next/cache
 
 # -- RUNTIME STAGE --------------------------------
 
-FROM node:12-alpine AS runtime
+FROM node:14-alpine AS runtime
 
 WORKDIR /usr/app
 

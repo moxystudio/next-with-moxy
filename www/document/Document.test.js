@@ -12,7 +12,12 @@ jest.mock('next/document', () => ({
 }));
 
 beforeAll(() => {
-    global.__NEXT_INTL_POLYFILL_URL__ = 'foo.js';
+    global.__NEXT_INTL_POLYFILLS__ = [
+        {
+            asset: 'intl-polyfill-1.js',
+            shouldPolyfill: 'exports.shouldPolyfill = () => true',
+        },
+    ];
 });
 
 it('should render correctly', () => {
