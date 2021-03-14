@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, userEvent } from '../../shared/test-utils';
+import { render, screen } from '../../shared/test-utils';
 import ErrorPage from './ErrorPage';
 
 it('should render internal server error when `statusCode` is not 404', () => {
@@ -7,8 +7,6 @@ it('should render internal server error when `statusCode` is not 404', () => {
 
     screen.getByText('error.internal.title');
     screen.getByText('error.return-to-home');
-
-    userEvent.click(screen.getByText('error.return-to-home'));
 });
 
 it('should render not found error when `statusCode` is 404', () => {
