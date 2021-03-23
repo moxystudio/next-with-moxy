@@ -10,7 +10,7 @@ import nextIntlConfig from '../../intl';
 import PageSwapper from '../shared/react/page-swapper';
 import MainLayout from '../shared/react/main-layout';
 import { usePageKey } from '../shared/react/next-router';
-import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
+import { initGTM, destroyGTM } from '../shared/modules/google-tag-manager';
 import CookieBanner from './cookie-banner';
 import { seoData } from './App.data.js';
 

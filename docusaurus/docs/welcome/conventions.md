@@ -35,6 +35,7 @@ The folder-structure convention favours co-location of assets and their requeste
     └── shared
         └── modules
         │   ├── api-sdk
+        │   ├── google-tag-manager
         └── react
         │   ├── button
         │   ├── card
@@ -68,7 +69,8 @@ The folder-structure convention favours co-location of assets and their requeste
             	- `Hero.test.js`: This is the test file corresponding to this component.
             	- `Hero.module.css`: This is where you'll have styles that are only used in this component.
     - `shared`: Where you can put content that is shared between pages and cannot be directly co-located with its interested parties.
-        - `modules`: The folder for modules that are shared between pages. Here you can store components, services such as your web API clients, etc. You can find an example in the diagram above of what files this folder might have. Please note that every module should have a good prefix for better understandability. For example, a react based module should have `react-` as a prefix.
+        - `modules`: The folder for modules that are shared between pages. Here you can store services, such as your web API clients, etc. You can find an example in the diagram above of what files this folder might have.
+        - `react`: The folder for react modules that are shared between pages.
         - `media`: The folder for media (images, fonts, etc.) that is shared between many components.
             - `favicons`: This is where you can store your favicons.
             - `fonts`: This is where you can store your font files.
