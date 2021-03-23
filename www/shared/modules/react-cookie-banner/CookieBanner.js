@@ -1,37 +1,57 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { useCookies } from 'react-cookie';
 import Link from 'next/link';
+import useLocalStorageState from 'use-local-storage-state';
 
 import styles from './CookieBanner.module.css';
 
-const CookieBanner = ({ className, onCookieConsents, ...rest }) => {
-    const [mounted, setMounted] = useState(false);
-    const [cookies, setCookie] = useCookies(['cookieConsents', 'cookieBannerDismissed']);
+const MAX_CONSENT_DAYS = 365;
+const MAX_REJECTED_DAYS = 7;
 
-    const { cookieConsents = [], cookieBannerDismissed = false } = cookies;
+const CookieBanner = ({ className, onConsents, ...rest }) => {
+    const [mounted, setMounted] = useState(false);
+    const [state, setState] = useLocalStorageState('cookie-banner', {
+        consents: [],
+        consentedAt: null,
+        rejectedAt: null,
+    });
+
+    const consents = useMemo(() => (
+        state.consentedAt > Date.now() - (MAX_CONSENT_DAYS * 24 * 60 * 60 * 1000) ? state.consents : []
+    ), [state]);
+    const rejected = !!(state.rejectedAt >= Date.now() - (MAX_REJECTED_DAYS * 24 * 60 * 60 * 1000));
 
     useEffect(() => setMounted(true), []);
 
     useEffect(() => {
-        onCookieConsents(cookieConsents);
+        onConsents(consents);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [onCookieConsents, cookieConsents.join(',')]);
+    }, [consents.join(','), onConsents]);
 
     const handleAcceptClick = useCallback(() => {
-        setCookie('cookieConsents', ['analytics'], { maxAge: 365 * 24 * 60 * 60 });
-    }, [setCookie]);
+        setState({
+            ...state,
+            consents: ['analytics'],
+            consentedAt: Date.now(),
+            rejectedAt: null,
+        });
+    }, [state, setState]);
 
     const handleRejectClick = useCallback(() => {
-        setCookie('cookieBannerDismissed', true, { maxAge: 7 * 24 * 60 * 60 });
-    }, [setCookie]);
+        setState({
+            ...state,
+            consents: [],
+            consentedAt: null,
+            rejectedAt: Date.now(),
+        });
+    }, [state, setState]);
 
     // Do not display banner if:
-    // - user has previously dismissed or accepted at least one consent
+    // - user has previously rejected or accepted at least one consent
     // - on SSR to avoid having to add "Vary: Cookie" to the response headers, which is bad for reverse proxy caches
-    if (!mounted || cookieBannerDismissed || cookieConsents.length > 0) {
+    if (!mounted || rejected || consents.length > 0) {
         return null;
     }
 
@@ -63,7 +83,7 @@ const CookieBanner = ({ className, onCookieConsents, ...rest }) => {
 
 CookieBanner.propTypes = {
     className: PropTypes.string,
-    onCookieConsents: PropTypes.func.isRequired,
+    onConsents: PropTypes.func.isRequired,
 };
 
 export default CookieBanner;

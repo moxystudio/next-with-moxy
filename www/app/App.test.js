@@ -29,10 +29,10 @@ it('should render correctly (inner)', () => {
 
 describe('GTM', () => {
     it('should initialize GTM if analytics is in the cookies consent', () => {
-        CookieBanner.mockImplementation(({ onCookieConsents }) => {
+        CookieBanner.mockImplementation(({ onConsents }) => {
             useEffect(() => {
-                onCookieConsents(['analytics']);
-            }, [onCookieConsents]);
+                onConsents(['analytics']);
+            }, [onConsents]);
 
             return null;
         });
@@ -44,10 +44,10 @@ describe('GTM', () => {
     });
 
     it('should destroy GTM if analytics is not on the cookies consent', () => {
-        CookieBanner.mockImplementation(({ onCookieConsents }) => {
+        CookieBanner.mockImplementation(({ onConsents }) => {
             useEffect(() => {
-                onCookieConsents(['foo']);
-            }, [onCookieConsents]);
+                onConsents(['foo']);
+            }, [onConsents]);
 
             return null;
         });

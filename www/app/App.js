@@ -6,7 +6,6 @@ import { withNextIntlSetup } from '@moxy/next-intl';
 import { LayoutTree } from '@moxy/next-layout';
 import { RouterScrollProvider } from '@moxy/next-router-scroll';
 import Seo from '@moxy/next-seo';
-import { CookiesProvider } from 'react-cookie';
 import nextIntlConfig from '../../intl';
 import PageSwapper from '../shared/modules/react-page-swapper';
 import MainLayout from '../shared/modules/react-main-layout';
@@ -44,7 +43,7 @@ export const AppInner = ({ Component, pageProps }) => {
             <Seo data={ seoData } />
 
             <KeyboardOnlyOutlines />
-            <CookieBanner onCookieConsents={ handleCookieConsents } />
+            <CookieBanner onConsents={ handleCookieConsents } />
 
             <LayoutTree
                 Component={ Component }
@@ -63,11 +62,9 @@ AppInner.propTypes = {
 };
 
 export const App = (props) => (
-    <CookiesProvider>
-        <RouterScrollProvider>
-            <AppInner { ...props } />
-        </RouterScrollProvider>
-    </CookiesProvider>
+    <RouterScrollProvider>
+        <AppInner { ...props } />
+    </RouterScrollProvider>
 );
 
 App.propTypes = {
