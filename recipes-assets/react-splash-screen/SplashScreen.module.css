@@ -8,6 +8,7 @@
 
     @mixin position fixed, 0, 0, 0, 0;
 
+    min-width: var(--viewport-min-width);
     z-index: var(--z-index-splash-screen);
     display: flex;
     justify-content: center;
