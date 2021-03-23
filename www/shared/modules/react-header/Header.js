@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import styles from './Header.module.css';
 
-const Header = ({ className }) => (
-    <header className={ classNames(styles.header, className) }>
+const Header = ({ className, ...rest }) => (
+    <header className={ classNames(styles.header, className) } { ...rest }>
         <ul>
             <li>
                 <Link href="/">

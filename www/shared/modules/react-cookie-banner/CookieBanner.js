@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { useCookies } from 'react-cookie';
 import Link from 'next/link';
 
 import styles from './CookieBanner.module.css';
 
-const CookieBanner = ({ onCookieConsents }) => {
+const CookieBanner = ({ className, onCookieConsents, ...rest }) => {
     const [mounted, setMounted] = useState(false);
     const [cookies, setCookie] = useCookies(['cookieConsents', 'cookieBannerDismissed']);
 
@@ -35,7 +36,7 @@ const CookieBanner = ({ onCookieConsents }) => {
     }
 
     return (
-        <div className={ styles.cookieBanner }>
+        <div className={ classNames(styles.cookieBanner, className) } { ...rest }>
             <p>
                 <FormattedMessage
                     id="cookie-banner.text"

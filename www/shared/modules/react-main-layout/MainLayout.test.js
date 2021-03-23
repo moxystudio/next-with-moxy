@@ -18,3 +18,15 @@ it('should render correctly', () => {
     expect(container.querySelector('main')).toBeInTheDocument();
     screen.getByText('Hello!');
 });
+
+it('should respect passed className', () => {
+    const { container } = render(
+        <MainLayout className="foo">
+            <Page>
+                <main className="hello">Hello!</main>
+            </Page>
+        </MainLayout>,
+    );
+
+    expect(container.querySelector('.foo')).toBeTruthy();
+});

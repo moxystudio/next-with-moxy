@@ -102,3 +102,13 @@ it('should behave well when the reject button is clicked', () => {
     expect(handleCookieConsents).not.toHaveBeenCalled();
     expect(container.innerHTML).toBe('');
 });
+
+it('should respect passed className', () => {
+    const handleCookieConsents = () => {};
+
+    const { container } = render(
+        <CookieBanner className="foo" onCookieConsents={ handleCookieConsents } />,
+    );
+
+    expect(container.querySelector('.foo')).toBeTruthy();
+});
