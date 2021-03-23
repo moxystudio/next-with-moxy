@@ -1,4 +1,4 @@
-import seoImage from '../shared/media/images/seo.png';
+import seoImage from '../shared/media/images/seo.jpg';
 
 export const data = {
     url: process.env.SITE_URL,
