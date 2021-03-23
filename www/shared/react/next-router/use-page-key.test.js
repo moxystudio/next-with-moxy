@@ -1,6 +1,6 @@
 import React from 'react';
 import Router from 'next/router'; // eslint-disable-line no-restricted-imports
-import { render, screen } from '../../test-utils';
+import { render, screen } from '../testing-library';
 import usePageKey from './use-page-key';
 
 const MyComponent = () => {

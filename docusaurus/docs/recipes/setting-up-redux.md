@@ -511,7 +511,7 @@ Now that we can access the state from a component, it's time to change it.
 4. Now, setup a provider with a mock store.
 
     ```js
-    // shared/modules/test-utils/react-app-tree/AppTree.js
+    // shared/react/testing-library/app-tree/AppTree.js
 
     import React from 'react';
     import PropTypes from 'prop-types';

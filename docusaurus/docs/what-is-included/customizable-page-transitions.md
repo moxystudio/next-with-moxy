@@ -17,6 +17,6 @@ For more details about all the possibilities `@moxy/react-page-swapper` gives yo
 If you don't need to include custom transitions to your pages you may want to remove this feature altogether. To do so, take the following steps:
 
 1. Uninstall `@moxy/react-page-swapper`, `@moxy/next-router-scroll` and `react-transition-group`.
-2. Delete the folder `www/modules/react-page-swapper`.
+2. Delete the folder `www/react/page-swapper`.
 3. Search globally for `react-page-swapper` and `@moxy/next-router-scroll` and remove the corresponding code across the project.
 4. Update your unit tests if necessary so that they all pass!

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '../../shared/test-utils';
+import { render, screen } from '../../shared/react/testing-library';
 import ErrorPage from './ErrorPage';
 
 it('should render internal server error when `statusCode` is not 404', () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '../../test-utils';
+import { render, screen } from '../testing-library';
 import MainLayout from './MainLayout';
 
 const Page = ({ children }) => children;

@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react';
-import { render } from '../../test-utils';
+import { render } from '../testing-library';
 import withPageRouter from './with-page-router';
 
 jest.mock('next/router', () => ({

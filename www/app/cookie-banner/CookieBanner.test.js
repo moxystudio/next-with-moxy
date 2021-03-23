@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, userEvent } from '../../test-utils';
+import { render, screen, userEvent } from '../../shared/react/testing-library';
 import CookieBanner from './CookieBanner';
 
 Storage.prototype.getItem = jest.fn(() => 'bla');

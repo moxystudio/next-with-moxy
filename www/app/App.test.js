@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { render, screen } from '../shared/test-utils';
-import CookieBanner from '../shared/modules/react-cookie-banner';
+import { render, screen } from '../shared/react/testing-library';
 import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
+import CookieBanner from './cookie-banner';
 import { App, AppInner } from './App';
 
-jest.mock('../shared/modules/react-cookie-banner', () => jest.fn(() => null));
+jest.mock('./cookie-banner', () => jest.fn(() => null));
 
 jest.mock('../shared/utils/google-tag-manager', () => ({
     initGTM: jest.fn(),

@@ -35,17 +35,18 @@ The folder-structure convention favours co-location of assets and their requeste
     └── shared
         └── modules
         │   ├── api-sdk
-        │   ├── react-button
-        │   ├── react-card
-        │   ├── react-progress-bar
-        │   ├── react-icons
+        └── react
+        │   ├── button
+        │   ├── card
+        │   ├── progress-bar
+        │   ├── icons
         │   │   ├── svgs
         │   │   └── index.js
         │   └── ...
         └── media
-        │   └── favicons
         │   └── fonts
         │   └── images
+        |   └── ...
         └── styles
 ```
 

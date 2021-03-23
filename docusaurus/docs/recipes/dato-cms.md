@@ -41,16 +41,17 @@ You will need the following packages:
 npm i next-with-apollo @apollo/client @apollo/react-hooks apollo-client graphql
 ```
 
-Then copy the files inside [next-with-apollo](https://github.com/moxystudio/next-with-moxy/tree/master/docusaurus/static/recipes-assets/dato-cms/next-with-apollo) into `www/shared/modules/next-with-apollo`.
+Then copy the files inside [next-with-apollo](https://github.com/moxystudio/next-with-moxy/tree/master/docusaurus/static/recipes-assets/dato-cms/next-with-apollo) into `www/shared/react/next-with-apollo`.
 
 The [apollo client](https://github.com/moxystudio/next-with-moxy/tree/master/docusaurus/static/recipes-assets/dato-cms/next-with-apollo/apollo-client.js) is already configured with the Content Delivery API endpoint and the respective authorization header using the variable `DATOCMS_TOKEN`, so you don't need to do any changes.
 
-Now let's use it! 🚀  
+Now let's use it! 🚀
+
 All you need to do is wrap your pages with the HOC. Using the page `Home` as example you would need to do the following:
 
 ```js
 // ...
-import { withApollo } from '../../shared/modules/next-with-apollo';
+import { withApollo } from '../../shared/react/next-with-apollo';
 
 //...
 
@@ -92,16 +93,15 @@ Home.getInitialProps = async ({ apolloClient }) => {
 };
 ```
 
-> ℹ️This is a simple example with a short query, but the queries can get really long. If that happens you should move them out of the component into a separate file.
+> ℹ️ This is a simple example with a short query, but the queries can get really long. If that happens you should move them out of the component into a separate file.
 
 > ⚠️ The Content Delivery API doesn't allow mutations, which means that you can't create, update or delete content. If you need that you should use the Content Management API that uses REST.
 
 ### 3. Localization
 
-**DatoCMS** provides an easy way to localize your content. You can manage the supported languages on **"Project settings"**.  
+**DatoCMS** provides an easy way to localize your content. You can manage the supported languages on **"Project settings"**.
 
-To force a model to be localized in all languages you need to select the option **"All locales required?"** on its settings.  
-For each field type if you need it to be translatable you have to select the option **"Enable localization on this field?"** on its settings.
+To force a model to be localized in all languages you need to select the option **"All locales required?"** on its settings. For each field type if you need it to be translatable you have to select the option **"Enable localization on this field?"** on its settings.
 
 > ⚠️ Be aware that DatoCMS doesn't have locale fallback. When the content doesn't exist in one language it will show empty.
 
@@ -177,7 +177,8 @@ Home.getInitialProps = async ({ apolloClient }) => {
 
 #### Static translations
 
-This boilerplate already includes **Internationalization** using [`@moxy/next-intl`](https://github.com/moxystudio/next-intl), that is done by configuring individual `intl/messages/<locale>.json` per locale. This is hard to maintain as it is necessary a new deploy to add or edit translations.  
+This boilerplate already includes **Internationalization** using [`@moxy/next-intl`](https://github.com/moxystudio/next-intl), that is done by configuring individual `intl/messages/<locale>.json` per locale. This is hard to maintain as it is necessary a new deploy to add or edit translations.
+
 To overcome this problem we can add the static translations to **DatoCMS**, so it is easier to manage it.
 
 1. Create a new model called "Translation". Select the option "Single instance?" and "All locales required?";
@@ -188,11 +189,13 @@ To overcome this problem we can add the static translations to **DatoCMS**, so i
    - Key - used on the code to get the translation, for example `home.title`;
    - Value - value of the translation.
 
-> ℹ️**DatoCMS** has a "Hidden Field" plugin that can be useful here to hide the `key` field. This will prevent changes on that field.  
+> ℹ️ **DatoCMS** has a "Hidden Field" plugin that can be useful here to hide the `key` field. This will prevent changes on that field.
+
 To do so you need to add the plugin, then go to the field's settings and change the "Field editor" to "Hidden Field", on "Presentation" tab. This will hide the field and every time there is a need to change it you have to change the "Field editor" back to "Default editor".
 
-Now we need to get the translations!  
-First it is necessary to export the `createApolloClient` function in the `www/shared/modules/next-with-apollo/index.js` file:
+Now we need to get the translations!
+
+First it is necessary to export the `createApolloClient` function in the `www/shared/react/next-with-apollo/index.js` file:
 
 ```js
 // ...
@@ -204,7 +207,7 @@ Then use it and get the translations in the `intl/index.js` file:
 ```js
 // ...
 import gql from 'graphql-tag';
-import { createApolloClient } from '../www/shared/modules/next-with-apollo';
+import { createApolloClient } from '../www/shared/react/next-with-apollo';
 
 const apolloClient = createApolloClient(null, null);
 
@@ -314,7 +317,7 @@ Your server is ready, you can access http://localhost:3000/api/grahpql and try i
 Now you need to change the Apollo Client to consume this new endpoint with APQ:
 
 ```js
-// shared/modules/with-apollo/apolloClient.js
+// shared/react/with-apollo/apollo-client.js
 import { createPersistedQueryLink } from 'apollo-link-persisted-queries';
 //...
 
@@ -343,7 +346,7 @@ export default function createApolloClient(initialState, ctx, preview = false) {
 }
 ```
 
-> ℹ️For the preview it is recommended to use directly the Content Delivery API, so when someone changes the content on **DatoCMS** they can see it immediately.
+> ℹ️ For the preview it is recommended to use directly the Content Delivery API, so when someone changes the content on **DatoCMS** they can see it immediately.
 
 Last step is to add cache control headers. Apollo Server has a `cacheControl` option that you can use if you want to use normal cache:
 

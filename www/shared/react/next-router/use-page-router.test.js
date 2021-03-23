@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router'; // eslint-disable-line no-restricted-imports
-import { render } from '../../test-utils';
+import { render } from '../testing-library';
 import usePageRouter from './use-page-router';
 
 jest.mock('next/router', () => ({

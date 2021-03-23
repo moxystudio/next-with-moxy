@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '../../test-utils';
+import { render, screen } from '../testing-library';
 
 beforeEach(() => {
     process.env.DATOCMS_TOKEN = 'foo';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '../shared/test-utils';
+import { render } from '../shared/react/testing-library';
 import Document from './Document';
 
 jest.mock('next/document', () => ({

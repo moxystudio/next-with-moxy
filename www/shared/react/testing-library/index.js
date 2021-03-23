@@ -2,8 +2,8 @@
 
 import { render, queries } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import AppTree from './modules/react-app-tree';
-import * as customQueries from './modules/custom-queries';
+import AppTree from './app-tree';
+import * as customQueries from './custom-queries';
 
 const customRender = (ui, options) =>
     render(ui, {

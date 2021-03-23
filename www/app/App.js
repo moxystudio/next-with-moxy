@@ -7,11 +7,11 @@ import { LayoutTree } from '@moxy/next-layout';
 import { RouterScrollProvider } from '@moxy/next-router-scroll';
 import Seo from '@moxy/next-seo';
 import nextIntlConfig from '../../intl';
-import PageSwapper from '../shared/modules/react-page-swapper';
-import MainLayout from '../shared/modules/react-main-layout';
-import CookieBanner from '../shared/modules/react-cookie-banner';
-import { usePageKey } from '../shared/modules/next-router';
+import PageSwapper from '../shared/react/page-swapper';
+import MainLayout from '../shared/react/main-layout';
+import { usePageKey } from '../shared/react/next-router';
 import { initGTM, destroyGTM } from '../shared/utils/google-tag-manager';
+import CookieBanner from './cookie-banner';
 import { seoData } from './App.data.js';
 
 export const AppInner = ({ Component, pageProps }) => {
