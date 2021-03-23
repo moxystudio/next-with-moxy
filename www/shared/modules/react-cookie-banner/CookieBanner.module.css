@@ -4,9 +4,10 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 8rem;
+    min-width: var(--viewport-min-width);
+    min-height: 8rem;
     z-index: calc(var(--z-index-cookie-banner) + 1);
-    padding: 0 2.5rem;
+    padding: 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
