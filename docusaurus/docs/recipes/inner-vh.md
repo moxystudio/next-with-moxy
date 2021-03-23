@@ -6,17 +6,19 @@ sidebar_label: Inner vh CSS
 
 Some mobile browsers define a fixed value for the vh based on the maximum height of the screen. By doing so, the user would not experience jumps on the page once the address bar went out of view. However, in some situations, you want to to target the visible viewport (inner), regardless of the address bar being visible or not.
 
-To address this, this recipe allows you to target the inner viewport height using the `--inner-vh` CSS variable.
+To address the issue, this recipe allows you to target the inner viewport height using the `--inner-vh` CSS variable.
+
+You may read more at about this subject in the following article: https://css-tricks.com/the-trick-to-viewport-units-on-mobile/.
 
 ## Walk-through
 
-### 1. Installing the necessary dependencies
+### 1. Install the necessary dependencies
 
 ```sh
 $ npm i inner-vh detect-it
 ```
 
-### 2. Setup inner-vh module
+### 2. Setup `inner-vh` module
 
 ```js
 // www/app/App.js
