@@ -38,6 +38,7 @@ module.exports = {
             label: 'Recipes',
             items: [
                 'recipes/rest-api',
+                'recipes/inner-vh',
                 'recipes/splash-screen',
                 'recipes/video-player',
                 'recipes/favicon-os-theme',

@@ -4,7 +4,7 @@ title: Implementing Contentful
 sidebar_label: Contentful
 ---
 
-This recipe aims to guide you through the implementation of Contentful in the project and also provides custom solutions for different use-cases.  
+This recipe aims to guide you through the implementation of Contentful in the project and also provides custom solutions for different use-cases.
 
 ### What is a CMS?
 
@@ -32,7 +32,7 @@ Keep in mind:
 
 ## Localization
 
-**Contentful** makes it easy to add localized content to your application. Once you define a locale, which you can do in the Locales option in the Settings menu, you can specify in each field you create whether they can be localized, in what languages, etc., giving you fine control over what needs to be localized and what doesn't. 
+**Contentful** makes it easy to add localized content to your application. Once you define a locale, which you can do in the Locales option in the Settings menu, you can specify in each field you create whether they can be localized, in what languages, etc., giving you fine control over what needs to be localized and what doesn't.
 
 Once having these locales, you can then use the **Contentful** API signaling your desired locale through the `locale` field. You'll find an example of this in the next section.
 
@@ -43,7 +43,7 @@ Contentful splits content changes in 3 states:
 - `Published`: when a user saves some content.
 - `Changed`: when the user changes previously saved content but still hasn't saved the new one.
 - `Draft`: when the user creates new content but doesn't save.
-  
+
 Usually, only `Published` content is available, unless a specific request is done. This request is called `Preview` and may help users see beforehand how content would look like on their website before publishing it and making it available for every visitor.
 
 However, Contentful **does not validate content that is not published.** This means that, if your app relies on validation from Contentful, **it will likely break in preview mode unless all content in Contentful already passes validation.** This is assumed and must taken into account when developing your applications and communicated to potential users.
@@ -79,7 +79,7 @@ CONTENTFUL_TOKEN=<DELIVERY_TOKEN>
 CONTENTFUL_PREVIEW_TOKEN=<PREVIEW_TOKEN>
 ```
 
-Setting up the SDK can be done as follows: 
+Setting up the SDK can be done as follows:
 
 ```js
 import { createClient } from 'contentful';
@@ -94,7 +94,7 @@ const client = createClient({
 This `client` exposes the functions necessary to fetch the data in **Contentful**, for example:
 
 ```js
-const result = await client.getEntries({ 
+const result = await client.getEntries({
     content_type: 'clients',
 });
 ```
@@ -113,7 +113,7 @@ In the contents you are retrieving, you may have links to other contents. In thi
 You can change the depth to which links will be resolved with the option `include`. By default it is set at `1`, and its maximum value is `10`. Please consider that a higher `include` value will introduce more complexity to the resolver and may result in a loss of performance.
 
 ```js
-const result = await client.getEntries({ 
+const result = await client.getEntries({
     content_type: 'clients',
     include: 0,
 });
@@ -147,7 +147,7 @@ App.getInitialProps = async ({Component, ctx, router}) => {
         accessToken: contentfulToken, // Delivery API Token
         host: contentfulHost, // Delivery API host
     });
-    
+
     // Append it to the context object so other Components can access it
     ctx.contentfulClient = client;
 
@@ -156,7 +156,7 @@ App.getInitialProps = async ({Component, ctx, router}) => {
     if (Component.getInitialProps) {
         pageProps = await Component.getInitialProps(ctx);
     }
-    
+
     // Return the state here to receive as a prop,
     // allowing you to conditionally render a DOM element in case of preview
     return { pageProps, isPreviewingContentful };
@@ -185,7 +185,7 @@ UseCases.getInitialProps = async (ctx) => {
 
 When using Next.js, you can use [next-redux-wrapper](https://github.com/kirill-konshin/next-redux-wrapper) to integrate Redux in your application. We will be using this wrapper as part of this walkthrough, but will not cover its integration.  For more detailed information on this package, e.g. how to install it, please refer to its documentation.
 
-As part of using this package, you'll have to create a function (which we'll call `buildStore` ) which should return the instance of the Redux store in your application, and it will be here that you will create your `client` instance, and decide whether it should fetch published or preview content. 
+As part of using this package, you'll have to create a function (which we'll call `buildStore` ) which should return the instance of the Redux store in your application, and it will be here that you will create your `client` instance, and decide whether it should fetch published or preview content.
 
 Given the nature of Next.js and the implementation of [next-redux-wrapper](https://github.com/kirill-konshin/next-redux-wrapper), `buildStore` will run twice, once server-side and once client-side, requiring you to consistently instantiate the `client` to be the same for both cases. But the same strategy cannot be used for both. Each requires its own solution. 
 
@@ -211,7 +211,7 @@ export const buildStore = (initialState, { query }) => {
         // For client-side, check wether `window` exist and has the `cms-preview` query parameter
         (typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('cms-preview'))
     ) {
-        // In a positive case, switch the client instance to access the Preview API instead		
+        // In a positive case, switch the client instance to access the Preview API instead
         client = createClient({
             space: process.env.CONTENTFUL_SPACE_ID,
             accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN, // Preview API Token
@@ -222,7 +222,7 @@ export const buildStore = (initialState, { query }) => {
     const reducer = {
         // Example reducer
     };
-    
+
     // Add client as a thunk middleware
     // This will give us access to the `client` object in our fetcher functions as an argument
     const middlewares = applyMiddleware(thunkMiddleware.withExtraArgument({ client }));
@@ -278,13 +278,13 @@ Since we're on the topic, you must use a similar strategy in your `App.js` file 
 
 As an example, we show how to conditionally render `ContentfulPreview`, which is a component that consists in a ribbon that is placed on the page to indicate the user is viewing a preview version of the content.
 
-Using hooks: 
+Using hooks:
 
 ```js
 // www/app/App.js
 const App = ({ Component, pageProps, rootSelector, router }) => {
     const [isPreviewingContentful, setIsPreviewingContentful] = useState(false);
-    
+
     // Using a useEffect hook with no dependencies guaranties that it fires only once per instance of App
     useEffect(() => setIsPreviewingContentful(Object.hasOwnProperty.call(router.query, 'cms-preview')), []);
 

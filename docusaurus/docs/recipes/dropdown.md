@@ -251,7 +251,8 @@ export default function App() {
 
 #### 3. Native _select_ behavior support
 
-On mobile/touch devices, the use of native _select_ behavior is highly recommended due to UX reasons. To implement that, our `<Dropdown>` component is going to need some enhancements. Our approach will place a native select element on top of our trigger button, with the same items that we are passing to our `<Dropdown>` component, but it will be invisible.   
+On mobile/touch devices, the use of native _select_ behavior is highly recommended due to UX reasons. To implement that, our `<Dropdown>` component is going to need some enhancements. Our approach will place a native select element on top of our trigger button, with the same items that we are passing to our `<Dropdown>` component, but it will be invisible.
+
 Whenever an option is selected, we need to update the internal state of `Downshift` so that those changes are reflected on the custom `<Dropdown>`.
 
 Take a look at the following steps:
