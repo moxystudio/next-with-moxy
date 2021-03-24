@@ -13,9 +13,12 @@ import MainLayout from '../shared/react/main-layout';
 import { usePageKey } from '../shared/react/next-router';
 import { initGTM, destroyGTM } from '../shared/modules/google-tag-manager';
 import CookieBanner from './cookie-banner';
+import useFossFix from './use-foss-fix';
 import { seoData } from './App.data.js';
 
 export const AppInner = ({ Component, pageProps }) => {
+    useFossFix();
+
     const pageKey = usePageKey();
 
     const handleCookieConsents = useCallback((cookieConsents) => {
