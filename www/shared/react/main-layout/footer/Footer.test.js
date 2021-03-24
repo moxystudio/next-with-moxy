@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '../testing-library';
+import { render } from '../../testing-library';
 import Footer from './Footer';
 
 it('should render correctly', () => {

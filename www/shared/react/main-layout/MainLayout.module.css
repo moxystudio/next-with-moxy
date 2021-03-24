@@ -5,15 +5,14 @@
     display: flex;
     flex: 1;
     flex-direction: column;
+    background-color: var(--color-white);
 
     & .header {
         flex: 0 0 auto;
     }
 
     & .content {
-        padding: 2.5rem;
         flex: 1 0 auto;
-        background-color: var(--color-white);
     }
 
     & .footer {

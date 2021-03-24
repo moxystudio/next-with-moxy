@@ -1,0 +1,153 @@
+@import "../../styles/imports";
+
+.container {
+    width: var(--grid-width);
+    min-width: var(--grid-min-width);
+    max-width: var(--grid-max-width);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    margin-right: calc(-1 * var(--grid-gutter));
+    margin-left: calc(-1 * var(--grid-gutter));
+    padding-right: calc(var(--grid-gutter) / 2);
+    padding-left: calc(var(--grid-gutter) / 2);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col {
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--grid-gutter) / 2);
+    padding-left: calc(var(--grid-gutter) / 2);
+    flex: 1 0 0%;
+}
+
+@each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
+    /* columns: auto */
+    @media (--gte-$breakpoint) {
+        .col-$(breakpoint)-auto {
+            width: auto;
+            flex: 0 0 auto;
+        }
+    }
+
+    /* justify-content */
+    @each $justify-content-variant in (flex-start, center, flex-end, space-between, space-around, space-evenly) {
+        @media (--gte-$breakpoint) {
+            .justify-content-$(breakpoint)-$(justify-content-variant) {
+                justify-content: $justify-content-variant;
+            }
+        }
+    }
+
+    /* align-items */
+    @each $align-items-variant in (flex-start, center, flex-end, baseline, stretch) {
+        @media (--gte-$breakpoint) {
+            .align-items-$(breakpoint)-$(align-items-variant) {
+                align-items: $align-items-variant;
+            }
+        }
+    }
+}
+
+/* [xxs, xs] */
+
+@each $breakpoint in (xxs, xs) {
+    $columns: 4;
+    $offsets: 3;
+
+    /* columns = <number> */
+    @for $x from 1 to $columns by 1 {
+        @media (--gte-$breakpoint) {
+            .col-$(x) {
+                max-width: calc($x / $columns * 100%);
+                flex: 0 0 calc($x / $columns * 100%);
+            }
+            .col-$(breakpoint)-$(x) {
+                max-width: calc($x / $columns * 100%);
+                flex: 0 0 calc($x / $columns * 100%);
+            }
+        }
+    }
+
+    /* columnsOffset = <number> */
+    @for $x from 0 to $offsets by 1 {
+        @media (--gte-$breakpoint) {
+            .col-offset-$(x) {
+                margin-left: calc($x / $columns * 100%);
+            }
+            .col-offset-$(breakpoint)-$(x) {
+                margin-left: calc($x / $columns * 100%);
+            }
+        }
+    }
+}
+
+/* [sm, sm] */
+
+@each $breakpoint in (sm) {
+    $columns: 8;
+    $offsets: 7;
+
+    /* columns = <number> */
+    @for $x from 1 to $columns by 1 {
+        @media (--gte-$breakpoint) {
+            .col-$(x) {
+                max-width: calc($x / $columns * 100%);
+                flex: 0 0 calc($x / $columns * 100%);
+            }
+            .col-$(breakpoint)-$(x) {
+                max-width: calc($x / $columns * 100%);
+                flex: 0 0 calc($x / $columns * 100%);
+            }
+        }
+    }
+
+    /* columnsOffset = <number> */
+    @for $x from 0 to $offsets by 1 {
+        @media (--gte-$breakpoint) {
+            .col-offset-$(x) {
+                margin-left: calc($x / $columns * 100%);
+            }
+            .col-offset-$(breakpoint)-$(x) {
+                margin-left: calc($x / $columns * 100%);
+            }
+        }
+    }
+}
+
+/* [md, xxl] */
+
+@each $breakpoint in (md, lg, xl, xxl) {
+    $columns: 12;
+    $offsets: 11;
+
+    /* columns = <number> */
+    @for $x from 1 to $columns by 1 {
+        @media (--gte-$breakpoint) {
+            .col-$(x) {
+                max-width: calc($x / $columns * 100%);
+                flex: 0 0 calc($x / $columns * 100%);
+            }
+            .col-$(breakpoint)-$(x) {
+                max-width: calc($x / $columns * 100%);
+                flex: 0 0 calc($x / $columns * 100%);
+            }
+        }
+    }
+
+    /* columnsOffset = <number> */
+    @for $x from 0 to $offsets by 1 {
+        @media (--gte-$breakpoint) {
+            .col-offset-$(x) {
+                margin-left: calc($x / $columns * 100%);
+            }
+            .col-offset-$(breakpoint)-$(x) {
+                margin-left: calc($x / $columns * 100%);
+            }
+        }
+    }
+}

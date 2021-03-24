@@ -7,6 +7,7 @@ import { LayoutTree } from '@moxy/next-layout';
 import { RouterScrollProvider } from '@moxy/next-router-scroll';
 import Seo from '@moxy/next-seo';
 import nextIntlConfig from '../../intl';
+import { Debug as DebugGrid } from '../shared/react/grid';
 import PageSwapper from '../shared/react/page-swapper';
 import MainLayout from '../shared/react/main-layout';
 import { usePageKey } from '../shared/react/next-router';
@@ -44,6 +45,7 @@ export const AppInner = ({ Component, pageProps }) => {
 
             <KeyboardOnlyOutlines />
             <CookieBanner onConsents={ handleCookieConsents } />
+            <DebugGrid />
 
             <LayoutTree
                 Component={ Component }

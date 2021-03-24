@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import PageSwapper from '../page-swapper';
-import Header from '../header';
-import Footer from '../footer';
+import Header from './header';
+import Footer from './footer';
 
 import styles from './MainLayout.module.css';
 

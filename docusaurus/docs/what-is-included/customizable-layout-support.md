@@ -1,6 +1,6 @@
 ---
 id: customizable-layout-support
-title: Customizable layout support 
+title: Customizable layout support
 sidebar_label: Customizable layout support
 ---
 

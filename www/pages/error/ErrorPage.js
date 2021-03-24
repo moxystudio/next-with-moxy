@@ -2,25 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Link from 'next/link';
+import { Container } from '../../shared/react/grid';
 
 import styles from './ErrorPage.module.css';
 
 const ErrorPage = ({ statusCode }) => (
     <main className={ styles.error }>
-        <h1>
-            { statusCode === 404 ?
-                <FormattedMessage id="error.not-found.title" /> :
-                <FormattedMessage id="error.internal.title" />
-            }
-        </h1>
+        <Container>
+            <h1>
+                { statusCode === 404 ?
+                    <FormattedMessage id="error.not-found.title" /> :
+                    <FormattedMessage id="error.internal.title" />
+                }
+            </h1>
 
-        <p>
-            <Link href="/">
-                <a>
-                    <FormattedMessage id="error.return-to-home" />
-                </a>
-            </Link>
-        </p>
+            <p>
+                <Link href="/">
+                    <a>
+                        <FormattedMessage id="error.return-to-home" />
+                    </a>
+                </Link>
+            </p>
+        </Container>
     </main>
 );
 

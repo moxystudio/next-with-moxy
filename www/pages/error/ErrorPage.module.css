@@ -1,5 +1,5 @@
 @import "../../shared/styles/imports";
 
 .error {
-    background-color: var(--color-white);
+    padding: 2.5rem 0;
 }

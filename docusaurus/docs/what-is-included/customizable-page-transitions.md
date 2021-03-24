@@ -1,6 +1,6 @@
 ---
 id: customizable-page-transitions
-title: Customizable page transitions 
+title: Customizable page transitions
 sidebar_label: Customizable page transitions
 ---
 

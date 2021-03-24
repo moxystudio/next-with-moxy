@@ -18,6 +18,64 @@
 }
 
 /* ==========================================================================
+   Grid
+   Must be the same as the one defined in grid.module.css
+   ========================================================================== */
+
+/* [xxs, xxs] */
+
+:root {
+    --grid-gutter: 1.6rem;
+    --grid-width: calc(100% - (2rem * 2));
+    --grid-min-width: auto;
+    --grid-max-width: none;
+}
+
+/* [xs, sm[ */
+
+:root {
+    @media (--gte-xs) {
+        --grid-gutter: 1.6rem;
+        --grid-width: calc(100% - (2rem * 2));
+        --grid-min-width: auto;
+        --grid-max-width: 66rem;
+    }
+}
+
+/* [sm, md[ */
+
+:root {
+    @media (--gte-sm) {
+        --grid-gutter: 2rem;
+        --grid-width: 85%;
+        --grid-min-width: auto;
+        --grid-max-width: none;
+    }
+}
+
+/* [md, lg[ */
+
+:root {
+    @media (--gte-md) {
+        --grid-gutter: 2rem;
+        --grid-width: 85%;
+        --grid-min-width: auto;
+        --grid-max-width: 102.4rem;
+    }
+}
+
+/* [lg, infinity[ */
+
+:root {
+    @media (--gte-lg) {
+        --grid-gutter: 2rem;
+        --grid-width: 85%;
+        --grid-min-width: auto;
+        --grid-max-width: 120rem;
+    }
+}
+
+/* ==========================================================================
    Z-index
    ========================================================================== */
 

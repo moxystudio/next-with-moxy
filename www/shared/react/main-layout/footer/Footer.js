@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Container } from '../../grid';
 import styles from './Footer.module.css';
 
 const Footer = ({ className, ...rest }) => {
@@ -8,7 +9,9 @@ const Footer = ({ className, ...rest }) => {
 
     return (
         <footer className={ classNames(styles.footer, className) } { ...rest }>
-            { year } © MOXY
+            <Container>
+                { year } © MOXY
+            </Container>
         </footer>
     );
 };

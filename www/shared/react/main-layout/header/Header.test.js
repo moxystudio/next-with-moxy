@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '../testing-library';
+import { render } from '../../testing-library';
 import Header from './Header';
 
 it('should render correctly', () => {

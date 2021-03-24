@@ -18,6 +18,8 @@ module.exports = {
                 'what-is-included/available-scripts',
                 'what-is-included/eslint-stylelint',
                 'what-is-included/css-modules',
+                'what-is-included/breakpoints',
+                'what-is-included/grid-system',
                 'what-is-included/customizable-layout-support',
                 'what-is-included/customizable-page-transitions',
                 'what-is-included/internationalization',

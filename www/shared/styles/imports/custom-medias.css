@@ -1,45 +1,45 @@
 /* ==========================================================================
    Custom media queries - for more information check https://github.com/postcss/postcss-custom-media
 
-   Use it like so: @media (--layout-small) { ... }
+   Use it like so: @media (--sm) { ... }
    ========================================================================== */
 
 /* Use these if you are developing for desktop first and want to target lower resolutions (including) */
 
-@custom-media --layout-lte-xxsmall (width <= 23.4375em); /* 375px */
-@custom-media --layout-lte-xsmall (width <= 30em); /* 480px */
-@custom-media --layout-lte-small (width <= 48em); /* 768px */
-@custom-media --layout-lte-medium (width <= 64em); /* 1024px */
-@custom-media --layout-lte-large (width <= 80em); /* 1280px */
-@custom-media --layout-lte-xlarge (width <= 90em); /* 1440px */
-@custom-media --layout-lte-xxlarge (width <= 120em); /* 1920px */
+@custom-media --lte-xxs (width <= 20em); /* 320px */
+@custom-media --lte-xs (width <= 30em); /* 480px */
+@custom-media --lte-sm (width <= 48em); /* 768px */
+@custom-media --lte-md (width <= 64em); /* 1024px */
+@custom-media --lte-lg (width <= 80em); /* 1280px */
+@custom-media --lte-xl (width <= 90em); /* 1440px */
+@custom-media --lte-xxl (width <= 120em); /* 1920px */
 
 /* Use these if you are developing for desktop first and want to target lower resolutions (not including) */
 
-@custom-media --layout-lt-xxsmall (width < 23.4375em); /* 375px */
-@custom-media --layout-lt-xsmall (width < 30em); /* 480px */
-@custom-media --layout-lt-small (width < 48em); /* 768px */
-@custom-media --layout-lt-medium (width < 64em); /* 1024px */
-@custom-media --layout-lt-large (width < 80em); /* 1280px */
-@custom-media --layout-lt-xlarge (width < 90em); /* 1440px */
-@custom-media --layout-lt-xxlarge (width < 120em); /* 1920px */
+@custom-media --lt-xxs (width < 20em); /* 320px */
+@custom-media --lt-xs (width < 30em); /* 480px */
+@custom-media --lt-sm (width < 48em); /* 768px */
+@custom-media --lt-md (width < 64em); /* 1024px */
+@custom-media --lt-lg (width < 80em); /* 1280px */
+@custom-media --lt-xl (width < 90em); /* 1440px */
+@custom-media --lt-xxl (width < 120em); /* 1920px */
 
 /* Use these if you are developing for mobile first and want to target higher resolutions (including) */
 
-@custom-media --layout-gte-xxsmall (width >= 23.4375em); /* 375px */
-@custom-media --layout-gte-xsmall (width >= 30em); /* 480px */
-@custom-media --layout-gte-small (width >= 48em); /* 768px */
-@custom-media --layout-gte-medium (width >= 64em); /* 1024px */
-@custom-media --layout-gte-large (width >= 80em); /* 1280px */
-@custom-media --layout-gte-xlarge (width >= 90em); /* 1440px */
-@custom-media --layout-gte-xxlarge (width >= 120em); /* 1920px */
+@custom-media --gte-xxs (width >= 0); /* 0 */
+@custom-media --gte-xs (width >= 30em); /* 480px */
+@custom-media --gte-sm (width >= 48em); /* 768px */
+@custom-media --gte-md (width >= 64em); /* 1024px */
+@custom-media --gte-lg (width >= 80em); /* 1280px */
+@custom-media --gte-xl (width >= 90em); /* 1440px */
+@custom-media --gte-xxl (width >= 120em); /* 1920px */
 
 /* Use these if you are developing for mobile first and want to target higher resolutions (not including) */
 
-@custom-media --layout-gt-xxsmall (width > 23.4375em); /* 375px */
-@custom-media --layout-gt-xsmall (width > 30em); /* 480px */
-@custom-media --layout-gt-small (width > 48em); /* 768px */
-@custom-media --layout-gt-medium (width > 64em); /* 1024px */
-@custom-media --layout-gt-large (width > 80em); /* 1280px */
-@custom-media --layout-gt-xlarge (width > 90em); /* 1440px */
-@custom-media --layout-gt-xxlarge (width > 120em); /* 1920px */
+@custom-media --gt-xxs (width > 0); /* 0 */
+@custom-media --gt-xs (width > 30em); /* 480px */
+@custom-media --gt-sm (width > 48em); /* 768px */
+@custom-media --gt-md (width > 64em); /* 1024px */
+@custom-media --gt-lg (width > 80em); /* 1280px */
+@custom-media --gt-xl (width > 90em); /* 1440px */
+@custom-media --gt-xxl (width > 120em); /* 1920px */

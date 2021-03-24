@@ -1,0 +1,86 @@
+@import "../../styles/imports";
+
+.debug {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-width: 32.5rem;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    pointer-events: none;
+
+    & .container {
+        height: 100%;
+    }
+
+    &.visible {
+        visibility: visible;
+    }
+
+    & .row {
+        height: 100%;
+    }
+
+    & .col {
+        height: 100%;
+    }
+
+    & .colContent {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 0, 0, 0.15);
+        color: red;
+        font-weight: 600;
+    }
+
+    & .currentBreakpoint::after {
+        content: "xxs";
+        position: absolute;
+        bottom: 2rem;
+        left: 2rem;
+        color: red;
+        font-weight: 600;
+    }
+
+    @media (--gte-xs) {
+        & .currentBreakpoint::after {
+            content: "xs";
+        }
+    }
+
+    @media (--gte-sm) {
+        & .currentBreakpoint::after {
+            content: "sm";
+        }
+    }
+
+    @media (--gte-md) {
+        & .currentBreakpoint::after {
+            content: "md";
+        }
+    }
+
+    @media (--gte-lg) {
+        & .currentBreakpoint::after {
+            content: "lg";
+        }
+    }
+
+    @media (--gte-xl) {
+        & .currentBreakpoint::after {
+            content: "xl";
+        }
+    }
+
+    @media (--gte-xxl) {
+        & .currentBreakpoint::after {
+            content: "xxl";
+        }
+    }
+}
