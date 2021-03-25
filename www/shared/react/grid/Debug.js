@@ -4,7 +4,8 @@ import Container from './Container';
 import Row from './Row';
 import Col from './Col';
 
-import styles from './Debug.module.css';
+// eslint-disable-next-line import/no-commonjs
+const styles = process.env.NODE_ENV === 'production' ? {} : require('./Debug.module.css');
 
 const Debug = () => {
     const [visible, setVisible] = useState(false);
