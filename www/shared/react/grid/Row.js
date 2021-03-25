@@ -13,8 +13,8 @@ const Row = forwardRef(({
 }, ref) => {
     const finalClassName = classNames(
         styles.row,
-        getResponsiveClasses('justify-content', justifyContent),
-        getResponsiveClasses('align-items', alignItems),
+        getResponsiveClasses('row-justify-content', justifyContent),
+        getResponsiveClasses('row-align-items', alignItems),
         className,
     );
 

@@ -25,36 +25,48 @@
     flex: 1 0 0%;
 }
 
-@each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
-    /* columns: auto */
-    @media (--gte-$breakpoint) {
-        .col-$(breakpoint)-auto {
-            width: auto;
-            flex: 0 0 auto;
-        }
+/* Row: justify-content */
+@each $justify-content-variant in (flex-start, center, flex-end, space-between, space-around, space-evenly) {
+    .row-justify-content-$(justify-content-variant) {
+        justify-content: $justify-content-variant;
     }
 
-    /* justify-content */
-    @each $justify-content-variant in (flex-start, center, flex-end, space-between, space-around, space-evenly) {
-        @media (--gte-$breakpoint) {
-            .justify-content-$(breakpoint)-$(justify-content-variant) {
-                justify-content: $justify-content-variant;
-            }
-        }
-    }
-
-    /* align-items */
-    @each $align-items-variant in (flex-start, center, flex-end, baseline, stretch) {
-        @media (--gte-$breakpoint) {
-            .align-items-$(breakpoint)-$(align-items-variant) {
-                align-items: $align-items-variant;
-            }
+    @each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
+        .row-justify-content-$(breakpoint)-$(justify-content-variant) {
+            justify-content: $justify-content-variant;
         }
     }
 }
 
-/* [xxs, xs] */
+/* Row: align-items */
+@each $align-items-variant in (flex-start, center, flex-end, baseline, stretch) {
+    .row-align-items-$(align-items-variant) {
+        align-items: $align-items-variant;
+    }
 
+    @each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
+        .row-align-items-$(breakpoint)-$(align-items-variant) {
+            align-items: $align-items-variant;
+        }
+    }
+}
+
+/* Col: auto */
+.col-column-auto {
+    width: auto;
+    flex: 0 0 auto;
+}
+
+@each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
+    @media (--gte-$breakpoint) {
+        .col-column-$(breakpoint)-auto {
+            width: auto;
+            flex: 0 0 auto;
+        }
+    }
+}
+
+/* Col: [xxs, xs] */
 @each $breakpoint in (xxs, xs) {
     $columns: 4;
     $offsets: 3;
@@ -62,18 +74,18 @@
     /* columns = <number> */
     @for $x from 1 to $columns by 1 {
         @media (--gte-$breakpoint) {
-            .col-$(x) {
+            .col-column-$(x) {
                 max-width: calc($x / $columns * 100%);
                 flex: 0 0 calc($x / $columns * 100%);
             }
-            .col-$(breakpoint)-$(x) {
+            .col-column-$(breakpoint)-$(x) {
                 max-width: calc($x / $columns * 100%);
                 flex: 0 0 calc($x / $columns * 100%);
             }
         }
     }
 
-    /* columnsOffset = <number> */
+    /* offset = <number> */
     @for $x from 0 to $offsets by 1 {
         @media (--gte-$breakpoint) {
             .col-offset-$(x) {
@@ -86,8 +98,7 @@
     }
 }
 
-/* [sm, sm] */
-
+/* col: [sm, sm] */
 @each $breakpoint in (sm) {
     $columns: 8;
     $offsets: 7;
@@ -95,18 +106,18 @@
     /* columns = <number> */
     @for $x from 1 to $columns by 1 {
         @media (--gte-$breakpoint) {
-            .col-$(x) {
+            .col-column-$(x) {
                 max-width: calc($x / $columns * 100%);
                 flex: 0 0 calc($x / $columns * 100%);
             }
-            .col-$(breakpoint)-$(x) {
+            .col-column-$(breakpoint)-$(x) {
                 max-width: calc($x / $columns * 100%);
                 flex: 0 0 calc($x / $columns * 100%);
             }
         }
     }
 
-    /* columnsOffset = <number> */
+    /* offset = <number> */
     @for $x from 0 to $offsets by 1 {
         @media (--gte-$breakpoint) {
             .col-offset-$(x) {
@@ -119,8 +130,7 @@
     }
 }
 
-/* [md, xxl] */
-
+/* col: [md, xxl] */
 @each $breakpoint in (md, lg, xl, xxl) {
     $columns: 12;
     $offsets: 11;
@@ -128,18 +138,18 @@
     /* columns = <number> */
     @for $x from 1 to $columns by 1 {
         @media (--gte-$breakpoint) {
-            .col-$(x) {
+            .col-column-$(x) {
                 max-width: calc($x / $columns * 100%);
                 flex: 0 0 calc($x / $columns * 100%);
             }
-            .col-$(breakpoint)-$(x) {
+            .col-column-$(breakpoint)-$(x) {
                 max-width: calc($x / $columns * 100%);
                 flex: 0 0 calc($x / $columns * 100%);
             }
         }
     }
 
-    /* columnsOffset = <number> */
+    /* offset = <number> */
     @for $x from 0 to $offsets by 1 {
         @media (--gte-$breakpoint) {
             .col-offset-$(x) {

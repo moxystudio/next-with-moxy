@@ -4,7 +4,7 @@ title: Grid system
 sidebar_label: Grid system
 ---
 
-The boilerplate comes with a standardized Grid system to help you position elements on the screen, base of CSS flex box. It has the following specs:
+The boilerplate comes with a standardized Grid system to help you position elements on the screen, based on CSS flex box. It has the following specs:
 
 | Breakpoint | Columns | Gutters | Width | Max Width |
 | ---------- | ------- | ------- | ----- | --------- |
