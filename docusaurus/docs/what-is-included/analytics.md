@@ -51,7 +51,7 @@ For privacy purposes, and in compliance with [GDPR](https://en.wikipedia.org/wik
 
 If you are sure you do not need analytics in your project, you can remove all the analytics related code. To do so, take the following steps:
 
-1. Uninstall `react-cookies` if no other component uses it.
+1. Uninstall `use-local-storage-stage` if no other component uses it.
 2. Remove the `<CookieBanner />` component and its associated components.
 3. Delete the `www/shared/utils/google-tag-manager` module. Also, make sure to cleanup the files where it was being used, such as the `<App />` component. The global search feature of your editor will be your best friend here.
 4. Update your unit tests if necessary so that they all pass!
