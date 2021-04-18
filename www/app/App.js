@@ -2,11 +2,10 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import KeyboardOnlyOutlines from '@moxy/react-keyboard-only-outlines';
-import { withNextIntlSetup } from '@moxy/next-intl';
+import { withIntlApp } from '@moxy/next-intl';
 import { LayoutTree } from '@moxy/next-layout';
 import { RouterScrollProvider } from '@moxy/next-router-scroll';
 import Seo from '@moxy/next-seo';
-import nextIntlConfig from '../../intl';
 import { Debug as DebugGrid } from '../shared/react/grid';
 import PageSwapper from '../shared/react/page-swapper';
 import MainLayout from '../shared/react/main-layout';
@@ -16,7 +15,7 @@ import CookieBanner from './cookie-banner';
 import useFossFix from './use-foss-fix';
 import { seoData } from './App.data.js';
 
-export const AppInner = ({ Component, pageProps }) => {
+export const App = ({ Component, pageProps }) => {
     useFossFix();
 
     const pageKey = usePageKey();
@@ -50,31 +49,29 @@ export const AppInner = ({ Component, pageProps }) => {
             <CookieBanner onConsents={ handleCookieConsents } />
             <DebugGrid />
 
-            <LayoutTree
-                Component={ Component }
-                pageProps={ pageProps }
-                pageKey={ pageKey }
-                defaultLayout={ <MainLayout /> }>
-                { (tree) => <PageSwapper node={ tree } nodeKey={ tree.key } /> }
-            </LayoutTree>
+            <RouterScrollProvider>
+                <LayoutTree
+                    Component={ Component }
+                    pageProps={ pageProps }
+                    pageKey={ pageKey }
+                    defaultLayout={ <MainLayout /> }>
+                    { (tree) => <PageSwapper node={ tree } nodeKey={ tree.key } /> }
+                </LayoutTree>
+            </RouterScrollProvider>
         </>
     );
 };
-
-AppInner.propTypes = {
-    Component: PropTypes.elementType.isRequired,
-    pageProps: PropTypes.object.isRequired,
-};
-
-export const App = (props) => (
-    <RouterScrollProvider>
-        <AppInner { ...props } />
-    </RouterScrollProvider>
-);
 
 App.propTypes = {
     Component: PropTypes.elementType.isRequired,
     pageProps: PropTypes.object.isRequired,
 };
 
-export default withNextIntlSetup(nextIntlConfig)(App);
+/* istanbul ignore next */
+const loadLocale = async (locale) => {
+    const module = await import(/* webpackChunkName: "intl-messages" */ `../../intl/${locale}.json`);
+
+    return module.default;
+};
+
+export default withIntlApp(loadLocale)(App);

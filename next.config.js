@@ -3,7 +3,6 @@
 const { withRasterImages, withPlayback, withSVG, withFonts, with3D } = require('@moxy/next-common-files');
 const withOneOf = require('@moxy/next-webpack-oneof');
 const withCompileNodeModules = require('@moxy/next-compile-node-modules');
-const withNextIntl = require('@moxy/next-intl/plugin');
 const withPlugins = require('next-compose-plugins');
 const withSitemap = require('@moxy/next-sitemaps/plugin');
 const envVar = require('env-var');
@@ -71,17 +70,15 @@ module.exports = (phase, params) => {
             include: /\.inline\./,
             inline: true,
         }),
-        withNextIntl(),
-        withCompileNodeModules({
-            exclude: [
-                // Exclude next-intl related polyfills as they are huge but are already compiled down to ES5
-                /[\\/]node_modules[\\/]@formatjs[\\/].+?[\\/]locales\.js$/,
-            ],
-        }),
+        withCompileNodeModules(),
         withSitemap(phase, SITE_URL),
     ], {
         poweredByHeader: false,
         compress: COMPRESSION,
+        i18n: {
+            locales: ['en'],
+            defaultLocale: 'en',
+        },
         env: {
             GTM_CONTAINER_ID,
             SITE_URL,

@@ -1,1 +1,1 @@
-export { default } from '../www/pages/contacts';
+export { default, getStaticProps } from '../www/pages/contacts';

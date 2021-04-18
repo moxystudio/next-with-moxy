@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`should render correctly 1`] = `"<head></head><body><div></div><script>!function(e){if(new Function(\\"var exports={};\\"+e.shouldPolyfill+\\"return shouldPolyfill()\\")()){var n=document.currentScript,t=document.createElement(\\"script\\");t.src=e.asset,n.parentNode.insertBefore(t,n.nextSibling)}}({\\"asset\\":\\"intl-polyfill-1.js\\",\\"shouldPolyfill\\":\\"exports.shouldPolyfill = () => true\\"})</script><div></div></body>"`;

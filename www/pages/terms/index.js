@@ -1,1 +1,1 @@
-export { default } from './Terms';
+export { default, getStaticProps } from './Terms';
