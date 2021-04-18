@@ -27,3 +27,13 @@ jest.mock('next/router', () => {
 
 // Mock Next.js internal router so that <Link> uses our mock as well.
 jest.mock('next/dist/client/router', () => require('next/router'));
+
+// Mock @moxy/next-intl.
+jest.mock('@moxy/next-intl', () => ({
+    withIntlApp: () => (App) => App,
+    getIntlProps: () => ({
+        intl: {
+            messages: {},
+        },
+    }),
+}));

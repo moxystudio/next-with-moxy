@@ -4,6 +4,8 @@ title: Implementing Contentful
 sidebar_label: Contentful
 ---
 
+> ⚠️ This recipe is out-of-date. It needs to be updated in regards to `i18n` as well as to use the new `getStaticProps` / `getServerSideProps` methods. If you are going to use use Contentful in your next project, please upgrade this recipe.
+
 This recipe aims to guide you through the implementation of Contentful in the project and also provides custom solutions for different use-cases.
 
 ### What is a CMS?

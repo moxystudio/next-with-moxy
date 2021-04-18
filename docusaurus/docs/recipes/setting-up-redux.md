@@ -74,23 +74,16 @@ export { default as buildStore } from './buildStore';
 In your `App.js`, import the newly created store, along with `withRedux` from `next-redux-wrapper` and `Provider` from `react-redux`.
 
 ```js
+// App.js
 import withRedux from 'next-redux-wrapper';
 import { Provider as ReduxProvider } from 'react-redux';
 import { compose } from 'redux'; // Only import this if you are already using other nested function transformations
 import { buildStore } from '../shared/redux';
-```
 
-If you are not using any other transformations on your `App` export, just transform it with the `withRedux` function (using `buildStore` as the argument):
+// ...
 
-```js
-export default withRedux(buildStore)(App);
-```
-
-Otherwise, add it to the enhance function:
-
-```js
 const enhance = compose(
-    withNextIntlSetup(nextIntlConfig),
+    withIntlApp(loadLocale),
     withRedux(buildStore),
 );
 

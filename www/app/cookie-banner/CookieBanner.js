@@ -3,20 +3,22 @@ import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import useLocalStorageState from 'use-local-storage-state';
+import { createLocalStorageStateHook } from 'use-local-storage-state';
 
 import styles from './CookieBanner.module.css';
 
 const MAX_CONSENT_DAYS = 365;
 const MAX_REJECTED_DAYS = 7;
 
+const useLocalStorageState = createLocalStorageStateHook('cookie-banner', {
+    consents: [],
+    consentedAt: null,
+    rejectedAt: null,
+});
+
 const CookieBanner = ({ className, onConsents, ...rest }) => {
     const [mounted, setMounted] = useState(false);
-    const [state, setState] = useLocalStorageState('cookie-banner', {
-        consents: [],
-        consentedAt: null,
-        rejectedAt: null,
-    });
+    const [state, setState] = useLocalStorageState();
 
     const consents = useMemo(() => (
         state.consentedAt > Date.now() - (MAX_CONSENT_DAYS * 24 * 60 * 60 * 1000) ? state.consents : []

@@ -1,1 +1,1 @@
-export { default } from './ErrorPage';
+export { default, getStaticProps } from './Error';
