@@ -76,8 +76,8 @@ module.exports = (phase, params) => {
         poweredByHeader: false,
         compress: COMPRESSION,
         i18n: {
-            locales: ['en'],
-            defaultLocale: 'en',
+            locales: ['en-US'],
+            defaultLocale: 'en-US',
         },
         env: {
             GTM_CONTAINER_ID,
