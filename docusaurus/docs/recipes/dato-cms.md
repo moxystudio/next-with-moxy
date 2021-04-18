@@ -4,7 +4,7 @@ title: Integrating DatoCMS
 sidebar_label: DatoCMS
 ---
 
-> ⚠️ This recipe is out-of-date. It needs to be updated in regards to `i18n` as well as to use the new `getStaticProps` / `getServerSideProps` methods. If you are going to use use DatoCMS in your next project, please upgrade this recipe.
+> ⚠️ This recipe is out-of-date. It needs to be updated in regards to `i18n` and to prioritize the usage of `getStaticProps` / `getServerSideProps` methods. If you are going to use use Contentful in your next project, please upgrade this recipe.
 
 Often there is a need to have a **Content Management System (CMS)** to manage all the website content in a easy way for non tech people.
 In this recipe you will be guided on how to setup and integrate **DatoCMS**.
