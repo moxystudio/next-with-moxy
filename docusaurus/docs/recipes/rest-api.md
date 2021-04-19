@@ -15,7 +15,7 @@ Besides getting familiar with the `@moxy/next-rest-api`, you might want to give 
 ### 1. Install `@moxy/next-rest-api`
 
 ```bash
-npm i @moxy/next-rest-api @hapi/joi @hapi/boom
+npm i @moxy/next-rest-api @hapi/boom joi
 ```
 
 ### 2. Create `/api/my-endpoint.js` file
