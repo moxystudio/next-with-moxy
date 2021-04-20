@@ -15,7 +15,7 @@ import CookieBanner from './cookie-banner';
 import useFossFix from './use-foss-fix';
 import { seoData } from './App.data.js';
 
-export const App = ({ Component, pageProps }) => {
+const App = ({ Component, pageProps }) => {
     useFossFix();
 
     const pageKey = usePageKey();

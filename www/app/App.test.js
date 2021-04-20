@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { render, screen } from '../shared/react/testing-library';
 import { initGTM, destroyGTM } from '../shared/modules/google-tag-manager';
 import CookieBanner from './cookie-banner';
-import { App } from './App';
+import App from './App';
 
 jest.mock('./cookie-banner', () => jest.fn(() => null));
 
