@@ -43,11 +43,11 @@ Content:
 ```js
 // buildStore.js
 
-import { createStore, combineReducers } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 import thunkMiddleware from 'redux-thunk';
 
-export default function buildStore(initialState) {
+const buildStore = (initialState) => {
     const reducer = combineReducers({
     });
 
@@ -60,9 +60,11 @@ export default function buildStore(initialState) {
 
     return store;
 };
+
+export default buildStore;
 ```
 
-We will come back to this file when adding new `reducers`.  
+We will come back to this file when adding new `reducers`.
 For an easier import, use an `index.js` in the `state` directory.
 
 ```js
@@ -131,7 +133,7 @@ width="100%" />
 
 ### 4. Creating reducers
 
-Now we will add a reducer to your store, let's call it `tickets` 😁.  
+Now we will add a reducer to your store, let's call it `tickets` 😁.
 In your `state` directory, create a `tickets` folder.
 This folder should have `index.js`, `state.js`, `actionTypes.js`, `actions.js`, `reducer.js` and `selectors.js` files.
 
@@ -176,7 +178,7 @@ state
     export const GET_TICKET_HOLDER_SUCCESS = `${SCOPE}/GET_TICKET_HOLDER_SUCCESS`;
     ```
 
-3. The `reducer` should instantiate the initial state and have the mutations associated with each dispatched action type.  
+3. The `reducer` should instantiate the initial state and have the mutations associated with each dispatched action type.
 
    For each key in the state we'll have a different method (these methods are combined as reducers in the default export):
 
