@@ -25,6 +25,7 @@
 /* [xxs, xxs] */
 
 :root {
+    --grid-columns: 4;
     --grid-gutter: 1.6rem;
     --grid-width: calc(100% - (2rem * 2));
     --grid-min-width: auto;
@@ -35,9 +36,6 @@
 
 :root {
     @media (--gte-xs) {
-        --grid-gutter: 1.6rem;
-        --grid-width: calc(100% - (2rem * 2));
-        --grid-min-width: auto;
         --grid-max-width: 66rem;
     }
 }
@@ -46,9 +44,9 @@
 
 :root {
     @media (--gte-sm) {
+        --grid-columns: 8;
         --grid-gutter: 2rem;
         --grid-width: 85%;
-        --grid-min-width: auto;
         --grid-max-width: none;
     }
 }
@@ -57,9 +55,7 @@
 
 :root {
     @media (--gte-md) {
-        --grid-gutter: 2rem;
-        --grid-width: 85%;
-        --grid-min-width: auto;
+        --grid-columns: 12;
         --grid-max-width: 102.4rem;
     }
 }
@@ -68,9 +64,7 @@
 
 :root {
     @media (--gte-lg) {
-        --grid-gutter: 2rem;
-        --grid-width: 85%;
-        --grid-min-width: auto;
+        --grid-gutter: 3.2rem;
         --grid-max-width: 120rem;
     }
 }
