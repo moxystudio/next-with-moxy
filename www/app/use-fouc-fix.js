@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-// Temporary fix to avoid flash of unstyled content during route transitions.
+// Temporary fix to avoid flash of unstyled content (FOC) during route transitions.
 // Keep an eye on this issue and remove this code when resolved: https://github.com/vercel/next.js/issues/17464
-const useFossFix = () => useEffect(() => {
+const useFouc = () => useEffect(() => {
     document
         .querySelectorAll('head > link[rel="stylesheet"][data-n-p]')
         .forEach((node) => node.removeAttribute('data-n-p'));
@@ -21,4 +21,4 @@ const useFossFix = () => useEffect(() => {
     return () => observer.disconnect();
 }, []);
 
-export default useFossFix;
+export default useFouc;
