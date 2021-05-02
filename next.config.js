@@ -27,7 +27,7 @@ module.exports = (phase, params) => {
     const GTM_CONTAINER_ID = extEnvVar.get('GTM_CONTAINER_ID').asString();
     const SITE_URL = extEnvVar.get('SITE_URL')
         .required(isEnvRequired(phase))
-        .asStringWithPattern(/^https?:\/\/[^/]+$/);
+        .asStringWithPattern(/^https?:\/\/.+[^/]$/);
 
     return withPlugins([
         withOneOf,
