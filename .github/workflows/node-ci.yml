@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: ['14']
+        node-version: ['14', '16']
     name: "[v${{ matrix.node-version }}] prepare"
 
     steps:
