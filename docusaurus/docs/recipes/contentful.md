@@ -573,7 +573,7 @@ ContentfulSeo.propTypes = {
 export default ContentfulSeo;
 ```
 
-The `data` it recieves is the SEO field in its original state.
+The `data` it receives is the SEO field in its original state.
 
 So, to render Contentful SEO you just need to do the following:
 

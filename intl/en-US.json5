@@ -1,0 +1,33 @@
+{
+    // Base SEO used for all pages.
+    "seo.title": "{project-name}",
+    "seo.description": "{project-description}",
+    "seo.keywords": "{project-keyword-1}, {project-keyword-2}",
+
+    // Home page.
+    "home.title": "Homepage",
+
+    // Error page.
+    "error.internal.title": "An error has occurred",
+    "error.not-found.title": "Page not found",
+    "error.return-to-home": "Return to home",
+
+    // Contacts page.
+    "contacts.seo.title": "Contacts",
+    "contacts.seo.description": "Know how you can contact us",
+    "contacts.seo.keywords": "contact, email, telephone, telephone number, phone, phone number, address",
+    "contacts.title": "Contacts",
+    "contacts.name": "Name: { name }",
+    "contacts.email": "Email: { email }",
+
+    // Terms page.
+    "terms.seo.title": "Terms",
+    "terms.seo.description": "Know how you can contact us",
+    "terms.seo.keywords": "contact, email, telephone, telephone number, phone, phone number, address",
+    "terms.title": "Terms and Conditions",
+
+    // CookieBanner component.
+    "cookie-banner.text": "We use cookies to personalize content and to collect analytics to improve our website. Please review our <link>terms and conditions</link> for more information.",
+    "cookie-banner.accept": "Accept",
+    "cookie-banner.reject": "Reject"
+}

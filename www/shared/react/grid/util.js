@@ -9,6 +9,7 @@ const getResponsiveClasses = (name, value) => {
         return Object.entries(value).reduce((accumulator, [breakpoint, value]) => {
             const className = styles[`${name}-${breakpoint}-${value}`];
 
+            /* istanbul ignore if */
             if (!className) {
                 console.warn(`Unknown grid responsive class: ${name}-${breakpoint}-${value}`);
             } else {

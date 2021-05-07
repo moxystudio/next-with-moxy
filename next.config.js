@@ -72,16 +72,36 @@ module.exports = (phase, params) => {
         }),
         withCompileNodeModules(),
         withSitemap(phase, SITE_URL),
-    ], {
-        poweredByHeader: false,
-        compress: COMPRESSION,
-        i18n: {
-            locales: ['en-US'],
-            defaultLocale: 'en-US',
-        },
-        env: {
-            GTM_CONTAINER_ID,
-            SITE_URL,
-        },
-    })(phase, params);
+
+        // Base config here.
+        // Please note that the `nextConfig` variable contains the config after all plugins have run,
+        // so be sure to merge it correctly.
+        (nextConfig) => ({
+            ...nextConfig,
+            poweredByHeader: false,
+            compress: COMPRESSION,
+            i18n: {
+                locales: ['en-US'],
+                defaultLocale: 'en-US',
+            },
+            env: {
+                ...nextConfig.env,
+                GTM_CONTAINER_ID,
+                SITE_URL,
+            },
+            webpack: (config, options) => {
+                // Add support for json5, so that we may have JSON with comments in `intl/`.
+                config.module.rules.push({
+                    test: /\.json5$/,
+                    loader: require.resolve('json5-loader'),
+                });
+
+                if (typeof nextConfig.webpack === 'function') {
+                    return nextConfig.webpack(config, options);
+                }
+
+                return config;
+            },
+        }),
+    ])(phase, params);
 };

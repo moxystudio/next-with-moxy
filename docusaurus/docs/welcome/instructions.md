@@ -11,15 +11,11 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
 
 ## 1. Tweak some project files
 
-1. Change all instances of `{project-name}` into the name of your project:
+1. Change all instances of `{project-*}`:
 
-    You must change all instances of {project-name} into the name of your project, which you can find by using your editor to search the entire workspace for project-name.
+    You must change all instances of `{project-*}`, which you can find by using your editor to search the entire workspace for `{project-`.
 
-    In any case, here's a list of all places you'll find it:
-    - `package.json`: In the `name` field.
-    - `App.data.js`: In the `title` field.
-    - `Contacts.data.js`: In the `name` field. This file is a sample file and you might want to delete it altogether.
-    - In this document, in case you want to use it.
+    > ⚠️ Please the `name` field of the package.json as well.
 
 2. Copy `.env.sample` to `.env`. Ensure `SITE_URL` has a value set, and that it points to the same URL as where your development server is running. If you are using all default values, it should just work out of the box.
 
@@ -33,7 +29,7 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
 Replace the root README.md file of the project with:
 
 ````md
-# {Project Name}
+# {project-name}
 
 {Brief explanation of the project}
 

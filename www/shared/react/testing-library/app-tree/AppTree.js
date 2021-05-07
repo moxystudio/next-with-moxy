@@ -6,7 +6,7 @@ import { LayoutTree } from '@moxy/next-layout';
 
 export const AppTree = ({ intlProvider, routerScrollProvider, children }) => {
     intlProvider = {
-        locale: 'en-US',
+        locale: 'en',
         messages: new Proxy({}, {
             get: (target, key) => key,
             getOwnPropertyDescriptor: () => ({ configurable: true }),

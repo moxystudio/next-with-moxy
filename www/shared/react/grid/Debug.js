@@ -5,7 +5,7 @@ import Row from './Row';
 import Col from './Col';
 
 // eslint-disable-next-line import/no-commonjs
-const styles = process.env.NODE_ENV === 'production' ? {} : require('./Debug.module.css');
+const styles = process.env.NODE_ENV === 'production' ? /* istanbul ignore next */ {} : require('./Debug.module.css');
 
 const Debug = () => {
     const [visible, setVisible] = useState(false);
@@ -72,6 +72,6 @@ Debug.defaultProps = {
 };
 
 // Export a mock component in production.
-const FinalDebug = process.env.NODE_ENV === 'production' ? () => null : Debug;
+const FinalDebug = process.env.NODE_ENV === 'production' ? /* istanbul ignore next */ () => null : Debug;
 
 export default FinalDebug;

@@ -4,8 +4,8 @@ import Head from 'next/head';
 import KeyboardOnlyOutlines from '@moxy/react-keyboard-only-outlines';
 import { withIntlApp } from '@moxy/next-intl';
 import { LayoutTree } from '@moxy/next-layout';
-import { RouterScrollProvider } from '@moxy/next-router-scroll';
 import Seo from '@moxy/next-seo';
+import { RouterScrollProvider } from '@moxy/next-router-scroll';
 import { Debug as DebugGrid } from '../shared/react/grid';
 import PageSwapper from '../shared/react/page-swapper';
 import MainLayout from '../shared/react/main-layout';
@@ -13,11 +13,12 @@ import { usePageKey } from '../shared/react/next-router';
 import { initGTM, destroyGTM } from '../shared/modules/google-tag-manager';
 import CookieBanner from './cookie-banner';
 import useFouc from './use-fouc-fix';
-import { seoData } from './App.data.js';
+import { useSeoData } from './App.data';
 
 const App = ({ Component, pageProps }) => {
     useFouc();
 
+    const seoData = useSeoData();
     const pageKey = usePageKey();
 
     const handleCookieConsents = useCallback((cookieConsents) => {
@@ -69,7 +70,7 @@ App.propTypes = {
 
 /* istanbul ignore next */
 const loadLocale = async (locale) => {
-    const module = await import(/* webpackChunkName: "intl-messages" */ `../../intl/${locale}.json`);
+    const module = await import(/* webpackChunkName: "intl-messages" */ `../../intl/${locale}.json5`);
 
     return module.default;
 };

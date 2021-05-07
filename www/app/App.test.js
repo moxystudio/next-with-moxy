@@ -6,6 +6,10 @@ import App from './App';
 
 jest.mock('./cookie-banner', () => jest.fn(() => null));
 
+jest.mock('./App.data', () => ({
+    useSeoData: () => ({}),
+}));
+
 jest.mock('../shared/modules/google-tag-manager', () => ({
     initGTM: jest.fn(),
     destroyGTM: jest.fn(),
