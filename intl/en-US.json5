@@ -21,9 +21,9 @@
     "contacts.email": "Email: { email }",
 
     // Terms page.
-    "terms.seo.title": "Terms",
-    "terms.seo.description": "Know how you can contact us",
-    "terms.seo.keywords": "contact, email, telephone, telephone number, phone, phone number, address",
+    "terms.seo.title": "Terms and Conditions",
+    "terms.seo.description": "Read the Terms and Conditions before using this website",
+    "terms.seo.keywords": "terms, conditions, read",
     "terms.title": "Terms and Conditions",
 
     // CookieBanner component.

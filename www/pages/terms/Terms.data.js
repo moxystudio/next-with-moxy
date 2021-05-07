@@ -12,6 +12,12 @@ export const useSeoData = () => {
         meta: [
             { name: 'description', content: description },
             { name: 'keywords', content: keywords },
+            /* Facebook & search engines */
+            { property: 'og:title', content: title },
+            { property: 'og:description', content: description },
+            /* Twitter */
+            { name: 'twitter:title', content: title },
+            { name: 'twitter:description', content: description },
         ],
     };
 };
