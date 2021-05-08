@@ -15,7 +15,7 @@ Keep in mind, part of adapting this boilerplate into a deliverable project is al
 
     You must change all instances of `{project-*}`, which you can find by using your editor to search the entire workspace for `{project-`.
 
-    > ⚠️ Please the `name` field of the package.json as well.
+    > ⚠️ Please change the `name` field of `package.json` as well.
 
 2. Copy `.env.sample` to `.env`. Ensure `SITE_URL` has a value set, and that it points to the same URL as where your development server is running. If you are using all default values, it should just work out of the box.
 
@@ -84,14 +84,14 @@ npm run docs
 
 The boilerplate supports an unstyled error page that is able to distinguish between `Page Not Found` and `Internal Error` (both server and client errors). It contains appropriate copy for each case, and a link to `/`.
 
-You should update `<ErrorPage />` to fit your project's image. To do so, you will need to update the following files:
+You should update `<Error />` to fit your project's image. To do so, you will need to update the following files:
 
 ```
 www
 ├── pages
 │   ├── error
-│   │   ├── ErrorPage.js
-│   │   ├── ErrorPage.module.css
-│   │   ├── ErrorPage.test.js
+│   │   ├── Error.js
+│   │   ├── Error.module.css
+│   │   ├── Error.test.js
 │   │   └── ...
 ```
