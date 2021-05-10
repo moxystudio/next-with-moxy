@@ -25,13 +25,13 @@
     overflow-wrap: normal;
 }
 
-@define-mixin text-ellipsis-multiline $max-line-count, $max-height {
-    max-height: $max-height;
+@define-mixin text-ellipsis-multiline $maxLineCount, $maxHeight {
+    max-height: $maxHeight;
     overflow: hidden;
     /* stylelint-disable */
     display: -webkit-box;
     text-overflow: ellipsis;
-    -webkit-line-clamp: $max-line-count;
+    -webkit-line-clamp: $maxLineCount;
     -webkit-box-orient: vertical;
     /* stylelint-enable */
 }
