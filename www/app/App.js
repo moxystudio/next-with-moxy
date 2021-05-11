@@ -15,7 +15,7 @@ import CookieBanner from './cookie-banner';
 import useFouc from './use-fouc-fix';
 import { useSeoData } from './App.data';
 
-const App = ({ Component, pageProps }) => {
+export const App = ({ Component, pageProps }) => {
     useFouc();
 
     const seoData = useSeoData();

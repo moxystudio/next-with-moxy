@@ -2,13 +2,9 @@ import React, { useEffect } from 'react';
 import { render, screen } from '../shared/react/testing-library';
 import { initGTM, destroyGTM } from '../shared/modules/google-tag-manager';
 import CookieBanner from './cookie-banner';
-import App from './App';
+import { App } from './App';
 
 jest.mock('./cookie-banner', () => jest.fn(() => null));
-
-jest.mock('./App.data', () => ({
-    useSeoData: () => ({}),
-}));
 
 jest.mock('../shared/modules/google-tag-manager', () => ({
     initGTM: jest.fn(),
@@ -20,7 +16,7 @@ beforeEach(() => {
 });
 
 it('should render correctly', () => {
-    render(<App Component={ () => 'Hello World' } pageProps={ {} } />, { wrapper: undefined });
+    render(<App Component={ () => 'Hello World' } pageProps={ {} } />);
 
     screen.getByText('Hello World');
 });
@@ -35,7 +31,7 @@ describe('GTM', () => {
             return null;
         });
 
-        render(<App Component={ () => 'Hello World' } pageProps={ {} } />, { wrapper: undefined });
+        render(<App Component={ () => 'Hello World' } pageProps={ {} } />);
 
         expect(initGTM).toHaveBeenCalledTimes(1);
         expect(destroyGTM).toHaveBeenCalledTimes(0);
@@ -50,7 +46,7 @@ describe('GTM', () => {
             return null;
         });
 
-        render(<App Component={ () => 'Hello World' } pageProps={ {} } />, { wrapper: undefined });
+        render(<App Component={ () => 'Hello World' } pageProps={ {} } />);
 
         expect(initGTM).toHaveBeenCalledTimes(0);
         expect(destroyGTM).toHaveBeenCalledTimes(1);
