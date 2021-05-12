@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl';
 import { useRouter } from 'next/router'; // eslint-disable-line no-restricted-imports
-import seoImage from '../shared/media/images/seo.jpg';
+import seoImage from './images/seo.jpg';
 
 export const useSeoData = () => {
     const intl = useIntl();
