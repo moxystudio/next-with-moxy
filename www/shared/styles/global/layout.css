@@ -41,7 +41,7 @@ html {
 body {
     overflow-y: scroll; /* 1 */
     display: flex; /* 2 */
-    flex: 1 0 auto; /* 2 */
+    flex: 1 0; /* 2 */
     flex-direction: column; /* 2 */
 
     /* Uncomment to disable rubber band scrolling */
@@ -50,6 +50,6 @@ body {
 
 #__next {
     display: flex; /* 2 */
-    flex: 1 0 auto; /* 2 */
+    flex: 1 0; /* 2 */
     flex-direction: column; /* 2 */
 }
