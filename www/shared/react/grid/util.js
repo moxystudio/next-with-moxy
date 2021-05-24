@@ -11,7 +11,8 @@ const getResponsiveClasses = (name, value) => {
 
             /* istanbul ignore if */
             if (!className) {
-                console.warn(`Unknown grid responsive class: ${name}-${breakpoint}-${value}`);
+                process.env.NODE_ENV !== 'production' &&
+                    console.warn(`Unknown grid responsive class: ${name}-${breakpoint}-${value}`);
             } else {
                 accumulator[styles[`${name}-${breakpoint}-${value}`]] = true;
             }
