@@ -2,4 +2,36 @@
 
 .home {
     padding: 2.5rem 0;
+
+    & .typographyShowcase {
+        margin-top: 6rem;
+
+        & .subtitle1 {
+            @mixin typography-subtitle-1;
+        }
+
+        & .subtitle2 {
+            @mixin typography-subtitle-2;
+        }
+
+        & .body1 {
+            @mixin typography-body-1;
+        }
+
+        & .body2 {
+            @mixin typography-body-2;
+        }
+
+        & .textButton {
+            @mixin typography-text-button;
+        }
+
+        & .caption {
+            @mixin typography-caption;
+        }
+
+        & .overline {
+            @mixin typography-overline;
+        }
+    }
 }

@@ -9,13 +9,21 @@ html {
 }
 
 body {
-    @mixin typography-body;
+    @mixin typography-body-1;
     @mixin text-smooth;
 
     color: var(--color-black);
     overflow-wrap: break-word; /* Break long words, while keeping them together if possible (fallback) */
     overflow-wrap: anywhere;  /* Break long words, while keeping them together if possible */
     -webkit-tap-highlight-color: transparent;  /* Do not show a highlight (rectangle around the link) while tapping it */
+}
+
+/* ==========================================================================
+  Anchors
+  ========================================================================== */
+
+a {
+    color: inherit;
 }
 
 /* ==========================================================================
@@ -50,4 +58,8 @@ h4 {
 
 h5 {
     @mixin typography-h5;
+}
+
+h6 {
+    @mixin typography-h6;
 }

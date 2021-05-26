@@ -7,10 +7,6 @@
     background-color: color(var(--color-black) alpha(0.2));
     color: var(--color-black);
 
-    & a {
-        color: inherit;
-    }
-
     & ul {
         padding: 0;
         display: flex;
