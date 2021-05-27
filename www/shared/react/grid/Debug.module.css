@@ -1,5 +1,10 @@
 @import "../../styles/imports";
 
+:root {
+    --debug-color: red;
+    --debug-font-weight: bold;
+}
+
 .debug {
     position: fixed;
     top: 0;
@@ -7,7 +12,7 @@
     bottom: 0;
     left: 0;
     min-width: 32.5rem;
-    z-index: 10000;
+    z-index: calc(var(--z-index-base) + 10000);
     display: flex;
     flex-direction: column;
     visibility: hidden;
@@ -34,9 +39,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: rgba(255, 0, 0, 0.15);
-        color: red;
-        font-weight: 600;
+        background: color(var(--debug-color) a(0.15));
+        color: var(--debug-color);
+        font-weight: var(--debug-font-weight);
     }
 
     & .currentBreakpoint::after {
@@ -44,8 +49,8 @@
         position: absolute;
         bottom: 2rem;
         left: 2rem;
-        color: red;
-        font-weight: 600;
+        color: var(--debug-color);
+        font-weight: var(--debug-font-weight);
     }
 
     @media (--gte-xs) {
