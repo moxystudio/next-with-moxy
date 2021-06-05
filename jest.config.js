@@ -14,6 +14,12 @@ module.exports = compose(
             './jest.setup.js',
         ];
 
+        config.coveragePathIgnorePatterns = [
+            ...config.coveragePathIgnorePatterns,
+            // Temporary fix for a FOUC bug, which doesn't need tests.
+            '<rootDir>/www/app/use-fouc-fix.js',
+        ];
+
         return config;
     },
 );
