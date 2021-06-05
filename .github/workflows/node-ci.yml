@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: ['14', '16']
-    name: "[v${{ matrix.node-version }}] prepare"
+        node-version: ['12', '14', '16']
+    name: '[v${{ matrix.node-version }}] prepare'
 
     steps:
     - name: Checkout code
@@ -36,9 +36,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: prepare
     strategy:
-        matrix:
-          node-version: ['14']
-    name: "[v${{ matrix.node-version }}] check"
+      matrix:
+        node-version: ['12', '14', '16']
+    name: '[v${{ matrix.node-version }}] check'
 
     steps:
     - name: Checkout code
@@ -78,9 +78,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: prepare
     strategy:
-        matrix:
-          node-version: ['14']
-    name: "[v${{ matrix.node-version }}] build"
+      matrix:
+        node-version: ['12', '14', '16']
+    name: '[v${{ matrix.node-version }}] build'
 
     steps:
     - name: Checkout code
