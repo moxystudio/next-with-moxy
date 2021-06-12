@@ -7,11 +7,4 @@
     color: inherit;
     cursor: pointer;
     appearance: none;
-
-    &:active,
-    &:focus,
-    &:visited,
-    &:hover {
-        outline: none;
-    }
 }
