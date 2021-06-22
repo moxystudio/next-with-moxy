@@ -21,7 +21,7 @@
 */
 
 html {
-    min-width: var(--viewport-min-width);
+    min-width: calc(var(--viewport-min-width) * 62.5%);
     height: 0; /* 3 */
     min-height: 100%; /* 1 */
     display: flex; /* 2 */
