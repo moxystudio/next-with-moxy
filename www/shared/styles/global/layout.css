@@ -21,7 +21,6 @@
 */
 
 html {
-    min-width: calc(var(--viewport-min-width) * 62.5%);
     height: 0; /* 3 */
     min-height: 100%; /* 1 */
     display: flex; /* 2 */
@@ -39,6 +38,7 @@ html {
 */
 
 body {
+    min-width: var(--viewport-min-width);
     overflow-y: scroll; /* 1 */
     display: flex; /* 2 */
     flex: 1 0; /* 2 */
