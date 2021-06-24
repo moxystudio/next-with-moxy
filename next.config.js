@@ -1,6 +1,6 @@
 'use strict';
 
-const { withRasterImages, withPlayback, withSVG, withFonts, with3D } = require('@moxy/next-common-files');
+const { withRasterImages, withPlayback, withSVG, withFonts, with3D, withJSON5 } = require('@moxy/next-common-files');
 const withOneOf = require('@moxy/next-webpack-oneof');
 const withCompileNodeModules = require('@moxy/next-compile-node-modules');
 const withPlugins = require('next-compose-plugins');
@@ -70,6 +70,7 @@ module.exports = (phase, params) => {
             include: /\.inline\./,
             inline: true,
         }),
+        withJSON5(),
         withCompileNodeModules(),
         withSitemap(phase, SITE_URL),
 
@@ -80,6 +81,9 @@ module.exports = (phase, params) => {
             ...nextConfig,
             poweredByHeader: false,
             compress: COMPRESSION,
+            eslint: {
+                ignoreDuringBuilds: true,
+            },
             i18n: {
                 locales: ['en-US'],
                 defaultLocale: 'en-US',
@@ -90,11 +94,7 @@ module.exports = (phase, params) => {
                 SITE_URL,
             },
             webpack: (config, options) => {
-                // Add support for json5, so that we may have JSON with comments in `intl/`.
-                config.module.rules.push({
-                    test: /\.json5$/,
-                    loader: require.resolve('json5-loader'),
-                });
+                // Customize webpack config here..
 
                 if (typeof nextConfig.webpack === 'function') {
                     return nextConfig.webpack(config, options);
