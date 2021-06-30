@@ -298,6 +298,10 @@ When rendering small logos opt for `8bit` png and resize to the maximum used hei
 />
 ```
 
+**NOTES:**
+
+> ℹ️ The component does not at the moment generate srcsets for different screen sizes, see the issue [here](https://github.com/moxystudio/react-contentful-image/issues/5). Please contribute to [@moxy/react-contentful-image](https://github.com/moxystudio/react-contentful-image) in order to have this functionality available to everyone.
+
 ##### Vector (SVGs)
 
 No compression or optimization options can be applied here. So in order to handle SVGs:
