@@ -4,16 +4,16 @@ title: Top progress bar
 sidebar_label: Top progress bar
 ---
 
-A very subtle progress bar is displayed when Next.js is performing route changes, which can take some time depending on how fast the page assets and data (via `getInitialProps`, `getServerSideProps` or `getStaticProps` with `revalidate`).
+A very subtle progress bar is displayed when Next.js is performing route changes, which can take some time depending on how fast the page assets and data are loaded (via `getInitialProps`, `getServerSideProps` or `getStaticProps` with `revalidate`).
 
 We use the [`NProgress`](https://github.com/rstacruz/nprogress) library for the heavy-lifting of the progress bar UI. Under `shared/modules/nprogress`, you will find a `NProgress` sub-facade that:
 
-- Has `start()` and `done()` methods that ref-count aware, meaning you can call them several times around your code-base; only the first start call and last done call will be accounted to show / hide the progress bar.
+- Has `start()` and `done()` methods that are ref-count aware, meaning you can call them several times around your code-base; only the first start call and last done call will be accounted for to show / hide the progress bar.
 - Adds a built-in start delay, so that the progress bar is not shown right away.
 
 ## Removing this feature
 
-If you are going to have another loading solution for Next.js page transitions, following these steps:
+If you are going to have another loading solution for Next.js page transitions, follow these steps:
 
 1. Uninstall `nprogress`.
 2. Delete `shared/modules/nprogress` folder and its import & usage from `app/App.js`.
