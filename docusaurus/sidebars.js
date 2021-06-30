@@ -22,6 +22,7 @@ module.exports = {
                 'what-is-included/grid-system',
                 'what-is-included/customizable-layout-support',
                 'what-is-included/customizable-page-transitions',
+                'what-is-included/top-progress-bar',
                 'what-is-included/internationalization',
                 'what-is-included/sitemap-robots',
                 'what-is-included/analytics',

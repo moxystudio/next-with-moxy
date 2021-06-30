@@ -1,0 +1,24 @@
+@import "../imports";
+
+#nprogress {
+    @mixin position fixed, 0, null, null, 0;
+    width: 100%;
+    height: 0.2rem;
+    z-index: var(--z-index-nprogress);
+    pointer-events: none;
+
+    & .bar {
+        @mixin position absolute, 0, null, null, 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-black);
+
+        & .peg {
+            @mixin position fixed, 0, 0;
+            width: 10rem;
+            height: 100%;
+            transform: rotate(3deg) translate(0, -0.4rem);
+            box-shadow: 0 0 0.1rem var(--color-black), 0 0 0.5rem var(--color-black);
+        }
+    }
+}
