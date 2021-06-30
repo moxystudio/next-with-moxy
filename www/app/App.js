@@ -11,9 +11,12 @@ import PageSwapper from '../shared/react/page-swapper';
 import MainLayout from '../shared/react/main-layout';
 import { usePageKey } from '../shared/react/next-router';
 import { initGTM, destroyGTM } from '../shared/modules/google-tag-manager';
+import { subscribeToRouter } from '../shared/modules/nprogress';
 import CookieBanner from './cookie-banner';
 import useFouc from './use-fouc-fix';
 import { useSeoData } from './App.data';
+
+subscribeToRouter();
 
 export const App = ({ Component, pageProps }) => {
     useFouc();
