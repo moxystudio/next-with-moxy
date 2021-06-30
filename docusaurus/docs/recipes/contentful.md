@@ -274,6 +274,49 @@ const fetch = () => async (dispatch, getState, { client }) => {
 };
 ```
 
+#### 2.3 Rendering Images
+
+When rendering images from Contentful, you should use [@moxy/react-contentful-image](https://github.com/moxystudio/react-contentful-image) in order to easily take advantage of [Contentful's Image API](https://www.contentful.com/developers/docs/references/images-api/).
+
+**NOTES:**
+
+> ℹ️ The Contentful Image API provides a CDN when serving the assets so processed images are cached to reduce response time.
+
+> ℹ️ **The Contentful Image API does not provide compression for raster or vector images** at the time of writing (see [this](https://www.contentfulcommunity.com/t/svg-png-optimization/2862) and [this](https://www.contentfulcommunity.com/t/upscale-svg-image-with-image-api/5493/2)). As such, we need to make sure the assets uploaded to Contentful are already compressed as much as possible, for example by using [tinypng](https://tinypng.com) before uploading in the Contentful UI.
+
+##### Raster images
+
+In order reduce image file size as much as we can, make use of the parameters `format` and `resize`. The default format is webp which provides low file sizes without major quality losses.
+
+When rendering small logos opt for `8bit` png and resize to the maximum used height:
+
+```jsx
+<ContentfulImage
+    image={ image }
+    format="8bit png"
+    resize={ { height: 50 } }
+/>
+```
+
+**NOTES:**
+
+> ℹ️ The component does not at the moment generate srcsets for different screen sizes, see the issue [here](https://github.com/moxystudio/react-contentful-image/issues/5). Please contribute to [@moxy/react-contentful-image](https://github.com/moxystudio/react-contentful-image) in order to have this functionality available to everyone.
+
+##### Vector (SVGs)
+
+No compression or optimization options can be applied here. So in order to handle SVGs:
+
+- Make sure all SVG files uploaded to contentful are properly compressed and optimized beforehand through a visual editor and [SVGOmg](https://jakearchibald.github.io/svgomg/).
+- When rendering, skip any kind of optimization and use the file from the API as is. You can conditionally render the image or use the helper parameter `optimize`:
+    ```jsx
+    <ContentfulImage
+        image={ image }
+        optimize={ !image.url.includes('.svg') }
+        format="8bit png"
+        resize={ { height: 50 } }
+    />
+    ```
+
 ### 3. Conditionally rendering DOM elements in case of preview
 
 Since we're on the topic, you must use a similar strategy in your `App.js` file to conditionally render a DOM element to let the user know they are in a preview state. This must happen once per instance of the App, since we will not perpetuate the `cms-preview` query parameter on route changes.
