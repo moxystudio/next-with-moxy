@@ -10,14 +10,16 @@ const usePageKey = (depth = null) => {
     const { asPath } = useRouter();
 
     const pageKey = useMemo(() => {
+        // Remove query string.
         let pageKey = asPath.replace(/\?.+/, '');
 
+        // Handle depth.
         if (depth != null) {
             pageKey = pageKey.split('/').slice(0, depth + 1).join('/');
         }
 
         return pageKey;
-    }, [asPath, depth]); // Remove query string
+    }, [asPath, depth]);
 
     return pageKey;
 };
