@@ -8,6 +8,9 @@ import styles from './PageTransition.module.css';
 /* istanbul ignore next */
 const getZIndex = (inProp) => !inProp ? 0 : 1;
 
+// This function might have to be adjusted if you have more than you transition property on animations.
+const addEndListener = (node, done) => node.addEventListener('transitionend', done);
+
 const PageTransition = ({ node, animation, style, in: inProp, onEntered, onExited, className }) => (
     <CSSTransition
         in={ inProp }
@@ -21,6 +24,7 @@ const PageTransition = ({ node, animation, style, in: inProp, onEntered, onExite
             exitActive: styles.exitActive,
             exitDone: styles.exitDone,
         } }
+        addEndListener={ addEndListener }
         timeout={ 1000 }>
         <div className={ classNames(styles[animation], className) } style={ { ...style, zIndex: getZIndex(inProp) } }>
             { node }
