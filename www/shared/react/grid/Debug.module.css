@@ -46,9 +46,7 @@
 
     & .currentBreakpoint::after {
         content: "xxs";
-        position: absolute;
-        bottom: 2rem;
-        left: 2rem;
+        @mixin position absolute, null, null, 2rem, 2rem;
         color: var(--debug-color);
         font-weight: var(--debug-font-weight);
     }
