@@ -1,19 +1,24 @@
 import React, { Component, createRef } from 'react';
-import { render } from '../testing-library';
+import { useRouter } from 'next/router'; // eslint-disable-line no-restricted-imports
+import { render, screen } from '../testing-library';
 import withPageRouter from './with-page-router';
 
 jest.mock('next/router', () => ({
-    useRouter: jest.fn(() => ({
+    useRouter: jest.fn(),
+}));
+
+beforeEach(() => {
+    useRouter.mockImplementation(() => ({
         pathname: '/blog/[name]',
         asPath: '/blog/foo?baz=1',
         query: { name: 'foo', baz: 1 },
-    })),
-}));
+    }));
+});
 
 it('should inject pageRouter prop', () => {
     expect.assertions(1);
 
-    const MyComponent = withPageRouter(({ pageRouter }) => {
+    const MyComponent = withPageRouter()(({ pageRouter }) => {
         expect(pageRouter).toEqual({
             pathname: '/blog/[name]',
             asPath: '/blog/foo?baz=1',
@@ -26,6 +31,33 @@ it('should inject pageRouter prop', () => {
     render(<MyComponent />, { wrapper: undefined });
 });
 
+it('should respect depth', () => {
+    const MyComponent = withPageRouter(1)(({ pageRouter }) => pageRouter.asPath);
+
+    const { rerender } = render(<MyComponent />, { wrapper: undefined });
+
+    screen.getByText('/blog/foo?baz=1');
+
+    useRouter.mockImplementation(() => ({
+        pathname: '/blog/[name]',
+        asPath: '/blog/bar?baz=1',
+        query: { name: 'bar', baz: 1 },
+    }));
+
+    rerender(<MyComponent />);
+
+    screen.getByText('/blog/bar?baz=1');
+
+    useRouter.mockImplementation(() => ({
+        pathname: '/about',
+        asPath: '/about',
+    }));
+
+    rerender(<MyComponent />);
+
+    screen.getByText('/blog/bar?baz=1');
+});
+
 it('should forward refs', () => {
     class MyComponent extends Component {
         render() {
@@ -35,7 +67,7 @@ it('should forward refs', () => {
         handleClick = () => {};
     }
 
-    const EnhancedMyComponent = withPageRouter(MyComponent);
+    const EnhancedMyComponent = withPageRouter()(MyComponent);
 
     const ref = createRef();
 
@@ -49,7 +81,7 @@ it('should copy statics', () => {
 
     MyComponent.foo = 'bar';
 
-    const EnhancedMyComponent = withPageRouter(MyComponent);
+    const EnhancedMyComponent = withPageRouter()(MyComponent);
 
     expect(EnhancedMyComponent.foo).toBe('bar');
 });

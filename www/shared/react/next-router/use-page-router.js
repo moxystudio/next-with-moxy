@@ -7,8 +7,8 @@ import usePageKey from './use-page-key';
 // the old page will still be mounted when animating out, but the router has already changed.
 // This hook returns the same router your page started with.
 
-const usePageRouter = () => {
-    const pageKey = usePageKey();
+const usePageRouter = (depth) => {
+    const pageKey = usePageKey(depth);
     const router = useRouter();
 
     const routerRef = useRef(router);

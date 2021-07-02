@@ -3,8 +3,8 @@ import Router from 'next/router'; // eslint-disable-line no-restricted-imports
 import { render, screen } from '../testing-library';
 import usePageKey from './use-page-key';
 
-const MyComponent = () => {
-    const pageKey = usePageKey();
+const MyComponent = ({ depth }) => {
+    const pageKey = usePageKey(depth);
 
     return pageKey;
 };
@@ -16,4 +16,13 @@ it('should return the correct page key', () => {
     render(<MyComponent />, { wrapper: undefined });
 
     screen.getByText('/blog/foo');
+});
+
+it('should return the correct page key with depth', () => {
+    Router.pathname = '/blog/[name]';
+    Router.asPath = '/blog/foo?baz=1';
+
+    render(<MyComponent depth={ 1 } />, { wrapper: undefined });
+
+    screen.getByText('/blog');
 });
