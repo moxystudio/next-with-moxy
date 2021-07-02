@@ -1,8 +1,7 @@
 @import "../../shared/styles/imports";
 
 .cookieBanner {
-    position: fixed;
-    bottom: 0;
+    @mixin position fixed, null, null, 0, 0;
     width: 100%;
     min-width: var(--viewport-min-width);
     min-height: 8rem;

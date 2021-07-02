@@ -6,11 +6,7 @@
 }
 
 .debug {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    @mixin position fixed, 0, 0, 0, 0;
     min-width: var(--viewport-min-width);
     z-index: calc(var(--z-index-base) + 10000);
     display: flex;
