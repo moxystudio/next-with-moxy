@@ -27,134 +27,83 @@
 
 /* Row: justify-content */
 @each $justify-content-variant in (flex-start, center, flex-end, space-between, space-around, space-evenly) {
-    .row-justify-content-$(justify-content-variant) {
-        justify-content: $justify-content-variant;
-    }
-
     @each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
-        .row-justify-content-$(breakpoint)-$(justify-content-variant) {
-            justify-content: $justify-content-variant;
+        @media (--gte-$breakpoint) {
+            .row-justify-content-$(breakpoint)-$(justify-content-variant) {
+                justify-content: $justify-content-variant;
+            }
         }
     }
 }
 
 /* Row: align-items */
 @each $align-items-variant in (flex-start, center, flex-end, baseline, stretch) {
-    .row-align-items-$(align-items-variant) {
-        align-items: $align-items-variant;
-    }
-
     @each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
-        .row-align-items-$(breakpoint)-$(align-items-variant) {
-            align-items: $align-items-variant;
+        @media (--gte-$breakpoint) {
+            .row-align-items-$(breakpoint)-$(align-items-variant) {
+                align-items: $align-items-variant;
+            }
         }
     }
 }
 
-/* Col: auto */
-.col-column-auto {
-    width: auto;
-    flex: 0 0 auto;
-}
-
+/* col: [xxs, xxl] */
 @each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
-    @media (--gte-$breakpoint) {
-        .col-column-$(breakpoint)-auto {
-            width: auto;
-            flex: 0 0 auto;
-        }
-    }
-}
-
-/* Col: [xxs, xs] */
-@each $breakpoint in (xxs, xs) {
-    $columns: 4;
-    $offsets: 3;
-
-    /* columns = <number> */
-    @for $x from 1 to $columns by 1 {
-        @media (--gte-$breakpoint) {
-            .col-column-$(x) {
-                max-width: calc($x / $columns * 100%);
-                flex: 0 0 calc($x / $columns * 100%);
-            }
-            .col-column-$(breakpoint)-$(x) {
-                max-width: calc($x / $columns * 100%);
-                flex: 0 0 calc($x / $columns * 100%);
-            }
-        }
-    }
-
-    /* offset = <number> */
-    @for $x from 0 to $offsets by 1 {
-        @media (--gte-$breakpoint) {
-            .col-offset-$(x) {
-                margin-left: calc($x / $columns * 100%);
-            }
-            .col-offset-$(breakpoint)-$(x) {
-                margin-left: calc($x / $columns * 100%);
-            }
-        }
-    }
-}
-
-/* col: [sm, sm] */
-@each $breakpoint in (sm) {
-    $columns: 8;
-    $offsets: 7;
-
-    /* columns = <number> */
-    @for $x from 1 to $columns by 1 {
-        @media (--gte-$breakpoint) {
-            .col-column-$(x) {
-                max-width: calc($x / $columns * 100%);
-                flex: 0 0 calc($x / $columns * 100%);
-            }
-            .col-column-$(breakpoint)-$(x) {
-                max-width: calc($x / $columns * 100%);
-                flex: 0 0 calc($x / $columns * 100%);
-            }
-        }
-    }
-
-    /* offset = <number> */
-    @for $x from 0 to $offsets by 1 {
-        @media (--gte-$breakpoint) {
-            .col-offset-$(x) {
-                margin-left: calc($x / $columns * 100%);
-            }
-            .col-offset-$(breakpoint)-$(x) {
-                margin-left: calc($x / $columns * 100%);
-            }
-        }
-    }
-}
-
-/* col: [md, xxl] */
-@each $breakpoint in (md, lg, xl, xxl) {
     $columns: 12;
     $offsets: 11;
 
-    /* columns = <number> */
-    @for $x from 1 to $columns by 1 {
-        @media (--gte-$breakpoint) {
-            .col-column-$(x) {
-                max-width: calc($x / $columns * 100%);
-                flex: 0 0 calc($x / $columns * 100%);
-            }
+    @media (--gte-$breakpoint) {
+        /* columns = auto */
+        .col-column-$(breakpoint)-auto {
+            width: auto;
+            max-width: none;
+            flex: 0 0 auto;
+        }
+
+        /* columns = <number> */
+        @for $x from 1 to $columns by 1 {
             .col-column-$(breakpoint)-$(x) {
+                width: calc($x / $columns * 100%);
                 max-width: calc($x / $columns * 100%);
                 flex: 0 0 calc($x / $columns * 100%);
             }
         }
-    }
 
-    /* offset = <number> */
-    @for $x from 0 to $offsets by 1 {
-        @media (--gte-$breakpoint) {
-            .col-offset-$(x) {
-                margin-left: calc($x / $columns * 100%);
+        /* offset = <number> */
+        @for $x from 0 to $offsets by 1 {
+            @media (--gte-$breakpoint) {
+                .col-offset-$(breakpoint)-$(x) {
+                    margin-left: calc($x / $columns * 100%);
+                }
             }
+        }
+    }
+}
+
+/* Col: [xxs, sm] (overrides) */
+@each $breakpoint in (xxs, xs, sm) {
+    $columns: 8;
+    $offsets: 7;
+
+    @media (--gte-$breakpoint) and (--lt-md) {
+        /* columns = auto */
+        .col-column-$(breakpoint)-auto {
+            width: auto;
+            max-width: none;
+            flex: 0 0 auto;
+        }
+
+        /* columns = <number> */
+        @for $x from 1 to $columns by 1 {
+            .col-column-$(breakpoint)-$(x) {
+                width: calc($x / $columns * 100%);
+                max-width: calc($x / $columns * 100%);
+                flex: 0 0 calc($x / $columns * 100%);
+            }
+        }
+
+        /* offset = <number> */
+        @for $x from 0 to $offsets by 1 {
             .col-offset-$(breakpoint)-$(x) {
                 margin-left: calc($x / $columns * 100%);
             }
