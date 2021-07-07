@@ -13,19 +13,32 @@
 }
 
 /* ==========================================================================
-   Ellipsis mixin
+   Text wrap related mixins
 
-   The container needs to have a width for it to work
+   Please note that for text-ellipsis and text-ellipsis-multiline to work,
+   they most likely need to be restricted in width
    ========================================================================== */
 
+@define-mixin text-wrap {
+    white-space: normal;
+    word-wrap: anywhere;
+    word-break: break-word; /* Needed for iOS Safari, since it does not support `word-wrap: anywhere` */
+}
+
+@define-mixin text-nowrap {
+    white-space: nowrap;
+    word-wrap: normal;
+    word-break: normal;
+}
+
 @define-mixin text-ellipsis {
+    @mixin text-nowrap;
     overflow: hidden; /* "overflow" value must be different from "visible" */
     text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow-wrap: normal;
 }
 
 @define-mixin text-ellipsis-multiline $maxLineCount, $maxHeight {
+    @mixin text-wrap;
     max-height: $maxHeight;
     overflow: hidden;
     /* stylelint-disable */
