@@ -27,8 +27,8 @@ FROM base AS build
 
 # Define build arguments & map them to environment variables
 ARG GTM_CONTAINER_ID
-ARG SITE_URL
 ENV GTM_CONTAINER_ID $GTM_CONTAINER_ID
+ARG SITE_URL
 ENV SITE_URL $SITE_URL
 
 # Build the project and then dispose files not necessary to run the project
