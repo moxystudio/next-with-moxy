@@ -6,15 +6,16 @@ import usePageKey from './use-page-key';
 // returns the correct router even during page transitions. During the transition,
 // the old page will still be mounted when animating out, but the router has already changed.
 // This hook returns the same router your page started with.
+// Additionally, you may specify an `pathnames` array to allow the returned router to change only for these pages.
 
-const usePageRouter = (depth) => {
-    const pageKey = usePageKey(depth);
+const usePageRouter = (pathnames) => {
     const router = useRouter();
+    const pageKey = usePageKey();
 
-    const routerRef = useRef(router);
+    const routerRef = useRef(router.pathname);
     const pageKeyRef = useRef(pageKey);
 
-    if (pageKeyRef.current === pageKey) {
+    if (pageKeyRef.current === pageKey || pathnames?.includes(router.pathname)) {
         pageKeyRef.current = pageKey;
         routerRef.current = router;
     }

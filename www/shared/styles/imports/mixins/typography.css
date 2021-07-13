@@ -265,9 +265,9 @@
     font-size: 1.4$(unit);
     line-height: 1.45;
 
-    @media (--gte-xl) {
-        font-size: 1.6$(unit);
-        line-height: 1.5;
+    @media (--gte-sm) {
+        font-size: 1.8$(unit);
+        line-height: 1.33;
     }
 }
 

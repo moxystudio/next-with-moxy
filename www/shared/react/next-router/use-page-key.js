@@ -6,20 +6,15 @@ import { useRouter } from 'next/router'; // eslint-disable-line no-restricted-im
 // You may use `depth` to specify the depth of the URL you are interested in.
 // As an example, a depth of 1 for /foo/bar, will return /foo.
 
-const usePageKey = (depth = null) => {
+const usePageKey = () => {
     const { asPath } = useRouter();
 
     const pageKey = useMemo(() => {
         // Remove query string.
-        let pageKey = asPath.replace(/\?.+/, '');
-
-        // Handle depth.
-        if (depth != null) {
-            pageKey = pageKey.split('/').slice(0, depth + 1).join('/');
-        }
+        const pageKey = asPath.replace(/\?.+/, '');
 
         return pageKey;
-    }, [asPath, depth]);
+    }, [asPath]);
 
     return pageKey;
 };

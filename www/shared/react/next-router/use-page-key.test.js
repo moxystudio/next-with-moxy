@@ -17,12 +17,3 @@ it('should return the correct page key', () => {
 
     screen.getByText('/blog/foo');
 });
-
-it('should return the correct page key with depth', () => {
-    Router.pathname = '/blog/[name]';
-    Router.asPath = '/blog/foo?baz=1';
-
-    render(<MyComponent depth={ 1 } />, { wrapper: undefined });
-
-    screen.getByText('/blog');
-});

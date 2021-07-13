@@ -31,8 +31,8 @@ it('should inject pageRouter prop', () => {
     render(<MyComponent />, { wrapper: undefined });
 });
 
-it('should respect depth', () => {
-    const MyComponent = withPageRouter(1)(({ pageRouter }) => pageRouter.asPath);
+it('should respect pathnames', () => {
+    const MyComponent = withPageRouter(['/blog/[name]'])(({ pageRouter }) => pageRouter.asPath);
 
     const { rerender } = render(<MyComponent />, { wrapper: undefined });
 

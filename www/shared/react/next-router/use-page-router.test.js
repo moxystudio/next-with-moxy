@@ -60,11 +60,11 @@ it('should return the same router it started with', () => {
     });
 });
 
-it('should respect depth', () => {
+it('should respect pathnames', () => {
     let router;
 
     const MyComponent = () => {
-        router = usePageRouter(1);
+        router = usePageRouter(['/blog/[name]']);
 
         return null;
     };
