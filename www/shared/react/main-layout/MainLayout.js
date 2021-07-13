@@ -12,10 +12,17 @@ const MainLayout = ({ children, className, ...rest }) => (
         <Header className={ styles.header } />
 
         <div className={ styles.content }>
-            <PageSwapper node={ children } nodeKey={ children.key } />
+            <PageSwapper
+                node={ children }
+                nodeKey={ children.key }>
+                { ({ node }) => (
+                    <>
+                        <div className={ styles.page }>{ node }</div>
+                        <Footer className={ styles.footer } />
+                    </>
+                ) }
+            </PageSwapper>
         </div>
-
-        <Footer className={ styles.footer } />
     </div>
 );
 

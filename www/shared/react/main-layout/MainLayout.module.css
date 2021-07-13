@@ -3,7 +3,7 @@
 .mainLayout {
     min-height: 100%;
     display: flex;
-    flex: 1;
+    flex: 1 0;
     flex-direction: column;
     background-color: var(--color-white);
 
@@ -12,10 +12,16 @@
     }
 
     & .content {
+        display: flex;
         flex: 1 0;
-    }
+        flex-direction: column;
 
-    & .footer {
-        flex: 0 0 auto;
+        & .page {
+            flex: 1 0;
+        }
+
+        & .footer {
+            flex: 0 0 auto;
+        }
     }
 }

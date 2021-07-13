@@ -1,5 +1,6 @@
 @import "../../shared/styles/imports";
 
 .contacts {
+    min-height: 200vh; /* Just to simulate scroll */
     padding: 2.5rem 0;
 }

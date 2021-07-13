@@ -7,7 +7,7 @@ import PageTransition from './page-transition';
 
 import styles from './PageSwapper.module.css';
 
-const PageSwapper = ({ className, ...rest }) => {
+const PageSwapper = ({ children, className, ...rest }) => {
     const { updateScroll } = useRouterScroll();
 
     return (
@@ -15,12 +15,19 @@ const PageSwapper = ({ className, ...rest }) => {
             { ...rest }
             updateScroll={ updateScroll }
             className={ classNames(styles.pageSwapper, className) }>
-            { (props) => <PageTransition { ...props } /> }
+            { ({ node, ...rest }) => {
+                if (typeof children === 'function') {
+                    node = children({ node, ...rest });
+                }
+
+                return <PageTransition node={ node } { ...rest } />;
+            } }
         </RawPageSwapper>
     );
 };
 
 PageSwapper.propTypes = {
+    children: PropTypes.func,
     className: PropTypes.string,
 };
 
