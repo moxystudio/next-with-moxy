@@ -1,8 +1,4 @@
 .fade {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-
     &.enter {
         opacity: 0;
     }

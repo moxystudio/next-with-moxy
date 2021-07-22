@@ -1,0 +1,7 @@
+.pageSwapper {
+    height: 100%;
+
+    & .pageTransition {
+        height: 100%;
+    }
+}

@@ -16,6 +16,8 @@ import CookieBanner from './cookie-banner';
 import useFouc from './use-fouc-fix';
 import { useSeoData } from './App.data';
 
+import styles from './App.module.css';
+
 subscribeToRouter();
 
 export const App = ({ Component, pageProps }) => {
@@ -62,7 +64,13 @@ export const App = ({ Component, pageProps }) => {
                     pageProps={ pageProps }
                     pageKey={ pageKey }
                     defaultLayout={ <MainLayout /> }>
-                    { (tree) => <PageSwapper node={ tree } nodeKey={ tree.key } /> }
+                    { (tree) => (
+                        <PageSwapper
+                            node={ tree }
+                            nodeKey={ tree.key }
+                            pageTransitionClassName={ styles.pageTransition }
+                            className={ styles.pageSwapper } />
+                    ) }
                 </LayoutTree>
             </RouterScrollProvider>
         </>

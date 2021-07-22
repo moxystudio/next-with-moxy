@@ -11,17 +11,23 @@
         flex: 0 0 auto;
     }
 
-    & .content {
+    & .pageSwapper {
         display: flex;
         flex: 1 0;
         flex-direction: column;
 
-        & .page {
+        & .pageTransition {
+            display: flex;
             flex: 1 0;
-        }
+            flex-direction: column;
 
-        & .footer {
-            flex: 0 0 auto;
+            & .page {
+                flex: 1 0;
+            }
+
+            & .footer {
+                flex: 0 0 auto;
+            }
         }
     }
 }
