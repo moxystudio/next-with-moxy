@@ -23,7 +23,7 @@ it('should respect passed className', () => {
 it('should respect passed justifyContent (string)', () => {
     const { container } = render(<Row justifyContent="flex-end">Hello World</Row>);
 
-    expect(container.querySelector('div').classList.contains('row-justify-content-flex-end')).toBe(true);
+    expect(container.querySelector('div').classList.contains('row-justify-content-xxs-flex-end')).toBe(true);
 });
 
 it('should respect passed justifyContent (object)', () => {
@@ -41,7 +41,7 @@ it('should respect passed justifyContent (object)', () => {
 it('should respect passed alignItems (string)', () => {
     const { container } = render(<Row alignItems="flex-end">Hello World</Row>);
 
-    expect(container.querySelector('div').classList.contains('row-align-items-flex-end')).toBe(true);
+    expect(container.querySelector('div').classList.contains('row-align-items-xxs-flex-end')).toBe(true);
 });
 
 it('should respect passed alignItems (object)', () => {

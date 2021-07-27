@@ -23,7 +23,7 @@ it('should respect passed className', () => {
 it('should respect passed columns (number)', () => {
     const { container } = render(<Col columns={ 1 }>Hello World</Col>);
 
-    expect(container.querySelector('div').classList.contains('col-column-1')).toBe(true);
+    expect(container.querySelector('div').classList.contains('col-column-xxs-1')).toBe(true);
 });
 
 it('should respect passed columns (object)', () => {
@@ -41,7 +41,7 @@ it('should respect passed columns (object)', () => {
 it('should respect passed offset (number)', () => {
     const { container } = render(<Col offset={ 1 }>Hello World</Col>);
 
-    expect(container.querySelector('div').classList.contains('col-offset-1')).toBe(true);
+    expect(container.querySelector('div').classList.contains('col-offset-xxs-1')).toBe(true);
 });
 
 it('should respect passed offset (object)', () => {
