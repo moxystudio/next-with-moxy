@@ -22,7 +22,7 @@ const getResponsiveClasses = (name, value) => {
     }
 
     return {
-        [styles[`${name}-${value}`]]: true,
+        [styles[`${name}-xxs-${value}`]]: true,
     };
 };
 
