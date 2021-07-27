@@ -3,22 +3,21 @@ import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { createLocalStorageStateHook } from 'use-local-storage-state';
+import useLocalStorageState from 'use-local-storage-state';
+import { Container, Row, Col } from '../../shared/react/grid';
 
 import styles from './CookieBanner.module.css';
 
 const MAX_CONSENT_DAYS = 365;
 const MAX_REJECTED_DAYS = 7;
 
-const useLocalStorageState = createLocalStorageStateHook('cookie-banner', {
-    consents: [],
-    consentedAt: null,
-    rejectedAt: null,
-});
-
 const CookieBanner = ({ className, onConsents, ...rest }) => {
     const [mounted, setMounted] = useState(false);
-    const [state, setState] = useLocalStorageState();
+    const [state, setState] = useLocalStorageState('cookie-banner', {
+        consents: [],
+        consentedAt: null,
+        rejectedAt: null,
+    });
 
     const consents = useMemo(() => (
         state.consentedAt > Date.now() - (MAX_CONSENT_DAYS * 24 * 60 * 60 * 1000) ? state.consents : []
@@ -59,26 +58,32 @@ const CookieBanner = ({ className, onConsents, ...rest }) => {
 
     return (
         <div className={ classNames(styles.cookieBanner, className) } { ...rest }>
-            <p>
-                <FormattedMessage
-                    id="cookie-banner.text"
-                    values={ {
-                        link: /* istanbul ignore next */ (...chunks) => (
-                            <Link href="/terms">
-                                <a>{ chunks }</a>
-                            </Link>
-                        ),
-                    } } />
-            </p>
+            <Container>
+                <Row justifyContent="space-between" alignItems="center">
+                    <Col>
+                        <p>
+                            <FormattedMessage
+                                id="cookie-banner.text"
+                                values={ {
+                                    link: /* istanbul ignore next */ (...chunks) => (
+                                        <Link href="/terms">
+                                            <a>{ chunks }</a>
+                                        </Link>
+                                    ),
+                                } } />
+                        </p>
+                    </Col>
 
-            <div className={ styles.buttons }>
-                <button className={ styles.accept } type="button" onClick={ handleAcceptClick }>
-                    <FormattedMessage id="cookie-banner.accept" />
-                </button>
-                <button type="button" onClick={ handleRejectClick }>
-                    <FormattedMessage id="cookie-banner.reject" />
-                </button>
-            </div>
+                    <Col columns="auto" className={ styles.buttonsCol }>
+                        <button className={ styles.accept } type="button" onClick={ handleAcceptClick }>
+                            <FormattedMessage id="cookie-banner.accept" />
+                        </button>
+                        <button type="button" onClick={ handleRejectClick }>
+                            <FormattedMessage id="cookie-banner.reject" />
+                        </button>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     );
 };
