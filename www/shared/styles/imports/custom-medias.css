@@ -4,17 +4,7 @@
    Use it like so: @media (--sm) { ... }
    ========================================================================== */
 
-/* Use these if you are developing for desktop first and want to target lower resolutions (including) */
-
-@custom-media --lte-xxs (width <= 20em); /* 320px */
-@custom-media --lte-xs (width <= 30em); /* 480px */
-@custom-media --lte-sm (width <= 48em); /* 768px */
-@custom-media --lte-md (width <= 64em); /* 1024px */
-@custom-media --lte-lg (width <= 80em); /* 1280px */
-@custom-media --lte-xl (width <= 90em); /* 1440px */
-@custom-media --lte-xxl (width <= 120em); /* 1920px */
-
-/* Use these if you are developing for desktop first and want to target lower resolutions (not including) */
+/* Use these if you are developing for desktop first and want to target lower resolutions */
 
 @custom-media --lt-xxs (width < 20em); /* 320px */
 @custom-media --lt-xs (width < 30em); /* 480px */
@@ -24,7 +14,7 @@
 @custom-media --lt-xl (width < 90em); /* 1440px */
 @custom-media --lt-xxl (width < 120em); /* 1920px */
 
-/* Use these if you are developing for mobile first and want to target higher resolutions (including) */
+/* Use these if you are developing for mobile first and want to target higher resolutions */
 
 @custom-media --gte-xxs (width >= 0); /* 0 */
 @custom-media --gte-xs (width >= 30em); /* 480px */
@@ -33,13 +23,3 @@
 @custom-media --gte-lg (width >= 80em); /* 1280px */
 @custom-media --gte-xl (width >= 90em); /* 1440px */
 @custom-media --gte-xxl (width >= 120em); /* 1920px */
-
-/* Use these if you are developing for mobile first and want to target higher resolutions (not including) */
-
-@custom-media --gt-xxs (width > 0); /* 0 */
-@custom-media --gt-xs (width > 30em); /* 480px */
-@custom-media --gt-sm (width > 48em); /* 768px */
-@custom-media --gt-md (width > 64em); /* 1024px */
-@custom-media --gt-lg (width > 80em); /* 1280px */
-@custom-media --gt-xl (width > 90em); /* 1440px */
-@custom-media --gt-xxl (width > 120em); /* 1920px */

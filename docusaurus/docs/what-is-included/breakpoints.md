@@ -28,7 +28,7 @@ Here's an example:
 .myPage {
     padding: 0 25px;
 
-    @media (--lte-sm) {
+    @media (--lt-sm) {
         padding: 0 10px;
     }
 }
