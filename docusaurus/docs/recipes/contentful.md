@@ -137,7 +137,7 @@ import { createClient } from 'contentful';
 
 App.getInitialProps = async ({Component, ctx, router}) => {
     // Check whether route has `cms-preview` query parameter
-    const isPreviewingContentful = Object.hasOwnProperty.call(router.query, 'cms-preview');
+    const isPreviewingContentful = router.query['cms-preview'] != null;
 
     // Set the preview or regular host
     const contentfulHost = isPreviewingContentful ? 'preview.contentful.com' : 'cdn.contentful.com';
@@ -208,9 +208,9 @@ export const buildStore = (initialState, { query }) => {
     });
 
     if (
-        // For server-side, check wether `query` exists and has the `cms-preview` key
-        (typeof query !== 'undefined' && Object.hasOwnProperty.call(query, 'cms-preview')) ||
-        // For client-side, check wether `window` exist and has the `cms-preview` query parameter
+        // For server-side, check whether `query` exists and has the `cms-preview` key
+        query?.['cms-preview'] != null ||
+        // For client-side, check whether `window` exists and has the `cms-preview` query parameter
         (typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('cms-preview'))
     ) {
         // In a positive case, switch the client instance to access the Preview API instead
@@ -331,7 +331,7 @@ const App = ({ Component, pageProps, rootSelector, router }) => {
     const [isPreviewingContentful, setIsPreviewingContentful] = useState(false);
 
     // Using a useEffect hook with no dependencies guaranties that it fires only once per instance of App
-    useEffect(() => setIsPreviewingContentful(Object.hasOwnProperty.call(router.query, 'cms-preview')), []);
+    useEffect(() => setIsPreviewingContentful(router.query['cms-preview'] != null), []);
 
     return (
         (...)
@@ -355,7 +355,7 @@ class App extends NextApp {
         const { router } = this.props;
 
         this.setState({
-            isPreviewingContentful: Object.hasOwnProperty.call(router.query, 'cms-preview');
+            isPreviewingContentful: router.query['cms-preview'] != null,
         });
     }
 
