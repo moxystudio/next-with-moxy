@@ -32,7 +32,7 @@
     "docs": "npm run start --prefix docusaurus -- --port 4000"
   },
   "dependencies": {
-    "@moxy/next-common-files": "^1.5.1",
+    "@moxy/next-common-files": "^2.0.0",
     "@moxy/next-compile-node-modules": "^2.1.1",
     "@moxy/next-intl": "^3.1.0",
     "@moxy/next-layout": "^2.2.3",
