@@ -26,8 +26,8 @@
 }
 
 /* Row: justify-content */
-@each $justify-content-variant in (flex-start, center, flex-end, space-between, space-around, space-evenly) {
-    @each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
+@each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
+    @each $justify-content-variant in (flex-start, center, flex-end, space-between, space-around, space-evenly) {
         @media (--gte-$breakpoint) {
             .row-justify-content-$(breakpoint)-$(justify-content-variant) {
                 justify-content: $justify-content-variant;
@@ -37,8 +37,8 @@
 }
 
 /* Row: align-items */
-@each $align-items-variant in (flex-start, center, flex-end, baseline, stretch) {
-    @each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
+@each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
+    @each $align-items-variant in (flex-start, center, flex-end, baseline, stretch) {
         @media (--gte-$breakpoint) {
             .row-align-items-$(breakpoint)-$(align-items-variant) {
                 align-items: $align-items-variant;
