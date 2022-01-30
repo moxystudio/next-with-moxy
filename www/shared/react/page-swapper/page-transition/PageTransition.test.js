@@ -7,31 +7,29 @@ jest.useFakeTimers();
 const MyComponent = () => <div>foo</div>;
 
 it('should render correctly when in prop is false', () => {
-    render(<PageTransition node={ <MyComponent /> } />);
+    render(<PageTransition><MyComponent /></PageTransition>);
 
     const element = screen.getByText('foo').parentNode;
 
     expect(element).toHaveClass('fade');
     expect(element).not.toHaveClass('exitDone');
-    expect(element).toHaveStyle({ zIndex: '0' });
 });
 
 it('should render correctly when in prop is true', () => {
-    render(<PageTransition node={ <MyComponent /> } in />);
+    render(<PageTransition in><MyComponent /></PageTransition>);
 
     const element = screen.getByText('foo').parentNode;
 
     expect(element).toHaveClass('fade');
     expect(element).not.toHaveClass('enterDone');
-    expect(element).toHaveStyle({ zIndex: '1' });
 });
 
 it('should animate in, calling onEntered correctly', () => {
     const handleEntered = jest.fn();
 
-    const { rerender } = render(<PageTransition node={ <MyComponent /> } />);
+    const { rerender } = render(<PageTransition><MyComponent /></PageTransition>);
 
-    rerender(<PageTransition node={ <MyComponent /> } in onEntered={ handleEntered } />);
+    rerender(<PageTransition in onEntered={ handleEntered }><MyComponent /></PageTransition>);
 
     const element = screen.getByText('foo').parentNode;
 
@@ -51,9 +49,9 @@ it('should animate in, calling onEntered correctly', () => {
 it('should animate out, calling onEntered correctly', () => {
     const handleExited = jest.fn();
 
-    const { rerender } = render(<PageTransition node={ <MyComponent /> } in />);
+    const { rerender } = render(<PageTransition in><MyComponent /></PageTransition>);
 
-    rerender(<PageTransition node={ <MyComponent /> } onExited={ handleExited } />);
+    rerender(<PageTransition onExited={ handleExited }><MyComponent /></PageTransition>);
 
     const element = screen.getByText('foo').parentNode;
 
@@ -71,7 +69,7 @@ it('should animate out, calling onEntered correctly', () => {
 });
 
 it('should respect passed className', () => {
-    const { container } = render(<PageTransition node={ <MyComponent /> } className="foo" />);
+    const { container } = render(<PageTransition className="foo"><MyComponent /></PageTransition>);
 
     expect(container.querySelector('.foo')).toBeInTheDocument();
 });

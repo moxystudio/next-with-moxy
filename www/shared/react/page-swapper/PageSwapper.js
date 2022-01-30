@@ -8,13 +8,13 @@ const PageSwapper = ({ children, pageTransitionClassName, ...rest }) => {
     const { updateScroll } = useRouterScroll();
 
     return (
-        <RawPageSwapper { ...rest } updateScroll={ updateScroll }>
+        <RawPageSwapper mode="out-in" { ...rest } updateScroll={ updateScroll }>
             { ({ node, ...rest }) => {
                 if (typeof children === 'function') {
                     node = children({ node, ...rest });
                 }
 
-                return <PageTransition node={ node } className={ pageTransitionClassName } { ...rest } />;
+                return <PageTransition className={ pageTransitionClassName } { ...rest }>{ node }</PageTransition>;
             } }
         </RawPageSwapper>
     );

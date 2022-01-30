@@ -7,7 +7,6 @@
     &.enterDone {
         opacity: 1;
         transition: opacity 0.6s;
-        transition-delay: 0.3s;
     }
 
     &.exit {

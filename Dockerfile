@@ -48,6 +48,7 @@ WORKDIR /usr/app
 COPY --from=build /src/package.json ./package.json
 COPY --from=build /src/node_modules ./node_modules
 COPY --from=build /src/.next ./.next
+COPY --from=build /src/intl/index.js ./intl/index.js
 COPY --from=build /src/public ./public
 COPY --from=build /src/next.config.js ./next.config.js
 
