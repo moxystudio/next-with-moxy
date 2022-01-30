@@ -1,9 +1,12 @@
+import { defaultLocale as mockDefaultLocale } from './intl';
+
 // Mock Next.js router so that useRouter hook works.
 jest.mock('next/router', () => {
     const router = {
         pathname: '/',
         query: {},
         asPath: '/',
+        locale: mockDefaultLocale,
         events: {
             on: jest.fn(),
             off: jest.fn(),

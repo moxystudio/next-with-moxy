@@ -7,6 +7,7 @@ const withPlugins = require('next-compose-plugins');
 const withSitemap = require('@moxy/next-sitemaps/plugin');
 const envVar = require('env-var');
 const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/constants');
+const { locales, defaultLocale } = require('./intl');
 
 const isEnvRequired = (phase) => phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD;
 
@@ -85,8 +86,8 @@ module.exports = (phase, params) => {
                 ignoreDuringBuilds: true,
             },
             i18n: {
-                locales: ['en-US'],
-                defaultLocale: 'en-US',
+                locales: locales.map(({ tag }) => tag),
+                defaultLocale,
             },
             env: {
                 ...nextConfig.env,

@@ -1,11 +1,13 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import KeyboardOnlyOutlines from '@moxy/react-keyboard-only-outlines';
 import { withIntlApp } from '@moxy/next-intl';
 import { LayoutTree } from '@moxy/next-layout';
 import Seo from '@moxy/next-seo';
+import { useRouter } from 'next/router'; // eslint-disable-line no-restricted-imports
 import { RouterScrollProvider } from '@moxy/next-router-scroll';
+import { localesMap } from '../../intl';
 import { Debug as DebugGrid } from '../shared/react/grid';
 import PageSwapper from '../shared/react/page-swapper';
 import MainLayout from '../shared/react/main-layout';
@@ -23,9 +25,16 @@ subscribeToRouter();
 export const App = ({ Component, pageProps }) => {
     useFouc();
 
+    const { locale } = useRouter();
     const seoData = useSeoData();
     const pageKey = usePageKey();
 
+    // Update <html dir> attribute on locale change.
+    useEffect(() => {
+        document.documentElement.dir = localesMap[locale].dir;
+    }, [locale]);
+
+    // Handler for cookie consents.
     const handleCookieConsents = useCallback((cookieConsents) => {
         if (cookieConsents.includes('analytics')) {
             initGTM();

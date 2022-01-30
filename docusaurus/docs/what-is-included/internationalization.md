@@ -17,7 +17,7 @@ The integration of `react-intl` into Next.js is made with [`@moxy/next-intl`](ht
 
 ## Adding a new locale
 
-1. Add the locale to the `next.config.js` file.
+1. Add the locale to the `intl/index.js` file.
 2. Add the messages file to `intl/<locale>.json`.
 
 ## Removing this feature
@@ -25,6 +25,6 @@ The integration of `react-intl` into Next.js is made with [`@moxy/next-intl`](ht
 If you are really sure internationalization is not needed in your project, you'll want to remove all the unnecessary `intl` related code. Be sure to follow these steps in order to clean your project properly:
 
 1. Uninstall `react-intl`, `@moxy/next-intl`.
-2. Remove the `intl` folder.
+2. Remove the `intl` folder and update the files that were requiring that folder, removing any related localization code: `next.config.js`, `app/App.js` and `document/Document.js`;
 3. Search globally for `react-intl` and `@moxy/next-intl` and remove the corresponding code across the project.
 4. Update your unit tests if necessary so that they all pass!
