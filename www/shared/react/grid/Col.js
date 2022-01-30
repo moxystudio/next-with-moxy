@@ -8,8 +8,8 @@ import styles from './grid.module.css';
 const Col = forwardRef(({ className, component: Component, columns, offset, ...rest }, ref) => {
     const finalClassName = classNames(
         styles.col,
-        getResponsiveClasses('col-column', columns),
-        getResponsiveClasses('col-offset', offset),
+        getResponsiveClasses(styles, 'col-column', columns),
+        getResponsiveClasses(styles, 'col-offset', offset),
         className,
     );
 

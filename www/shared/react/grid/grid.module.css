@@ -47,6 +47,17 @@
     }
 }
 
+/* Row: flex-direction */
+@each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
+    @each $flex-direction-variant in (row, row-reverse) {
+        @media (--gte-$breakpoint) {
+            .row-flex-direction-$(breakpoint)-$(flex-direction-variant) {
+                flex-direction: $flex-direction-variant;
+            }
+        }
+    }
+}
+
 /* col: [xxs, xxl] */
 @each $breakpoint in (xxs, xs, sm, md, lg, xl, xxl) {
     $columns: 12;

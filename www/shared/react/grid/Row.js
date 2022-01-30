@@ -9,12 +9,14 @@ const Row = forwardRef(({
     component: Component,
     justifyContent,
     alignItems,
+    flexDirection,
     ...rest
 }, ref) => {
     const finalClassName = classNames(
         styles.row,
-        getResponsiveClasses('row-justify-content', justifyContent),
-        getResponsiveClasses('row-align-items', alignItems),
+        getResponsiveClasses(styles, 'row-justify-content', justifyContent),
+        getResponsiveClasses(styles, 'row-align-items', alignItems),
+        getResponsiveClasses(styles, 'row-flex-direction', flexDirection),
         className,
     );
 
@@ -29,6 +31,7 @@ Row.defaultProps = {
 
 const justifyContentPropType = PropTypes.oneOf(['flex-start', 'center', 'flex-end', 'space-between', 'space-around', 'space-evenly']);
 const alignItemsPropType = PropTypes.oneOf(['flex-start', 'center', 'flex-end', 'baseline', 'stretch']);
+const flexDirectionPropType = PropTypes.oneOf(['row', 'row-reverse']);
 
 Row.propTypes = {
     justifyContent: PropTypes.oneOfType([
@@ -53,6 +56,18 @@ Row.propTypes = {
             lg: alignItemsPropType,
             xl: alignItemsPropType,
             xxl: alignItemsPropType,
+        }),
+    ]),
+    flexDirection: PropTypes.oneOfType([
+        flexDirectionPropType,
+        PropTypes.shape({
+            xxs: flexDirectionPropType, // 0
+            xs: flexDirectionPropType,
+            sm: flexDirectionPropType,
+            md: flexDirectionPropType,
+            lg: flexDirectionPropType,
+            xl: flexDirectionPropType,
+            xxl: flexDirectionPropType,
         }),
     ]),
     component: PropTypes.elementType,

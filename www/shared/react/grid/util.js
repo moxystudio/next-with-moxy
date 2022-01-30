@@ -1,6 +1,4 @@
-import styles from './grid.module.css';
-
-const getResponsiveClasses = (name, value) => {
+const getResponsiveClasses = (styles, name, value) => {
     if (!value) {
         return {};
     }
