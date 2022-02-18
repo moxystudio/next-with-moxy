@@ -46,7 +46,7 @@
     "cross-env": "^7.0.3",
     "env-var": "^7.0.0",
     "hoist-non-react-statics": "^3.3.2",
-    "next": "^11.0.1",
+    "next": "^12.1.0",
     "next-compose-plugins": "^2.2.1",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
