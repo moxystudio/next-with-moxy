@@ -2,7 +2,7 @@
 
 const { withRasterImages, withPlayback, withSVG, withFonts, with3D, withJSON5 } = require('@moxy/next-common-files');
 const withOneOf = require('@moxy/next-webpack-oneof');
-const withCompileNodeModules = require('@moxy/next-compile-node-modules');
+// const withCompileNodeModules = require('@moxy/next-compile-node-modules');
 const withPlugins = require('next-compose-plugins');
 const withSitemap = require('@moxy/next-sitemaps/plugin');
 const envVar = require('env-var');
@@ -72,7 +72,7 @@ module.exports = (phase, params) => {
             inline: true,
         }),
         withJSON5(),
-        withCompileNodeModules(),
+        // withCompileNodeModules(),
         withSitemap(phase, SITE_URL),
 
         // Base config here.

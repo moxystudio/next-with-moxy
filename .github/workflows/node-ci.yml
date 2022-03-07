@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: ['12', '14', '16']
+        node-version: ['16']
     name: '[v${{ matrix.node-version }}] prepare'
 
     steps:
@@ -37,7 +37,7 @@ jobs:
     needs: prepare
     strategy:
       matrix:
-        node-version: ['12', '14', '16']
+        node-version: ['16']
     name: '[v${{ matrix.node-version }}] check'
 
     steps:
@@ -79,7 +79,7 @@ jobs:
     needs: prepare
     strategy:
       matrix:
-        node-version: ['12', '14', '16']
+        node-version: ['16']
     name: '[v${{ matrix.node-version }}] build'
 
     steps:
