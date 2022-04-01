@@ -20,9 +20,9 @@ const CookieBanner = ({ className, onConsents, ...rest }) => {
     });
 
     const consents = useMemo(() => (
-        state.consentedAt > Date.now() - (MAX_CONSENT_DAYS * 24 * 60 * 60 * 1000) ? state.consents : []
+        state?.consentedAt > Date.now() - (MAX_CONSENT_DAYS * 24 * 60 * 60 * 1000) ? state?.consents : []
     ), [state]);
-    const rejected = !!(state.rejectedAt >= Date.now() - (MAX_REJECTED_DAYS * 24 * 60 * 60 * 1000));
+    const rejected = !!(state?.rejectedAt >= Date.now() - (MAX_REJECTED_DAYS * 24 * 60 * 60 * 1000));
 
     useEffect(() => setMounted(true), []);
 

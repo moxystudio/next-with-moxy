@@ -2,10 +2,15 @@ import React from 'react';
 import { render, screen, userEvent } from '../../shared/react/testing-library';
 import CookieBanner from './CookieBanner';
 
-Storage.prototype.getItem = jest.fn(() => 'bla');
+const getItem = Storage.prototype.getItem;
+
+beforeEach(() => {
+    Storage.prototype.getItem = jest.fn((...args) => getItem.call(localStorage, ...args));
+});
 
 afterEach(() => {
     jest.resetAllMocks();
+    localStorage.clear();
 });
 
 it('should not render banner when banner was previously rejected', () => {
@@ -58,7 +63,7 @@ it('should call onConsents with the correct consents on mount', () => {
     expect(handleCookieConsents).toHaveBeenCalledWith([]);
 });
 
-it('should behave well when the accept button is clicked', () => {
+it('should behave well when the accept button is clicked', async () => {
     const handleCookieConsents = jest.fn();
 
     const { container, rerender, getByText } = render(
@@ -68,6 +73,8 @@ it('should behave well when the accept button is clicked', () => {
     handleCookieConsents.mockClear();
 
     userEvent.click(getByText('cookie-banner.accept'));
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     expect(handleCookieConsents).toHaveBeenCalledTimes(1);
     expect(handleCookieConsents).toHaveBeenCalledWith(['analytics']);
